@@ -1,6 +1,6 @@
 # WorkIt
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ✨Extensible worker for Node.js that work with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
 
@@ -20,11 +20,11 @@ This package can be useful because:
 
 ## Quickstart
 
-[Get started in 2 minutes](packages/workit-camunda/.docs/WORKER.md).
+[Get started in 2 minutes](.docs/WORKER.md).
 
 ## Documentation
 
- - [.docs](packages/workit-camunda/.docs/) contains written documentation
+ - [.docs](.docs/) contains written documentation
 
 ## Installing
 
@@ -33,8 +33,6 @@ npm i workit-camunda
 ```
 or using the generator below
 ### Yo!
-
-<p align="center"><img src=".repo/render1560988155586.gif?raw=true"/></p>
 
 This generator will help you during your development with this library. It provides handy tools.
 
@@ -168,6 +166,7 @@ enum LOCAL_IDENTIFIER {
 // Register your task
 IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);
 ```
+[See documentation]()
 
 If you have installed `workit-cli`, you can do `workit create task` 
 and everything will be done for you.
@@ -269,50 +268,16 @@ IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);
 
 ### Define your strategies in case of failure or success
 
-By default, we define simple strategy for success or failure. 
+By default, we define simple strategy for sucess or failure. 
 We strongly recommend you to provide yours as your app trigger specific exceptions.
 Strategies are automatically handled.
 If an exeption is bubble up from the task, failure strategy  is raised, otherwise it's success.
 
 ```javascript
-// the idea is to create your own but imagine that your worker works mainly with REST API
-class ServerErrorHandler extends ErrorHandlerBase {
-  constructor(config: { maxRetries: number }) {
-    super(config);
-  }
-
-  public isHandled(error: IDciErrorResponse<IDciResponse<IApiError>>): boolean {
-    return error.response.status >= 500;
-  }
-  public handle(error: IDciErrorResponse<IDciResponse<IApiError>>, message: IMessage): Failure {
-    const retries = this.getRetryValue(message);
-    return new Failure(error.message, this.buildErrorDetails(error, message), retries, 2000 * retries);
-  }
-}
-// You could create also
-// BadRequestErrorHandler
-// TimeoutErrorHandler
-// UnManagedErrorHandler
-// ...
-// Then you could build your strategy
-/// "FailureStrategy" implements "IFailureStrategy" provided by workit-camunda
-const strategy = new FailureStrategy([
-  new AxiosApiErrorHandler(errorConfig, [
-    new BadRequestErrorHandler(errorConfig),
-    new TimeoutErrorHandler(errorConfig),
-    new ServerErrorHandler(errorConfig),
-    new UnManagedErrorHandler(errorConfig),
-    //...
-  ]),
-  new ErrorHandler(errorConfig)
-]);
-// worker will use your new strategy
-IoC.bindToObject(strategy, CORE_IDENTIFIER.failure_strategy);
+TODO: PROVIDE SAMPLE
 ```
 
 ## Running the tests
-
-We use Jest.
 
 ```bash
 npm test

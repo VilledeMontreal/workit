@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: zeebe-db
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: zeebe-db
+    spec:
+      containers:
+      - name: zeebe-db
+        image: oscarfonts/h2:latest
+        ports:
+        - containerPort: 1521
+        - containerPort: 81
+          name: http-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zeebe-db
+  labels:
+    app: zeebe-db
+spec:
+  ports:
+  - port: 30000
+    nodePort: 30000
+    targetPort: http-port
+  type: NodePort
+  selector:
+    app: zeebe-db

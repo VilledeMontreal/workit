@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": { "*": ["types/*"] },
+      "skipLibCheck": true,
+      "declaration": true,
+      "target": "es2016",
+      "module": "commonjs",
+      "charset": "utf8",
+      "suppressImplicitAnyIndexErrors": true,
+      "alwaysStrict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "noUnusedLocals": true,
+      "pretty": true,
+      "outDir": "./lib",
+      "sourceMap": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "strictPropertyInitialization": true,
+      "strictNullChecks": true
+    },
+    "exclude": [
+      "dist", 
+      "lib", 
+      "temp", 
+      "node_modules", 
+      "output", 
+      "log",  
+      "mocha", 
+      ".*",
+      "src/tests",
+      "src/**/*/src"
+    ]
+  }
+  

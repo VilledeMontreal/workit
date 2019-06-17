@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+CONFIG_FILE=docker/local-config/docker-compose.yml
+PULL_CMD="docker-compose -f $CONFIG_FILE pull"
+UP_CMD="docker-compose up"
+
+function rmContainers() {
+  docker-compose -f $CONFIG_FILE rm -fv $SERVICE_NAME || true
+}
+
+CONTAINERS=(monitor broker db)
+
+for i in "${!CONTAINERS[@]}"
+do
+   SERVICE_NAME=${CONTAINERS[$i]} rmContainers
+done
+
+$PULL_CMD
+
+cd docker/local-config/
+echo "starting containers"
+$UP_CMD
+
+cd ../..

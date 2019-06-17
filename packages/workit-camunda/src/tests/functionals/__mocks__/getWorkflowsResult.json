@@ -1,0 +1,46 @@
+{
+    "workflows": [
+        {
+            "bpmnProcessId": "invoice",
+            "workflowKey": "invoice:1:59b72dd4-4691-11e9-8b8f-0242ac110002",
+            "resourceName": "invoice.v1.bpmn",
+            "version": 1
+        },
+        {
+            "bpmnProcessId": "invoice",
+            "workflowKey": "invoice:2:1b02e849-518b-11e9-bd78-0242ac110003",
+            "resourceName": "invoice.v2.bpmn",
+            "version": 2
+        },
+        {
+            "bpmnProcessId": "message-event",
+            "workflowKey": "message-event:1:f7e53636-4dc9-11e9-b6d4-0242ac110002",
+            "resourceName": "MESSAGE_EVENT.bpmn",
+            "version": 1
+        },
+        {
+            "bpmnProcessId": "message-event",
+            "workflowKey": "message-event:2:97471500-518c-11e9-bd78-0242ac110003",
+            "resourceName": "MESSAGE_EVENT.bpmn",
+            "version": 2
+        },
+        {
+            "bpmnProcessId": "message-event",
+            "workflowKey": "message-event:3:8f2d4d6d-518d-11e9-bd78-0242ac110003",
+            "resourceName": "MESSAGE_EVENT.bpmn",
+            "version": 3
+        },
+        {
+            "bpmnProcessId": "message-event",
+            "workflowKey": "message-event:4:cc64fe9a-518d-11e9-bd78-0242ac110003",
+            "resourceName": "MESSAGE_EVENT.bpmn",
+            "version": 4
+        },
+        {
+            "bpmnProcessId": "message-event",
+            "workflowKey": "message-event:5:8e65496a-53fb-11e9-8953-0242ac110002",
+            "resourceName": "MESSAGE_EVENT.bpmn",
+            "version": 5
+        }
+    ]
+}
