@@ -1,0 +1,43 @@
+[
+    {
+        "activityId": "sample_activity",
+        "activityInstanceId": "sample_activity:37a6adef-c4c2-11e8-a64b-0242ac110002",
+        "errorMessage": null,
+        "errorDetails": null,
+        "executionId": "37a6adee-c4c2-11e8-a64b-0242ac110002",
+        "id": "37a72320-c4c2-11e8-a64b-0242ac110002",
+        "lockExpirationTime": "2018-09-30T15:06:17.714+0000",
+        "processDefinitionId": "BPMN_DEMO:1:de79f138-c020-11e8-970d-0242ac110002",
+        "processDefinitionKey": "BPMN_DEMO",
+        "processInstanceId": "37a4d921-c4c2-11e8-a64b-0242ac110002",
+        "retries": null,
+        "suspended": false,
+        "workerId": "some-random-id",
+        "topicName": "topic_demo",
+        "tenantId": null,
+        "variables": {
+            "internalStatus": {
+                "type": "String",
+                "value": "completed",
+                "valueInfo": {}
+            },
+            "serviceType": {
+                "type": "String",
+                "value": "pet-licensing",
+                "valueInfo": {}
+            },
+            "requestInfo": {
+                "type": "Json",
+                "value": "{\"jwtAccessToken\":\"dc79a8db-24c9-4246-a8ce-53185e72e2d9\",\"jwtInum\":\"\",\"jwtUserName\":\"srvAccBPM\",\"jwtUserType\":\"serviceAccount\",\"xUser\": \"Olivier1537469226875\",\"acceptLanguage\":\"fr-CA\",\"xCorrelationId\":\"CID-Test-726\"}",
+                "valueInfo": {}
+            },
+            "id": {
+                "type": "String",
+                "value": "5535",
+                "valueInfo": {}
+            }
+        },
+        "priority": 0,
+        "businessKey": null
+    }
+]

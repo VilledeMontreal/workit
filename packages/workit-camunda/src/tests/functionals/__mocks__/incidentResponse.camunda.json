@@ -1,0 +1,17 @@
+[
+    {
+        "id": "db94be11-5417-11e9-8953-0242ac110002",
+        "processDefinitionId": "message-event:6:76bf01bc-5410-11e9-8953-0242ac110002",
+        "processInstanceId": "76c913e7-5410-11e9-8953-0242ac110002",
+        "executionId": "76c93afd-5410-11e9-8953-0242ac110002",
+        "incidentTimestamp": "2019-04-01T00:48:25.645+0000",
+        "incidentType": "failedExternalTask",
+        "activityId": "Task_1effr2c",
+        "causeIncidentId": "db94be11-5417-11e9-8953-0242ac110002",
+        "rootCauseIncidentId": "db94be11-5417-11e9-8953-0242ac110002",
+        "configuration": "76c93b00-5410-11e9-8953-0242ac110002",
+        "incidentMessage": null,
+        "tenantId": null,
+        "jobDefinitionId": null
+    }
+]

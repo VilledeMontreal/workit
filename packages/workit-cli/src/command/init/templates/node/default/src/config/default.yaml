@@ -1,0 +1,9 @@
+#==========================================
+# Camunda configs
+#==========================================
+camunda:
+  baseUrl: __undefined__
+  workerId: workit
+  maxTasks: 1
+  topicName: srPetitionsStatus
+  maxRetry: 500

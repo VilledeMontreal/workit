@@ -1,0 +1,16 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "publish": "lerna run lint-fix && lerna publish"
+  },
+  "devDependencies": {
+    "@types/node": "12.0.8",
+    "lerna": "^3.15.0",
+    "typescript": "3.5.2"
+  }
+}

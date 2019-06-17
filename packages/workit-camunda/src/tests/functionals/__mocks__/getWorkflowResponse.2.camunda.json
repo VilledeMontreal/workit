@@ -1,0 +1,16 @@
+{
+    "id": "message-event:6:76bf01bc-5410-11e9-8953-0242ac110002",
+    "key": "message-event",
+    "category": "http://bpmn.io/schema/bpmn",
+    "description": null,
+    "name": "Message event",
+    "version": 6,
+    "resource": "MESSAGE_EVENT.bpmn",
+    "deploymentId": "76bcb7ca-5410-11e9-8953-0242ac110002",
+    "diagram": null,
+    "suspended": false,
+    "tenantId": null,
+    "versionTag": null,
+    "historyTimeToLive": null,
+    "startableInTasklist": true
+}

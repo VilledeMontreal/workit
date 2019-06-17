@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zeebe-gateway
+  labels:
+    app: zeebe-gateway
+spec:
+  ports:
+    - port: 26500
+      name: grpc
+  selector:
+    app: zeebe
