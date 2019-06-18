@@ -1,6 +1,6 @@
 {
   "name": "workit-camunda",
-  "version": "0.0.3-beta.1",
+  "version": "0.0.4-beta.0",
   "description": "Worker for Node.js system with pluggable Camunda clients that work with both Zeebe and Camunda platform powered by TypeScript",
   "author": "Olivier Albertini <olivier.albertini@ville.montreal.qc.ca>",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
