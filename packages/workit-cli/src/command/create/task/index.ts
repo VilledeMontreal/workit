@@ -28,7 +28,10 @@ export const task = async (args, options, logger) => {
     throw new Error(`This language is not supported ${language}`);
   }
 
-  const templatePath = `${__dirname}/templates/${language}/${template}`; // .replace('workit-cli/lib/command','workit-cli/src/command');
+  const templatePath = `${__dirname}/templates/${language}/${template}`.replace(
+    'workit-cli/lib/command',
+    'workit-cli/src/command'
+  );
   const contentFile = fs.readFileSync(`${templatePath}/src/task`);
   /*
    * File variables
