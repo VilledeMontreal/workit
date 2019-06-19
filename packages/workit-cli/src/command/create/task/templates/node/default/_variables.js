@@ -1,4 +1,4 @@
-
+// const validate = require("validate-npm-package-name");
 
 /*
  * Variables to replace
@@ -23,11 +23,11 @@ module.exports = [{
     .replace(/-/g, '')
 
   },
-  conform: function(input) {
-    const v = validate(input);
-    if (v.validForNewPackages) {
-      return true;
-    }
-    return false;
-  }
+  // conform: function(input) {
+  //   const v = validate(input);
+  //   if (v.validForNewPackages) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 }];

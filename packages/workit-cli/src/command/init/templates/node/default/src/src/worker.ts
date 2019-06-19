@@ -5,7 +5,9 @@ import './config/ioc';
 (() => {
   const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
   worker.start();
-  worker.run();
+  worker.run().catch(err => {
+    console.log('DO SOMETHING');
+  });
 
   const stop = () => {
     console.info('SIGTERM signal received.');

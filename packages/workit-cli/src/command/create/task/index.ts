@@ -17,7 +17,18 @@ const localPath = process.cwd();
 export const task = async (args, options, logger) => {
   const language = options.lang;
   const workflowPath = options.file;
-  const templatePath = `${__dirname}/templates/${language}/${args.template}`.replace('dist', 'src');
+  const template = args.template;
+  // tslint:disable: no-console
+  // console.log(options);
+  // console.log(args);
+  if (!template || template !== 'default') {
+    throw new Error(`Invalid template ${template}`);
+  }
+  if (!language || language !== 'node') {
+    throw new Error(`This language is not supported ${language}`);
+  }
+
+  const templatePath = `${__dirname}/templates/${language}/${template}`.replace('workit-cli/lib/command', 'workit-cli/src/command');
   const contentFile = fs.readFileSync(`${templatePath}/src/task`);
   /*
    * File variables
@@ -32,6 +43,9 @@ export const task = async (args, options, logger) => {
   }
 
   if (workflowPath) {
+    if (!fs.existsSync(workflowPath)) {
+      throw new Error('Le fichier n\'a pas été trouvé');
+    }
     const tasks = getExternalTasks(workflowPath);
     // tslint:disable-next-line: variable-name
     const ProgressBar = require('progress');
@@ -49,6 +63,8 @@ export const task = async (args, options, logger) => {
   } else {
     logger.info('Please fill the following values…');
     prompt.start().get(variables, (err, result) => {
+      console.log(err);
+      console.log(result);
       if (err || !result || !result.className) {
         return;
       }
@@ -69,9 +85,11 @@ async function processHandler(className, contentFile, isBpmn = false) {
     // with the associated source files.
     // Read more: https://dsherret.github.io/ts-morph/setup/
   });
+
   if (fs.existsSync(`${localPath}/src/tasks/${classNameSanitized}.ts`)) {
     return Promise.resolve();
   }
+
   fs.writeFileSync(
     `${localPath}/src/tasks/${classNameSanitized}.ts`,
     contentFile.toString().replace('[CLASSNAME]', classNameWithMaj)

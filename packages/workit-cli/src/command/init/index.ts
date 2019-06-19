@@ -13,10 +13,18 @@ prompt.message = colors.green('Replace');
 
 export const init = (args, options, logger) => {
   const localPath = process.cwd();
-  const language = options.lang;
-  const templatePath = `${__dirname}/templates/${language}/${args.template}`.replace('dist', 'src');
-  // tslint:disable-next-line: no-console
-  console.log(templatePath);
+  const template = args.template.toLowerCase();
+  const language = options.lang.toLowerCase();
+  
+  if (!template || template !== 'default') {
+    throw new Error(`Invalid template ${template}`);
+  }
+  if (!language || language !== 'node') {
+    throw new Error(`This language is not supported ${language}`);
+  }
+    
+  const templatePath = `${__dirname}/templates/${language}/${template}`.replace('workit-cli/lib', 'workit-cli/src');
+
   /*
    * Copy Template
    */
@@ -26,7 +34,7 @@ export const init = (args, options, logger) => {
     shell.cp('-R', `${templatePath}/src/*`, localPath);
     logger.info(`${symbols.ok} The files have been copied!`);
   } else {
-    logger.error(`The requested template for ${args.template} wasn’t found.`);
+    logger.error(`The requested template for ${template} wasn’t found.`);
     process.exit(1);
   }
 
