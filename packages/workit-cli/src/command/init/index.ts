@@ -15,14 +15,14 @@ export const init = (args, options, logger) => {
   const localPath = process.cwd();
   const template = args.template.toLowerCase();
   const language = options.lang.toLowerCase();
-  
+
   if (!template || template !== 'default') {
     throw new Error(`Invalid template ${template}`);
   }
   if (!language || language !== 'node') {
     throw new Error(`This language is not supported ${language}`);
   }
-    
+
   const templatePath = `${__dirname}/templates/${language}/${template}`.replace('workit-cli/lib', 'workit-cli/src');
 
   /*
