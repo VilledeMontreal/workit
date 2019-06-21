@@ -34,7 +34,7 @@ npm i workit-camunda
 or using the generator below
 ### Yo!
 
-<p align="center"><img src=".repo/render1560988155586.gif?raw=true"/></p>
+<p align="center"><img src=".repo/render1561149492572.gif?raw=true"/></p>
 
 This generator will help you during your development with this library. It provides handy tools.
 
