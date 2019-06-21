@@ -117,7 +117,8 @@ export class CamundaRepository implements ICamundaRepository {
       correlationKeys: Utils.serializeVariables(correlationKeys),
       businessKey: typeof variables === 'object' ? (variables as any).businessKey : undefined,
       processVariables: Utils.serializeVariables(variables),
-      resultEnabled: false
+      resultEnabled: false,
+      all: true // same behaviour than Zeebe
     });
   }
   public async cancelWorkflowInstance(id: string): Promise<void> {
