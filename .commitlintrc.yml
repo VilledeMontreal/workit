@@ -26,3 +26,4 @@ help: |
   `perf`:     Improves performance.
   `test`:     Adds or modifies tests. (example scopes: functionals, unit-tests)
   `revert`:   Changes that reverting other changes
+  `chore`:    (updating grunt tasks etc; no production code change)

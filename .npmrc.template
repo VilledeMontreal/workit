@@ -1,0 +1,4 @@
+//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
+//registry.npmjs.org/:username=olivieralbertini
+//registry.npmjs.org/:email=olivier.albertini@montreal.ca
+//registry.npmjs.org/:always-auth=true

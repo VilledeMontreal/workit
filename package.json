@@ -6,6 +6,11 @@
     "services/*"
   ],
   "scripts": {
+    "bootstrap": "lerna exec -- npm i && lerna link",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "clean": "lerna clean",
+    "publish:ci": "lerna run lint-fix && lerna publish --canary --yes",
     "publish": "lerna run lint-fix && lerna publish"
   },
   "devDependencies": {
@@ -13,6 +18,7 @@
     "@commitlint/config-conventional": "^8.0.0",
     "@types/node": "^12.0.10",
     "lerna": "^3.15.0",
+    "lerna-changelog": "^0.8.2",
     "typescript": "3.5.2"
   },
   "husky": {
