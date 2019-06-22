@@ -5,10 +5,27 @@
   ],
   "command": {
     "publish": {
-      "message": "ci(release): publish %s"
+      "npmClient": "npm",
+      "registry": "https://registry.npmjs.org/",
+      "ignoreChanges": ["*.lock"],
+      "allowBranch": "master",
+      "message": "chore(release): publish"
+    },
+    "bootstrap": {
+      "npmClient": "npm"
     }
+  },
+  "changelog": {
+    "repo": "VilledeMontreal/workit",
+    "labels": {
+      "enchancement": ":rocket:(Enhancement)",
+      "bug": ":bug:(Bug Fix)",
+      "doc": ":doc:(Refine Doc)",
+      "feat": ":sparkles:(Feature)"
+    },
+    "cacheDir": ".changelog"
   },
   "useWorkspaces": true,
   "npmClient": "npm",
-  "version": "0.0.7-beta.0"
+  "version": "independent"
 }
