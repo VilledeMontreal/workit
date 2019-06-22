@@ -5,6 +5,7 @@ node_js:
   - "11"
 
 install:
+  - npm i codecov -g
   - npm i
   - npm run bootstrap
   - npm run build # @TODO lerna bug will use symlink when depending on internal packages, but package is typescript, no lib before build
@@ -14,6 +15,7 @@ script:
 
 after_success:
   # - npm run coverage
+  - codecov -f ./packages/workit-camunda/coverage/*.json
   - git remote set-url origin git@${GH_TOKEN}@github.com:${TRAVIS_REPO_SLUG}.git
 
 git:
