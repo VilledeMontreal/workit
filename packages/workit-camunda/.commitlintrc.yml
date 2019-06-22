@@ -14,6 +14,7 @@ rules:
     - perf
     - test
     - revert
+    - chore
 help: |
   **Possible types**:
   `ci`:       Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
@@ -25,3 +26,4 @@ help: |
   `perf`:     Improves performance.
   `test`:     Adds or modifies tests. (example scopes: functionals, unit-tests)
   `revert`:   Changes that reverting other changes
+  `chore`:    (updating grunt tasks etc; no production code change)
