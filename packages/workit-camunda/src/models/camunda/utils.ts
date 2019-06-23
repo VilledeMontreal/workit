@@ -138,14 +138,14 @@ export class Utils {
     return match[0];
   };
 
-  public static serializeVariables<T = any>(variables: T) {
+  public static serializeVariables<T = any>(variables: T, local: boolean = false) {
     if (!variables) {
       return;
     }
     const dirtyVariables = {};
     Object.entries(variables).forEach(([key, value]) => {
       const type = Utils.getVariableType(value);
-      const typedValue = { type, value, valueInfo: {} };
+      const typedValue = { type, value, valueInfo: {}, local };
       dirtyVariables[key] = Utils.serializeVariable({ typedValue });
     });
     return dirtyVariables;

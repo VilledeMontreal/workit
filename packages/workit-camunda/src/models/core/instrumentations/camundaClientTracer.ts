@@ -1,3 +1,7 @@
+// Copyright (c) Ville de Montreal. All rights reserved.
+// Licensed under the MIT license.
+// See LICENSE file in the project root for full license information.
+
 import { inject, injectable } from 'inversify';
 import { FORMAT_TEXT_MAP, Reference, Span, SpanContext, Tags, Tracer } from 'opentracing';
 import { SERVICE_IDENTIFIER } from '../../../config/constants/identifiers';

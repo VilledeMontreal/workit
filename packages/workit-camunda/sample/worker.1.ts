@@ -37,7 +37,5 @@ console.log('stop worker');
 await worker.stop();
 console.log('rerun worker');
 worker.run().catch((e) => console.log(e));
-console.log('stop worker');
-await worker.run();
 
 })();

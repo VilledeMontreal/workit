@@ -11,10 +11,8 @@ import { IWorkflowClient } from '../src/models/camunda-n-mq/specs/workflowClient
 import { IoC } from '../src/models/IoC';
 // tslint:disable-next-line: no-floating-promises
 (async () => {
-    const cm = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
+    const cm = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // TAG.zeebe
     for (let index = 0; index < 1; index++) {
-        // tslint:disable-next-line: no-console
-        console.log(index);
         await cm.createWorkflowInstance({
             bpmnProcessId: "BPMN_DEMO",
             variables: {
@@ -23,4 +21,6 @@ import { IoC } from '../src/models/IoC';
             }
         });
     }
+    // tslint:disable-next-line: no-console
+    console.log('Sucess!');
 })();

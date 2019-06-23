@@ -56,6 +56,11 @@ export const SERVICE_IDENTIFIER = {
    */
   zeebe_config: Symbol('zeebe_config'),
   /**
+   * Bind your own Elastic exporter config for Zeebe
+   */
+
+  zeebe_elastic_exporter_config: Symbol('zeebe_elastic_exporter_config'),
+  /**
    * You can bind your own logger.
    */
   logger: Symbol('logger'),
@@ -82,6 +87,7 @@ export const SERVICE_IDENTIFIER = {
    * e.g IoC.get<Worker>(SERVICE_IDENTIFIER.worker);
    */
   worker: Symbol('Worker'),
+
   /**
    * Pass your custom tracer in order to trace your worker.
    * See more on opentracing web site. https://github.com/opentracing/opentracing-javascript/blob/master/README.md#usage-with-typescript

@@ -162,8 +162,11 @@ enum LOCAL_IDENTIFIER {
 }
 
 <span class="hljs-comment">// Register your task</span>
-IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);</code></pre>
-				<p><a href="">See documentation</a></p>
+IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);
+</code></pre>
+				<p>You can even make complex binding like</p>
+				<pre><code class="language-javascript">IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { <span class="hljs-attr">bpmnProcessId</span>: BPMN_PROCESS_ID, <span class="hljs-attr">version</span>: <span class="hljs-number">2</span> });</code></pre>
+				<p><a href=".docs/WORKER.md">See documentation</a></p>
 				<p>If you have installed <code>workit-cli</code>, you can do <code>workit create task</code>
 				and everything will be done for you.</p>
 				<h3 id="worker-life-cycle-and-events">Worker life cycle and events</h3>
@@ -228,7 +231,7 @@ IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);</code></pre>
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(message);
   }
 }</code></pre>
-				<p>You can look to <code>sample</code> folder where we provide an example (worker.4.ts) using <a href="https://www.jaegertracing.io/docs/latest/">Jaeger</a>.</p>
+				<p>You can look to <code>sample</code> folder where we provide an example (parallel.ts) using <a href="https://www.jaegertracing.io/docs/latest/">Jaeger</a>.</p>
 				<h3 id="define-your-config-for-each-platform">Define your config for each platform</h3>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> configBase: ICamundaConfig = {
     <span class="hljs-attr">workerId</span>: <span class="hljs-string">'demo'</span>,
@@ -236,12 +239,21 @@ IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);</code></pre>
     <span class="hljs-attr">topicName</span>: <span class="hljs-string">'topic_demo'</span>
 };
 
+<span class="hljs-comment">// For Camunda BPM platform</span>
 <span class="hljs-keyword">const</span> bpmnPlatformClientConfig = { ...configBase, <span class="hljs-attr">baseUrl</span>: <span class="hljs-string">'http://localhost:8080/engine-rest'</span>,  <span class="hljs-attr">maxTasks</span>: <span class="hljs-number">32</span>, <span class="hljs-attr">autoPoll</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">use</span>: [] };
-<span class="hljs-keyword">const</span> zeebeClientConfig = { ...configBase, { <span class="hljs-attr">baseUrl</span>: <span class="hljs-string">'localhost:2650'</span>, <span class="hljs-attr">timeout</span>: <span class="hljs-number">2000</span> };
 
 IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_config);
-IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);</code></pre>
-				<p><a href="">See documentation</a></p>
+
+<span class="hljs-comment">// For Zeebe platform</span>
+<span class="hljs-keyword">const</span> zeebeClientConfig = { ...configBase, { <span class="hljs-attr">baseUrl</span>: <span class="hljs-string">'localhost:2650'</span>, <span class="hljs-attr">timeout</span>: <span class="hljs-number">2000</span> };
+
+<span class="hljs-keyword">const</span> zeebeElasticExporterConfig = {
+    <span class="hljs-attr">url</span>: <span class="hljs-string">`http://localhost:9200`</span>,
+};
+
+IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);
+IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_exporter_config)</code></pre>
+				<p><a href=".docs/CONFIG.md">See documentation</a></p>
 				<h3 id="define-your-strategies-in-case-of-failure-or-success">Define your strategies in case of failure or success</h3>
 				<p>By default, we define simple strategy for sucess or failure.
 					We strongly recommend you to provide yours as your app trigger specific exceptions.
@@ -295,7 +307,7 @@ IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);</cod
 				</li>
 				</ul>
 				<h2 id="versionning">Versionning</h2>
-				<p>We use <a href="http://semver.org/">SemVer</a> for versioning. For the versions available, see the <a href="TODO">tags on this repository</a>.</p>
+				<p>We use <a href="http://semver.org/">SemVer</a> for versioning. For the versions available, see the <a href="https://github.com/VilledeMontreal/workit/tags">tags on this repository</a>.</p>
 				<h2 id="maintainers">Maintainers</h2>
 				<ul>
 					<li><strong>Olivier Albertini</strong> - <em>Initial work</em> - <a href="https://github.com/VilledeMontreal">Ville de Montréal</a></li>
@@ -405,7 +417,7 @@ IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);</cod
 					<li class=" tsd-kind-class">
 						<a href="classes/worker.html" class="tsd-kind-icon">Worker</a>
 					</li>
-					<li class=" tsd-kind-class">
+					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="classes/zeebeclient.html" class="tsd-kind-icon">Zeebe<wbr>Client</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -585,7 +597,7 @@ IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);</cod
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/iworkflowdefinitionkey.html" class="tsd-kind-icon">IWorkflow<wbr>Definition<wbr>Key</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-not-exported">
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/iworkflowdeployresponse.html" class="tsd-kind-icon">IWorkflow<wbr>Deploy<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -593,9 +605,6 @@ IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);</cod
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/iworkflowresponse.html" class="tsd-kind-icon">IWorkflow<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/izeebeclient.html" class="tsd-kind-icon">IZeebe<wbr>Client</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/izeebeclientoptions.html" class="tsd-kind-icon">IZeebe<wbr>Client<wbr>Options</a>

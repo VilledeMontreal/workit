@@ -7,10 +7,10 @@
 import '../src/config/ioc';
 
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '../src/config/constants/identifiers';
+import { TAG } from '../src/config/constants/tag';
 import { Worker } from '../src/models/core/worker';
 import { IoC } from '../src/models/IoC'
 import { HelloWorldTask } from './tasks/helloWorldTask';
-import { getTag } from './utils';
 
 (async () => {
     console.log();
@@ -20,8 +20,8 @@ enum LOCAL_IDENTIFIER {
 }
 IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);
 
-const tag = getTag();
-const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, tag);
+
+const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm); // TAG.zeebe
 
 const stop = () => {
     console.info('SIGTERM signal received.');

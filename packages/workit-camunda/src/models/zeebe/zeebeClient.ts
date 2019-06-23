@@ -3,6 +3,7 @@
 // See LICENSE file in the project root for full license information.
 
 import { optional } from 'inversify';
+import { Configs, IAPIConfig as IElasticExporterConfig, ZBElasticClient } from 'zeebe-elasticsearch-client';
 import { ZBClient, ZBWorker } from 'zeebe-node';
 import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
 import { IClient } from '../camunda-n-mq/specs/client';
@@ -14,25 +15,46 @@ import { IPublishMessage } from '../camunda-n-mq/specs/publishMessage';
 import { IUpdateWorkflowRetry } from '../camunda-n-mq/specs/updateWorkflowRetry';
 import { IUpdateWorkflowVariables } from '../camunda-n-mq/specs/updateWorkflowVariables';
 import { IWorkflowClient } from '../camunda-n-mq/specs/workflowClient';
-import { IWorkflowDefinition, IWorkflowDefinitionRequest } from '../camunda-n-mq/specs/workflowDefinition';
+import {
+  IWorkflowDefinition,
+  IWorkflowDefinitionKey,
+  IWorkflowDefinitionRequest,
+  IWorkflowProcessIdDefinition
+} from '../camunda-n-mq/specs/workflowDefinition';
 import { ICCInstrumentationHandler } from '../core/instrumentations/specs/instrumentation';
 import { IPayload } from './specs/payload';
+import { IWorkflowResponse } from './specs/workflowDeployResponse';
 import { IZeebeOptions } from './specs/zeebeOptions';
 import { ZeebeMessage } from './zeebeMessage';
-export interface IZeebeClient {
-  [custom: string]: any;
-}
+// export interface IZeebeClient {
+//   [custom: string]: any;
+// }
 
-export class ZeebeClient implements IClient, IWorkflowClient {
+export class ZeebeClient<WorkerInputVariables = any, CustomHeaderShape = any, WorkerOutputVariables = any>
+  implements IClient, IWorkflowClient {
   private readonly _client: ZBClient;
-  private _worker: ZBWorker | undefined;
+  private readonly _exporterClient: ZBElasticClient;
+  private _worker: ZBWorker<WorkerInputVariables, CustomHeaderShape, WorkerOutputVariables> | undefined;
   private readonly _config: IZeebeOptions;
+  private readonly _exporterConfig: Partial<IElasticExporterConfig> | undefined;
   private readonly _apm: ICCInstrumentationHandler;
-
-  constructor(config: IZeebeOptions, apm: ICCInstrumentationHandler, @optional() client?: ZBClient) {
+  constructor(
+    config: IZeebeOptions,
+    apm: ICCInstrumentationHandler,
+    @optional() client?: ZBClient,
+    @optional() exporterConfig?: Partial<IElasticExporterConfig>
+  ) {
     this._client = client || new ZBClient(config.baseUrl, config);
     this._apm = apm;
     this._config = config;
+    this._exporterConfig = exporterConfig;
+    if (!exporterConfig) {
+      // tslint:disable-next-line: no-console
+      console.log(
+        "warning: no exporterConfig has been provided to Zeebe. getWorkflow and getWorkflows methods won't work. "
+      );
+    }
+    this._exporterClient = new ZBElasticClient(new Configs(exporterConfig));
   }
   public subscribe(onMessageReceived: (message: IMessage, service: ICamundaService) => Promise<void>): Promise<void> {
     this._worker = this._client.createWorker(
@@ -60,15 +82,54 @@ export class ZeebeClient implements IClient, IWorkflowClient {
     };
   }
   public async getWorkflows(): Promise<IWorkflowResponse> {
-    return this._client.listWorkflows();
+    this.validateExporterConfig();
+    const result = await this._exporterClient.getWorkflows({});
+    const data = result.data.hits.hits.map(doc => {
+      const workflow = doc._source;
+      return {
+        bpmnProcessId: workflow.bpmnProcessId,
+        version: workflow.version,
+        workflowKey: workflow.key.toString(),
+        resourceName: workflow.resourceName
+      };
+    });
+
+    return {
+      workflows: data
+    };
   }
   public async getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition> {
-    return this._client.getWorkflow(payload);
+    this.validateExporterConfig();
+    this.validateObject();
+    const key = Number((payload as IWorkflowDefinitionKey).workflowKey);
+    const response = await this._exporterClient.getWorkflows({
+      key: !isNaN(key) ? key : undefined,
+      bpmnProcessId: (payload as IWorkflowProcessIdDefinition).bpmnProcessId,
+      version: (payload as IWorkflowProcessIdDefinition).version,
+      latestVersion: typeof (payload as IWorkflowProcessIdDefinition).version !== 'number'
+    });
+
+    const data = response.data.hits.hits[0];
+
+    if (!data) {
+      throw new Error('Not found');
+    }
+
+    const doc = data._source;
+
+    return {
+      version: doc.version,
+      resourceName: doc.resourceName,
+      bpmnXml: doc.bpmnXml,
+      workflowKey: doc.key.toString(),
+      bpmnProcessId: doc.bpmnProcessId
+    };
   }
-  public updateVariables<T = any>(model: IUpdateWorkflowVariables<T>): Promise<void> {
-    return this._client.updateWorkflowInstancePayload({
+  public updateVariables<T = any>(model: IUpdateWorkflowVariables<Partial<T>>): Promise<void> {
+    return this._client.setVariables<T>({
       elementInstanceKey: model.processInstanceId,
-      payload: model.variables
+      variables: model.variables,
+      local: !!model.local
     });
   }
   public updateJobRetries(payload: IUpdateWorkflowRetry): Promise<void> {
@@ -81,7 +142,7 @@ export class ZeebeClient implements IClient, IWorkflowClient {
   public publishMessage<T>(payload: IPublishMessage<T, string>): Promise<void> {
     return this._client.publishMessage({
       correlationKey: payload.correlation || '__MESSAGE_START_EVENT__',
-      payload: payload.variables,
+      variables: payload.variables,
       messageId: payload.messageId,
       timeToLive: payload.timeToLive,
       name: payload.name
@@ -101,5 +162,21 @@ export class ZeebeClient implements IClient, IWorkflowClient {
       return this._worker.close();
     }
     return Promise.resolve();
+  }
+
+  private validateExporterConfig() {
+    if (!this._exporterConfig) {
+      throw new Error(`
+      Please, refer to the warning when you instiate this class. You must pass exporterConfig to the Ctor in order to use this method.
+      For now, we are only compatible with elastic indexes that operate produce. If you use different indexes or different exporter, please raise an issue.
+      `);
+    }
+  }
+  private validateObject() {
+    if (!this._exporterConfig) {
+      throw new Error(`
+        Object passed to the method can't be undefined
+      `);
+    }
   }
 }
