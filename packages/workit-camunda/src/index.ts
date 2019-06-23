@@ -29,6 +29,11 @@ export * from './models/camunda/logger';
 // Zeebe specific
 // // specs
 export * from './models/zeebe/specs/payload';
+// export * from './models/zeebe/specs/workflowDeployResponse';
+export * from './models/zeebe/specs/zeebeClientOptions';
+export * from './models/zeebe/specs/zeebeOptions';
+export * from './models/zeebe/specs/zeebeWorkerOptions';
+export * from './models/zeebe/specs/logLevel';
 // // General
 export * from './models/zeebe/zeebeClient';
 export * from './models/zeebe/zeebeMapperProperties';

@@ -17,7 +17,6 @@ This package can be useful because:
 - Added features like Opentracing.
 - This package enforce feature parity between Zeebe and Camunda BPM through the client libraries. Some features exposed to the Camunda BPM platform are not presents in this package because we couldn't provide them if we switch to Zeebe. This limitation is to guide developers to prepare migration.
 
-
 ## Quickstart
 
 [Get started in 2 minutes](.docs/WORKER.md).
@@ -165,8 +164,14 @@ enum LOCAL_IDENTIFIER {
 
 // Register your task
 IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);
+
 ```
-[See documentation]()
+You can even make complex binding like
+```javascript
+IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { bpmnProcessId: BPMN_PROCESS_ID, version: 2 });
+```
+
+[See documentation](.docs/WORKER.md)
 
 If you have installed `workit-cli`, you can do `workit create task` 
 and everything will be done for you.
@@ -247,7 +252,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
   }
 }
 ```
-You can look to `sample` folder where we provide an example (worker.4.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
+You can look to `sample` folder where we provide an example (parallel.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
 ### Define your config for each platform
 
@@ -258,13 +263,22 @@ const configBase: ICamundaConfig = {
     topicName: 'topic_demo'
 };
 
+// For Camunda BPM platform
 const bpmnPlatformClientConfig = { ...configBase, baseUrl: 'http://localhost:8080/engine-rest',  maxTasks: 32, autoPoll: false, use: [] };
-const zeebeClientConfig = { ...configBase, { baseUrl: 'localhost:2650', timeout: 2000 };
 
 IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_config);
+
+// For Zeebe platform
+const zeebeClientConfig = { ...configBase, { baseUrl: 'localhost:2650', timeout: 2000 };
+
+const zeebeElasticExporterConfig = {
+    url: `http://localhost:9200`,
+};
+
 IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);
+IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_exporter_config)
 ```
-[See documentation]()
+[See documentation](.docs/CONFIG.md)
 
 ### Define your strategies in case of failure or success
 
@@ -337,7 +351,7 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 
 ## Versionning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](TODO).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/VilledeMontreal/workit/tags).
 
 ## Maintainers
 

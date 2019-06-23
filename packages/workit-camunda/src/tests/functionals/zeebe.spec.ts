@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 
+import * as nock from 'nock';
 import * as opentracing from 'opentracing';
 import { ZBClient } from 'zeebe-node';
 import { Client } from '../../models/camunda-n-mq/client';
@@ -29,7 +30,7 @@ const run = (worker: Worker, done: any, delay: number = 500) => {
 // tslint:disable:ter-prefer-arrow-callback
 // tslint:disable:only-arrow-functions
 // tslint:disable:max-func-body-length
-describe.only('Zeebe Worker', function() {
+describe('Zeebe Worker', function() {
   let worker: Worker;
   let config: ICamundaConfig;
 
@@ -61,5 +62,45 @@ describe.only('Zeebe Worker', function() {
       worker = new Worker(client, processHandler);
       run(worker, done, 500);
     })().catch();
+  });
+
+  it('should get workflows', async () => {
+    const scope = nock('http://localhost:9200')
+      .post('/operate-workflow_alias/_search')
+      .reply(200, require('../data/elasticResponse.workflow'));
+
+    const configuration = Utils.buildConfig(config as ICamundaConfig);
+    const externalclient = new ZBClient(config.baseUrl!);
+    const noopTracer = new opentracing.Tracer();
+    const ccTracer = new CamundaClientTracer(noopTracer);
+    const instrumentation = new Instrumentation([ccTracer]);
+    // issue with definition - fix with any
+    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+      url: 'http://localhost:9200'
+    });
+    const response = await zeebeClient.getWorkflows();
+
+    scope.done();
+    expect(response).toMatchSnapshot();
+  });
+
+  it('should get MESSAGE_EVENT workflow', async () => {
+    const scope = nock('http://localhost:9200')
+      .post('/operate-workflow_alias/_search')
+      .reply(200, require('../data/elasticResponseAgg.workflow'));
+
+    const configuration = Utils.buildConfig(config as ICamundaConfig);
+    const externalclient = new ZBClient(config.baseUrl!);
+    const noopTracer = new opentracing.Tracer();
+    const ccTracer = new CamundaClientTracer(noopTracer);
+    const instrumentation = new Instrumentation([ccTracer]);
+    // issue with definition - fix with any
+    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+      url: 'http://localhost:9200'
+    });
+    const response = await zeebeClient.getWorkflow({ bpmnProcessId: 'MESSAGE_EVENT' });
+
+    scope.done();
+    expect(response).toMatchSnapshot();
   });
 });

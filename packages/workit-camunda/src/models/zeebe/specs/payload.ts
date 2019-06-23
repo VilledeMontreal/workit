@@ -22,5 +22,5 @@ export interface IEmptyPayload {
 }
 
 export interface IPayload<T = any> extends IEmptyPayload {
-  payload: T;
+  variables: T;
 }

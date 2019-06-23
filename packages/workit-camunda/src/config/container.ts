@@ -43,15 +43,22 @@ if (!process.env.SKIP_DEMO_CONFIG) {
     baseUrl: `__undefined__`,
     topicName: 'topic_demo'
   };
+
   const bpmnPlatformClientConfig = Object.assign({}, configBase, {
     baseUrl: `http://localhost:8080/engine-rest`,
     maxTasks: 32,
     autoPoll: false
   });
+
+  const zeebeElasticExporterConfig = {
+    url: `http://localhost:9200`
+  };
+
   const zeebeClientConfig = Object.assign({}, configBase, { baseUrl: `localhost:26500` });
 
   kernel.bind(SERVICE_IDENTIFIER.camunda_external_config).toConstantValue(bpmnPlatformClientConfig);
   kernel.bind(SERVICE_IDENTIFIER.zeebe_external_config).toConstantValue(zeebeClientConfig);
+  kernel.bind(SERVICE_IDENTIFIER.zeebe_elastic_exporter_config).toConstantValue(zeebeElasticExporterConfig);
 }
 
 kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(new opentracing.Tracer());

@@ -8,7 +8,7 @@ export type IWorkflowDefinitionRequest = IWorkflowProcessIdDefinition | IWorkflo
 
 export interface IWorkflowProcessIdDefinition {
   /**
-   * Warning: Camunda BPM is not compatible with "version" property due to API restriction,
+   * Warning: Camunda BPM platform is not compatible with "version" property due to API restriction,
    * please use workflowKey. Because workflowKey includes "version" in Camunda BPM plateform
    */
   version?: number;

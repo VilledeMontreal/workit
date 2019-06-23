@@ -166,9 +166,13 @@ export class CamundaRepository implements ICamundaRepository {
       retries
     });
   }
-  public updateVariables<T = any>(processInstanceId: string, variables: T): Promise<IHttpResponse<void>> {
+  public updateVariables<T = any>(
+    processInstanceId: string,
+    variables: T,
+    local: boolean = false
+  ): Promise<IHttpResponse<void>> {
     return this._request.post(`/process-instance/${processInstanceId}/variables`, {
-      modifications: Utils.serializeVariables(variables)
+      modifications: Utils.serializeVariables(variables, local)
     });
   }
 }

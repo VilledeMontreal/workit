@@ -169,6 +169,11 @@ enum LOCAL_IDENTIFIER {
 IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);
 ```
 
+You can even make complex binding like
+```javascript
+IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { bpmnProcessId: BPMN_PROCESS_ID, version: 2 });
+```
+
 If you have installed `workit-cli`, you can do `workit create task` 
 and everything will be done for you.
 
@@ -237,7 +242,8 @@ export class HelloWorldTask extends TaskBase<IMessage> {
   public execute(message: IMessage): Promise<IMessage> {
       const { properties, spans } = message;
       // --------------------------
-      // You can use doamain probe pattern here.
+      // You should use domain probe pattern here 
+      // See internal code (ICamundaClientInstrumentation), but here an example:
       const tracer =  spans.tracer();
       const context = spans.context();
       const span = tracer.startSpan("HelloWorldTask.execute", { childOf: context });
@@ -259,13 +265,22 @@ const configBase: ICamundaConfig = {
     topicName: 'topic_demo'
 };
 
+// For Camunda BPM platform
 const bpmnPlatformClientConfig = { ...configBase, baseUrl: 'http://localhost:8080/engine-rest',  maxTasks: 32, autoPoll: false, use: [] };
-const zeebeClientConfig = { ...configBase, { baseUrl: 'localhost:2650', timeout: 2000 };
 
 IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_config);
+
+// For Zeebe platform
+const zeebeClientConfig = { ...configBase, { baseUrl: 'localhost:2650', timeout: 2000 };
+
+const zeebeElasticExporterConfig = {
+    url: `http://localhost:9200`,
+};
+
 IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);
+IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_exporter_config)
 ```
-[See documentation]()
+[See documentation](packages/workit-camunda/.docs/CONFIG.md)
 
 ### Define your strategies in case of failure or success
 
@@ -372,7 +387,7 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 
 ## Versionning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](TODO).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/VilledeMontreal/workit/tags).
 
 ## Maintainers
 

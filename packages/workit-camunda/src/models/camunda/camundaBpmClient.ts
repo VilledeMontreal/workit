@@ -17,6 +17,7 @@ import {
   IWorkflowDefinitionRequest,
   IWorkflowProcessIdDefinition
 } from '../camunda-n-mq/specs/workflowDefinition';
+import { IWorkflowResponse } from '../camunda-n-mq/specs/workflowResponse';
 import { ICCInstrumentationHandler } from '../core/instrumentations/specs/instrumentation';
 import { CamundaMessage } from './camundaMessage';
 import { CamundaRepository, ICamundaRepository } from './repositories/camundaRepository';
@@ -121,7 +122,7 @@ export class CamundaBpmClient implements IClient, IWorkflowClient {
       workflowKey: definition.id
     };
   }
-  public async updateVariables<T = any>(model: IUpdateWorkflowVariables<T>): Promise<void> {
+  public async updateVariables<T = any>(model: IUpdateWorkflowVariables<Partial<T>>): Promise<void> {
     await this._repo.updateVariables(model.processInstanceId, model.variables);
   }
   public async updateJobRetries({ jobKey, retries }: IUpdateWorkflowRetry): Promise<void> {
