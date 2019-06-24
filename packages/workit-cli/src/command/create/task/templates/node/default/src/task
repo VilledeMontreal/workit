@@ -1,0 +1,11 @@
+import { IMessage, TaskBase } from "workit-camunda";
+
+export class [CLASSNAME] extends TaskBase<IMessage> {
+    constructor() {
+        super();
+    }
+    public execute(message: IMessage): Promise<IMessage> {
+        // put your business logic here
+        return Promise.resolve({} as any);
+    }
+}

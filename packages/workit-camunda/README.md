@@ -1,6 +1,6 @@
 # WorkIt
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) [![Greenkeeper badge](https://badges.greenkeeper.io/VilledeMontreal/workit.svg)](https://greenkeeper.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ✨Extensible worker for Node.js that work with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
 
@@ -17,14 +17,13 @@ This package can be useful because:
 - Added features like Opentracing.
 - This package enforce feature parity between Zeebe and Camunda BPM through the client libraries. Some features exposed to the Camunda BPM platform are not presents in this package because we couldn't provide them if we switch to Zeebe. This limitation is to guide developers to prepare migration.
 
-
 ## Quickstart
 
-[Get started in 2 minutes](packages/workit-camunda/.docs/WORKER.md).
+[Get started in 2 minutes](.docs/WORKER.md).
 
 ## Documentation
 
- - [.docs](packages/workit-camunda/.docs/) contains written documentation
+ - [.docs](.docs/) contains written documentation
 
 ## Installing
 
@@ -33,8 +32,6 @@ npm i workit-camunda
 ```
 or using the generator below
 ### Yo!
-
-<p align="center"><img src=".repo/render1561149492572.gif?raw=true"/></p>
 
 This generator will help you during your development with this library. It provides handy tools.
 
@@ -167,12 +164,14 @@ enum LOCAL_IDENTIFIER {
 
 // Register your task
 IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);
-```
 
+```
 You can even make complex binding like
 ```javascript
 IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { bpmnProcessId: BPMN_PROCESS_ID, version: 2 });
 ```
+
+[See documentation](.docs/WORKER.md)
 
 If you have installed `workit-cli`, you can do `workit create task` 
 and everything will be done for you.
@@ -242,8 +241,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
   public execute(message: IMessage): Promise<IMessage> {
       const { properties, spans } = message;
       // --------------------------
-      // You should use domain probe pattern here 
-      // See internal code (ICamundaClientInstrumentation), but here an example:
+      // You can use doamain probe pattern here.
       const tracer =  spans.tracer();
       const context = spans.context();
       const span = tracer.startSpan("HelloWorldTask.execute", { childOf: context });
@@ -254,7 +252,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
   }
 }
 ```
-You can look to `sample` folder where we provide an example (worker.4.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
+You can look to `sample` folder where we provide an example (parallel.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
 ### Define your config for each platform
 
@@ -280,54 +278,20 @@ const zeebeElasticExporterConfig = {
 IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);
 IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_exporter_config)
 ```
-[See documentation](packages/workit-camunda/.docs/CONFIG.md)
+[See documentation](.docs/CONFIG.md)
 
 ### Define your strategies in case of failure or success
 
-By default, we define simple strategy for success or failure. 
+By default, we define simple strategy for sucess or failure. 
 We strongly recommend you to provide yours as your app trigger specific exceptions.
 Strategies are automatically handled.
 If an exeption is bubble up from the task, failure strategy  is raised, otherwise it's success.
 
 ```javascript
-// the idea is to create your own but imagine that your worker works mainly with REST API
-class ServerErrorHandler extends ErrorHandlerBase {
-  constructor(config: { maxRetries: number }) {
-    super(config);
-  }
-
-  public isHandled(error: IDciErrorResponse<IDciResponse<IApiError>>): boolean {
-    return error.response.status >= 500;
-  }
-  public handle(error: IDciErrorResponse<IDciResponse<IApiError>>, message: IMessage): Failure {
-    const retries = this.getRetryValue(message);
-    return new Failure(error.message, this.buildErrorDetails(error, message), retries, 2000 * retries);
-  }
-}
-// You could create also
-// BadRequestErrorHandler
-// TimeoutErrorHandler
-// UnManagedErrorHandler
-// ...
-// Then you could build your strategy
-/// "FailureStrategy" implements "IFailureStrategy" provided by workit-camunda
-const strategy = new FailureStrategy([
-  new AxiosApiErrorHandler(errorConfig, [
-    new BadRequestErrorHandler(errorConfig),
-    new TimeoutErrorHandler(errorConfig),
-    new ServerErrorHandler(errorConfig),
-    new UnManagedErrorHandler(errorConfig),
-    //...
-  ]),
-  new ErrorHandler(errorConfig)
-]);
-// worker will use your new strategy
-IoC.bindToObject(strategy, CORE_IDENTIFIER.failure_strategy);
+TODO: PROVIDE SAMPLE
 ```
 
 ## Running the tests
-
-We use Jest.
 
 ```bash
 npm test

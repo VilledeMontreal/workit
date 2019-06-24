@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "packages/workit-camunda/package.json",
+        "packages/workit-cli/package.json",
+        "packages/workit-cli/src/command/init/templates/node/default/src/package.json"
+      ]
+    }
+  }
+}

@@ -1,0 +1,135 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: zeebe-config
+#   labels:
+#     app: zeebe-config
+# data:
+#   zeebe.cfg.toml: |
+#     [[exporters]]
+#         id = "simple-monitor"
+#         className = "io.zeebe.monitor.SimpleMonitorExporter"
+
+#         [exporters.args]
+#           jdbcUrl = "jdbc:h2:tcp://zeebe-db:1521/zeebe-monitor"
+#           driverName = "org.h2.Driver"
+#           userName = "sa"
+#           password = ""
+# ---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zeebe
+  labels:
+    app: zeebe
+spec:
+  serviceName: "zeebe"
+  selector:
+    matchLabels:
+      app: zeebe
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: zeebe
+    spec:
+      initContainers:
+      # NOTE:
+      # This is to fix the permission on the volume
+      # By default elasticsearch container is not run as
+      # non root user.
+      # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#_notes_for_production_use_and_defaults
+      - name: fix-the-volume-permission
+        image: busybox
+        command:
+        - sh
+        - -c
+        - chown -R 1000:1000 /usr/local/zeebe/data
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: data
+          mountPath: /usr/local/zeebe/data
+      volumes:
+      - name: configuration
+        configMap:
+          name: zeebe-config
+          defaultMode: 0744
+      # this could be avoided if you use an image with this inside
+      - name: exporters
+        hostPath:
+          path: /Users/ualbe94/apps/kubernetes-course/zeebe/zeebe-simple-monitor-exporter.jar    
+      #initContainers:
+      #- name: zeebe-enable-elastic-exporter
+      #  image: busybox
+      #  command:
+      #  - sh
+      #  - -c
+      #  - echo -e '[[exporters]]\nid="elasticsearch"\nclassName="io.zeebe.exporter.ElasticsearchExporter"\n[exporter.args]\nurl="http://elasticsearch:9200"\n[exporters.args.bulk]\nsize=1' >> conf/zeebe.cfg.toml
+      #  # remove buld size for >= 0.13.0
+      #  securityContext:
+      #    privileged: true
+      containers:
+      - name: zeebe
+        image: camunda/zeebe:latest
+        ports:
+        - containerPort: 26500
+          name: gateway
+        - containerPort: 26501
+          name: client
+        - containerPort: 26502
+          name: management
+        - containerPort: 26503
+          name: replication
+        - containerPort: 26504
+          name: subscription
+        env:
+          - name: JAVA_TOOL_OPTIONS
+            value: |
+              -XX:+UnlockExperimentalVMOptions
+              -XX:+UseCGroupMemoryLimitForHeap
+              -Xms512m
+              -Xmx512m          
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name   
+          - name: ZEEBE_CLUSTER_SIZE
+            value: "1"
+          - name: ZEEBE_CONTACT_POINTS
+            value: "zeebe-0.zeebe:26502"
+          - name: ZEEBE_REPLICATION_FACTOR
+            value: "1"
+          - name: ZEEBE_PARTITIONS_COUNT
+            value: "1"
+          - name: ZEEBE_LOG_LEVEL
+            value: debug
+        #resources:
+        #  limits:
+        #    cpu: 1
+        #    memory: 1Gi
+        #  requests:
+        #    cpu: 500m
+        #    memory: 512Mi
+        volumeMounts:
+          - name: configuration
+            mountPath: /usr/local/zeebe/conf/zeebe.cfg.toml
+            subPath: zeebe.cfg.toml
+          - name: exporters
+            mountPath: /usr/local/zeebe/lib/zeebe-simple-monitor-exporter.jar
+          - name: data
+            mountPath: /usr/local/zeebe/data
+        command:
+          - "/bin/sh"
+          - "-c"
+          - "export ZEEBE_NODE_ID=$((${MY_POD_NAME##*-})) && /usr/local/bin/startup.sh"
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      storageClassName: manual
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 5Gi
