@@ -1,6 +1,6 @@
 # WorkIt
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) [![Greenkeeper badge](https://badges.greenkeeper.io/VilledeMontreal/workit.svg)](https://greenkeeper.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) [![Greenkeeper badge](https://badges.greenkeeper.io/VilledeMontreal/workit.svg)](https://greenkeeper.io/) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3c1fca456ba14ed7a1613b7f698d2ee3)](https://www.codacy.com/app/albertini.olivier/workit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VilledeMontreal/workit&amp;utm_campaign=Badge_Grade)
 
 ✨Extensible worker for Node.js that work with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
 
@@ -10,12 +10,12 @@ We needed a framework to help us quickly build workers used to execute tasks. [Z
 
 This package can be useful because:
 
-- At this moment, Zeebe doesn't provide all BPMN components. Zeebe is new and some unexpected bugs can appear during development so we can easily revert back to the the former platform if an issue was to rise.
-- Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it’s easier to change the client or to make your own.
-- You want to have a worker standardization.
-- Uniformisation. Indeed, you can use both platforms depending project needs.
-- Added features like Opentracing.
-- This package enforce feature parity between Zeebe and Camunda BPM through the client libraries. Some features exposed to the Camunda BPM platform are not presents in this package because we couldn't provide them if we switch to Zeebe. This limitation is to guide developers to prepare migration.
+-  At this moment, Zeebe doesn't provide all BPMN components. Zeebe is new and some unexpected bugs can appear during development so we can easily revert back to the the former platform if an issue was to rise.
+-  Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it’s easier to change the client or to make your own.
+-  You want to have a worker standardization.
+-  Uniformisation. Indeed, you can use both platforms depending project needs.
+-  Added features like Opentracing.
+-  This package enforce feature parity between Zeebe and Camunda BPM through the client libraries. Some features exposed to the Camunda BPM platform are not presents in this package because we couldn't provide them if we switch to Zeebe. This limitation is to guide developers to prepare migration.
 
 
 ## Quickstart
@@ -82,12 +82,16 @@ await manager.deployWorkflow(fullpath);
 
 ### Get workflows
 
+*Zeebe: You will need elasticsearch instance.*
+
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
 await manager.getWorkflows()
 ```
 
 ### Get a workflow
+
+*Zeebe: You will need elasticsearch instance.*
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
@@ -390,8 +394,6 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/VilledeMontreal/workit/tags).
 
 ## Maintainers
-
-* **Olivier Albertini** - *Initial work* - [Ville de Montréal](https://github.com/VilledeMontreal)
 
 See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
 
