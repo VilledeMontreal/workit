@@ -47,7 +47,7 @@
     "node": ">=8.11.4"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "compile": "rm -rf ./lib/ && npm run build",
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc -p ./tsconfig.json --watch",
