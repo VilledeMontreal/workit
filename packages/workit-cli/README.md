@@ -37,7 +37,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Maintainers
 
-* **Olivier Albertini** - *Initial work* - [Ville de Montréal](https://github.com/VilledeMontreal)
+*   **Olivier Albertini** - *Initial work* - [Ville de Montréal](https://github.com/VilledeMontreal)
 
 See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
 
@@ -51,4 +51,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-* [Josh Wulf](https://github.com/jwulf) - zeebe-node inspired me during `workit-cli` development
+*   [Josh Wulf](https://github.com/jwulf) - zeebe-node inspired me during `workit-cli` development

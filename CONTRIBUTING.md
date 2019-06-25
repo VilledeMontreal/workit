@@ -20,16 +20,17 @@ My PR addresses the following Github issues and references them in the PR title.
 In case you are fixing a typo in the documentation you can prepend your commit with #XXX, code changes always need a Github issue.
 
 #### Description
-  Here are some details about my PR, including screenshots of any UI changes:
+  
+Here are some details about my PR, including screenshots of any UI changes:
 
-  - Clarify the documentation.
-  - No UI changes.
+-   Clarify the documentation.
+-   No UI changes.
 
 #### Tests
 
-  My PR adds the following unit tests OR does not need testing for this extremely good reason:
+My PR adds the following unit tests OR does not need testing for this extremely good reason:
 
-  - It's just a simple documentation change.
+-   It's just a simple documentation change.
 
 #### Commits
   My commits all reference Github issues in their subject lines (recommended), 
