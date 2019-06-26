@@ -1,6 +1,6 @@
 # WorkIt
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) [![Greenkeeper badge](https://badges.greenkeeper.io/VilledeMontreal/workit.svg)](https://greenkeeper.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) [![Greenkeeper badge](https://badges.greenkeeper.io/VilledeMontreal/workit.svg)](https://greenkeeper.io/) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3c1fca456ba14ed7a1613b7f698d2ee3)](https://www.codacy.com/app/albertini.olivier/workit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VilledeMontreal/workit&amp;utm_campaign=Badge_Grade)
 
 ✨Extensible worker for Node.js that work with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
 
@@ -10,13 +10,12 @@ We needed a framework to help us quickly build workers used to execute tasks. [Z
 
 This package can be useful because:
 
-- At this moment, Zeebe doesn't provide all BPMN components. Zeebe is new and some unexpected bugs can appear during development so we can easily revert back to the the former platform if an issue was to rise.
-- Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it’s easier to change the client or to make your own.
-- You want to have a worker standardization.
-- Uniformisation. Indeed, you can use both platforms depending project needs.
-- Added features like Opentracing.
-- This package enforce feature parity between Zeebe and Camunda BPM through the client libraries. Some features exposed to the Camunda BPM platform are not presents in this package because we couldn't provide them if we switch to Zeebe. This limitation is to guide developers to prepare migration.
-
+-   At this moment, Zeebe doesn't provide all BPMN components. Zeebe is new and some unexpected bugs can appear during development so we can easily revert back to the the former platform if an issue was to rise.
+-   Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it’s easier to change the client or to make your own.
+-   You want to have a worker standardization.
+-   Uniformisation. Indeed, you can use both platforms depending project needs.
+-   Added features like Opentracing.
+-   This package enforce feature parity between Zeebe and Camunda BPM through the client libraries. Some features exposed to the Camunda BPM platform are not presents in this package because we couldn't provide them if we switch to Zeebe. This limitation is to guide developers to prepare migration.
 
 ## Quickstart
 
@@ -24,7 +23,8 @@ This package can be useful because:
 
 ## Documentation
 
- - [.docs](packages/workit-camunda/.docs/) contains written documentation
+-   [.docs](packages/workit-camunda/.docs/) contains written documentation
+-   Comprehensive API documentation is available [online](https://villedemontreal.github.io/workit/) and in the `docs` subdirectory
 
 ## Installing
 
@@ -82,12 +82,16 @@ await manager.deployWorkflow(fullpath);
 
 ### Get workflows
 
+*Zeebe: You will need elasticsearch instance.*
+
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
 await manager.getWorkflows()
 ```
 
 ### Get a workflow
+
+*Zeebe: You will need elasticsearch instance.*
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
@@ -256,7 +260,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
 ```
 You can look to `sample` folder where we provide an example (worker.4.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
-### Define your config for each platform
+### Define your config for the platform you want to use
 
 ```javascript
 const configBase: ICamundaConfig = {
@@ -271,7 +275,7 @@ const bpmnPlatformClientConfig = { ...configBase, baseUrl: 'http://localhost:808
 IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_config);
 
 // For Zeebe platform
-const zeebeClientConfig = { ...configBase, { baseUrl: 'localhost:2650', timeout: 2000 };
+const zeebeClientConfig = { ...configBase, baseUrl: 'localhost:2650', timeout: 2000 };
 
 const zeebeElasticExporterConfig = {
     url: `http://localhost:9200`,
@@ -335,16 +339,16 @@ npm test
 
 ## Built With
 
-* [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - nodejs client for Zeebe
-* [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - nodejs client for Camunda BPM
-* [inversify](https://github.com/inversify/InversifyJS) - Dependency injection
-* [opentracing](https://github.com/opentracing/opentracing-javascript) - add instrumentation to the operations to be tracked
+*   [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - nodejs client for Zeebe
+*   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - nodejs client for Camunda BPM
+*   [inversify](https://github.com/inversify/InversifyJS) - Dependency injection
+*   [opentracing](https://github.com/opentracing/opentracing-javascript) - add instrumentation to the operations to be tracked
 
 ## Philosophy
 
-1. Allow Javascript developers to write code that adheres to the SOLID principles.
-2. Facilitate and encourage the adherence to the best OOP and IoC practices.
-3. Add as little runtime overhead as possible.
+1.  Allow Javascript developers to write code that adheres to the SOLID principles.
+2.  Facilitate and encourage the adherence to the best OOP and IoC practices.
+3.  Add as little runtime overhead as possible.
 
 ## Kubernetes
 
@@ -373,12 +377,12 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 <details>
 <summary>Click to expand</summary>
 
-- Add tests
-- Improve docs
-- Make sample and confirm compatibility with DMN
-- Adding a common exception error codes between Manager clients
-- Add metrics by using prometheus lib
-- Questionning about spliting this project in 4 parts (core-camunda-message, core-camunda-engine-client-lib, core-zeebe-engine-client-lib, core-camunda-client-lib)
+-   Add tests
+-   Improve docs
+-   Make sample and confirm compatibility with DMN
+-   Adding a common exception error codes between Manager clients
+-   Add metrics by using prometheus lib
+-   Questionning about spliting this project in 4 parts (core-camunda-message, core-camunda-engine-client-lib, core-zeebe-engine-client-lib, core-camunda-client-lib)
     - Dependencies would be 
         - core-camunda-message -> core-camunda-engine-client-lib
         - core-camunda-message -> core-zeebe-engine-client-lib
@@ -390,8 +394,6 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/VilledeMontreal/workit/tags).
 
 ## Maintainers
-
-* **Olivier Albertini** - *Initial work* - [Ville de Montréal](https://github.com/VilledeMontreal)
 
 See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
 
@@ -405,4 +407,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-* [Josh Wulf](https://github.com/jwulf) - zeebe-node inspired me during `workit-cli` development
+*   [Josh Wulf](https://github.com/jwulf) - zeebe-node inspired me during `workit-cli` development

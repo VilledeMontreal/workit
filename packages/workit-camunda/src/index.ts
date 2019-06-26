@@ -61,7 +61,7 @@ export * from './models/camunda-n-mq/clientManager';
 export * from './utils/utils';
 
 // Core
-export * from './models/core/processHandler/specs/processHandlerConfig';
+
 export * from './models/core/specs/process';
 export * from './models/core/specs/task';
 export * from './models/core/specs/failureStrategy';
@@ -70,9 +70,19 @@ export * from './models/core/worker';
 export * from './models/core/specs/taskBase';
 export * from './models/core/specs/interceptor';
 
+// Sample
+export * from './models/core/strategies/FailureStrategySimple';
+export * from './models/core/strategies/SuccessStrategySimple';
+
 // Core instrumentation
 export * from './models/core/instrumentations/specs/camundaClientInstrumentation';
 export * from './models/core/instrumentations/specs/camundaClientTracer';
 export * from './models/core/instrumentations/specs/instrumentation';
+export * from './models/core/instrumentations/instrumentation';
 export * from './models/core/instrumentations/camundaClientTracer';
 export * from './models/core/instrumentations/enums/apm';
+
+// ProcessHandler
+export * from './models/core/processHandler/specs/processHandler';
+export * from './models/core/processHandler/specs/processHandlerConfig';
+export * from './models/core/processHandler/simpleCamundaProcessHandler';

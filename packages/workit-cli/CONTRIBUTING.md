@@ -20,7 +20,7 @@ My PR addresses the following Github issues and references them in the PR title.
 In case you are fixing a typo in the documentation you can prepend your commit with #XXX, code changes always need a Github issue.
 
 #### Description
-  
+
 Here are some details about my PR, including screenshots of any UI changes:
 
 -   Clarify the documentation.
@@ -33,13 +33,16 @@ My PR adds the following unit tests OR does not need testing for this extremely 
 -   It's just a simple documentation change.
 
 #### Commits
-  My commits all reference Github issues in their subject lines (recommended), 
-  and I have **squashed** multiple commits if they address the same issue. 
-  In addition, my commits follow the guidelines from ["How to write a good git commit message"](https://www.conventionalcommits.org/en/v1.0.0-beta.3)
+  
+My commits all reference Github issues in their subject lines (recommended), 
+and I have **squashed** multiple commits if they address the same issue. 
+In addition, my commits follow the guidelines from ["How to write a good git commit message"](https://www.conventionalcommits.org/en/v1.0.0-beta.3)
 
 #### Documentation
-  In case of new functionality, my PR adds documentation that describes how to use it.
+  
+In case of new functionality, my PR adds documentation that describes how to use it.
 
 ## Developer Certificate of Origin (DCO)
+
 In order to accept your pull request, we need you to submit a DCO. You only need to add `-s` command line option to append this automatically to your commit message.
 [More details](https://github.com/probot/dco)

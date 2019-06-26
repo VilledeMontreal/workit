@@ -2,7 +2,7 @@
 
 set -e
 
-CONFIG_FILE=docker/local-config/docker-compose.yml
+CONFIG_FILE=docker/dev-config/docker-compose.yml
 PULL_CMD="docker-compose -f $CONFIG_FILE pull"
 UP_CMD="docker-compose up"
 
@@ -10,7 +10,7 @@ function rmContainers() {
   docker-compose -f $CONFIG_FILE rm -fv $SERVICE_NAME || true
 }
 
-CONTAINERS=(monitor broker db)
+CONTAINERS=(operate zeebe elasticsearch kibana)
 
 for i in "${!CONTAINERS[@]}"
 do
@@ -19,7 +19,7 @@ done
 
 $PULL_CMD
 
-cd docker/local-config/
+cd docker/dev-config/
 echo "starting containers"
 $UP_CMD
 
