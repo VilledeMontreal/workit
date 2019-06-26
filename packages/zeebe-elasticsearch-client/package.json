@@ -1,6 +1,6 @@
 {
   "name": "zeebe-elasticsearch-client",
-  "version": "0.0.4-beta.0",
+  "version": "0.0.4",
   "description": "Client (Browser and NodeJs) for Zeebe Elasticsearch exporter powered by Typescript",
   "keywords": [
     "zeebe",
@@ -59,5 +59,6 @@
   },
   "bugs": {
     "url": "https://github.com/VilledeMontreal/workit/issues"
-  }
+  },
+  "gitHead": "4d109b9f2978bac5ec5338a39adc49ccf9bf2651"
 }
