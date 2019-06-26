@@ -24,6 +24,7 @@ This package can be useful because:
 ## Documentation
 
 -   [.docs](packages/workit-camunda/.docs/) contains written documentation
+-   Comprehensive API documentation is available [online](https://villedemontreal.github.io/workit/) and in the `docs` subdirectory
 
 ## Installing
 
@@ -259,7 +260,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
 ```
 You can look to `sample` folder where we provide an example (worker.4.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
-### Define your config for each platform
+### Define your config for the platform you want to use
 
 ```javascript
 const configBase: ICamundaConfig = {
@@ -274,7 +275,7 @@ const bpmnPlatformClientConfig = { ...configBase, baseUrl: 'http://localhost:808
 IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_config);
 
 // For Zeebe platform
-const zeebeClientConfig = { ...configBase, { baseUrl: 'localhost:2650', timeout: 2000 };
+const zeebeClientConfig = { ...configBase, baseUrl: 'localhost:2650', timeout: 2000 };
 
 const zeebeElasticExporterConfig = {
     url: `http://localhost:9200`,
