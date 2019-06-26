@@ -9,7 +9,7 @@
       "registry": "https://registry.npmjs.org/",
       "ignoreChanges": ["*.lock"],
       "allowBranch": "master",
-      "message": "chore(release): publish"
+      "message": "chore(release): publish %s"
     },
     "bootstrap": {
       "npmClient": "npm"
