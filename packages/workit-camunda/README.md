@@ -24,6 +24,7 @@ This package can be useful because:
 ## Documentation
 
 -   [.docs](.docs/) contains written documentation
+-   Comprehensive API documentation is available [online](https://villedemontreal.github.io/workit/) and in the `docs` subdirectory
 
 ## Installing
 
@@ -271,6 +272,7 @@ IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_conf
 // For Zeebe platform
 const zeebeClientConfig = { ...configBase, { baseUrl: 'localhost:2650', timeout: 2000 };
 
+// Zeebe exporter (Elasticsearch instance)
 const zeebeElasticExporterConfig = {
     url: `http://localhost:9200`,
 };

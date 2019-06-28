@@ -1,3 +1,4 @@
+[Français](CODE_OF_CONDUCT_FR.md)
 
 # Code of Conduct
 

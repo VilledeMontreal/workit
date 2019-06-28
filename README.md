@@ -277,6 +277,7 @@ IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_conf
 // For Zeebe platform
 const zeebeClientConfig = { ...configBase, baseUrl: 'localhost:2650', timeout: 2000 };
 
+// For Zeebe exporter (Elasticsearch instance)
 const zeebeElasticExporterConfig = {
     url: `http://localhost:9200`,
 };
@@ -294,27 +295,30 @@ Strategies are automatically handled.
 If an exeption is bubble up from the task, failure strategy  is raised, otherwise it's success.
 
 ```javascript
-// the idea is to create your own but imagine that your worker works mainly with REST API
+// the idea is to create your own but imagine that your worker works mainly with HTTP REST API
 class ServerErrorHandler extends ErrorHandlerBase {
   constructor(config: { maxRetries: number }) {
     super(config);
   }
 
-  public isHandled(error: IDciErrorResponse<IDciResponse<IApiError>>): boolean {
+  public isHandled(error: IErrorResponse<IResponse<IApiError>>): boolean {
     return error.response.status >= 500;
   }
-  public handle(error: IDciErrorResponse<IDciResponse<IApiError>>, message: IMessage): Failure {
+  public handle(error: IErrorResponse<IResponse<IApiError>>, message: IMessage): Failure {
     const retries = this.getRetryValue(message);
     return new Failure(error.message, this.buildErrorDetails(error, message), retries, 2000 * retries);
   }
 }
+
+// You got the idea...
+
 // You could create also
 // BadRequestErrorHandler
 // TimeoutErrorHandler
 // UnManagedErrorHandler
 // ...
 // Then you could build your strategy
-/// "FailureStrategy" implements "IFailureStrategy" provided by workit-camunda
+/// "FailureStrategy" implements "IFailureStrategy", this interface is provided by workit-camunda
 const strategy = new FailureStrategy([
   new AxiosApiErrorHandler(errorConfig, [
     new BadRequestErrorHandler(errorConfig),
@@ -354,6 +358,8 @@ npm test
 
 ### Zeebe
 
+TODO: provide helm chart.
+But in the meantime, you can do for development: 
 ```bash
 kubernetes/run
 ```
