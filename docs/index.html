@@ -83,6 +83,7 @@
 				<h2 id="documentation">Documentation</h2>
 				<ul>
 					<li><a href=".docs/">.docs</a> contains written documentation</li>
+					<li>Comprehensive API documentation is available <a href="https://villedemontreal.github.io/workit/">online</a> and in the <code>docs</code> subdirectory</li>
 				</ul>
 				<h2 id="installing">Installing</h2>
 				<pre><code class="language-bash">npm i workit-camunda</code></pre>
@@ -247,6 +248,7 @@ IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_conf
 <span class="hljs-comment">// For Zeebe platform</span>
 <span class="hljs-keyword">const</span> zeebeClientConfig = { ...configBase, { <span class="hljs-attr">baseUrl</span>: <span class="hljs-string">'localhost:2650'</span>, <span class="hljs-attr">timeout</span>: <span class="hljs-number">2000</span> };
 
+<span class="hljs-comment">// Zeebe exporter (Elasticsearch instance)</span>
 <span class="hljs-keyword">const</span> zeebeElasticExporterConfig = {
     <span class="hljs-attr">url</span>: <span class="hljs-string">`http://localhost:9200`</span>,
 };
