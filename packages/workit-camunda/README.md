@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-✨Extensible worker for Node.js that work with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
+✨Extensible worker for Node.js that works with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
 
 ## Motivation
 
