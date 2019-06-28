@@ -1,3 +1,5 @@
+[Français](CONTRIBUTING_FR.md)
+
 # How to Contribute
 
 This library is one of the open source projects of the Ville de Montréal which is currently under active development and which is also used to operate online services on [beta.montreal.com](https://beta.montreal.com).
@@ -17,7 +19,7 @@ We will do our best to keep `master` in good shape, with tests passing at all ti
 ### Github
 
 My PR addresses the following Github issues and references them in the PR title. For example, "#XXX My PR"
-In case you are fixing a typo in the documentation you can prepend your commit with #XXX, code changes always need a Github issue.
+In case you are fixing a typo in the documentation you can prepend your commit with docs: xxxx #XXX, code changes always need a Github issue.
 
 #### Description
   

@@ -2,70 +2,68 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) [![Greenkeeper badge](https://badges.greenkeeper.io/VilledeMontreal/workit.svg)](https://greenkeeper.io/) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3c1fca456ba14ed7a1613b7f698d2ee3)](https://www.codacy.com/app/albertini.olivier/workit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VilledeMontreal/workit&amp;utm_campaign=Badge_Grade)
 
-[Français](README_FR.md)
-
-✨Extensible worker for Node.js that work with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
+✨ Worker extensible pour Node.js fonctionnant avec les plates-formes Zeebe et Camunda BPM optimisées par TypeScript ✨
 
 ## Motivation
 
-We needed a framework to help us quickly build workers used to execute tasks. [Zeebe](https://zeebe.io/) provides a good fit with our stack. Until this is production ready, we are keeping the [Camunda Bpm](https://camunda.com/products/bpmn-engine/). Indeed, Zeebe is in developper preview. In order to make the transition smoother, we use this package. We can experiment and choose the Camunda platform we want without rewritting our business logic.
+Nous avions besoin d'un framework pour nous aider à développer rapidement des Workers. Ces derniers sont utilisés pour exécuter des tâches. [Zeebe](https://zeebe.io/) correspond bien à nos choix technologiques. Jusqu'à ce qu'une version de production soit prête, nous conservons [Camunda Bpm](https://camunda.com/products/bpmn-engine/). En effet, Zeebe est développement. Pour faciliter la transition, nous utilisons ce package. Nous pouvons expérimenter et choisir la plate-forme Camunda que nous voulons sans réécrire notre logique métier.
 
-This package can be useful because:
+Ce paquet est utile parce que:
 
--   At this moment, Zeebe doesn't provide all BPMN components. Zeebe is new and some unexpected bugs can appear during development so we can easily revert back to the the former platform if an issue was to rise.
--   Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it’s easier to change the client or to make your own.
--   You want to have a worker standardization.
--   Uniformisation. Indeed, you can use both platforms depending project needs.
--   Added features like Opentracing.
--   This package enforce feature parity between Zeebe and Camunda BPM through the client libraries. Some features exposed to the Camunda BPM platform are not presents in this package because we couldn't provide them if we switch to Zeebe. This limitation is to guide developers to prepare migration.
+-   Zeebe ne fournit pas tous les composants BPMN pour le moment. Zeebe est nouveau et des bugs inattendus peuvent apparaître lors du développement, ce qui nous permet de revenir facilement à l'ancienne plate-forme si un problème se posait.
+-   Au lieu de dépendre directement d'un client Camunda, ce projet fournit une couche d'abstraction. De cette façon, il est plus facile de changer de client ou de créer le vôtre.
+-   Vous voulez avoir une standardisation des workers.
+-   L'uniformisation. En effet, vous pouvez utiliser les deux plates-formes en fonction des besoins du projet.
+-   Ajout de fonctionnalités comme Opentracing.
+-   Ce paquet impose la parité des fonctionnalités entre Zeebe et Camunda BPM via les bibliothèques clientes. Certaines fonctionnalités exposées à la plate-forme Camunda BPM ne sont pas présentes dans ce package car nous ne pourrions pas les fournir si nous passons à Zeebe. Cette limitation est destinée à guider les développeurs dans la préparation de la migration.
 
-## Quickstart
+## Démarrage rapide
 
-[Get started in 2 minutes](packages/workit-camunda/.docs/WORKER.md).
+[Commencez en 2 minutes](packages/workit-camunda/.docs/WORKER.md).
 
 ## Documentation
 
--   [.docs](packages/workit-camunda/.docs/) contains written documentation
--   Comprehensive API documentation is available [online](https://villedemontreal.github.io/workit/) and in the `docs` subdirectory
+-   [.docs](packages/workit-camunda/.docs/) contient la documentation écrite.
+-   Une documentation complète sur l'API est disponible [en ligne](https://villedemontreal.github.io/workit/) et dans le sous répertoire `docs`
 
-## Installing
+## L'installation
 
 ```bash
 npm i workit-camunda
 ```
-or using the generator below
+ou utiliser le générateur en dessous
 ### Yo!
 
 <p align="center"><img src=".repo/render1561149492572.gif?raw=true"/></p>
 
-This generator will help you during your development with this library. It provides handy tools.
+Ce générateur vous aidera lors de votre développement avec cette bibliothèque. Il fournit des outils pratiques.
 
 ```bash
 npm i -g workit-cli
 ```
 
-#### Install a fresh new project
+#### Installer un nouveau projet
 
 ```bash
 workit init
 ```
-#### Generate tasks from your existing BPMN
+#### Générer des tâches à partir de votre BPMN existant
 
 ```bash
 workit create task --file /your/path.bpmn
 ```
 
-#### Generate new task
+#### Générer une nouvelle tâche
 
 ```bash
 workit create task
 ```
 
-## How to use
+## Comment utiliser
 
-Switching between Zeebe and the bpmn platform is easy as specifying a `TAG` to the IoC.
+Basculer entre Zeebe et la plate-forme Camunda BPM est simple, il suffit de spécifier un `TAG` pour l'IoC.
 
-### Run worker
+### Rouler le worker
 
 ```javascript
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm); // or TAG.zeebe
@@ -74,7 +72,7 @@ worker.start();
 worker.run();
 ```
 
-### Deploy a workflow
+### Déployer un workflow
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
@@ -82,25 +80,25 @@ const fullpath = `${process.cwd()}/sample/BPMN_DEMO.bpmn`;
 await manager.deployWorkflow(fullpath);
 ```
 
-### Get workflows
+### Obtenir les flux de travail
 
-*Zeebe: You will need elasticsearch instance.*
+*Zeebe: Vous aurez besoin de l'instance Elasticsearch.*
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
 await manager.getWorkflows()
 ```
 
-### Get a workflow
+### Obtenir un flux de travail
 
-*Zeebe: You will need elasticsearch instance.*
+*Zeebe: Vous aurez besoin de l'instance Elasticsearch.*
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
 await manager.getWorkflow({ bpmnProcessId: "DEMO" });
 ```
 
-### Update variables
+### Mettre à jour les variables
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
@@ -110,7 +108,7 @@ await manager.updateVariables({
 });
 ```
 
-### Publish message
+### Publier un message
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
@@ -123,7 +121,7 @@ await manager.publishMessage({
 });
 ```
 
-### Create workflow instance
+### Créer une instance de flux de travail
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
@@ -135,23 +133,23 @@ await manager.createWorkflowInstance({
 });
 ```
 
-### Cancel workflow instance
+### Annuler l'instance d'un flux de travail
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
 await manager.cancelWorkflowInstance("4651614f-4b3c-11e9-b5b3-ee5801424400");
 ```
 
-### Resolve incident
+### Résoudre l'incident
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
 await manager.resolveIncident("c84fce6c-518e-11e9-bd78-0242ac110003");
 ```
 
-### Define tasks (your bpmn activities)
+### Définir les tâches (vos activités bpmn)
 
-You can define many tasks to one worker. It will handle all messages and will route to the right tasks.
+Vous pouvez définir plusieurs tâches pour un seul Worker. Il traitera tous les messages et acheminera les requêtes vers les bonnes tâches.
 
 ```javascript
 export class HelloWorldTask extends TaskBase<IMessage> {
@@ -175,15 +173,15 @@ enum LOCAL_IDENTIFIER {
 IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);
 ```
 
-You can even make complex binding like
+Vous pouvez même faire des liaisons complexes comme
 ```javascript
 IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { bpmnProcessId: BPMN_PROCESS_ID, version: 2 });
 ```
 
-If you have installed `workit-cli`, you can do `workit create task` 
-and everything will be done for you.
+Si vous avez installé `workit-cli`, vous pouvez faire` workit create task` (vous devez avoir une structure de fichier standard au projet généré via la commande `workit init`)
+et tout sera fait pour vous.
 
-### Worker life cycle and events
+### Cycle de vie et événements des Workers
 
 ```javascript
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.zeebe); // or TAG.camundaBpm
@@ -219,7 +217,7 @@ worker.run(); // Promise
 worker.stop(); // Promise
 ```
 
-### Interceptors
+### Les intercepteurs
 
 ```javascript
 const workerConfig = {
@@ -235,13 +233,13 @@ IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
 ### Opentracing
-WorkIt integrates opentracing in order to provide instrumentations to developers. By default, we bound a `NoopTracer` but you can provide your own and it must be compatible to [opentracing interface](https://opentracing.io/docs/overview/tracers/#tracer-interface). We use [Domain Probe pattern](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests) in our Camunda clients. This way, we allow developers to bind their own and/or add their instrumentations like logs and metrics. We strongly recommand to use this kind of pattern in your task.
+WorkIt intègre opentracing afin de fournir des instruments aux développeurs. Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit être compatible avec [l'interface d'Opentracing](https://opentracing.io/docs/overview/tracers/#tracer-interface). Nous utilisons [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests) dans nos clients Camunda. De cette manière, nous permettons aux développeurs de lier les leurs instruments propres et/ou d’ajouter des instrumentations supplémentaires telles que les logs et les métriques. Nous vous recommandons fortement d'utiliser ce type de modèle dans votre tâche.
 
 ```javascript
 // Simply bind your custom tracer object like this
 IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);
 ```
-Now, you can access to `spans` property in `IMessage` object.
+Vous pouvez maintenant accéder à la propriété `spans` dans l'objet `IMessage`.
 
 ```javascript
 export class HelloWorldTask extends TaskBase<IMessage> {
@@ -260,9 +258,9 @@ export class HelloWorldTask extends TaskBase<IMessage> {
   }
 }
 ```
-You can look to `sample` folder where we provide an example (worker.4.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
+Vous pouvez consulter le dossier `sample` où nous fournissons un exemple (worker.4.ts) en utilisant [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
-### Define your config for the platform you want to use
+### Définissez votre configuration pour la plate-forme que vous souhaitez utiliser
 
 ```javascript
 const configBase: ICamundaConfig = {
@@ -289,12 +287,12 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 ```
 [See documentation](packages/workit-camunda/.docs/CONFIG.md)
 
-### Define your strategies in case of failure or success
+### Définissez vos stratégies en cas d'échec ou de succès
 
-By default, we define simple strategy for success or failure. 
-We strongly recommend you to provide yours as your app trigger specific exceptions.
-Strategies are automatically handled.
-If an exeption is bubble up from the task, failure strategy  is raised, otherwise it's success.
+Par défaut, nous définissons une stratégie simple de réussite ou d’échec.
+Nous vous recommandons vivement de fournir la vôtre car votre application déclenche des exceptions spécifiques.
+Les stratégies sont automatiquement traitées.
+Si une exception se dégage de la tâche, une stratégie d'échec est invoquée, sinon c'est un succès et la stratégie de succès est invoquée.
 
 ```javascript
 // the idea is to create your own but imagine that your worker works mainly with HTTP REST API
@@ -335,33 +333,33 @@ const strategy = new FailureStrategy([
 IoC.bindToObject(strategy, CORE_IDENTIFIER.failure_strategy);
 ```
 
-## Running the tests
+## Rouler les tests
 
-We use Jest.
+Nous utilisons Jest.
 
 ```bash
 npm test
 ```
 
-## Built With
+## Construit avec
 
-*   [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - nodejs client for Zeebe
-*   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - nodejs client for Camunda BPM
-*   [inversify](https://github.com/inversify/InversifyJS) - Dependency injection
-*   [opentracing](https://github.com/opentracing/opentracing-javascript) - add instrumentation to the operations to be tracked
+*   [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - client nodejs pour Zeebe
+*   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - client nodejs pour Camunda BPM
+*   [inversify](https://github.com/inversify/InversifyJS) - Injection de dépendence
+*   [opentracing](https://github.com/opentracing/opentracing-javascript) - ajouter de l'instrumentation aux opérations
 
-## Philosophy
+## Philosophie
 
-1.  Allow Javascript developers to write code that adheres to the SOLID principles.
-2.  Facilitate and encourage the adherence to the best OOP and IoC practices.
-3.  Add as little runtime overhead as possible.
+1.  Autorisez les développeurs Javascript à écrire du code conforme aux principes de SOLID.
+2.  Faciliter et encourager l’adhésion aux meilleures pratiques de POO et d’IoC.
+3.  Ajoutez le moins de temps système possible.
 
 ## Kubernetes
 
 ### Zeebe
 
-TODO: provide helm chart.
-But in the meantime, you can do for development: 
+À FAIRE: fournir un helm chart.
+Mais en attendant, pour le développement, vous pouvez faire:
 ```bash
 kubernetes/run
 ```
@@ -370,20 +368,20 @@ kubernetes/run
 
 ### Zeebe
 
-In your terminal
+Dans votre terminal
 ```bash
 docker/run
 ```
-### Bpmn platform
+### Camunda BPM
 ```bash
 docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 // Go: http://localhost:8080/camunda - user/password : `demo/demo`
 ```
-[More details](https://github.com/camunda/docker-camunda-bpm-platform)
+[Plus de détails](https://github.com/camunda/docker-camunda-bpm-platform)
 
 ## TODO
 <details>
-<summary>Click to expand</summary>
+<summary>Cliquez pour agrandir</summary>
 
 -   Add tests
 -   Improve docs
@@ -397,22 +395,22 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
         - core-camunda-client-lib, core-zeebe-engine-client-lib or core-camunda-engine-client-lib  -> app
 </details>
 
-## Versionning
+## Gestion des versions
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/VilledeMontreal/workit/tags).
+Nous utilisons [SemVer](http://semver.org/) pour la gestion des versions. Pour les versions disponibles, voir les [balises sur ce référentiel](https://github.com/VilledeMontreal/workit/tags).
 
-## Maintainers
+## Mainteneurs
 
-See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
+Voir aussi la liste des [contributeurs](CONTRIBUTORS.md) ayant participé à ce projet.
 
-## Contributing
+## Contribuer
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Veuillez lire [CONTRIBUTING.md](CONTRIBUTING_FR.md) pour plus de détails sur notre code de conduite et sur le processus de soumission des demandes.
 
-## License
+## Licence
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails
 
-## Acknowledgments
+## Remerciements
 
-*   [Josh Wulf](https://github.com/jwulf) - zeebe-node inspired me during `workit-cli` development
+*   [Josh Wulf](https://github.com/jwulf) - zeebe-node m'a inspiré pendant le développement de `workit-cli`
