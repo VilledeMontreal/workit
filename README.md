@@ -4,7 +4,7 @@
 
 [Français](README_FR.md)
 
-✨Extensible worker for Node.js that work with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
+✨Extensible worker for Node.js that works with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
 
 ## Motivation
 
