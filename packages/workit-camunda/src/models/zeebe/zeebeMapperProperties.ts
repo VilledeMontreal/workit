@@ -6,7 +6,7 @@ import { IProperties } from '../camunda-n-mq/specs/properties';
 import { IEmptyPayload, IPayload } from './specs/payload';
 
 export class ZeebeMapperProperties {
-  public static map(obj: IPayload): IProperties {
+  public static map<TVariables = any, TProps = any>(obj: IPayload<TVariables, TProps>): IProperties<TProps> {
     if (!obj.payload) {
       obj.payload = {};
     }
@@ -28,7 +28,7 @@ export class ZeebeMapperProperties {
     };
   }
 
-  public static unmap(props: IProperties): IEmptyPayload {
+  public static unmap<TProps = any>(props: IProperties<TProps>): IEmptyPayload<TProps> {
     return {
       jobHeaders: {
         elementId: props.activityId,
