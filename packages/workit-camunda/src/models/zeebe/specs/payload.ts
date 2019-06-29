@@ -10,17 +10,17 @@ export interface IJobHeader {
   elementInstanceKey: string;
 }
 
-export interface IEmptyPayload {
+export interface IEmptyPayload<TProps> {
   key: string;
   type: string;
   jobHeaders: IJobHeader;
   worker: string;
   retries: number | null;
   deadline: string;
-  customHeaders: any;
+  customHeaders: TProps;
   [custom: string]: any;
 }
 
-export interface IPayload<T = any> extends IEmptyPayload {
-  variables: T;
+export interface IPayload<TVariables = any, TProps = any> extends IEmptyPayload<TProps> {
+  variables: TVariables;
 }

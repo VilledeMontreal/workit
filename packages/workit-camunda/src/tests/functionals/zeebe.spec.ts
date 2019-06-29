@@ -52,7 +52,6 @@ describe('Zeebe Worker', function() {
       const noopTracer = new opentracing.Tracer();
       const ccTracer = new CamundaClientTracer(noopTracer);
       const instrumentation = new Instrumentation([ccTracer]);
-      // issue with definition - fix with any
       const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient);
       const successHandler = new SuccessStrategySimple();
       const failureHandler = new FailureStrategySimple();
@@ -74,7 +73,6 @@ describe('Zeebe Worker', function() {
     const noopTracer = new opentracing.Tracer();
     const ccTracer = new CamundaClientTracer(noopTracer);
     const instrumentation = new Instrumentation([ccTracer]);
-    // issue with definition - fix with any
     const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
       url: 'http://localhost:9200'
     });
@@ -94,7 +92,6 @@ describe('Zeebe Worker', function() {
     const noopTracer = new opentracing.Tracer();
     const ccTracer = new CamundaClientTracer(noopTracer);
     const instrumentation = new Instrumentation([ccTracer]);
-    // issue with definition - fix with any
     const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
       url: 'http://localhost:9200'
     });
@@ -102,5 +99,19 @@ describe('Zeebe Worker', function() {
 
     scope.done();
     expect(response).toMatchSnapshot();
+  });
+
+  it('should generate an exception', async () => {
+    const configuration = Utils.buildConfig(config as ICamundaConfig);
+    const externalclient = new ZBClient(config.baseUrl!);
+    const noopTracer = new opentracing.Tracer();
+    const ccTracer = new CamundaClientTracer(noopTracer);
+    const instrumentation = new Instrumentation([ccTracer]);
+    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient);
+    try {
+      await zeebeClient.cancelWorkflowInstance('hello');
+    } catch (error) {
+      expect(error).toMatchSnapshot();
+    }
   });
 });

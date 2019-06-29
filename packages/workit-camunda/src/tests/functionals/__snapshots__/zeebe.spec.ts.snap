@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Zeebe Worker should generate an exception 1`] = `
+[Error: 
+      workflowInstanceKey value is malformed
+      ]
+`;
+
 exports[`Zeebe Worker should get MESSAGE_EVENT workflow 1`] = `
 Object {
   "bpmnProcessId": "MESSAGE_EVENT",

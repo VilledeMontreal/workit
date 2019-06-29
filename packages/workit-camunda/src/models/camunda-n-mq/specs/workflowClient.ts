@@ -13,7 +13,7 @@ export interface IWorkflowClient {
   updateVariables(payload: IUpdateWorkflowVariables): Promise<void>;
   updateJobRetries(payload: IUpdateWorkflowRetry): Promise<void>;
   publishMessage<T = any>(payload: IPublishMessage<T, any>): Promise<void>;
-  cancelWorkflowInstance(instanceId: string): Promise<void>;
+  cancelWorkflowInstance(instance: number | string): Promise<void>;
   createWorkflowInstance<T>(payload: ICreateWorkflowInstance<T>): Promise<ICreateWorkflowInstanceResponse>;
   resolveIncident(incidentKey: string): Promise<void>;
   getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition>;

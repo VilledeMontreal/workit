@@ -30,11 +30,10 @@ import { ZeebeMessage } from './zeebeMessage';
 //   [custom: string]: any;
 // }
 
-export class ZeebeClient<WorkerInputVariables = any, CustomHeaderShape = any, WorkerOutputVariables = any>
-  implements IClient, IWorkflowClient {
+export class ZeebeClient<TVariables = any, TProps = any, RVariables = TVariables> implements IClient, IWorkflowClient {
   private readonly _client: ZBClient;
   private readonly _exporterClient: ZBElasticClient;
-  private _worker: ZBWorker<WorkerInputVariables, CustomHeaderShape, WorkerOutputVariables> | undefined;
+  private _worker: ZBWorker<TVariables, TProps, RVariables> | undefined;
   private readonly _config: IZeebeOptions;
   private readonly _exporterConfig: Partial<IElasticExporterConfig> | undefined;
   private readonly _apm: ICCInstrumentationHandler;
@@ -56,11 +55,13 @@ export class ZeebeClient<WorkerInputVariables = any, CustomHeaderShape = any, Wo
     }
     this._exporterClient = new ZBElasticClient(new Configs(exporterConfig));
   }
-  public subscribe(onMessageReceived: (message: IMessage, service: ICamundaService) => Promise<void>): Promise<void> {
+  public subscribe(
+    onMessageReceived: (message: IMessage<TVariables, TProps>, service: ICamundaService) => Promise<void>
+  ): Promise<void> {
     this._worker = this._client.createWorker(
       this._config.workerId || 'some-random-id',
       this._config.topicName,
-      async (payload: IPayload, complete: (content: IPayload) => void) => {
+      async (payload: IPayload<TVariables, TProps>, complete: (content: IPayload<RVariables, TProps>) => void) => {
         const [message, service] = ZeebeMessage.wrap(payload, complete, this._client, this._apm);
         try {
           await onMessageReceived(message, service);
@@ -151,8 +152,9 @@ export class ZeebeClient<WorkerInputVariables = any, CustomHeaderShape = any, Wo
   public createWorkflowInstance<T>(model: ICreateWorkflowInstance<T>): Promise<ICreateWorkflowInstanceResponse> {
     return this._client.createWorkflowInstance(model.bpmnProcessId, model.variables, model.version);
   }
-  public cancelWorkflowInstance(instanceId: string): Promise<void> {
-    return this._client.cancelWorkflowInstance(instanceId);
+  public cancelWorkflowInstance(instance: string): Promise<void> {
+    this.validateNumber(instance);
+    return this._client.cancelWorkflowInstance(instance as any); // TODO: will be fixed https://github.com/zeebe-io/zeebe/issues/2680
   }
   public resolveIncident(incidentKey: string): Promise<void> {
     return this._client.resolveIncident(incidentKey);
@@ -176,6 +178,14 @@ export class ZeebeClient<WorkerInputVariables = any, CustomHeaderShape = any, Wo
     if (!this._exporterConfig) {
       throw new Error(`
         Object passed to the method can't be undefined
+      `);
+    }
+  }
+  private validateNumber(variable: string) {
+    const value = Number(variable);
+    if (!Number.isInteger(value)) {
+      throw new Error(`
+      workflowInstanceKey value is malformed
       `);
     }
   }
