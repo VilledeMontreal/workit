@@ -25,14 +25,14 @@
       "@types/node": "^12.0.10",
       "prettier": "^1.18.2",
       "prettier-tslint": "^0.4.2",
-      "husky": "^2.4.1",
-      "tslint": "^5.17.0",
+      "husky": "^2.7.0",
+      "tslint": "^5.18.0",
       "tslint-config-airbnb": "^5.11.1",
       "tslint-config-prettier": "^1.18.0",
       "typescript": "^3.5.2"
     },
     "dependencies": {
-      "workit-camunda": "^1.0.0",
+      "workit-camunda": "^2.0.0",
       "config": "~3.1.0"
     }
   }
