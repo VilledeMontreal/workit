@@ -26,7 +26,6 @@ const run = (worker: Worker, done: any, delay: number = 500) => {
     done();
   }, delay);
 };
-
 // tslint:disable:ter-prefer-arrow-callback
 // tslint:disable:only-arrow-functions
 // tslint:disable:max-func-body-length
@@ -66,6 +65,7 @@ describe('Zeebe Worker', function() {
   it('should get workflows', async () => {
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search')
+      .query({ _source_excludes: 'bpmnXml' })
       .reply(200, require('../data/elasticResponse.workflow'));
 
     const configuration = Utils.buildConfig(config as ICamundaConfig);
@@ -101,7 +101,7 @@ describe('Zeebe Worker', function() {
     expect(response).toMatchSnapshot();
   });
 
-  it('should generate an exception', async () => {
+  it('should generate an exception for cancelWorkflowInstance when key is malformed', async () => {
     const configuration = Utils.buildConfig(config as ICamundaConfig);
     const externalclient = new ZBClient(config.baseUrl!);
     const noopTracer = new opentracing.Tracer();
@@ -113,5 +113,68 @@ describe('Zeebe Worker', function() {
     } catch (error) {
       expect(error).toMatchSnapshot();
     }
+  });
+  it('should limit the number of document', async () => {
+    const size = 5;
+    const scope = nock('http://localhost:9200')
+      .post('/operate-workflow_alias/_search', { query: { bool: { must: [] } } })
+      .query({ _source_excludes: 'bpmnXml', size })
+      .reply(200, require('../data/elasticResponse.paginated'));
+    const configuration = Utils.buildConfig(config as ICamundaConfig);
+    const externalclient = new ZBClient(config.baseUrl!);
+    const noopTracer = new opentracing.Tracer();
+    const ccTracer = new CamundaClientTracer(noopTracer);
+    const instrumentation = new Instrumentation([ccTracer]);
+    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+      url: 'http://localhost:9200'
+    });
+    const response = await zeebeClient.getWorkflows({ size });
+    scope.done();
+    expect(response.items.length).toEqual(size);
+    expect(response).toMatchSnapshot();
+  });
+
+  it('should limit the number of document and skip one document', async () => {
+    const size = 4;
+    const from = 1;
+    const scope = nock('http://localhost:9200')
+      .post('/operate-workflow_alias/_search', { query: { bool: { must: [] } } })
+      .query({ _source_excludes: 'bpmnXml', size, from })
+      .reply(200, require('../data/elasticResponse.paginated.skip'));
+    const configuration = Utils.buildConfig(config as ICamundaConfig);
+    const externalclient = new ZBClient(config.baseUrl!);
+    const noopTracer = new opentracing.Tracer();
+    const ccTracer = new CamundaClientTracer(noopTracer);
+    const instrumentation = new Instrumentation([ccTracer]);
+    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+      url: 'http://localhost:9200'
+    });
+    const response = await zeebeClient.getWorkflows({ size, from });
+    scope.done();
+    expect(response.items.length).toEqual(size);
+    expect(response).toMatchSnapshot();
+  });
+
+  it('should limit the number of document and search by bpmnProcessId', async () => {
+    const size = 5;
+    const bpmnProcessId = 'MESSAGE_EVENT';
+    const scope = nock('http://localhost:9200')
+      .post('/operate-workflow_alias/_search', {
+        query: { bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }] } }
+      })
+      .query({ _source_excludes: 'bpmnXml', size })
+      .reply(200, require('../data/elasticResponseBpmnProcessId.paginated'));
+
+    const configuration = Utils.buildConfig(config as ICamundaConfig);
+    const externalclient = new ZBClient(config.baseUrl!);
+    const noopTracer = new opentracing.Tracer();
+    const ccTracer = new CamundaClientTracer(noopTracer);
+    const instrumentation = new Instrumentation([ccTracer]);
+    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+      url: 'http://localhost:9200'
+    });
+    const response = await zeebeClient.getWorkflows({ size, bpmnProcessId });
+    scope.done();
+    expect(response).toMatchSnapshot();
   });
 });

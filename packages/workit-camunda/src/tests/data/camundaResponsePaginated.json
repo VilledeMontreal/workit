@@ -30,21 +30,5 @@
         "versionTag": "V1.0",
         "historyTimeToLive": 30,
         "startableInTasklist": true
-    },
-    {
-        "id": "invoice:2:65434362-9ad1-11e9-8102-0242ac110002",
-        "key": "invoice",
-        "category": "http://www.omg.org/spec/BPMN/20100524/MODEL",
-        "description": null,
-        "name": "Invoice Receipt",
-        "version": 2,
-        "resource": "invoice.v2.bpmn",
-        "deploymentId": "653dec2e-9ad1-11e9-8102-0242ac110002",
-        "diagram": null,
-        "suspended": false,
-        "tenantId": null,
-        "versionTag": "V2.0",
-        "historyTimeToLive": 45,
-        "startableInTasklist": true
     }
 ]

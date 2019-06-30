@@ -2,14 +2,6 @@
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 
-export interface IWorkflowDeployResponse {
-  key: string;
-  workflows: IWorkflow[];
-}
-
-export interface IWorkflow {
+export interface IWorkflowOptions {
   bpmnProcessId: string;
-  version: number;
-  workflowKey: string;
-  resourceName: string;
 }
