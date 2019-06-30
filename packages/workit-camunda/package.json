@@ -1,6 +1,6 @@
 {
   "name": "workit-camunda",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Worker for Node.js system with pluggable Camunda clients that works with both Zeebe and Camunda platform powered by TypeScript",
   "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -16,7 +16,7 @@
     "inversify": "~5.0.1",
     "opentracing": "0.14.3",
     "reflect-metadata": "~0.1.13",
-    "zeebe-elasticsearch-client": "^0.0.4",
+    "zeebe-elasticsearch-client": "^0.0.5",
     "zeebe-node": "~2.3.0"
   },
   "devDependencies": {
