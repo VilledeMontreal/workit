@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ISampler | workit-camunda</title>
+	<title>IPagination | workit-camunda</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,21 +56,29 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="isampler.html">ISampler</a>
+					<a href="ipagination.html">IPagination</a>
 				</li>
 			</ul>
-			<h1>Interface ISampler</h1>
+			<h1>Interface IPagination&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ISampler</span>
+						<span class="target">IPagination</span>
 					</li>
 				</ul>
 			</section>
@@ -81,8 +89,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isampler.html#param" class="tsd-kind-icon">param</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isampler.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ipagination.html#items" class="tsd-kind-icon">items</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ipagination.html#paging" class="tsd-kind-icon">paging</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,22 +99,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="param" class="tsd-anchor"></a>
-					<h3>param</h3>
-					<div class="tsd-signature tsd-kind-icon">param<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="items" class="tsd-anchor"></a>
+					<h3>items</h3>
+					<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/core/specs/sampler.ts#L7">src/models/core/specs/sampler.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/pagination.ts#L8">src/models/camunda-n-mq/specs/pagination.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="paging" class="tsd-anchor"></a>
+					<h3>paging</h3>
+					<div class="tsd-signature tsd-kind-icon">paging<span class="tsd-signature-symbol">:</span> <a href="ipaging.html" class="tsd-signature-type">IPaging</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/core/specs/sampler.ts#L6">src/models/core/specs/sampler.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/pagination.ts#L7">src/models/camunda-n-mq/specs/pagination.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -124,14 +132,14 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="isampler.html" class="tsd-kind-icon">ISampler</a>
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
+						<a href="ipagination.html" class="tsd-kind-icon">IPagination</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="isampler.html#param" class="tsd-kind-icon">param</a>
+								<a href="ipagination.html#items" class="tsd-kind-icon">items</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="isampler.html#type" class="tsd-kind-icon">type</a>
+								<a href="ipagination.html#paging" class="tsd-kind-icon">paging</a>
 							</li>
 						</ul>
 					</li>

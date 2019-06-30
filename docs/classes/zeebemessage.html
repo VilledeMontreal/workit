@@ -81,8 +81,8 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="zeebemessage.html#unwrap" class="tsd-kind-icon">unwrap</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="zeebemessage.html#wrap" class="tsd-kind-icon">wrap</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="zeebemessage.html#unwrap" class="tsd-kind-icon">unwrap</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="zeebemessage.html#wrap" class="tsd-kind-icon">wrap</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,17 +90,17 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
 					<a name="unwrap" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> unwrap</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">unwrap<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/ipayload.html" class="tsd-signature-type">IPayload</a></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">unwrap&lt;TVariables, TProps&gt;<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/ipayload.html" class="tsd-signature-type">IPayload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeMessage.ts#L68">src/models/zeebe/zeebeMessage.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeMessage.ts#L68">src/models/zeebe/zeebeMessage.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -108,33 +108,51 @@
 									<p>Shallow copy</p>
 								</div>
 							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TVariables</h4>
+								</li>
+								<li>
+									<h4>TProps</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>message: <a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a></h5>
+									<h5>message: <a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/ipayload.html" class="tsd-signature-type">IPayload</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/ipayload.html" class="tsd-signature-type">IPayload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
 					<a name="wrap" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> wrap</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">wrap<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><a href="../interfaces/ipayload.html" class="tsd-signature-type">IPayload</a>, complete<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ZBClient</span>, apm<span class="tsd-signature-symbol">: </span><a href="../interfaces/iccinstrumentationhandler.html" class="tsd-signature-type">ICCInstrumentationHandler</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/icamundaservice.html" class="tsd-signature-type">ICamundaService</a><span class="tsd-signature-symbol">]</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">wrap&lt;TVariables, TProps&gt;<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><a href="../interfaces/ipayload.html" class="tsd-signature-type">IPayload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span>, complete<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ZBClient</span>, apm<span class="tsd-signature-symbol">: </span><a href="../interfaces/iccinstrumentationhandler.html" class="tsd-signature-type">ICCInstrumentationHandler</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/icamundaservice.html" class="tsd-signature-type">ICamundaService</a><span class="tsd-signature-symbol">]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeMessage.ts#L19">src/models/zeebe/zeebeMessage.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeMessage.ts#L19">src/models/zeebe/zeebeMessage.ts:19</a></li>
 								</ul>
 							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TVariables</h4>
+								</li>
+								<li>
+									<h4>TProps</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>payload: <a href="../interfaces/ipayload.html" class="tsd-signature-type">IPayload</a></h5>
+									<h5>payload: <a href="../interfaces/ipayload.html" class="tsd-signature-type">IPayload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>complete: <span class="tsd-signature-type">any</span></h5>
@@ -167,10 +185,10 @@
 					<li class="current tsd-kind-class">
 						<a href="zeebemessage.html" class="tsd-kind-icon">Zeebe<wbr>Message</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
 								<a href="zeebemessage.html#unwrap" class="tsd-kind-icon">unwrap</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
 								<a href="zeebemessage.html#wrap" class="tsd-kind-icon">wrap</a>
 							</li>
 						</ul>

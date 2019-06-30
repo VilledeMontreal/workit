@@ -59,7 +59,7 @@
 					<a href="zeebeclient.html">ZeebeClient</a>
 				</li>
 			</ul>
-			<h1>Class ZeebeClient&lt;WorkerInputVariables, CustomHeaderShape, WorkerOutputVariables&gt;</h1>
+			<h1>Class ZeebeClient&lt;TVariables, TProps, RVariables&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -70,13 +70,13 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>WorkerInputVariables</h4>
+						<h4>TVariables</h4>
 					</li>
 					<li>
-						<h4>CustomHeaderShape</h4>
+						<h4>TProps</h4>
 					</li>
 					<li>
-						<h4>WorkerOutputVariables</h4>
+						<h4>RVariables</h4>
 					</li>
 				</ul>
 			</section>
@@ -136,7 +136,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L40">src/models/zeebe/zeebeClient.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L43">src/models/zeebe/zeebeClient.ts:43</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -165,20 +165,19 @@
 					<a name="cancelworkflowinstance" class="tsd-anchor"></a>
 					<h3>cancel<wbr>Workflow<wbr>Instance</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">cancel<wbr>Workflow<wbr>Instance<span class="tsd-signature-symbol">(</span>instanceId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">cancel<wbr>Workflow<wbr>Instance<span class="tsd-signature-symbol">(</span>instance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/iworkflowclient.html">IWorkflowClient</a>.<a href="../interfaces/iworkflowclient.html#cancelworkflowinstance">cancelWorkflowInstance</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L154">src/models/zeebe/zeebeClient.ts:154</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L165">src/models/zeebe/zeebeClient.ts:165</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>instanceId: <span class="tsd-signature-type">string</span></h5>
+									<h5>instance: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -196,7 +195,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iworkflowclient.html">IWorkflowClient</a>.<a href="../interfaces/iworkflowclient.html#createworkflowinstance">createWorkflowInstance</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L151">src/models/zeebe/zeebeClient.ts:151</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L162">src/models/zeebe/zeebeClient.ts:162</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -226,7 +225,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iworkflowclient.html">IWorkflowClient</a>.<a href="../interfaces/iworkflowclient.html#deployworkflow">deployWorkflow</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L77">src/models/zeebe/zeebeClient.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L82">src/models/zeebe/zeebeClient.ts:82</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -250,7 +249,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iworkflowclient.html">IWorkflowClient</a>.<a href="../interfaces/iworkflowclient.html#getworkflow">getWorkflow</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L101">src/models/zeebe/zeebeClient.ts:101</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L112">src/models/zeebe/zeebeClient.ts:112</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -267,17 +266,23 @@
 					<a name="getworkflows" class="tsd-anchor"></a>
 					<h3>get<wbr>Workflows</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Workflows<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">IWorkflowResponse</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Workflows<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iworkflowoptions.html" class="tsd-signature-type">IWorkflowOptions</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/ipaginationoptions.html" class="tsd-signature-type">IPaginationOptions</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ipagination.html" class="tsd-signature-type">IPagination</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iworkflow.html" class="tsd-signature-type">IWorkflow</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iworkflowclient.html">IWorkflowClient</a>.<a href="../interfaces/iworkflowclient.html#getworkflows">getWorkflows</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L84">src/models/zeebe/zeebeClient.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L89">src/models/zeebe/zeebeClient.ts:89</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">IWorkflowResponse</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iworkflowoptions.html" class="tsd-signature-type">IWorkflowOptions</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/ipaginationoptions.html" class="tsd-signature-type">IPaginationOptions</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ipagination.html" class="tsd-signature-type">IPagination</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iworkflow.html" class="tsd-signature-type">IWorkflow</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -292,7 +297,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iworkflowclient.html">IWorkflowClient</a>.<a href="../interfaces/iworkflowclient.html#publishmessage">publishMessage</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L142">src/models/zeebe/zeebeClient.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L153">src/models/zeebe/zeebeClient.ts:153</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -328,7 +333,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iworkflowclient.html">IWorkflowClient</a>.<a href="../interfaces/iworkflowclient.html#resolveincident">resolveIncident</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L157">src/models/zeebe/zeebeClient.ts:157</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L169">src/models/zeebe/zeebeClient.ts:169</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -351,7 +356,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L59">src/models/zeebe/zeebeClient.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L62">src/models/zeebe/zeebeClient.ts:62</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -361,14 +366,14 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a>, service<span class="tsd-signature-symbol">: </span><a href="../interfaces/icamundaservice.html" class="tsd-signature-type">ICamundaService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span>, service<span class="tsd-signature-symbol">: </span><a href="../interfaces/icamundaservice.html" class="tsd-signature-type">ICamundaService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>message: <a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a></h5>
+															<h5>message: <a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span></h5>
 														</li>
 														<li>
 															<h5>service: <a href="../interfaces/icamundaservice.html" class="tsd-signature-type">ICamundaService</a></h5>
@@ -396,7 +401,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iclient.html">IClient</a>.<a href="../interfaces/iclient.html#unsubscribe">unsubscribe</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L160">src/models/zeebe/zeebeClient.ts:160</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L172">src/models/zeebe/zeebeClient.ts:172</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -414,7 +419,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iworkflowclient.html">IWorkflowClient</a>.<a href="../interfaces/iworkflowclient.html#updatejobretries">updateJobRetries</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L135">src/models/zeebe/zeebeClient.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L146">src/models/zeebe/zeebeClient.ts:146</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -438,7 +443,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/iworkflowclient.html">IWorkflowClient</a>.<a href="../interfaces/iworkflowclient.html#updatevariables">updateVariables</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L128">src/models/zeebe/zeebeClient.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/zeebeClient.ts#L139">src/models/zeebe/zeebeClient.ts:139</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>

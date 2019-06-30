@@ -59,7 +59,7 @@
 					<a href="ipayload.html">IPayload</a>
 				</li>
 			</ul>
-			<h1>Interface IPayload&lt;T&gt;</h1>
+			<h1>Interface IPayload&lt;TVariables, TProps&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,10 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>T</h4>
+						<h4>TVariables</h4>
+					</li>
+					<li>
+						<h4>TProps</h4>
 					</li>
 				</ul>
 			</section>
@@ -78,7 +81,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="iemptypayload.html" class="tsd-signature-type">IEmptyPayload</a>
+						<a href="iemptypayload.html" class="tsd-signature-type">IEmptyPayload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">IPayload</span>
@@ -116,11 +119,11 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="customheaders" class="tsd-anchor"></a>
 					<h3>custom<wbr>Headers</h3>
-					<div class="tsd-signature tsd-kind-icon">custom<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<div class="tsd-signature tsd-kind-icon">custom<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TProps</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="iemptypayload.html">IEmptyPayload</a>.<a href="iemptypayload.html#customheaders">customHeaders</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L20">src/models/zeebe/specs/payload.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L20">src/models/zeebe/specs/payload.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -131,7 +134,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="iemptypayload.html">IEmptyPayload</a>.<a href="iemptypayload.html#deadline">deadline</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L19">src/models/zeebe/specs/payload.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L19">src/models/zeebe/specs/payload.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -142,7 +145,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="iemptypayload.html">IEmptyPayload</a>.<a href="iemptypayload.html#jobheaders">jobHeaders</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L16">src/models/zeebe/specs/payload.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L16">src/models/zeebe/specs/payload.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -153,7 +156,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="iemptypayload.html">IEmptyPayload</a>.<a href="iemptypayload.html#key">key</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L14">src/models/zeebe/specs/payload.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L14">src/models/zeebe/specs/payload.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -164,7 +167,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="iemptypayload.html">IEmptyPayload</a>.<a href="iemptypayload.html#retries">retries</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L18">src/models/zeebe/specs/payload.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L18">src/models/zeebe/specs/payload.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -175,17 +178,17 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="iemptypayload.html">IEmptyPayload</a>.<a href="iemptypayload.html#type">type</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L15">src/models/zeebe/specs/payload.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L15">src/models/zeebe/specs/payload.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="variables" class="tsd-anchor"></a>
 					<h3>variables</h3>
-					<div class="tsd-signature tsd-kind-icon">variables<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span></div>
+					<div class="tsd-signature tsd-kind-icon">variables<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TVariables</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L25">src/models/zeebe/specs/payload.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L25">src/models/zeebe/specs/payload.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -196,7 +199,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="iemptypayload.html">IEmptyPayload</a>.<a href="iemptypayload.html#worker">worker</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L17">src/models/zeebe/specs/payload.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/zeebe/specs/payload.ts#L17">src/models/zeebe/specs/payload.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>

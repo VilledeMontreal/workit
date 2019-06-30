@@ -111,19 +111,19 @@
 					<a name="cancelworkflowinstance" class="tsd-anchor"></a>
 					<h3>cancel<wbr>Workflow<wbr>Instance</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">cancel<wbr>Workflow<wbr>Instance<span class="tsd-signature-symbol">(</span>instanceId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">cancel<wbr>Workflow<wbr>Instance<span class="tsd-signature-symbol">(</span>instance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L16">src/models/camunda-n-mq/specs/workflowClient.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L19">src/models/camunda-n-mq/specs/workflowClient.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>instanceId: <span class="tsd-signature-type">string</span></h5>
+									<h5>instance: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -140,7 +140,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L17">src/models/camunda-n-mq/specs/workflowClient.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L20">src/models/camunda-n-mq/specs/workflowClient.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -169,7 +169,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L11">src/models/camunda-n-mq/specs/workflowClient.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L14">src/models/camunda-n-mq/specs/workflowClient.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -192,7 +192,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L19">src/models/camunda-n-mq/specs/workflowClient.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L22">src/models/camunda-n-mq/specs/workflowClient.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -209,16 +209,22 @@
 					<a name="getworkflows" class="tsd-anchor"></a>
 					<h3>get<wbr>Workflows</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Workflows<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="iworkflowresponse.html" class="tsd-signature-type">IWorkflowResponse</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Workflows<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="iworkflowoptions.html" class="tsd-signature-type">IWorkflowOptions</a><span class="tsd-signature-symbol"> &amp; </span><a href="ipaginationoptions.html" class="tsd-signature-type">IPaginationOptions</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="ipagination.html" class="tsd-signature-type">IPagination</a><span class="tsd-signature-symbol">&lt;</span><a href="iworkflow.html" class="tsd-signature-type">IWorkflow</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L12">src/models/camunda-n-mq/specs/workflowClient.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L15">src/models/camunda-n-mq/specs/workflowClient.ts:15</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="iworkflowresponse.html" class="tsd-signature-type">IWorkflowResponse</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="iworkflowoptions.html" class="tsd-signature-type">IWorkflowOptions</a><span class="tsd-signature-symbol"> &amp; </span><a href="ipaginationoptions.html" class="tsd-signature-type">IPaginationOptions</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="ipagination.html" class="tsd-signature-type">IPagination</a><span class="tsd-signature-symbol">&lt;</span><a href="iworkflow.html" class="tsd-signature-type">IWorkflow</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -232,7 +238,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L15">src/models/camunda-n-mq/specs/workflowClient.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L18">src/models/camunda-n-mq/specs/workflowClient.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -261,7 +267,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L18">src/models/camunda-n-mq/specs/workflowClient.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L21">src/models/camunda-n-mq/specs/workflowClient.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -284,7 +290,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L14">src/models/camunda-n-mq/specs/workflowClient.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L17">src/models/camunda-n-mq/specs/workflowClient.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -307,7 +313,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/e420ab6/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L13">src/models/camunda-n-mq/specs/workflowClient.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/specs/workflowClient.ts#L16">src/models/camunda-n-mq/specs/workflowClient.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>

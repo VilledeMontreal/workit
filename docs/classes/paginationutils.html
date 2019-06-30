@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ICCInstrumentationHandler | workit-camunda</title>
+	<title>PaginationUtils | workit-camunda</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="iccinstrumentationhandler.html">ICCInstrumentationHandler</a>
+					<a href="paginationutils.html">PaginationUtils</a>
 				</li>
 			</ul>
-			<h1>Interface ICCInstrumentationHandler</h1>
+			<h1>Class PaginationUtils</h1>
 		</div>
 	</div>
 </header>
@@ -70,132 +70,114 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="icamundaclientinstrumentation.html" class="tsd-signature-type">ICamundaClientInstrumentation</a>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">ICCInstrumentationHandler</span>
-							</li>
-						</ul>
+						<span class="target">PaginationUtils</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/instrumentation.html" class="tsd-signature-type">Instrumentation</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-inherited">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="iccinstrumentationhandler.html#kind" class="tsd-kind-icon">kind</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="iccinstrumentationhandler.html#get" class="tsd-kind-icon">get</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="iccinstrumentationhandler.html#onmessagefailed" class="tsd-kind-icon">on<wbr>Message<wbr>Failed</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="iccinstrumentationhandler.html#onmessagesuccess" class="tsd-kind-icon">on<wbr>Message<wbr>Success</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="paginationutils.html#getpagingfromoptions" class="tsd-kind-icon">get<wbr>Paging<wbr>From<wbr>Options</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="paginationutils.html#setcamundabpmpaginationparams" class="tsd-kind-icon">set<wbr>Camunda<wbr>Bpm<wbr>Pagination<wbr>Params</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="paginationutils.html#setelasticpaginationparams" class="tsd-kind-icon">set<wbr>Elastic<wbr>Pagination<wbr>Params</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="kind" class="tsd-anchor"></a>
-					<h3>kind</h3>
-					<div class="tsd-signature tsd-kind-icon">kind<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="icamundaclientinstrumentation.html">ICamundaClientInstrumentation</a>.<a href="icamundaclientinstrumentation.html#kind">kind</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/core/instrumentations/specs/camundaClientInstrumentation.ts#L8">src/models/core/instrumentations/specs/camundaClientInstrumentation.ts:8</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="get" class="tsd-anchor"></a>
-					<h3>get</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>kind<span class="tsd-signature-symbol">: </span><a href="../enums/apm.html" class="tsd-signature-type">APM</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icamundaclientinstrumentation.html" class="tsd-signature-type">ICamundaClientInstrumentation</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getpagingfromoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Paging<wbr>From<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Paging<wbr>From<wbr>Options<span class="tsd-signature-symbol">(</span>totalCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/ipaging.html" class="tsd-signature-type">IPaging</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/core/instrumentations/specs/instrumentation.ts#L9">src/models/core/instrumentations/specs/instrumentation.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/paginationUtils.ts#L34">src/models/camunda-n-mq/paginationUtils.ts:34</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>kind: <a href="../enums/apm.html" class="tsd-signature-type">APM</a></h5>
+									<h5>totalCount: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="icamundaclientinstrumentation.html" class="tsd-signature-type">ICamundaClientInstrumentation</a>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">undefined</span>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/ipaging.html" class="tsd-signature-type">IPaging</a></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-					<a name="onmessagefailed" class="tsd-anchor"></a>
-					<h3>on<wbr>Message<wbr>Failed</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Message<wbr>Failed<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Error</span>, message<span class="tsd-signature-symbol">: </span><a href="imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+					<a name="setcamundabpmpaginationparams" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> set<wbr>Camunda<wbr>Bpm<wbr>Pagination<wbr>Params</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Camunda<wbr>Bpm<wbr>Pagination<wbr>Params&lt;T&gt;<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iworkflowoptions.html" class="tsd-signature-type">IWorkflowOptions</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/ipaginationoptions.html" class="tsd-signature-type">IPaginationOptions</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="icamundaclientinstrumentation.html">ICamundaClientInstrumentation</a>.<a href="icamundaclientinstrumentation.html#onmessagefailed">onMessageFailed</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/core/instrumentations/specs/camundaClientInstrumentation.ts#L9">src/models/core/instrumentations/specs/camundaClientInstrumentation.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/paginationUtils.ts#L20">src/models/camunda-n-mq/paginationUtils.ts:20</a></li>
 								</ul>
 							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>e: <span class="tsd-signature-type">Error</span></h5>
+									<h5>params: <span class="tsd-signature-type">T</span></h5>
 								</li>
 								<li>
-									<h5>message: <a href="imessage.html" class="tsd-signature-type">IMessage</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iworkflowoptions.html" class="tsd-signature-type">IWorkflowOptions</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/ipaginationoptions.html" class="tsd-signature-type">IPaginationOptions</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-					<a name="onmessagesuccess" class="tsd-anchor"></a>
-					<h3>on<wbr>Message<wbr>Success</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Message<wbr>Success<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+					<a name="setelasticpaginationparams" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> set<wbr>Elastic<wbr>Pagination<wbr>Params</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Elastic<wbr>Pagination<wbr>Params&lt;T&gt;<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iworkflowoptions.html" class="tsd-signature-type">IWorkflowOptions</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/ipaginationoptions.html" class="tsd-signature-type">IPaginationOptions</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="icamundaclientinstrumentation.html">ICamundaClientInstrumentation</a>.<a href="icamundaclientinstrumentation.html#onmessagesuccess">onMessageSuccess</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/core/instrumentations/specs/camundaClientInstrumentation.ts#L10">src/models/core/instrumentations/specs/camundaClientInstrumentation.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/323aa73/packages/workit-camunda/src/models/camunda-n-mq/paginationUtils.ts#L10">src/models/camunda-n-mq/paginationUtils.ts:10</a></li>
 								</ul>
 							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>message: <a href="imessage.html" class="tsd-signature-type">IMessage</a></h5>
+									<h5>params: <span class="tsd-signature-type">T</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iworkflowoptions.html" class="tsd-signature-type">IWorkflowOptions</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/ipaginationoptions.html" class="tsd-signature-type">IPaginationOptions</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -213,20 +195,17 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="iccinstrumentationhandler.html" class="tsd-kind-icon">ICCInstrumentation<wbr>Handler</a>
+					<li class="current tsd-kind-class">
+						<a href="paginationutils.html" class="tsd-kind-icon">Pagination<wbr>Utils</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="iccinstrumentationhandler.html#kind" class="tsd-kind-icon">kind</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="paginationutils.html#getpagingfromoptions" class="tsd-kind-icon">get<wbr>Paging<wbr>From<wbr>Options</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="iccinstrumentationhandler.html#get" class="tsd-kind-icon">get</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+								<a href="paginationutils.html#setcamundabpmpaginationparams" class="tsd-kind-icon">set<wbr>Camunda<wbr>Bpm<wbr>Pagination<wbr>Params</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-								<a href="iccinstrumentationhandler.html#onmessagefailed" class="tsd-kind-icon">on<wbr>Message<wbr>Failed</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-								<a href="iccinstrumentationhandler.html#onmessagesuccess" class="tsd-kind-icon">on<wbr>Message<wbr>Success</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+								<a href="paginationutils.html#setelasticpaginationparams" class="tsd-kind-icon">set<wbr>Elastic<wbr>Pagination<wbr>Params</a>
 							</li>
 						</ul>
 					</li>
