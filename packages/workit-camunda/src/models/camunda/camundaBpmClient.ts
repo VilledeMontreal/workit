@@ -2,22 +2,26 @@
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 
+import { PaginationUtils } from '../camunda-n-mq/paginationUtils';
 import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
 import { IClient } from '../camunda-n-mq/specs/client';
 import { ICreateWorkflowInstance } from '../camunda-n-mq/specs/createWorkflowInstance';
 import { ICreateWorkflowInstanceResponse } from '../camunda-n-mq/specs/createWorkflowInstanceResponse';
 import { IDeployWorkflowResponse } from '../camunda-n-mq/specs/deployWorkflowResponse';
 import { IMessage } from '../camunda-n-mq/specs/message';
+import { IPagination } from '../camunda-n-mq/specs/pagination';
+import { IPaginationOptions } from '../camunda-n-mq/specs/paginationOptions';
 import { IPublishMessage } from '../camunda-n-mq/specs/publishMessage';
 import { IUpdateWorkflowRetry } from '../camunda-n-mq/specs/updateWorkflowRetry';
 import { IUpdateWorkflowVariables } from '../camunda-n-mq/specs/updateWorkflowVariables';
+import { IWorkflow } from '../camunda-n-mq/specs/workflow';
 import { IWorkflowClient } from '../camunda-n-mq/specs/workflowClient';
 import {
   IWorkflowDefinition,
   IWorkflowDefinitionRequest,
   IWorkflowProcessIdDefinition
 } from '../camunda-n-mq/specs/workflowDefinition';
-import { IWorkflowResponse } from '../camunda-n-mq/specs/workflowResponse';
+import { IWorkflowOptions } from '../camunda-n-mq/specs/workflowOptions';
 import { ICCInstrumentationHandler } from '../core/instrumentations/specs/instrumentation';
 import { CamundaMessage } from './camundaMessage';
 import { CamundaRepository, ICamundaRepository } from './repositories/camundaRepository';
@@ -31,6 +35,13 @@ import { ITopicSubscription } from './specs/topicSubscription';
 // }
 
 export class CamundaBpmClient implements IClient, IWorkflowClient {
+  private static getWorkflowParams(options?: Partial<IWorkflowOptions & IPaginationOptions>): any {
+    const _params = {} as any;
+    if (options && (options as IWorkflowOptions).bpmnProcessId) {
+      _params.key = options.bpmnProcessId;
+    }
+    return PaginationUtils.setCamundaBpmPaginationParams(_params, options);
+  }
   private readonly _client: ICamundaClient;
   private _topicSubscription: ITopicSubscription | undefined;
   private readonly _config: ICamundaConfig;
@@ -91,8 +102,11 @@ export class CamundaBpmClient implements IClient, IWorkflowClient {
       key: response.id
     };
   }
-  public async getWorkflows(): Promise<IWorkflowResponse> {
-    const result = await this._repo.getWorkflows();
+  public async getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {
+    const params = CamundaBpmClient.getWorkflowParams(options);
+    const apiOptions = { params };
+    const requests: Promise<any>[] = [this._repo.getWorkflows(apiOptions), this._repo.getWorkflowCount(apiOptions)];
+    const [result, repCount] = await Promise.all(requests);
     const bpmns = result.data;
     const workflows = bpmns.map(definition => {
       return {
@@ -102,8 +116,10 @@ export class CamundaBpmClient implements IClient, IWorkflowClient {
         version: definition.version
       };
     });
+
     return {
-      workflows
+      paging: PaginationUtils.getPagingFromOptions(repCount.data.count, options),
+      items: workflows
     };
   }
   public async getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition> {

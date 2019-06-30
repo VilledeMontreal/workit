@@ -8,12 +8,15 @@ import 'reflect-metadata';
 import { ICreateWorkflowInstance } from './specs/createWorkflowInstance';
 import { ICreateWorkflowInstanceResponse } from './specs/createWorkflowInstanceResponse';
 import { IDeployWorkflowResponse } from './specs/deployWorkflowResponse';
+import { IPagination } from './specs/pagination';
+import { IPaginationOptions } from './specs/paginationOptions';
 import { IPublishMessage } from './specs/publishMessage';
 import { IUpdateWorkflowRetry } from './specs/updateWorkflowRetry';
 import { IUpdateWorkflowVariables } from './specs/updateWorkflowVariables';
+import { IWorkflow } from './specs/workflow';
 import { IWorkflowClient } from './specs/workflowClient';
 import { IWorkflowDefinition, IWorkflowDefinitionRequest } from './specs/workflowDefinition';
-import { IWorkflowResponse } from './specs/workflowResponse';
+import { IWorkflowOptions } from './specs/workflowOptions';
 
 const log = debug('workit:clientManager');
 @injectable()
@@ -26,9 +29,9 @@ export abstract class ClientManager<TClient extends IWorkflowClient> implements 
     log(`Deploying workflow from path: "${bpmnPath}"`);
     return this._client.deployWorkflow(bpmnPath);
   }
-  public getWorkflows(): Promise<IWorkflowResponse> {
+  public getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {
     log(`Getting workflows`);
-    return this._client.getWorkflows();
+    return this._client.getWorkflows(options);
   }
   public getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition> {
     return this._client.getWorkflow(payload);

@@ -30,6 +30,7 @@ let camundaClient: CamundaBpmClient;
 let failureHandler: FailureStrategySimple;
 let client: Client<CamundaBpmClient>;
 let processHandler: SCProcessHandler;
+
 // tslint:disable:ter-prefer-arrow-callback
 // tslint:disable:only-arrow-functions
 // tslint:disable:max-func-body-length

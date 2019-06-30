@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Zeebe Worker should generate an exception for cancelWorkflowInstance when key is malformed 1`] = `
+[Error: 
+      workflowInstanceKey value is malformed
+      ]
+`;
+
 exports[`Zeebe Worker should get MESSAGE_EVENT workflow 1`] = `
 Object {
   "bpmnProcessId": "MESSAGE_EVENT",
@@ -100,7 +106,7 @@ Object {
 
 exports[`Zeebe Worker should get workflows 1`] = `
 Object {
-  "workflows": Array [
+  "items": Array [
     Object {
       "bpmnProcessId": "MESSAGE_EVENT",
       "resourceName": "MESSAGE_EVENT.bpmn",
@@ -108,5 +114,106 @@ Object {
       "workflowKey": "2251799813685250",
     },
   ],
+  "paging": Object {
+    "from": 0,
+    "size": 500,
+    "totalCount": 1,
+  },
+}
+`;
+
+exports[`Zeebe Worker should limit the number of document 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "bpmnProcessId": "test-process",
+      "resourceName": "test.bpmn",
+      "version": 2,
+      "workflowKey": "2251799813709933",
+    },
+    Object {
+      "bpmnProcessId": "test-process",
+      "resourceName": "test.bpmn",
+      "version": 3,
+      "workflowKey": "2251799813719839",
+    },
+    Object {
+      "bpmnProcessId": "test-process",
+      "resourceName": "test.bpmn",
+      "version": 11,
+      "workflowKey": "2251799813720710",
+    },
+    Object {
+      "bpmnProcessId": "test-process",
+      "resourceName": "test.bpmn",
+      "version": 10,
+      "workflowKey": "2251799813720691",
+    },
+    Object {
+      "bpmnProcessId": "test-process",
+      "resourceName": "test.bpmn",
+      "version": 14,
+      "workflowKey": "2251799813720733",
+    },
+  ],
+  "paging": Object {
+    "from": 0,
+    "size": 5,
+    "totalCount": 15,
+  },
+}
+`;
+
+exports[`Zeebe Worker should limit the number of document and search by bpmnProcessId 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "bpmnProcessId": "MESSAGE_EVENT",
+      "resourceName": "MESSAGE_EVENT.bpmn",
+      "version": 1,
+      "workflowKey": "2251799813685250",
+    },
+  ],
+  "paging": Object {
+    "from": 0,
+    "size": 5,
+    "totalCount": 1,
+  },
+}
+`;
+
+exports[`Zeebe Worker should limit the number of document and skip one document 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "bpmnProcessId": "test-process",
+      "resourceName": "test.bpmn",
+      "version": 3,
+      "workflowKey": "2251799813719839",
+    },
+    Object {
+      "bpmnProcessId": "test-process",
+      "resourceName": "test.bpmn",
+      "version": 11,
+      "workflowKey": "2251799813720710",
+    },
+    Object {
+      "bpmnProcessId": "test-process",
+      "resourceName": "test.bpmn",
+      "version": 10,
+      "workflowKey": "2251799813720691",
+    },
+    Object {
+      "bpmnProcessId": "test-process",
+      "resourceName": "test.bpmn",
+      "version": 14,
+      "workflowKey": "2251799813720733",
+    },
+  ],
+  "paging": Object {
+    "from": 1,
+    "size": 4,
+    "totalCount": 15,
+  },
 }
 `;

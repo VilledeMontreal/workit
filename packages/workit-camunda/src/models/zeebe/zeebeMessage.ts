@@ -16,8 +16,8 @@ import { IPayload } from './specs/payload';
 import { ZeebeMapperProperties } from './zeebeMapperProperties';
 
 export class ZeebeMessage {
-  public static wrap(
-    payload: IPayload,
+  public static wrap<TVariables, TProps>(
+    payload: IPayload<TVariables, TProps>,
     complete,
     client: ZBClient,
     apm: ICCInstrumentationHandler
@@ -26,7 +26,7 @@ export class ZeebeMessage {
     const tracer = apm.get(APM.tracer) as CamundaClientTracer;
     const messageWithoutSpan = {
       body: payload.payload,
-      properties: properties as IProperties
+      properties: properties as IProperties<TProps>
     };
     const spans = tracer.createRootSpanOnMessage(messageWithoutSpan);
     // const messageWithProxy = ProxyFactory.create({
@@ -65,7 +65,7 @@ export class ZeebeMessage {
   /**
    * Shallow copy
    */
-  public static unwrap(message: IMessage): IPayload {
+  public static unwrap<TVariables, TProps>(message: IMessage<TVariables, TProps>): IPayload<TVariables, TProps> {
     const emptyPayload = ZeebeMapperProperties.unmap(message.properties);
     emptyPayload.payload = message.body;
     return emptyPayload as IPayload;
