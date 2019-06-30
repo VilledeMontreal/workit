@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## workit-cli
+
+-   Update template (workit-camunda@2.0.0) and deps
+
+### v2.0.0
+
 ## workit-camunda
 
 ### v2.0.0
