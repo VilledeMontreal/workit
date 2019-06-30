@@ -5,15 +5,19 @@
 import { optional } from 'inversify';
 import { Configs, IAPIConfig as IElasticExporterConfig, ZBElasticClient } from 'zeebe-elasticsearch-client';
 import { ZBClient, ZBWorker } from 'zeebe-node';
+import { PaginationUtils } from '../camunda-n-mq/paginationUtils';
 import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
 import { IClient } from '../camunda-n-mq/specs/client';
 import { ICreateWorkflowInstance } from '../camunda-n-mq/specs/createWorkflowInstance';
 import { ICreateWorkflowInstanceResponse } from '../camunda-n-mq/specs/createWorkflowInstanceResponse';
 import { IDeployWorkflowResponse } from '../camunda-n-mq/specs/deployWorkflowResponse';
 import { IMessage } from '../camunda-n-mq/specs/message';
+import { IPagination } from '../camunda-n-mq/specs/pagination';
+import { IPaginationOptions } from '../camunda-n-mq/specs/paginationOptions';
 import { IPublishMessage } from '../camunda-n-mq/specs/publishMessage';
 import { IUpdateWorkflowRetry } from '../camunda-n-mq/specs/updateWorkflowRetry';
 import { IUpdateWorkflowVariables } from '../camunda-n-mq/specs/updateWorkflowVariables';
+import { IWorkflow } from '../camunda-n-mq/specs/workflow';
 import { IWorkflowClient } from '../camunda-n-mq/specs/workflowClient';
 import {
   IWorkflowDefinition,
@@ -21,9 +25,9 @@ import {
   IWorkflowDefinitionRequest,
   IWorkflowProcessIdDefinition
 } from '../camunda-n-mq/specs/workflowDefinition';
+import { IWorkflowOptions } from '../camunda-n-mq/specs/workflowOptions';
 import { ICCInstrumentationHandler } from '../core/instrumentations/specs/instrumentation';
 import { IPayload } from './specs/payload';
-import { IWorkflowResponse } from './specs/workflowDeployResponse';
 import { IZeebeOptions } from './specs/zeebeOptions';
 import { ZeebeMessage } from './zeebeMessage';
 // export interface IZeebeClient {
@@ -82,10 +86,15 @@ export class ZeebeClient<TVariables = any, TProps = any, RVariables = TVariables
       key: result.key.toString() // TODO: interface say number but it return string, need to PR to zeebe-node
     };
   }
-  public async getWorkflows(): Promise<IWorkflowResponse> {
+  public async getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {
     this.validateExporterConfig();
-    const result = await this._exporterClient.getWorkflows({});
-    const data = result.data.hits.hits.map(doc => {
+    const params = { _source_excludes: 'bpmnXml' };
+    const workflowOptions = { params };
+    workflowOptions.params = PaginationUtils.setElasticPaginationParams(params, options);
+    const criteria = this.setWorkflowCriteria(options);
+    const result = await this._exporterClient.getWorkflows(criteria, workflowOptions);
+    const elasticResult = result.data.hits;
+    const data = elasticResult.hits.map(doc => {
       const workflow = doc._source;
       return {
         bpmnProcessId: workflow.bpmnProcessId,
@@ -96,7 +105,8 @@ export class ZeebeClient<TVariables = any, TProps = any, RVariables = TVariables
     });
 
     return {
-      workflows: data
+      paging: PaginationUtils.getPagingFromOptions(elasticResult.total, options),
+      items: data
     };
   }
   public async getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition> {
@@ -188,5 +198,12 @@ export class ZeebeClient<TVariables = any, TProps = any, RVariables = TVariables
       workflowInstanceKey value is malformed
       `);
     }
+  }
+
+  private setWorkflowCriteria(options?: Partial<IWorkflowOptions & IPaginationOptions>) {
+    if (!options) {
+      return {};
+    }
+    return { bpmnProcessId: options.bpmnProcessId };
   }
 }

@@ -14,7 +14,8 @@ import { IResolveIncident } from '../specs/resolveIncident';
 import { Utils } from '../utils';
 export interface ICamundaRepository {
   deployWorkflow(deployName: string, absPath: string): Promise<IHttpResponse<IBpmnDeployResponse>>;
-  getWorkflows(): Promise<IHttpResponse<IBpmn[]>>;
+  getWorkflows(options?: { params: {} }): Promise<IHttpResponse<IBpmn[]>>;
+  getWorkflowCount(options?: { params: {} }): Promise<IHttpResponse<{ count: number }>>;
   getWorkflow(idOrKey: string): Promise<IProcessDefinition & IProcessXmlDefinition>;
   updateVariables<T = any>(processInstanceId: string, variables: T): Promise<IHttpResponse<void>>;
   updateJobRetries(id: string, retries: number): Promise<IHttpResponse<void>>;
@@ -84,8 +85,11 @@ export class CamundaRepository implements ICamundaRepository {
       })
     });
   }
-  public getWorkflows(): Promise<IHttpResponse<IBpmn[]>> {
-    return this._request.get('/process-definition');
+  public getWorkflows(options?: { params: {} }): Promise<IHttpResponse<IBpmn[]>> {
+    return this._request.get('/process-definition', options);
+  }
+  public getWorkflowCount(options?: { params: {} }): Promise<IHttpResponse<{ count: number }>> {
+    return this._request.get('/process-definition/count', options);
   }
   public createWorkflowInstance<T = any>(
     idOrKey: string,

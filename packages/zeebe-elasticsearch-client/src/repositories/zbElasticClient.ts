@@ -45,18 +45,20 @@ export class ZBElasticClient {
 
     if (model.latestVersion) {
       // TODO: make a guard (e.g IElasticResponse<IWorkflow> | IElasticAggResponse<IWorkflow>)
-      const data = response.data;
+      let data = response.data;
       const aggs = (data as any).aggregations;
-      const newdata: IElasticResponse<IWorkflow> = {
-        _shards: data._shards,
-        timed_out: data.timed_out,
-        took: data.took,
-        hits: aggs.doc_with_latestVersion.hits
-      };
+      if (aggs) {
+        data = {
+          _shards: data._shards,
+          timed_out: data.timed_out,
+          took: data.took,
+          hits: aggs.doc_with_latestVersion.hits
+        };
+      }
 
       return {
         headers: response.headers,
-        data: newdata,
+        data,
         status: response.status,
         statusText: response.statusText
       };

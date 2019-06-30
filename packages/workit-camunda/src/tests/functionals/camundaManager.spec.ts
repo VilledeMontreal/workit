@@ -83,12 +83,64 @@ describe('Client Manager (Camunda BPM)', function() {
 
   it('Get Workflows', async () => {
     const scope = nock('http://localhost:8080')
+      .get('/engine-rest/process-definition/count')
+      .reply(200, { count: 3 })
       .get('/engine-rest/process-definition')
       .reply(200, require('./__mocks__/getWorkflowsResponse.camunda.json'));
 
     const result = await manager.getWorkflows();
     expect(result).toMatchObject(require('./__mocks__/getWorkflowsResult.json'));
     expect(scope.isDone()).toBeTruthy();
+  });
+
+  it('Get Workflows by limiting the result', async () => {
+    const size = 2;
+    const scope = nock('http://localhost:8080')
+      .get('/engine-rest/process-definition/count')
+      .query({ maxResults: size })
+      .reply(200, { count: 3 })
+      .get('/engine-rest/process-definition')
+      .query({ maxResults: size })
+      .reply(200, require('../data/camundaResponsePaginated'));
+
+    const result = await manager.getWorkflows({ size });
+
+    scope.done();
+    expect(result).toMatchSnapshot();
+  });
+
+  it('Get Workflows by limiting the result and skipping 2 workflows', async () => {
+    const size = 2;
+    const from = 3;
+    const scope = nock('http://localhost:8080')
+      .get('/engine-rest/process-definition/count')
+      .query({ firstResult: from, maxResults: size })
+      .reply(200, { count: 4 })
+      .get('/engine-rest/process-definition')
+      .query({ firstResult: from, maxResults: size })
+      .reply(200, require('../data/camundaResponsePaginated2'));
+
+    const result = await manager.getWorkflows({ size, from });
+    scope.done();
+    expect(result).toMatchSnapshot();
+  });
+
+  it('Get Workflows by limiting the result and searching a specific workflow', async () => {
+    const size = 2;
+    const bpmnProcessId = 'message-event';
+
+    const scope = nock('http://localhost:8080')
+      .get('/engine-rest/process-definition/count')
+      .query({ key: bpmnProcessId, maxResults: size })
+      .reply(200, { count: 1 })
+      .get('/engine-rest/process-definition')
+      .query({ key: bpmnProcessId, maxResults: size })
+      .reply(200, require('../data/camundaResponsePaginated2'));
+
+    const result = await manager.getWorkflows({ size, bpmnProcessId });
+
+    scope.done();
+    expect(result).toMatchSnapshot();
   });
 
   it('Get a Workflow by bpmnProcessId', async () => {
