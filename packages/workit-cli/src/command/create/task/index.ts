@@ -66,8 +66,6 @@ export const task = async (args, options, logger) => {
   } else {
     logger.info('Please fill the following values…');
     prompt.start().get(variables, (err, result) => {
-      console.log(err);
-      console.log(result);
       if (err || !result || !result.className) {
         return;
       }

@@ -6,7 +6,7 @@ import { task } from './command/create/task';
 import { init } from './command/init';
 
 prog
-  .version('1.0.1')
+  .version('0.0.10')
   .description('A simple cli that exploits "workit-camunda" package')
   .command('init', 'Initialize a new application')
   .alias('i')
