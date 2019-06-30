@@ -2,9 +2,9 @@
 
 ## workit-cli
 
--   Update template (workit-camunda@2.0.0) and deps
+### v0.0.11
 
-### v2.0.0
+-   Update `init` template (workit-camunda@2.0.0) and deps
 
 ## workit-camunda
 
