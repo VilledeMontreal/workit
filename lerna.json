@@ -1,4 +1,5 @@
 {
+  "lerna": "2.11.0",
   "packages": [
     "packages/*",
     "services/*"
@@ -6,10 +7,11 @@
   "command": {
     "publish": {
       "npmClient": "npm",
+      "conventionalCommits": true,
       "registry": "https://registry.npmjs.org/",
       "ignoreChanges": ["*.lock"],
       "allowBranch": "master",
-      "message": "chore(release): publish %s"
+      "message": "chore(release): publish"
     },
     "bootstrap": {
       "npmClient": "npm"
@@ -18,9 +20,11 @@
   "changelog": {
     "repo": "VilledeMontreal/workit",
     "labels": {
+      "breaking": ":boom: Breaking Change",
       "enchancement": ":rocket:(Enhancement)",
       "bug": ":bug:(Bug Fix)",
-      "doc": ":doc:(Refine Doc)",
+      "core": ":earth_asia: Core",
+      "documentation": ":doc:(Refine Doc)",
       "feat": ":sparkles:(Feature)"
     },
     "cacheDir": ".changelog"
