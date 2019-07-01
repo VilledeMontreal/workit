@@ -53,3 +53,6 @@ dist
 
 local.json
 local.yaml
+
+.changelog/
+.changelog/**/*
