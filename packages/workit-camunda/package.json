@@ -12,7 +12,7 @@
     "camunda-external-task-client-js": "~1.1.1",
     "debug": "~4.1.1",
     "fast-safe-stringify": "~2.0.6",
-    "form-data": "~2.4.0",
+    "form-data": "~2.5.0",
     "inversify": "~5.0.1",
     "opentracing": "0.14.3",
     "reflect-metadata": "~0.1.13",
