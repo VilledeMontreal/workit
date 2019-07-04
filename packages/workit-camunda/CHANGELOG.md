@@ -1,3 +1,20 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.0.1](https://github.com/VilledeMontreal/workit/compare/workit-camunda@2.0.0...workit-camunda@2.0.1) (2019-07-04)
+
+
+### Bug Fixes
+
+* **package:** update form-data to version 2.5.0 ([13a332a](https://github.com/VilledeMontreal/workit/commit/13a332a))
+* **workit-camunda:** regression from zeebe-node 2.3.0 ([07561c1](https://github.com/VilledeMontreal/workit/commit/07561c1))
+
+
+
+
+
 # CHANGELOG
 
 ## v1.0.2
