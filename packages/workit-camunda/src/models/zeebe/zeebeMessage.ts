@@ -25,7 +25,7 @@ export class ZeebeMessage {
     const properties = ZeebeMapperProperties.map(payload);
     const tracer = apm.get(APM.tracer) as CamundaClientTracer;
     const messageWithoutSpan = {
-      body: payload.payload,
+      body: payload.variables,
       properties: properties as IProperties<TProps>
     };
     const spans = tracer.createRootSpanOnMessage(messageWithoutSpan);
@@ -66,8 +66,8 @@ export class ZeebeMessage {
    * Shallow copy
    */
   public static unwrap<TVariables, TProps>(message: IMessage<TVariables, TProps>): IPayload<TVariables, TProps> {
-    const emptyPayload = ZeebeMapperProperties.unmap(message.properties);
-    emptyPayload.payload = message.body;
-    return emptyPayload as IPayload;
+    const emptyPayload = ZeebeMapperProperties.unmap<TProps>(message.properties);
+    (emptyPayload as IPayload<TVariables, TProps>).variables = message.body;
+    return emptyPayload as IPayload<TVariables, TProps>;
   }
 }

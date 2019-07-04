@@ -18,7 +18,6 @@ export interface IEmptyPayload<TProps> {
   retries: number | null;
   deadline: string;
   customHeaders: TProps;
-  [custom: string]: any;
 }
 
 export interface IPayload<TVariables = any, TProps = any> extends IEmptyPayload<TProps> {
