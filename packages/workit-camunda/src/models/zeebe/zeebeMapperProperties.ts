@@ -10,34 +10,31 @@ export class ZeebeMapperProperties {
     if (!obj.variables) {
       obj.variables = {} as any;
     }
-
     return {
       businessKey: (obj.variables as any).businessKey, // retro compatibility with bpmn workflow engine
-      activityId: obj.jobHeaders.elementId,
-      processInstanceId: obj.jobHeaders.elementInstanceKey,
-      workflowDefinitionVersion: obj.jobHeaders.workflowDefinitionVersion,
-      workflowInstanceKey: obj.jobHeaders.workflowInstanceKey,
-      workflowKey: obj.jobHeaders.workflowKey,
-      bpmnProcessId: obj.jobHeaders.bpmnProcessId,
+      activityId: obj.elementId,
+      processInstanceId: obj.elementInstanceKey,
+      workflowDefinitionVersion: obj.workflowDefinitionVersion,
+      workflowInstanceKey: obj.workflowInstanceKey,
+      workflowKey: obj.workflowKey,
+      bpmnProcessId: obj.bpmnProcessId,
       customHeaders: { ...obj.customHeaders },
       jobKey: obj.key,
       retries: obj.retries,
       topicName: obj.type,
       workerId: obj.worker,
-      lockExpirationTime: new Date(obj.deadline)
+      lockExpirationTime: new Date(Number(obj.deadline))
     };
   }
 
   public static unmap<TProps = any>(props: IProperties<TProps>): IEmptyPayload<TProps> {
     return {
-      jobHeaders: {
-        elementId: props.activityId,
-        elementInstanceKey: props.processInstanceId,
-        workflowKey: props.workflowKey,
-        workflowInstanceKey: props.workflowInstanceKey,
-        workflowDefinitionVersion: props.workflowDefinitionVersion,
-        bpmnProcessId: props.bpmnProcessId
-      },
+      elementId: props.activityId,
+      elementInstanceKey: props.processInstanceId,
+      workflowKey: props.workflowKey,
+      workflowInstanceKey: props.workflowInstanceKey,
+      workflowDefinitionVersion: props.workflowDefinitionVersion,
+      bpmnProcessId: props.bpmnProcessId,
       retries: props.retries,
       worker: props.workerId,
       deadline: props.lockExpirationTime.getTime().toString(),

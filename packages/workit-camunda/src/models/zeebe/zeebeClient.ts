@@ -66,7 +66,7 @@ export class ZeebeClient<TVariables = any, TProps = any, RVariables = TVariables
       this._config.workerId || 'some-random-id',
       this._config.topicName,
       async (payload: IPayload<TVariables, TProps>, complete: (content: IPayload<RVariables, TProps>) => void) => {
-        const [message, service] = ZeebeMessage.wrap(payload, complete, this._client, this._apm);
+        const [message, service] = ZeebeMessage.wrap<TVariables, TProps>(payload, complete, this._client, this._apm);
         try {
           await onMessageReceived(message, service);
         } catch (error) {

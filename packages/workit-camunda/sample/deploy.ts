@@ -16,4 +16,6 @@ import { IoC } from '../src/models/IoC';
     // const path = `${ process.cwd() }/sample/zeebe/BPMN_DEMO.bpmn`;
 
     await cm.deployWorkflow(path);
+    // tslint:disable-next-line: no-console
+    console.log('Success!');
 })();

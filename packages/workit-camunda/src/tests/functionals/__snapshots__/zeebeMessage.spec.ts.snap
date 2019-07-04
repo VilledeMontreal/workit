@@ -2,18 +2,13 @@
 
 exports[`zeebeMessage unmap 1`] = `
 Object {
+  "bpmnProcessId": "test-process",
   "customHeaders": Object {
     "jwt": "jwt fake",
   },
   "deadline": "1562269537659",
-  "jobHeaders": Object {
-    "bpmnProcessId": "test-process",
-    "elementId": "ServiceTask_0xdwuw7",
-    "elementInstanceKey": "38963",
-    "workflowDefinitionVersion": 4,
-    "workflowInstanceKey": "38963",
-    "workflowKey": "8806",
-  },
+  "elementId": "ServiceTask_0xdwuw7",
+  "elementInstanceKey": "38963",
   "key": "38968",
   "retries": 1,
   "type": "topic_demo",
@@ -21,5 +16,8 @@ Object {
     "hello": "world",
   },
   "worker": "demo",
+  "workflowDefinitionVersion": 4,
+  "workflowInstanceKey": "38963",
+  "workflowKey": "8806",
 }
 `;

@@ -22,5 +22,5 @@ import { IoC } from '../src/models/IoC';
         });
     }
     // tslint:disable-next-line: no-console
-    console.log('Sucess!');
+    console.log('Success!');
 })();
