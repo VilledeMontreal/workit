@@ -23,8 +23,8 @@
       "breaking": ":boom: Breaking Change",
       "enchancement": ":rocket: (Enhancement)",
       "bug": ":bug: (Bug Fix)",
-      "core": ":earth_asia: Core",
-      "documentation": ":doc: (Refine Doc)",
+      "core": ":wrench: Core",
+      "documentation": ":books: (Refine Doc)",
       "feat": ":sparkles: (Feature)"
     },
     "cacheDir": ".changelog"
