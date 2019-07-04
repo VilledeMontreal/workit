@@ -7,12 +7,12 @@ import { IEmptyPayload, IPayload } from './specs/payload';
 
 export class ZeebeMapperProperties {
   public static map<TVariables = any, TProps = any>(obj: IPayload<TVariables, TProps>): IProperties<TProps> {
-    if (!obj.payload) {
-      obj.payload = {};
+    if (!obj.variables) {
+      obj.variables = {} as any;
     }
 
     return {
-      businessKey: obj.payload.businessKey, // retro compatibility with bpmn workflow engine
+      businessKey: (obj.variables as any).businessKey, // retro compatibility with bpmn workflow engine
       activityId: obj.jobHeaders.elementId,
       processInstanceId: obj.jobHeaders.elementInstanceKey,
       workflowDefinitionVersion: obj.jobHeaders.workflowDefinitionVersion,
