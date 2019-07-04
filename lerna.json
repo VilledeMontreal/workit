@@ -21,11 +21,11 @@
     "repo": "VilledeMontreal/workit",
     "labels": {
       "breaking": ":boom: Breaking Change",
-      "enchancement": ":rocket:(Enhancement)",
-      "bug": ":bug:(Bug Fix)",
+      "enchancement": ":rocket: (Enhancement)",
+      "bug": ":bug: (Bug Fix)",
       "core": ":earth_asia: Core",
-      "documentation": ":doc:(Refine Doc)",
-      "feat": ":sparkles:(Feature)"
+      "documentation": ":doc: (Refine Doc)",
+      "feat": ":sparkles: (Feature)"
     },
     "cacheDir": ".changelog"
   },
