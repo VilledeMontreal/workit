@@ -399,6 +399,11 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 
 Nous utilisons [SemVer](http://semver.org/) pour la gestion des versions. Pour les versions disponibles, voir les [balises sur ce référentiel](https://github.com/VilledeMontreal/workit/tags).
 
+workit-camunda | Zeebe | Camunda BPM
+-- | -- | -- 
+\>= 2.0.1 and < 3.0.0 | 0.18.x | 7.6 to latest
+< 1.0.0 | <= 0.17.0 | 7.6 to latest
+
 ## Mainteneurs
 
 Voir aussi la liste des [contributeurs](CONTRIBUTORS.md) ayant participé à ce projet.
