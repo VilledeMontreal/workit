@@ -33,6 +33,6 @@
     },
     "dependencies": {
       "workit-camunda": "^2.0.0",
-      "config": "~3.1.0"
+      "config": "~3.2.0"
     }
   }
