@@ -1,6 +1,6 @@
 # Comment contribuer
 
-Cette bibliothèque est l’un des projets open source de la Ville de Montréal. Elle est utilisé  dans les services en ligne sur [beta.montreal.com](https://beta.montreal.com).
+Cette librairie est l’un des projets open source de la Ville de Montréal. Elle est utilisé pour les services en ligne que vous pouvez accéder à [beta.montreal.com](https://beta.montreal.com).
 
 ## [Code de conduite](http://ville.montreal.qc.ca/pls/portal/docs/page/intra_fr/media/documents/code_conduite_employes.pdf)
 
@@ -8,7 +8,7 @@ Les participants aux projets doivent souscrire au code de conduite que la Ville 
 
 ## Développement ouvert
 
-Tous les travaux sur cette bibliothèque se font directement sur [GitHub] (/). Les membres de l'équipe principale et les contributeurs externes envoient des demandes "Pull request" qui passent par le même processus de révision.
+Tous les travaux sur cette librairie se font directement sur [GitHub] (/). Les membres de l'équipe principale et les contributeurs externes envoient des demandes "Pull request" qui passent par le même processus de révision.
 
 ### `master` est dangereux
 
@@ -16,8 +16,8 @@ Nous ferons de notre mieux pour garder la branche `master` en bonne forme, avec 
 
 ### Github
 
-Ma PR traite les demandes suivantes de Github et les référence dans le titre de ma PR. Par exemple, "#XXX My PR"
-Si vous corrigez une faute de frappe dans la documentation, vous pouvez l'ajouter à votre commit avec docs: xxxx #XXX. Les modifications de code nécessitent toujours une demande Github.
+Ma PR traite les demandes suivantes de Github et les référence dans le titre de ma PR. Par exemple, "feat(scope): #XXX My PR"
+Si vous corrigez une faute de frappe dans la documentation, vous pouvez l'ajouter à votre commit avec docs(scope): xxxx #XXX. Les modifications de code nécessitent toujours une demande Github.
 
 #### La description
   

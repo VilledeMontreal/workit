@@ -260,7 +260,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
   }
 }
 ```
-You can look to `sample` folder where we provide an example (worker.4.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
+You can look to `packages/workit-camunda/sample` folder where we provide an example (parallel.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
 ### Define your config for the platform you want to use
 
@@ -403,7 +403,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 workit-camunda | Zeebe | Camunda BPM
 -- | -- | -- 
-\>= 2.0.1 and < 3.0.0 | 0.18.x | 7.6 to latest
+2.0.2 | 0.19.x | 7.6 to latest
+2.0.1 | 0.18.x | 7.6 to latest
 < 1.0.0 | <= 0.17.0 | 7.6 to latest
 
 ## Maintainers

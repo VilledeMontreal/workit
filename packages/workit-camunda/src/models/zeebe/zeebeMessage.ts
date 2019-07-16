@@ -21,7 +21,7 @@ export class ZeebeMessage {
     complete,
     client: ZBClient,
     apm: ICCInstrumentationHandler
-  ): [IMessage, ICamundaService] {
+  ): [IMessage<TVariables, TProps>, ICamundaService] {
     const properties = ZeebeMapperProperties.map(payload);
     const tracer = apm.get(APM.tracer) as CamundaClientTracer;
     const messageWithoutSpan = {

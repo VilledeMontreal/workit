@@ -6,16 +6,16 @@
 
 ## Motivation
 
-Nous avions besoin d'un framework pour nous aider à développer rapidement des Workers. Ces derniers sont utilisés pour exécuter des tâches. [Zeebe](https://zeebe.io/) correspond bien à nos choix technologiques. Jusqu'à ce qu'une version de production soit prête, nous conservons [Camunda Bpm](https://camunda.com/products/bpmn-engine/). En effet, Zeebe est développement. Pour faciliter la transition, nous utilisons ce package. Nous pouvons expérimenter et choisir la plate-forme Camunda que nous voulons sans réécrire notre logique métier.
+Nous avions besoin d'un framework pour nous aider à développer rapidement des Workers. Ces derniers sont utilisés pour exécuter des tâches. [Zeebe](https://zeebe.io/) correspond bien à nos choix technologiques. Jusqu'à ce qu'une version de production soit prête, nous conservons [Camunda Bpm](https://camunda.com/products/bpmn-engine/). En effet, Zeebe est en développement. Pour faciliter la transition, nous utilisons ce package. Nous pouvons expérimenter et choisir la plate-forme Camunda que nous voulons sans réécrire notre logique métier.
 
-Ce paquet est utile parce que:
+Ce framework est utile parce que:
 
 -   Zeebe ne fournit pas tous les composants BPMN pour le moment. Zeebe est nouveau et des bugs inattendus peuvent apparaître lors du développement, ce qui nous permet de revenir facilement à l'ancienne plate-forme si un problème se posait.
 -   Au lieu de dépendre directement d'un client Camunda, ce projet fournit une couche d'abstraction. De cette façon, il est plus facile de changer de client ou de créer le vôtre.
 -   Vous voulez avoir une standardisation des workers.
 -   L'uniformisation. En effet, vous pouvez utiliser les deux plates-formes en fonction des besoins du projet.
 -   Ajout de fonctionnalités comme Opentracing.
--   Ce paquet impose la parité des fonctionnalités entre Zeebe et Camunda BPM via les bibliothèques clientes. Certaines fonctionnalités exposées à la plate-forme Camunda BPM ne sont pas présentes dans ce package car nous ne pourrions pas les fournir si nous passons à Zeebe. Cette limitation est destinée à guider les développeurs dans la préparation de la migration.
+-   Ce Framework impose la parité des fonctionnalités entre Zeebe et Camunda BPM via les bibliothèques clientes. Certaines fonctionnalités exposées à la plate-forme Camunda BPM ne sont pas présentes dans ce package car nous ne pourrions pas les fournir si nous passons à Zeebe. Cette limitation est destinée à guider les développeurs dans la préparation de la migration.
 
 ## Démarrage rapide
 
@@ -36,7 +36,7 @@ ou utiliser le générateur en dessous
 
 <p align="center"><img src=".repo/render1561149492572.gif?raw=true"/></p>
 
-Ce générateur vous aidera lors de votre développement avec cette bibliothèque. Il fournit des outils pratiques.
+Ce générateur vous aidera lors de votre développement avec ce framework. Il fournit des outils pratiques.
 
 ```bash
 npm i -g workit-cli
@@ -136,14 +136,16 @@ await manager.createWorkflowInstance({
 ### Annuler l'instance d'un flux de travail
 
 ```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
+const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); 
+// or TAG.zeebe
 await manager.cancelWorkflowInstance("4651614f-4b3c-11e9-b5b3-ee5801424400");
 ```
 
 ### Résoudre l'incident
 
 ```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
+const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); 
+// or TAG.zeebe
 await manager.resolveIncident("c84fce6c-518e-11e9-bd78-0242ac110003");
 ```
 
@@ -184,7 +186,8 @@ et tout sera fait pour vous.
 ### Cycle de vie et événements des Workers
 
 ```javascript
-const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.zeebe); // or TAG.camundaBpm
+const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.zeebe); 
+// or TAG.camundaBpm
 
 worker.once('starting', () => {
     // slack notification 
@@ -258,7 +261,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
   }
 }
 ```
-Vous pouvez consulter le dossier `sample` où nous fournissons un exemple (worker.4.ts) en utilisant [Jaeger](https://www.jaegertracing.io/docs/latest/).
+Vous pouvez consulter le dossier `sample` où nous fournissons un exemple (parallel.ts) en utilisant [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
 ### Définissez votre configuration pour la plate-forme que vous souhaitez utiliser
 
@@ -350,7 +353,7 @@ npm test
 
 ## Philosophie
 
-1.  Autorisez les développeurs Javascript à écrire du code conforme aux principes de SOLID.
+1.  Autorisez les développeurs Javascript à écrire du code conforme aux principes SOLID.
 2.  Faciliter et encourager l’adhésion aux meilleures pratiques de POO et d’IoC.
 3.  Ajoutez le moins de temps système possible.
 
@@ -401,7 +404,8 @@ Nous utilisons [SemVer](http://semver.org/) pour la gestion des versions. Pour l
 
 workit-camunda | Zeebe | Camunda BPM
 -- | -- | -- 
-\>= 2.0.1 and < 3.0.0 | 0.18.x | 7.6 to latest
+2.0.2 | 0.19.x | 7.6 to latest
+2.0.1 | 0.18.x | 7.6 to latest
 < 1.0.0 | <= 0.17.0 | 7.6 to latest
 
 ## Mainteneurs
