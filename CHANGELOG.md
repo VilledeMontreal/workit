@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## workit-camunda@2.1.0 (2019-07-16)
+
+#### :books: (Refine Doc)
+*   [#45](https://github.com/VilledeMontreal/workit/pull/45) docs(readme): #35 add version matrix ([@jperron-ca](https://github.com/jperron-ca))
+
+#### :sparkles: (Feature)
+*   [#41](https://github.com/VilledeMontreal/workit/pull/41) feat(workit-camunda): update to zeebe 0.19.0
+
+
 ## workit-camunda@2.0.1 (2019-07-04)
 
 #### :bug: (Bug Fix)
