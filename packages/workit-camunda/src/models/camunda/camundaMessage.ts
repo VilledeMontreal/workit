@@ -12,7 +12,7 @@ import { ICamundaClientTracer } from '../core/instrumentations/specs/camundaClie
 import { ICCInstrumentationHandler } from '../core/instrumentations/specs/instrumentation';
 import { ProxyFactory } from '../core/proxyFactory';
 import { CamundaMapperProperties } from './camundaMapperProperties';
-import { IVariable, IVariablePayload } from './specs/payload';
+import { IVariablePayload } from './specs/payload';
 import { IVariables, Variables } from './variables';
 
 const stringify = require('fast-safe-stringify');
@@ -50,7 +50,7 @@ export class CamundaMessage {
             return;
           }
 
-          const vars = getVariablesWhenChanged<IVariable>(message, m => CamundaMessage.unwrap(m));
+          const vars = getVariablesWhenChanged<IVariables>(message, m => CamundaMessage.unwrap(m));
 
           await payload.taskService.complete(task, vars);
           this.hasBeenThreated = true;

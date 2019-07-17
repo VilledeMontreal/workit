@@ -3,6 +3,8 @@
 // See LICENSE file in the project root for full license information.
 
 import { ZBClient } from 'zeebe-node';
+// FIXME:dist folder....
+import { CompleteFn } from 'zeebe-node/dist/lib/interfaces';
 import { getVariablesWhenChanged } from '../../utils/utils';
 import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
 import { FailureException } from '../camunda-n-mq/specs/failureException';
@@ -18,7 +20,7 @@ import { ZeebeMapperProperties } from './zeebeMapperProperties';
 export class ZeebeMessage {
   public static wrap<TVariables, TProps>(
     payload: IPayload<TVariables, TProps>,
-    complete,
+    complete: CompleteFn<TVariables>,
     client: ZBClient,
     apm: ICCInstrumentationHandler
   ): [IMessage<TVariables, TProps>, ICamundaService] {
@@ -44,19 +46,26 @@ export class ZeebeMessage {
         hasBeenThreated: false,
         async ack(message: IMessage) {
           if (this.hasBeenThreated) {
-            return;
+            return Promise.resolve();
           }
-          const vars = getVariablesWhenChanged(message, msg => ZeebeMessage.unwrap(msg));
-          complete(vars);
-          this.hasBeenThreated = true;
+
+          const vars = getVariablesWhenChanged<IPayload<TVariables, TProps>>(message, msg => ZeebeMessage.unwrap(msg));
+
+          if (vars) {
+            this.hasBeenThreated = complete.success(vars.variables);
+          } else {
+            this.hasBeenThreated = complete.success();
+          }
+
+          return Promise.resolve();
         },
         async nack(error: FailureException) {
           if (this.hasBeenThreated) {
-            return;
+            return Promise.resolve();
           }
           const retries = error.retries;
-          await client.failJob({ retries, jobKey: payload.key, errorMessage: error.message });
-          this.hasBeenThreated = true;
+          this.hasBeenThreated = complete.failure(error.message, retries);
+          return Promise.resolve();
         }
       }
     ];

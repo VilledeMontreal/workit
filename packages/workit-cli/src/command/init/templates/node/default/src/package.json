@@ -22,7 +22,7 @@
       "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write"
     },
     "devDependencies": {
-      "@types/node": "^12.6.5",
+      "@types/node": "^12.6.6",
       "prettier": "^1.18.2",
       "prettier-tslint": "^0.4.2",
       "husky": "^3.0.0",
@@ -32,7 +32,7 @@
       "typescript": "^3.5.3"
     },
     "dependencies": {
-      "workit-camunda": "^2.1.0",
+      "workit-camunda": "^2.2.0",
       "config": "~3.2.0"
     }
   }

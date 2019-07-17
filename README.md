@@ -8,10 +8,10 @@
 
 ## Motivation
 
-We needed a framework to help us quickly build workers used to execute tasks. [Zeebe](https://zeebe.io/) provides a good fit with our stack. Until this is production ready, we are keeping the [Camunda Bpm](https://camunda.com/products/bpmn-engine/). Indeed, Zeebe is in developer preview. In order to make the transition smoother, we use this package. We can experiment and choose the Camunda platform we want without rewritting our business logic.
+We needed a framework to help us quickly build workers used to execute tasks.
 
 This package can be useful because:
-
+-   Experiment and choose the Camunda platform you want without rewritting the business logic.
 -   At this moment, Zeebe doesn't provide all BPMN components. Zeebe is new and some unexpected bugs can appear during development so we can easily revert back to the the former platform if an issue was to rise.
 -   Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it’s easier to change the client or to make your own.
 -   You want to have a worker standardization.
@@ -403,6 +403,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 workit-camunda | Zeebe | Camunda BPM
 -- | -- | -- 
+2.2.0 | 0.20.x | 7.6 to latest
 2.1.0 | 0.19.x | 7.6 to latest
 2.0.1 | 0.18.x | 7.6 to latest
 < 1.0.0 | <= 0.17.0 | 7.6 to latest

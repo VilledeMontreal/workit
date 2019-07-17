@@ -14,24 +14,22 @@ npm i workit-cli
 
 This generator will help you during your development with `workit-camunda`. It provides handy tools.
 
-#### Install a fresh new project
+### Install a fresh new project
 
 ```bash
 workit init
 ```
-#### Generate tasks from your existing BPMN
+### Generate tasks from your existing BPMN
 
 ```bash
 workit create task --file /your/path.bpmn
 ```
 
-#### Generate new task
+### Generate new task
 
 ```bash
 workit create task
 ```
-
-
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/VilledeMontreal/workit/tags).
 
