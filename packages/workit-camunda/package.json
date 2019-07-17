@@ -17,7 +17,7 @@
     "opentracing": "~0.14.4",
     "reflect-metadata": "~0.1.13",
     "zeebe-elasticsearch-client": "^0.1.0",
-    "zeebe-node": "~0.19.3"
+    "zeebe-node": "~0.20.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",

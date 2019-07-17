@@ -15,5 +15,4 @@ chmod +x docker/run
 ```
 and try again.
 
-
 Open a web browser and go to [http://localhost:8080](http://localhost:8080)

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`camundaMessage unmap 1`] = `
+Variables {
+  "get": [Function],
+  "getAll": [Function],
+  "getAllTyped": [Function],
+  "getDirtyVariables": [Function],
+  "getTyped": [Function],
+  "set": [Function],
+  "setAll": [Function],
+  "setAllTyped": [Function],
+  "setTyped": [Function],
+}
+`;

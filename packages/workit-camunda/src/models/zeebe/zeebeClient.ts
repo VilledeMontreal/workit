@@ -5,6 +5,8 @@
 import { optional } from 'inversify';
 import { Configs, IAPIConfig as IElasticExporterConfig, ZBElasticClient } from 'zeebe-elasticsearch-client';
 import { ZBClient, ZBWorker } from 'zeebe-node';
+// FIXME: dist folder
+import { CompleteFn } from 'zeebe-node/dist/lib/interfaces';
 import { PaginationUtils } from '../camunda-n-mq/paginationUtils';
 import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
 import { IClient } from '../camunda-n-mq/specs/client';
@@ -65,7 +67,7 @@ export class ZeebeClient<TVariables = any, TProps = any, RVariables = TVariables
     this._worker = this._client.createWorker(
       this._config.workerId || 'some-random-id',
       this._config.topicName,
-      async (payload: IPayload<TVariables, TProps>, complete: (content: IPayload<RVariables, TProps>) => void) => {
+      async (payload: IPayload<TVariables, TProps>, complete: CompleteFn<TVariables>) => {
         const [message, service] = ZeebeMessage.wrap<TVariables, TProps>(payload, complete, this._client, this._apm);
         try {
           await onMessageReceived(message, service);
