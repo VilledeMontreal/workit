@@ -25,16 +25,16 @@ cache:
   directories:
     - node_modules
 
-before_deploy:
-  - cp .npmrc.template ~/.npmrc
+# before_deploy:
+#   - cp .npmrc.template ~/.npmrc
 
-deploy: #npx lerna version patch and push to git
-  provider: script
-  email: olivier.albertini@montreal.ca
-  api_key: $NPM_AUTH_TOKEN
-  skip_cleanup: true
-  script: npx lerna publish -y from-git
-  on:
-    node: "10"
-    tags: true
-    branch: master
+# deploy: #npx lerna version patch and push to git
+#   provider: script
+#   email: olivier.albertini@montreal.ca
+#   api_key: $NPM_AUTH_TOKEN
+#   skip_cleanup: true
+#   script: npx lerna publish -y from-git
+#   on:
+#     node: "10"
+#     tags: true
+#     branch: master

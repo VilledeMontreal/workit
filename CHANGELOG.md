@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## workit-camunda@2.2.0 (2019-07-17)
+
+### :sparkles: (Feature)
+*   [#55](https://github.com/VilledeMontreal/workit/pull/55) feat(zeebe): add 0.20.0 compatibility
+
 ## workit-camunda@2.1.0 (2019-07-16)
 
 ### :books: (Refine Doc)
