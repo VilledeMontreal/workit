@@ -1,7 +1,7 @@
 # Getting started
 First, open a terminal and go the `workit-camunda` package folder (packages/workit-camunda)
 
-Second, install it:
+Second, install packages and transpile:
 
 ```bash
 npm i
@@ -82,6 +82,62 @@ npm run camunda:worker
 You should see in the console, all activities crushed by the worker. Now, if you look back to the `Demo` Bpmn (refresh the page), you see that the instance have disappeared.
 
 👏 Congrats, you have finished the Zeebe BPM section!
+
+## Add traces to your worker with Opencensus
+
+First, start Jaeger with docker
+```bash
+docker run -d --name jaeger \
+  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
+  -p 5775:5775/udp \
+  -p 6831:6831/udp \
+  -p 6832:6832/udp \
+  -p 5778:5778 \
+  -p 16686:16686 \
+  -p 14268:14268 \
+  -p 9411:9411 \
+  jaegertracing/all-in-one:1.13
+```
+Be sure to have a Camunda platform running. Let's say, you have Camunda BPM (default):
+```bash
+docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
+```
+If you have a port confict (stop Zeebe broker/operate)
+
+Then, run:
+```bash
+npm run camunda:trace
+```
+You can then navigate to `http://localhost:16686` to access the Jaeger UI.
+You should see something like:
+
+<p align="center">
+  <a href="./jaeger/jaeger-home.png"><img src="./jaeger/jaeger-home.png"></a>
+</p>
+
+By clicking on the first trace, you should see:
+<p align="center">
+  <a href="./jaeger/jaeger.png"><img src="./jaeger/jaeger.png"></a>
+</p>
+
+👏 Congrats, you have finished the tracing section!
+
+### FAQ
+
+#### error sending spans over UDP: Error: send EMSGSIZE [...]
+
+related issue: https://github.com/jaegertracing/jaeger-client-node/issues/124
+In your terminal, you can do something like:
+
+```bash
+% sysctl net.inet.udp.maxdgram
+net.inet.udp.maxdgram: 9216
+% sudo sysctl net.inet.udp.maxdgram=65536
+net.inet.udp.maxdgram: 9216 -> 65536
+% sysctl net.inet.udp.maxdgram
+net.inet.udp.maxdgram: 65536
+```
+
 
 # How to use
 

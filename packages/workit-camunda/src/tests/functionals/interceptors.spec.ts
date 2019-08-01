@@ -1,4 +1,3 @@
-import * as opentracing from 'opentracing';
 import { IMessage } from '../../models/camunda-n-mq/specs/message';
 import { Interceptors } from '../../models/core/interceptors';
 import { ProxyFactory } from '../../models/core/proxyFactory';
@@ -8,8 +7,7 @@ describe('Interceptors', () => {
       const cDate = new Date();
       const message = ProxyFactory.create({
         body: { a: 1, b: true, c: cDate, d: { d1: new Date() }, e: [] },
-        properties: { customHeaders: {} } as any,
-        spans: new opentracing.Span()
+        properties: { customHeaders: {} } as any
       });
       const interceptorExecution = Interceptors.execute([null as any], message);
       return expect(interceptorExecution).rejects.toThrow('interceptors passed in parameter are not valid.');
@@ -18,8 +16,7 @@ describe('Interceptors', () => {
       const cDate = new Date();
       const message = ProxyFactory.create({
         body: { a: 1, b: true, c: cDate, d: { d1: cDate }, e: [] },
-        properties: { customHeaders: {} } as any,
-        spans: new opentracing.Span()
+        properties: { customHeaders: {} } as any
       });
       const interceptorExecution = Interceptors.execute([], message);
       return expect(interceptorExecution).resolves.toStrictEqual(message);
@@ -28,8 +25,7 @@ describe('Interceptors', () => {
       const cDate = new Date();
       const message = ProxyFactory.create({
         body: { a: 1, b: true, c: cDate, d: { d1: cDate }, e: [] },
-        properties: { customHeaders: {} } as any,
-        spans: new opentracing.Span()
+        properties: { customHeaders: {} } as any
       });
       const messageFromInterceptor = Interceptors.execute(
         [
@@ -43,16 +39,13 @@ describe('Interceptors', () => {
     });
     it('should get new custom headers', () => {
       const cDate = new Date();
-      const noopSpan = new opentracing.Span();
       const message = ProxyFactory.create({
         body: { a: 1, b: true, c: cDate, d: { d1: new Date() }, e: [] },
-        properties: { customHeaders: {} } as any,
-        spans: noopSpan
+        properties: { customHeaders: {} } as any
       });
       const interceptorMessage = {
         body: message.body,
-        properties: { customHeaders: { hello: 'world' } } as any,
-        spans: noopSpan
+        properties: { customHeaders: { hello: 'world' } } as any
       };
       const interceptorExecution = Interceptors.execute(
         [
@@ -64,8 +57,7 @@ describe('Interceptors', () => {
       );
       return expect(interceptorExecution).resolves.toStrictEqual({
         body: message.body,
-        properties: interceptorMessage.properties,
-        spans: noopSpan
+        properties: interceptorMessage.properties
       });
     });
     // it.skip('should only merge custom headers in properties object', () => {

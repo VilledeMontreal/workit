@@ -1,4 +1,3 @@
-import { Span } from 'opentracing';
 import { CamundaMessage } from '../../models/camunda/camundaMessage';
 
 // Copyright (c) Ville de Montreal. All rights reserved.
@@ -11,8 +10,7 @@ describe('Camunda Message', () => {
       const cDate = new Date();
       const message = {
         body: { a: 1, b: true, c: cDate, d: { d1: new Date() }, e: [] },
-        properties: { customHeaders: {} } as any,
-        spans: new Span()
+        properties: { customHeaders: {} } as any
       };
       const variables = CamundaMessage.unwrap(message);
       const data = variables.getAll();
@@ -25,7 +23,7 @@ describe('Camunda Message', () => {
     });
 
     it('should unwrap customHeaders in properties message to _meta field in variable object', () => {
-      const message = { body: {}, properties: { customHeaders: { a: 1 } } as any, spans: new Span() };
+      const message = { body: {}, properties: { customHeaders: { a: 1 } } as any };
       const variables = CamundaMessage.unwrap(message);
       const data = variables.getAll();
 

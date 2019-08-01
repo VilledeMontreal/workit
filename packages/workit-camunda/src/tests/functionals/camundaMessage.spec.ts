@@ -1,4 +1,3 @@
-import * as opentracing from 'opentracing';
 import { CamundaMessage } from '../../models/camunda/camundaMessage';
 
 describe('camundaMessage', () => {
@@ -19,8 +18,7 @@ describe('camundaMessage', () => {
         lockExpirationTime: new Date(1562269537659),
         topicName: 'topic_demo',
         workerId: 'demo'
-      },
-      spans: new opentracing.Span()
+      }
     };
     const camundaObject = CamundaMessage.unwrap(message);
     expect(camundaObject).toMatchSnapshot();

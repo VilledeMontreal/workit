@@ -8,13 +8,13 @@
 
 Nous avions besoin d'un framework pour nous aider à développer rapidement des Workers. Ces derniers sont utilisés pour exécuter des tâches.
 
-Ce framework est utile parce que:
+Ce framework offre les avantages suivants:
 -   Expérimenter et choisir la plate-forme Camunda (et pas seulement Camunda) que vous voulez sans réécrire la logique métier.
 -   Zeebe ne fournit pas tous les composants BPMN pour le moment. Zeebe est nouveau et des bugs inattendus peuvent apparaître lors du développement, ce qui nous permet de revenir facilement à l'ancienne plate-forme si un problème se posait.
 -   Au lieu de dépendre directement d'un client Camunda, ce projet fournit une couche d'abstraction. De cette façon, il est plus facile de changer de client ou de créer le vôtre.
 -   Vous voulez avoir une standardisation des workers.
 -   L'uniformisation. En effet, vous pouvez utiliser les deux plates-formes en fonction des besoins du projet.
--   Ajout de fonctionnalités comme Opentracing.
+-   Ajout de fonctionnalités comme l'automatisation des traces (incluant la propagation).
 -   Ce Framework impose la parité des fonctionnalités entre Zeebe et Camunda BPM via les bibliothèques clientes. Certaines fonctionnalités exposées à la plate-forme Camunda BPM ne sont pas présentes dans ce package car nous ne pourrions pas les fournir si nous passons à Zeebe. Cette limitation est destinée à guider les développeurs dans la préparation de la migration.
 
 ## Démarrage rapide
@@ -235,33 +235,49 @@ const workerConfig = {
 IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
-### Opentracing
-WorkIt intègre opentracing afin de fournir des instruments aux développeurs. Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit être compatible avec [l'interface d'Opentracing](https://opentracing.io/docs/overview/tracers/#tracer-interface). Nous utilisons [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests) dans nos clients Camunda. De cette manière, nous permettons aux développeurs de lier les leurs instruments propres et/ou d’ajouter des instrumentations supplémentaires telles que les logs et les métriques. Nous vous recommandons fortement d'utiliser ce type de modèle dans votre tâche.
+### Open-telemetry
+WorkIt intègrera Open-telemetry afin de fournir des instruments aux développeurs. En attendant, nous utilisons [Opencensus](https://github.com/census-instrumentation/opencensus-node). Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit être compatible avec [l'interface d'Opentracing](https://opentracing.io/docs/overview/tracers/#tracer-interface). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
 
 ```javascript
 // Simply bind your custom tracer object like this
 IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);
 ```
-Vous pouvez maintenant accéder à la propriété `spans` dans l'objet `IMessage`.
 
 ```javascript
 export class HelloWorldTask extends TaskBase<IMessage> {
-  public execute(message: IMessage): Promise<IMessage> {
-      const { properties, spans } = message;
-      // --------------------------
-      // You should use domain probe pattern here 
-      // See internal code (ICamundaClientInstrumentation), but here an example:
-      const tracer =  spans.tracer();
-      const context = spans.context();
-      const span = tracer.startSpan("HelloWorldTask.execute", { childOf: context });
-      span.log({ test: true });
+  private readonly _tracer: TracerBase;
+    
+  constructor(tracer: TracerBase) {
+        this._tracer = tracer
+  }
+
+  public async execute(message: IMessage): Promise<IMessage> {
+      const { properties } = message;
+      
+      console.log(`Executing task: ${properties.activityId}`);
+      console.log(`${properties.bpmnProcessId}::${properties.processInstanceId} Servus!`);
+      message.body.test = true;
+      // This call will be traced automatically
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+      
+      // you can also create a custom trace like this :
+      const span = this._tracer.startChildSpan({ name: 'customSpan', kind: SpanKind.CLIENT });
+      
+      console.log();
+      console.log('data:');
+      console.log(response.data);
       // put your business logic here
-      span.finish();
+
+      // finish
+      span.end();
+      
       return Promise.resolve(message);
   }
 }
 ```
 Vous pouvez consulter le dossier `sample` où nous fournissons un exemple (parallel.ts) en utilisant [Jaeger](https://www.jaegertracing.io/docs/latest/).
+
+[Voir le tutoriel relié aux traces](.docs/WORKER.md#add-traces-to-your-worker-with-opencensus)
 
 ### Définissez votre configuration pour la plate-forme que vous souhaitez utiliser
 
@@ -348,8 +364,8 @@ npm test
 
 *   [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - client nodejs pour Zeebe
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - client nodejs pour Camunda BPM
-*   [inversify](https://github.com/inversify/InversifyJS) - Injection de dépendence
-*   [opentracing](https://github.com/opentracing/opentracing-javascript) - ajouter de l'instrumentation aux opérations
+*   [inversify](https://github.com/inversify/InversifyJS) - injection de dépendence
+*   [openCensus](https://opencensus.io/) - ajouter de l'instrumentation aux opérations (bientôt [open-telemetry](https://github.com/open-telemetry/opentelemetry-js))
 
 ## Philosophie
 

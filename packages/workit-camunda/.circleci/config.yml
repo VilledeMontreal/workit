@@ -1,0 +1,80 @@
+version: 2
+node_tests: &node_tests
+  steps:
+    - checkout
+    - run:
+        name: Create Checksum
+        command: sh .circleci/checksum.sh /tmp/checksums.txt
+    - restore_cache:
+        keys:
+          - npm-cache-{{ checksum "/tmp/checksums.txt" }}
+    - run:
+        name: Install Dependencies
+        command: yarn install
+    - save_cache:
+        key: npm-cache-{{ checksum "/tmp/checksums.txt" }}
+        paths:
+          - ./node_modules
+          - ./yarn.lock
+          - ./packages/*/node_modules
+          - ./packages/*/yarn.lock
+    - run:
+        name: Compile code
+        command: yarn build
+    - run:
+        name: Waiting for Zeebe to be ready
+        command: |
+          for i in `seq 1 10`;
+          do
+            nc -z localhost 26500 && echo success && exit 0
+            echo -n .
+            sleep 1
+          done
+          echo Failed waiting for Zeebe && exit 1
+    - run:
+        name: test
+        command: npm run test:integration
+docs_filters: &docs_filters # Ignores any commit on any branch by default
+  branches:
+    ignore: gh-pages
+
+prod_filters: &prod_filters # Ignores any commit on any branch by default
+  branches:
+    ignore: /.*/
+
+  # Only act on semver version tags
+  tags:
+    only:
+      - /@(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - node10:
+          filters: *docs_filters
+      - node11:
+          filters: *docs_filters
+  build-master: # Will only run when a tag is pushed
+    jobs:
+      - test:
+          filters: *prod_filters
+      - publish:
+          requires:
+            - test
+          filters: *prod_filters
+
+jobs:
+  # Runs the tests, including integration
+  node10:
+    docker:
+      - image: circleci/node:10
+      - image: camunda/zeebe:0.20.0
+    <<: *node_tests
+  node11:
+    docker:
+      - image: circleci/node:11
+      - image: camunda/zeebe:0.20.0
+    <<: *node_tests
+
+

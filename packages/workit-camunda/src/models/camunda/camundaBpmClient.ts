@@ -22,7 +22,6 @@ import {
   IWorkflowProcessIdDefinition
 } from '../camunda-n-mq/specs/workflowDefinition';
 import { IWorkflowOptions } from '../camunda-n-mq/specs/workflowOptions';
-import { ICCInstrumentationHandler } from '../core/instrumentations/specs/instrumentation';
 import { CamundaMessage } from './camundaMessage';
 import { CamundaRepository, ICamundaRepository } from './repositories/camundaRepository';
 import { ICamundaClient } from './specs/camundaClient';
@@ -46,26 +45,18 @@ export class CamundaBpmClient implements IClient, IWorkflowClient {
   private _topicSubscription: ITopicSubscription | undefined;
   private readonly _config: ICamundaConfig;
   private readonly _repo: ICamundaRepository;
-  private readonly _apm: ICCInstrumentationHandler;
-  constructor(config: ICamundaConfig, client: ICamundaClient, apm: ICCInstrumentationHandler) {
+  constructor(config: ICamundaConfig, client: ICamundaClient) {
     this._client = client;
     this._config = config;
     this._repo = new CamundaRepository(config);
-    this._apm = apm;
   }
   public subscribe(onMessageReceived: (message: IMessage, service: ICamundaService) => Promise<void>): Promise<void> {
     this._topicSubscription = this._client.subscribe(
       this._config.topicName,
       this._config.subscriptionOptions,
       async (camundaObject: { task: IVariablePayload; taskService: any }) => {
-        const [message, service] = CamundaMessage.wrap(camundaObject, this._apm);
-        try {
-          await onMessageReceived(message, service);
-        } catch (error) {
-          this._apm.onMessageFailed(error, message);
-        } finally {
-          this._apm.onMessageSuccess(message);
-        }
+        const [message, service] = CamundaMessage.wrap(camundaObject);
+        await onMessageReceived(message, service);
       }
     );
 

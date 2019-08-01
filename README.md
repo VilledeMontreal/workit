@@ -16,7 +16,7 @@ This package can be useful because:
 -   Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it’s easier to change the client or to make your own.
 -   You want to have a worker standardization.
 -   Uniformisation. Indeed, you can use both platforms depending project needs.
--   Added features like Opentracing.
+-   Added features like automated tracing.
 -   This package enforce feature parity between Zeebe and Camunda BPM through the client libraries. Some features exposed to the Camunda BPM platform are not presents in this package because we couldn't provide them if we switch to Zeebe. This limitation is to guide developers to prepare migration.
 
 ## Quickstart
@@ -234,33 +234,49 @@ const workerConfig = {
 IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
-### Opentracing
-WorkIt integrates opentracing in order to provide instrumentations to developers. By default, we bound a `NoopTracer` but you can provide your own and it must be compatible to [opentracing interface](https://opentracing.io/docs/overview/tracers/#tracer-interface). We use [Domain Probe pattern](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests) in our Camunda clients. This way, we allow developers to bind their own and/or add their instrumentations like logs and metrics. We strongly recommand to use this kind of pattern in your task.
+### Open-telemetry
+WorkIt will integrate Open-telemetry in order to provide instrumentations to developers. In the meantime, we use [Opencensus](https://github.com/census-instrumentation/opencensus-node). By default, we bound a `NoopTracer` but you can provide your own and it must extend [CoreTracer class](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/tracer.ts).We strongly recommand to use this kind of pattern in your task: [Domain Probe pattern](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). But here an example:
 
 ```javascript
 // Simply bind your custom tracer object like this
 IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);
 ```
-Now, you can access to `spans` property in `IMessage` object.
 
 ```javascript
 export class HelloWorldTask extends TaskBase<IMessage> {
-  public execute(message: IMessage): Promise<IMessage> {
-      const { properties, spans } = message;
-      // --------------------------
-      // You should use domain probe pattern here 
-      // See internal code (ICamundaClientInstrumentation), but here an example:
-      const tracer =  spans.tracer();
-      const context = spans.context();
-      const span = tracer.startSpan("HelloWorldTask.execute", { childOf: context });
-      span.log({ test: true });
+  private readonly _tracer: TracerBase;
+    
+  constructor(tracer: TracerBase) {
+        this._tracer = tracer
+  }
+
+  public async execute(message: IMessage): Promise<IMessage> {
+      const { properties } = message;
+      
+      console.log(`Executing task: ${properties.activityId}`);
+      console.log(`${properties.bpmnProcessId}::${properties.processInstanceId} Servus!`);
+      message.body.test = true;
+      // This call will be traced automatically
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+      
+      // you can also create a custom trace like this :
+      const span = this._tracer.startChildSpan({ name: 'customSpan', kind: SpanKind.CLIENT });
+      
+      console.log();
+      console.log('data:');
+      console.log(response.data);
       // put your business logic here
-      span.finish();
+
+      // finish the span scope
+      span.end();
+      
       return Promise.resolve(message);
   }
 }
 ```
-You can look to `packages/workit-camunda/sample` folder where we provide an example (parallel.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
+You can look to `sample` folder where we provide an example (parallel.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
+
+[See get started section with Opencensus](.docs/WORKER.md#add-traces-to-your-worker-with-opencensus)
 
 ### Define your config for the platform you want to use
 
@@ -348,7 +364,7 @@ npm test
 *   [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - nodejs client for Zeebe
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - nodejs client for Camunda BPM
 *   [inversify](https://github.com/inversify/InversifyJS) - Dependency injection
-*   [opentracing](https://github.com/opentracing/opentracing-javascript) - add instrumentation to the operations to be tracked
+*   [openCensus](https://opencensus.io/) - add instrumentation to the operations to be tracked (coming soon [open-telemetry](https://github.com/open-telemetry/opentelemetry-js))
 
 ## Philosophy
 

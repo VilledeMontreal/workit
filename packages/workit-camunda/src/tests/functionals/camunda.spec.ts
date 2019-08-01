@@ -2,9 +2,9 @@
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 
+import { CoreTracer } from '@opencensus/core';
 import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
 import * as nock from 'nock';
-import * as opentracing from 'opentracing';
 import { SERVICE_IDENTIFIER } from '../../config/constants/identifiers';
 import { Client } from '../../models/camunda-n-mq/client';
 import { IMessage } from '../../models/camunda-n-mq/specs/message';
@@ -12,9 +12,8 @@ import { CamundaBpmClient } from '../../models/camunda/camundaBpmClient';
 import { ICamundaClient } from '../../models/camunda/specs/camundaClient';
 import { ICamundaConfig } from '../../models/camunda/specs/camundaConfig';
 import { Utils } from '../../models/camunda/utils';
-import { CamundaClientTracer } from '../../models/core/instrumentations/camundaClientTracer';
-import { Instrumentation } from '../../models/core/instrumentations/instrumentation';
 import { SCProcessHandler } from '../../models/core/processHandler/simpleCamundaProcessHandler';
+import { IProcessHandlerConfig } from '../../models/core/processHandler/specs/processHandlerConfig';
 import { FailureStrategySimple } from '../../models/core/strategies/FailureStrategySimple';
 import { SuccessStrategySimple } from '../../models/core/strategies/SuccessStrategySimple';
 import { Worker } from '../../models/core/worker';
@@ -51,14 +50,11 @@ describe('Camunda Worker', function() {
     IoC.bindToObject(basicOauth, SERVICE_IDENTIFIER.camunda_oauth_info);
 
     const clientLib: ICamundaClient = new CamundaExternalClient(config) as any;
-    const noopTracer = new opentracing.Tracer();
-    const ccTracer = new CamundaClientTracer(noopTracer);
-    const instrumentation = new Instrumentation([ccTracer]);
-    camundaClient = new CamundaBpmClient(config, clientLib, instrumentation);
+    camundaClient = new CamundaBpmClient(config, clientLib);
     successHandler = new SuccessStrategySimple();
     failureHandler = new FailureStrategySimple();
     client = new Client(camundaClient);
-    processHandler = new SCProcessHandler(successHandler, failureHandler, config as any);
+    processHandler = new SCProcessHandler(successHandler, failureHandler, new CoreTracer(), config as any);
 
     successHandler.handle = jest.fn().mockResolvedValueOnce({});
     worker = new Worker(client, processHandler);
@@ -131,7 +127,7 @@ describe('Camunda Worker', function() {
       .post('/engine-rest/external-task/fetchAndLock')
       .reply(200, require('../data/camunda-response.json'));
 
-    const configWithInterceptors = {
+    const configWithInterceptors: any & IProcessHandlerConfig = {
       maxTasks: 1,
       baseUrl: `http://localhost:8080/engine-rest`,
       topicName: 'topic_demo',
@@ -153,8 +149,7 @@ describe('Camunda Worker', function() {
               lockExpirationTime: new Date(),
               topicName: 'topic_demo',
               workerId: 'demo'
-            },
-            spans: new opentracing.Span()
+            }
           });
         },
         (message: IMessage): Promise<IMessage> => {
@@ -174,14 +169,19 @@ describe('Camunda Worker', function() {
               lockExpirationTime: new Date(),
               topicName: 'topic_demo',
               workerId: 'demo'
-            },
-            spans: new opentracing.Span()
+            }
           });
         }
       ],
-      autoPoll: false
+      autoPoll: false,
+      enableTracing: false
     };
-    const newProcessHandler = new SCProcessHandler(successHandler, failureHandler, configWithInterceptors);
+    const newProcessHandler = new SCProcessHandler(
+      successHandler,
+      failureHandler,
+      new CoreTracer(),
+      configWithInterceptors
+    );
     worker = new Worker(client, newProcessHandler);
     worker.start();
     worker.run();

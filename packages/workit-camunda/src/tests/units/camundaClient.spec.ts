@@ -3,11 +3,8 @@
 // See LICENSE file in the project root for full license information.
 
 import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
-import * as opentracing from 'opentracing';
 import { CamundaBpmClient } from '../../models/camunda/camundaBpmClient';
 import { Utils } from '../../models/camunda/utils';
-import { CamundaClientTracer } from '../../models/core/instrumentations/camundaClientTracer';
-import { Instrumentation } from '../../models/core/instrumentations/instrumentation';
 
 let camundaClient: CamundaBpmClient;
 let clientLib: { subscribe: jest.Mock<any, any>; start: jest.Mock<any, any>; stop: jest.Mock<any, any> };
@@ -24,15 +21,12 @@ describe('Camunda Client', () => {
 
     const configuration = Utils.buildConfig(config);
     clientLib = new CamundaExternalClient(configuration);
-    const noopTracer = new opentracing.Tracer();
-    const ccTracer = new CamundaClientTracer(noopTracer);
-    const instrumentation = new Instrumentation([ccTracer]);
 
     clientLib.subscribe = jest.fn().mockReturnValue(undefined);
     clientLib.start = jest.fn().mockReturnValue(undefined);
     clientLib.stop = jest.fn().mockReturnValue(undefined);
     // issue with definition - fix with any
-    camundaClient = new CamundaBpmClient(configuration, clientLib as any, instrumentation);
+    camundaClient = new CamundaBpmClient(configuration, clientLib as any);
   });
 
   it('should be an instance of CamundaClient', () => {

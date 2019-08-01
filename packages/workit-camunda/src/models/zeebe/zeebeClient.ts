@@ -28,7 +28,6 @@ import {
   IWorkflowProcessIdDefinition
 } from '../camunda-n-mq/specs/workflowDefinition';
 import { IWorkflowOptions } from '../camunda-n-mq/specs/workflowOptions';
-import { ICCInstrumentationHandler } from '../core/instrumentations/specs/instrumentation';
 import { IPayload } from './specs/payload';
 import { IZeebeOptions } from './specs/zeebeOptions';
 import { ZeebeMessage } from './zeebeMessage';
@@ -42,15 +41,12 @@ export class ZeebeClient<TVariables = any, TProps = any, RVariables = TVariables
   private _worker: ZBWorker<TVariables, TProps, RVariables> | undefined;
   private readonly _config: IZeebeOptions;
   private readonly _exporterConfig: Partial<IElasticExporterConfig> | undefined;
-  private readonly _apm: ICCInstrumentationHandler;
   constructor(
     config: IZeebeOptions,
-    apm: ICCInstrumentationHandler,
     @optional() client?: ZBClient,
     @optional() exporterConfig?: Partial<IElasticExporterConfig>
   ) {
     this._client = client || new ZBClient(config.baseUrl, config);
-    this._apm = apm;
     this._config = config;
     this._exporterConfig = exporterConfig;
     if (!exporterConfig) {
@@ -68,14 +64,8 @@ export class ZeebeClient<TVariables = any, TProps = any, RVariables = TVariables
       this._config.workerId || 'some-random-id',
       this._config.topicName,
       async (payload: IPayload<TVariables, TProps>, complete: CompleteFn<TVariables>) => {
-        const [message, service] = ZeebeMessage.wrap<TVariables, TProps>(payload, complete, this._client, this._apm);
-        try {
-          await onMessageReceived(message, service);
-        } catch (error) {
-          this._apm.onMessageFailed(error, message);
-        } finally {
-          this._apm.onMessageSuccess(message);
-        }
+        const [message, service] = ZeebeMessage.wrap<TVariables, TProps>(payload, complete, this._client);
+        await onMessageReceived(message, service);
       },
       this._config
     );

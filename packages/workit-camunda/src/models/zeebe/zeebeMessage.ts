@@ -10,10 +10,6 @@ import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
 import { FailureException } from '../camunda-n-mq/specs/failureException';
 import { IMessage } from '../camunda-n-mq/specs/message';
 import { IProperties } from '../camunda-n-mq/specs/properties';
-import { CamundaClientTracer } from '../core/instrumentations/camundaClientTracer';
-import { APM } from '../core/instrumentations/enums/apm';
-import { ICCInstrumentationHandler } from '../core/instrumentations/specs/instrumentation';
-// import { ProxyFactory } from '../core/proxyFactory';
 import { IPayload } from './specs/payload';
 import { ZeebeMapperProperties } from './zeebeMapperProperties';
 
@@ -21,26 +17,17 @@ export class ZeebeMessage {
   public static wrap<TVariables, TProps>(
     payload: IPayload<TVariables, TProps>,
     complete: CompleteFn<TVariables>,
-    client: ZBClient,
-    apm: ICCInstrumentationHandler
+    client: ZBClient
   ): [IMessage<TVariables, TProps>, ICamundaService] {
     const properties = ZeebeMapperProperties.map(payload);
-    const tracer = apm.get(APM.tracer) as CamundaClientTracer;
     const messageWithoutSpan = {
       body: payload.variables,
       properties: properties as IProperties<TProps>
     };
-    const spans = tracer.createRootSpanOnMessage(messageWithoutSpan);
-    // const messageWithProxy = ProxyFactory.create({
-    //   body: messageWithoutSpan.body,
-    //   properties: messageWithoutSpan.properties,
-    //   span,
-    // });
     return [
       {
         body: messageWithoutSpan.body,
-        properties: messageWithoutSpan.properties,
-        spans
+        properties: messageWithoutSpan.properties
       },
       {
         hasBeenThreated: false,

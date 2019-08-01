@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 
+import { CoreTracer } from '@opencensus/core';
 import { SCProcessHandler } from '../../models/core/processHandler/simpleCamundaProcessHandler';
 import { FailureStrategySimple } from '../../models/core/strategies/FailureStrategySimple';
 import { SuccessStrategySimple } from '../../models/core/strategies/SuccessStrategySimple';
@@ -13,7 +14,7 @@ describe('Worker', () => {
     const successHandler = new SuccessStrategySimple();
     const failureHandler = new FailureStrategySimple();
     const fakeClient = new FakeClient();
-    const processHandler = new SCProcessHandler(successHandler, failureHandler);
+    const processHandler = new SCProcessHandler(successHandler, failureHandler, new CoreTracer());
     const worker = new Worker(fakeClient, processHandler);
     expect(worker).toBeInstanceOf(Worker);
   });
@@ -27,7 +28,7 @@ describe('Worker', () => {
       failureHandler.handle = jest.fn().mockResolvedValueOnce({});
 
       const fakeClient = new FakeClient();
-      const processHandler = new SCProcessHandler(successHandler, failureHandler);
+      const processHandler = new SCProcessHandler(successHandler, failureHandler, new CoreTracer());
       const worker = new Worker(fakeClient, processHandler);
 
       expect(worker).toBeInstanceOf(Worker);
@@ -42,7 +43,7 @@ describe('Worker', () => {
       fakeClient.subscribe = jest.fn().mockResolvedValueOnce({});
       fakeClient.unsubscribe = jest.fn().mockResolvedValueOnce({});
 
-      const processHandler = new SCProcessHandler(successHandler, failureHandler);
+      const processHandler = new SCProcessHandler(successHandler, failureHandler, new CoreTracer());
       const worker = new Worker(fakeClient, processHandler);
 
       expect(worker).toBeInstanceOf(Worker);
@@ -60,7 +61,7 @@ describe('Worker', () => {
       fakeClient.subscribe = jest.fn().mockResolvedValueOnce({});
       fakeClient.unsubscribe = jest.fn().mockResolvedValueOnce({});
 
-      const processHandler = new SCProcessHandler(successHandler, failureHandler);
+      const processHandler = new SCProcessHandler(successHandler, failureHandler, new CoreTracer());
       const worker = new Worker(fakeClient, processHandler);
       worker.run();
       worker.stop().catch();
