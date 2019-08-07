@@ -1,8 +1,22 @@
 # Getting started
 First, open a terminal and go the `workit-camunda` package folder (packages/workit-camunda)
 
+Second, install it:
+
+```bash
+npm i
+npm run build
+```
+
 ## Camunda BPM
-Make sure to have Camunda running at http://localhost:8080
+
+If you don't have Camunda installed, you can use docker command to run it in the root folder:
+
+```bash
+docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
+```
+
+Make sure to have Camunda running at http://localhost:8080 (user/pass demo/demo)
 
 Run in your terminal in the root folder:
 
@@ -25,6 +39,12 @@ You should see in the console, all activities crushed by the worker. Now, if you
 👏 Congrats, you have finished the Camunda BPM section!
 
 ## Zeebe
+
+If you don't have Zeebee installed, you can use docker command to run it in the root folder:
+
+```bash
+docker/run
+```
 
 Make sure to have Zeebe operate running at http://localhost:8080 (user/pass demo/demo)
 
