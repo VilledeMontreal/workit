@@ -6,15 +6,11 @@
   ],
   "command": {
     "publish": {
-      "npmClient": "npm",
       "conventionalCommits": true,
       "registry": "https://registry.npmjs.org/",
       "ignoreChanges": ["*.lock"],
       "allowBranch": "master",
       "message": "chore(release): publish"
-    },
-    "bootstrap": {
-      "npmClient": "npm"
     }
   },
   "changelog": {
@@ -29,7 +25,6 @@
     },
     "cacheDir": ".changelog"
   },
-  "useWorkspaces": true,
-  "npmClient": "npm",
+  "npmClient": "yarn",
   "version": "independent"
 }
