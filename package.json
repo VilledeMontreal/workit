@@ -1,17 +1,19 @@
 {
   "name": "root",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "services/*"
-  ],
   "scripts": {
-    "bootstrap": "lerna exec -- npm i && lerna link",
+    "fix": "lerna run fix",
+    "postinstall": "yarn run bootstrap",
+    "predocs-test": "yarn docs",
+    "docs-test": "lerna run docs-test",
+    "docs": "lerna run docs",
     "build": "lerna run build",
     "test": "lerna run test",
     "clean": "lerna clean",
     "publish:ci": "lerna run lint-fix && lerna publish --canary --yes",
     "publish": "lerna run lint-fix && lerna publish",
+    "bootstrap": "lerna bootstrap",
+    "bump": "lerna publish",
     "remark-lint": "remark ."
   },
   "devDependencies": {
