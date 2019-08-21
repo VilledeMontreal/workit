@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>APM | workit-camunda</title>
+	<title>JaegerTracerService | workit-camunda</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,62 +56,126 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="apm.html">APM</a>
+					<a href="jaegertracerservice.html">JaegerTracerService</a>
 				</li>
 			</ul>
-			<h1>Enumeration APM</h1>
+			<h1>Class JaegerTracerService</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">JaegerTracerService</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumeration members</h3>
+							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="apm.html#log" class="tsd-kind-icon">log</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="apm.html#metrics" class="tsd-kind-icon">metrics</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="apm.html#tracer" class="tsd-kind-icon">tracer</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="jaegertracerservice.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="jaegertracerservice.html#dispose" class="tsd-kind-icon">dispose</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="jaegertracerservice.html#gettracer" class="tsd-kind-icon">get<wbr>Tracer</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="jaegertracerservice.html#start" class="tsd-kind-icon">start</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="log" class="tsd-anchor"></a>
-					<h3>log</h3>
-					<div class="tsd-signature tsd-kind-icon">log<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;log&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/instrumentations/enums/apm.ts#L6">src/models/core/instrumentations/enums/apm.ts:6</a></li>
-						</ul>
-					</aside>
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Jaeger<wbr>Tracer<wbr>Service<span class="tsd-signature-symbol">(</span>tracerOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/itracerserviceoptions.html" class="tsd-signature-type">ITracerServiceOptions</a><span class="tsd-signature-symbol">&gt;</span>, pluginOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="jaegertracerservice.html" class="tsd-signature-type">JaegerTracerService</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/jaeger/tracerService.ts#L28">src/models/opentelemetry/jaeger/tracerService.ts:28</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> tracerOptions: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/itracerserviceoptions.html" class="tsd-signature-type">ITracerServiceOptions</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> pluginOptions: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="jaegertracerservice.html" class="tsd-signature-type">JaegerTracerService</a></h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="metrics" class="tsd-anchor"></a>
-					<h3>metrics</h3>
-					<div class="tsd-signature tsd-kind-icon">metrics<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;metrics&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/instrumentations/enums/apm.ts#L7">src/models/core/instrumentations/enums/apm.ts:7</a></li>
-						</ul>
-					</aside>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="dispose" class="tsd-anchor"></a>
+					<h3>dispose</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">dispose<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/jaeger/tracerService.ts#L77">src/models/opentelemetry/jaeger/tracerService.ts:77</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="tracer" class="tsd-anchor"></a>
-					<h3>tracer</h3>
-					<div class="tsd-signature tsd-kind-icon">tracer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;tracer&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/instrumentations/enums/apm.ts#L5">src/models/core/instrumentations/enums/apm.ts:5</a></li>
-						</ul>
-					</aside>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gettracer" class="tsd-anchor"></a>
+					<h3>get<wbr>Tracer</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Tracer<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TracerBase</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/jaeger/tracerService.ts#L73">src/models/opentelemetry/jaeger/tracerService.ts:73</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TracerBase</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="start" class="tsd-anchor"></a>
+					<h3>start</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/jaeger/tracerService.ts#L88">src/models/opentelemetry/jaeger/tracerService.ts:88</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -127,17 +191,20 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-enum">
-						<a href="apm.html" class="tsd-kind-icon">APM</a>
+					<li class="current tsd-kind-class">
+						<a href="jaegertracerservice.html" class="tsd-kind-icon">Jaeger<wbr>Tracer<wbr>Service</a>
 						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="apm.html#log" class="tsd-kind-icon">log</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="jaegertracerservice.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="apm.html#metrics" class="tsd-kind-icon">metrics</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="jaegertracerservice.html#dispose" class="tsd-kind-icon">dispose</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="apm.html#tracer" class="tsd-kind-icon">tracer</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="jaegertracerservice.html#gettracer" class="tsd-kind-icon">get<wbr>Tracer</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="jaegertracerservice.html#start" class="tsd-kind-icon">start</a>
 							</li>
 						</ul>
 					</li>
@@ -160,6 +227,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -208,7 +276,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

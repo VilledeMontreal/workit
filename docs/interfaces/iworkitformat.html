@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ICamundaClientInstrumentation | workit-camunda</title>
+	<title>IWorkitFormat | workit-camunda</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="icamundaclientinstrumentation.html">ICamundaClientInstrumentation</a>
+					<a href="iworkitformat.html">IWorkitFormat</a>
 				</li>
 			</ul>
-			<h1>Interface ICamundaClientInstrumentation</h1>
+			<h1>Interface IWorkitFormat</h1>
 		</div>
 	</div>
 </header>
@@ -70,16 +70,15 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ICamundaClientInstrumentation</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<a href="iccinstrumentationhandler.html" class="tsd-signature-type">ICCInstrumentationHandler</a>
-							</li>
-							<li>
-								<a href="icamundaclienttracer.html" class="tsd-signature-type">ICamundaClientTracer</a>
-							</li>
-						</ul>
+						<span class="target">IWorkitFormat</span>
 					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implemented by</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../classes/jaegerformat.html" class="tsd-signature-type">JaegerFormat</a></li>
+					<li><a href="../classes/simpleformat.html" class="tsd-signature-type">SimpleFormat</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -87,82 +86,39 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icamundaclientinstrumentation.html#kind" class="tsd-kind-icon">kind</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="icamundaclientinstrumentation.html#onmessagefailed" class="tsd-kind-icon">on<wbr>Message<wbr>Failed</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="icamundaclientinstrumentation.html#onmessagesuccess" class="tsd-kind-icon">on<wbr>Message<wbr>Success</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="iworkitformat.html#extractfrommessage" class="tsd-kind-icon">extract<wbr>From<wbr>Message</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="kind" class="tsd-anchor"></a>
-					<h3>kind</h3>
-					<div class="tsd-signature tsd-kind-icon">kind<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/instrumentations/specs/camundaClientInstrumentation.ts#L8">src/models/core/instrumentations/specs/camundaClientInstrumentation.ts:8</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="onmessagefailed" class="tsd-anchor"></a>
-					<h3>on<wbr>Message<wbr>Failed</h3>
+					<a name="extractfrommessage" class="tsd-anchor"></a>
+					<h3>extract<wbr>From<wbr>Message</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Message<wbr>Failed<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Error</span>, message<span class="tsd-signature-symbol">: </span><a href="imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">extract<wbr>From<wbr>Message<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="imessagebase.html" class="tsd-signature-type">IMessageBase</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SpanContext</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/instrumentations/specs/camundaClientInstrumentation.ts#L9">src/models/core/instrumentations/specs/camundaClientInstrumentation.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/specs/workitFormat.ts#L4">src/models/opentelemetry/specs/workitFormat.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>e: <span class="tsd-signature-type">Error</span></h5>
-								</li>
-								<li>
-									<h5>message: <a href="imessage.html" class="tsd-signature-type">IMessage</a></h5>
+									<h5>message: <a href="imessagebase.html" class="tsd-signature-type">IMessageBase</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="onmessagesuccess" class="tsd-anchor"></a>
-					<h3>on<wbr>Message<wbr>Success</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Message<wbr>Success<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/instrumentations/specs/camundaClientInstrumentation.ts#L10">src/models/core/instrumentations/specs/camundaClientInstrumentation.ts:10</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>message: <a href="imessage.html" class="tsd-signature-type">IMessage</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SpanContext</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">null</span>
+							</h4>
 						</li>
 					</ul>
 				</section>
@@ -181,16 +137,10 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="icamundaclientinstrumentation.html" class="tsd-kind-icon">ICamunda<wbr>Client<wbr>Instrumentation</a>
+						<a href="iworkitformat.html" class="tsd-kind-icon">IWorkit<wbr>Format</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="icamundaclientinstrumentation.html#kind" class="tsd-kind-icon">kind</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="icamundaclientinstrumentation.html#onmessagefailed" class="tsd-kind-icon">on<wbr>Message<wbr>Failed</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="icamundaclientinstrumentation.html#onmessagesuccess" class="tsd-kind-icon">on<wbr>Message<wbr>Success</a>
+								<a href="iworkitformat.html#extractfrommessage" class="tsd-kind-icon">extract<wbr>From<wbr>Message</a>
 							</li>
 						</ul>
 					</li>
@@ -213,6 +163,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -261,7 +212,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

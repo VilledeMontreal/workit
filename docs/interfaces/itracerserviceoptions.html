@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>VdmTextMapCodec | workit-camunda</title>
+	<title>ITracerServiceOptions | workit-camunda</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="vdmtextmapcodec.html">VdmTextMapCodec</a>
+					<a href="itracerserviceoptions.html">ITracerServiceOptions</a>
 				</li>
 			</ul>
-			<h1>Class VdmTextMapCodec</h1>
+			<h1>Interface ITracerServiceOptions</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">VdmTextMapCodec</span>
+						<span class="target">ITracerServiceOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -79,97 +79,69 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="vdmtextmapcodec.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Methods</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="vdmtextmapcodec.html#extract" class="tsd-kind-icon">extract</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="vdmtextmapcodec.html#inject" class="tsd-kind-icon">inject</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#host" class="tsd-kind-icon">host</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#maxpacketsize" class="tsd-kind-icon">max<wbr>Packet<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#port" class="tsd-kind-icon">port</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#servicename" class="tsd-kind-icon">service<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#tags" class="tsd-kind-icon">tags</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Vdm<wbr>Text<wbr>Map<wbr>Codec<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vdmtextmapcodec.html" class="tsd-signature-type">VdmTextMapCodec</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/sample/opentracing/vdmMapCodec.ts#L10">sample/opentracing/vdmMapCodec.ts:10</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="vdmtextmapcodec.html" class="tsd-signature-type">VdmTextMapCodec</a></h4>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="host" class="tsd-anchor"></a>
+					<h3>host</h3>
+					<div class="tsd-signature tsd-kind-icon">host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L5">src/models/opentelemetry/specs/tracerServiceOptions.ts:5</a></li>
+						</ul>
+					</aside>
 				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="extract" class="tsd-anchor"></a>
-					<h3>extract</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">extract<span class="tsd-signature-symbol">(</span>carrier<span class="tsd-signature-symbol">: </span><a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SpanContext</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/sample/opentracing/vdmMapCodec.ts#L20">sample/opentracing/vdmMapCodec.ts:20</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>carrier: <a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SpanContext</span></h4>
-						</li>
-					</ul>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="maxpacketsize" class="tsd-anchor"></a>
+					<h3>max<wbr>Packet<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Packet<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L7">src/models/opentelemetry/specs/tracerServiceOptions.ts:7</a></li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="inject" class="tsd-anchor"></a>
-					<h3>inject</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">inject<span class="tsd-signature-symbol">(</span>spanContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SpanContext</span>, carrier<span class="tsd-signature-symbol">: </span><a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/sample/opentracing/vdmMapCodec.ts#L55">sample/opentracing/vdmMapCodec.ts:55</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>spanContext: <span class="tsd-signature-type">SpanContext</span></h5>
-								</li>
-								<li>
-									<h5>carrier: <a href="../interfaces/imessage.html" class="tsd-signature-type">IMessage</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="port" class="tsd-anchor"></a>
+					<h3>port</h3>
+					<div class="tsd-signature tsd-kind-icon">port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L6">src/models/opentelemetry/specs/tracerServiceOptions.ts:6</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="servicename" class="tsd-anchor"></a>
+					<h3>service<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">service<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L3">src/models/opentelemetry/specs/tracerServiceOptions.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="tags" class="tsd-anchor"></a>
+					<h3>tags</h3>
+					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L4">src/models/opentelemetry/specs/tracerServiceOptions.ts:4</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -185,17 +157,23 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="vdmtextmapcodec.html" class="tsd-kind-icon">Vdm<wbr>Text<wbr>Map<wbr>Codec</a>
+					<li class="current tsd-kind-interface">
+						<a href="itracerserviceoptions.html" class="tsd-kind-icon">ITracer<wbr>Service<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="vdmtextmapcodec.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="itracerserviceoptions.html#host" class="tsd-kind-icon">host</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="vdmtextmapcodec.html#extract" class="tsd-kind-icon">extract</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="itracerserviceoptions.html#maxpacketsize" class="tsd-kind-icon">max<wbr>Packet<wbr>Size</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="vdmtextmapcodec.html#inject" class="tsd-kind-icon">inject</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="itracerserviceoptions.html#port" class="tsd-kind-icon">port</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="itracerserviceoptions.html#servicename" class="tsd-kind-icon">service<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="itracerserviceoptions.html#tags" class="tsd-kind-icon">tags</a>
 							</li>
 						</ul>
 					</li>
@@ -218,6 +196,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -266,7 +245,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

@@ -112,6 +112,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="scprocesshandler.html#_config" class="tsd-kind-icon">_config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="scprocesshandler.html#_failure" class="tsd-kind-icon">_failure</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="scprocesshandler.html#_success" class="tsd-kind-icon">_success</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="scprocesshandler.html#_tracer" class="tsd-kind-icon">_tracer</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="scprocesshandler.html#defaultmaxlisteners" class="tsd-kind-icon">default<wbr>Max<wbr>Listeners</a></li>
 							</ul>
 						</section>
@@ -146,13 +147,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new SCProcess<wbr>Handler<span class="tsd-signature-symbol">(</span>successStrategy<span class="tsd-signature-symbol">: </span><a href="../interfaces/isuccessstrategy.html" class="tsd-signature-type">ISuccessStrategy</a>, failureStrategy<span class="tsd-signature-symbol">: </span><a href="../interfaces/ifailurestrategy.html" class="tsd-signature-type">IFailureStrategy</a>, config<span class="tsd-signature-symbol">?: </span><a href="../interfaces/iprocesshandlerconfig.html" class="tsd-signature-type">IProcessHandlerConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="scprocesshandler.html" class="tsd-signature-type">SCProcessHandler</a></li>
+						<li class="tsd-signature tsd-kind-icon">new SCProcess<wbr>Handler<span class="tsd-signature-symbol">(</span>successStrategy<span class="tsd-signature-symbol">: </span><a href="../interfaces/isuccessstrategy.html" class="tsd-signature-type">ISuccessStrategy</a>, failureStrategy<span class="tsd-signature-symbol">: </span><a href="../interfaces/ifailurestrategy.html" class="tsd-signature-type">IFailureStrategy</a>, tracer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Tracer</span>, config<span class="tsd-signature-symbol">?: </span><a href="../interfaces/iprocesshandlerconfig.html" class="tsd-signature-type">IProcessHandlerConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="scprocesshandler.html" class="tsd-signature-type">SCProcessHandler</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L26">src/models/core/processHandler/simpleCamundaProcessHandler.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L29">src/models/core/processHandler/simpleCamundaProcessHandler.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -162,6 +163,9 @@
 								</li>
 								<li>
 									<h5>failureStrategy: <a href="../interfaces/ifailurestrategy.html" class="tsd-signature-type">IFailureStrategy</a></h5>
+								</li>
+								<li>
+									<h5>tracer: <span class="tsd-signature-type">Tracer</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> config: <a href="../interfaces/iprocesshandlerconfig.html" class="tsd-signature-type">IProcessHandlerConfig</a></h5>
@@ -180,7 +184,7 @@
 					<div class="tsd-signature tsd-kind-icon">_config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iprocesshandlerconfig.html" class="tsd-signature-type">IProcessHandlerConfig</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L24">src/models/core/processHandler/simpleCamundaProcessHandler.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L26">src/models/core/processHandler/simpleCamundaProcessHandler.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -190,7 +194,7 @@
 					<div class="tsd-signature tsd-kind-icon">_failure<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ifailurestrategy.html" class="tsd-signature-type">IFailureStrategy</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L26">src/models/core/processHandler/simpleCamundaProcessHandler.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L28">src/models/core/processHandler/simpleCamundaProcessHandler.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -200,7 +204,17 @@
 					<div class="tsd-signature tsd-kind-icon">_success<span class="tsd-signature-symbol">:</span> <a href="../interfaces/isuccessstrategy.html" class="tsd-signature-type">ISuccessStrategy</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L25">src/models/core/processHandler/simpleCamundaProcessHandler.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L27">src/models/core/processHandler/simpleCamundaProcessHandler.ts:27</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_tracer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _tracer</h3>
+					<div class="tsd-signature tsd-kind-icon">_tracer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Tracer</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L29">src/models/core/processHandler/simpleCamundaProcessHandler.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -340,7 +354,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/5fd0d2c/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L43">src/models/core/processHandler/simpleCamundaProcessHandler.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/bc4e3b7/packages/workit-camunda/src/models/core/processHandler/simpleCamundaProcessHandler.ts#L48">src/models/core/processHandler/simpleCamundaProcessHandler.ts:48</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -827,6 +841,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 								<a href="scprocesshandler.html#_success" class="tsd-kind-icon">_success</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="scprocesshandler.html#_tracer" class="tsd-kind-icon">_tracer</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
 								<a href="scprocesshandler.html#defaultmaxlisteners" class="tsd-kind-icon">default<wbr>Max<wbr>Listeners</a>
 							</li>
@@ -902,6 +919,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -950,7 +968,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

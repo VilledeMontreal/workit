@@ -64,10 +64,14 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="workit">WorkIt</h1>
+				<a href="#workit" id="workit" style="color: inherit; text-decoration: none;">
+					<h1>WorkIt</h1>
+				</a>
 				<p><a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a></p>
 				<p>✨Extensible worker for Node.js that works with both Zeebe and Camunda BPM platforms powered by TypeScript ✨</p>
-				<h2 id="motivation">Motivation</h2>
+				<a href="#motivation" id="motivation" style="color: inherit; text-decoration: none;">
+					<h2>Motivation</h2>
+				</a>
 				<p>We needed a framework to help us quickly build workers used to execute tasks. <a href="https://zeebe.io/">Zeebe</a> provides a good fit with our stack. Until this is production ready, we are keeping the <a href="https://camunda.com/products/bpmn-engine/">Camunda Bpm</a>. Indeed, Zeebe is in developper preview. In order to make the transition smoother, we use this package. We can experiment and choose the Camunda platform we want without rewritting our business logic.</p>
 				<p>This package can be useful because:</p>
 				<ul>
@@ -75,52 +79,80 @@
 					<li>Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it’s easier to change the client or to make your own.</li>
 					<li>You want to have a worker standardization.</li>
 					<li>Uniformisation. Indeed, you can use both platforms depending project needs.</li>
-					<li>Added features like Opentracing.</li>
+					<li>Added features like automated tracing.</li>
 					<li>This package enforce feature parity between Zeebe and Camunda BPM through the client libraries. Some features exposed to the Camunda BPM platform are not presents in this package because we couldn&#39;t provide them if we switch to Zeebe. This limitation is to guide developers to prepare migration.</li>
 				</ul>
-				<h2 id="quickstart">Quickstart</h2>
+				<a href="#quickstart" id="quickstart" style="color: inherit; text-decoration: none;">
+					<h2>Quickstart</h2>
+				</a>
 				<p><a href=".docs/WORKER.md">Get started in 2 minutes</a>.</p>
-				<h2 id="documentation">Documentation</h2>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
 				<ul>
 					<li><a href=".docs/">.docs</a> contains written documentation</li>
 					<li>Comprehensive API documentation is available <a href="https://villedemontreal.github.io/workit/">online</a> and in the <code>docs</code> subdirectory</li>
 				</ul>
-				<h2 id="installing">Installing</h2>
+				<a href="#installing" id="installing" style="color: inherit; text-decoration: none;">
+					<h2>Installing</h2>
+				</a>
 				<pre><code class="language-bash">npm i workit-camunda</code></pre>
 				<p>or using the generator below</p>
-				<h3 id="yo-">Yo!</h3>
+				<a href="#yo" id="yo" style="color: inherit; text-decoration: none;">
+					<h3>Yo!</h3>
+				</a>
 				<p>This generator will help you during your development with this library. It provides handy tools.</p>
 				<pre><code class="language-bash">npm i -g workit-cli</code></pre>
-				<h4 id="install-a-fresh-new-project">Install a fresh new project</h4>
+				<a href="#install-a-fresh-new-project" id="install-a-fresh-new-project" style="color: inherit; text-decoration: none;">
+					<h4>Install a fresh new project</h4>
+				</a>
 				<pre><code class="language-bash">workit init</code></pre>
-				<h4 id="generate-tasks-from-your-existing-bpmn">Generate tasks from your existing BPMN</h4>
+				<a href="#generate-tasks-from-your-existing-bpmn" id="generate-tasks-from-your-existing-bpmn" style="color: inherit; text-decoration: none;">
+					<h4>Generate tasks from your existing BPMN</h4>
+				</a>
 				<pre><code class="language-bash">workit create task --file /your/path.bpmn</code></pre>
-				<h4 id="generate-new-task">Generate new task</h4>
+				<a href="#generate-new-task" id="generate-new-task" style="color: inherit; text-decoration: none;">
+					<h4>Generate new task</h4>
+				</a>
 				<pre><code class="language-bash">workit create task</code></pre>
-				<h2 id="how-to-use">How to use</h2>
+				<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
+					<h2>How to use</h2>
+				</a>
 				<p>Switching between Zeebe and the bpmn platform is easy as specifying a <code>TAG</code> to the IoC.</p>
-				<h3 id="run-worker">Run worker</h3>
+				<a href="#run-worker" id="run-worker" style="color: inherit; text-decoration: none;">
+					<h3>Run worker</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> worker = IoC.get&lt;Worker&gt;(CORE_IDENTIFIER.worker, TAG.camundaBpm); <span class="hljs-comment">// or TAG.zeebe</span>
 
 worker.start();
 worker.run();</code></pre>
-				<h3 id="deploy-a-workflow">Deploy a workflow</h3>
+				<a href="#deploy-a-workflow" id="deploy-a-workflow" style="color: inherit; text-decoration: none;">
+					<h3>Deploy a workflow</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> manager = IoC.get&lt;IWorkflowClient&gt;(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); <span class="hljs-comment">// or TAG.zeebe</span>
 <span class="hljs-keyword">const</span> fullpath = <span class="hljs-string">`<span class="hljs-subst">${process.cwd()}</span>/sample/BPMN_DEMO.bpmn`</span>;
 <span class="hljs-keyword">await</span> manager.deployWorkflow(fullpath);</code></pre>
-				<h3 id="get-workflows">Get workflows</h3>
+				<a href="#get-workflows" id="get-workflows" style="color: inherit; text-decoration: none;">
+					<h3>Get workflows</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> manager = IoC.get&lt;IWorkflowClient&gt;(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); <span class="hljs-comment">// or TAG.zeebe</span>
 <span class="hljs-keyword">await</span> manager.getWorkflows()</code></pre>
-				<h3 id="get-a-workflow">Get a workflow</h3>
+				<a href="#get-a-workflow" id="get-a-workflow" style="color: inherit; text-decoration: none;">
+					<h3>Get a workflow</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> manager = IoC.get&lt;IWorkflowClient&gt;(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); <span class="hljs-comment">// or TAG.zeebe</span>
 <span class="hljs-keyword">await</span> manager.getWorkflow({ <span class="hljs-attr">bpmnProcessId</span>: <span class="hljs-string">"DEMO"</span> });</code></pre>
-				<h3 id="update-variables">Update variables</h3>
+				<a href="#update-variables" id="update-variables" style="color: inherit; text-decoration: none;">
+					<h3>Update variables</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> manager = IoC.get&lt;IWorkflowClient&gt;(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); <span class="hljs-comment">// or TAG.zeebe</span>
 <span class="hljs-keyword">await</span> manager.updateVariables({ 
     <span class="hljs-attr">processInstanceId</span>: <span class="hljs-string">"5c50c48e-4691-11e9-8b8f-0242ac110002"</span>,
     <span class="hljs-attr">variables</span>: { <span class="hljs-attr">amount</span>: <span class="hljs-number">1000</span> }
 });</code></pre>
-				<h3 id="publish-message">Publish message</h3>
+				<a href="#publish-message" id="publish-message" style="color: inherit; text-decoration: none;">
+					<h3>Publish message</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> manager = IoC.get&lt;IWorkflowClient&gt;(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); <span class="hljs-comment">// or TAG.zeebe</span>
 <span class="hljs-keyword">await</span> manager.publishMessage({
     <span class="hljs-attr">correlation</span>: {},
@@ -129,7 +161,9 @@ worker.run();</code></pre>
     <span class="hljs-attr">timeToLive</span>: <span class="hljs-literal">undefined</span>, <span class="hljs-comment">// only supported for Zeebe</span>
     messageId: <span class="hljs-string">"5c50c48e-4691-11e9-8b8f-0242ac110002"</span>
 });</code></pre>
-				<h3 id="create-workflow-instance">Create workflow instance</h3>
+				<a href="#create-workflow-instance" id="create-workflow-instance" style="color: inherit; text-decoration: none;">
+					<h3>Create workflow instance</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> manager = IoC.get&lt;IWorkflowClient&gt;(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); <span class="hljs-comment">// or TAG.zeebe</span>
 <span class="hljs-keyword">await</span> manager.createWorkflowInstance({
     <span class="hljs-attr">bpmnProcessId</span>: <span class="hljs-string">"MY_BPMN_KEY"</span>,
@@ -137,13 +171,19 @@ worker.run();</code></pre>
         <span class="hljs-attr">hello</span>: <span class="hljs-string">"world"</span>
     }
 });</code></pre>
-				<h3 id="cancel-workflow-instance">Cancel workflow instance</h3>
+				<a href="#cancel-workflow-instance" id="cancel-workflow-instance" style="color: inherit; text-decoration: none;">
+					<h3>Cancel workflow instance</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> manager = IoC.get&lt;IWorkflowClient&gt;(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); <span class="hljs-comment">// or TAG.zeebe</span>
 <span class="hljs-keyword">await</span> manager.cancelWorkflowInstance(<span class="hljs-string">"4651614f-4b3c-11e9-b5b3-ee5801424400"</span>);</code></pre>
-				<h3 id="resolve-incident">Resolve incident</h3>
+				<a href="#resolve-incident" id="resolve-incident" style="color: inherit; text-decoration: none;">
+					<h3>Resolve incident</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> manager = IoC.get&lt;IWorkflowClient&gt;(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); <span class="hljs-comment">// or TAG.zeebe</span>
 <span class="hljs-keyword">await</span> manager.resolveIncident(<span class="hljs-string">"c84fce6c-518e-11e9-bd78-0242ac110003"</span>);</code></pre>
-				<h3 id="define-tasks-your-bpmn-activities-">Define tasks (your bpmn activities)</h3>
+				<a href="#define-tasks-your-bpmn-activities" id="define-tasks-your-bpmn-activities" style="color: inherit; text-decoration: none;">
+					<h3>Define tasks (your bpmn activities)</h3>
+				</a>
 				<p>You can define many tasks to one worker. It will handle all messages and will route to the right tasks.</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">TaskBase</span>&lt;<span class="hljs-title">IMessage</span>&gt; </span>{
   <span class="hljs-comment">// You can type message like IMessage&lt;TBody, TProps&gt; default any</span>
@@ -170,7 +210,9 @@ IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);
 				<p><a href=".docs/WORKER.md">See documentation</a></p>
 				<p>If you have installed <code>workit-cli</code>, you can do <code>workit create task</code>
 				and everything will be done for you.</p>
-				<h3 id="worker-life-cycle-and-events">Worker life cycle and events</h3>
+				<a href="#worker-life-cycle-and-events" id="worker-life-cycle-and-events" style="color: inherit; text-decoration: none;">
+					<h3>Worker life cycle and events</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> worker = IoC.get&lt;Worker&gt;(CORE_IDENTIFIER.worker, TAG.zeebe); <span class="hljs-comment">// or TAG.camundaBpm</span>
 
 worker.once(<span class="hljs-string">'starting'</span>, () =&gt; {
@@ -202,7 +244,9 @@ handler.on(<span class="hljs-string">'message-handled'</span>, (err: <span class
 worker.start();
 worker.run(); <span class="hljs-comment">// Promise</span>
 worker.stop(); <span class="hljs-comment">// Promise</span></code></pre>
-				<h3 id="interceptors">Interceptors</h3>
+				<a href="#interceptors" id="interceptors" style="color: inherit; text-decoration: none;">
+					<h3>Interceptors</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> workerConfig = {
   <span class="hljs-attr">interceptors</span>: [
     <span class="hljs-keyword">async</span> (message: IMessage): <span class="hljs-built_in">Promise</span>&lt;IMessage&gt; =&gt; {
@@ -213,27 +257,47 @@ worker.stop(); <span class="hljs-comment">// Promise</span></code></pre>
 };
 
 IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);</code></pre>
-				<h3 id="opentracing">Opentracing</h3>
-				<p>WorkIt integrates opentracing in order to provide instrumentations to developers. By default, we bound a <code>NoopTracer</code> but you can provide your own and it must be compatible to <a href="https://opentracing.io/docs/overview/tracers/#tracer-interface">opentracing interface</a>. We use <a href="https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests">Domain Probe pattern</a> in our Camunda clients. This way, we allow developers to bind their own and/or add their instrumentations like logs and metrics. We strongly recommand to use this kind of pattern in your task.</p>
+				<a href="#open-telemetry" id="open-telemetry" style="color: inherit; text-decoration: none;">
+					<h3>Open-telemetry</h3>
+				</a>
+				<p>WorkIt will integrate Open-telemetry in order to provide instrumentations to developers. In the meantime, we use <a href="https://github.com/census-instrumentation/opencensus-node">Opencensus</a>. By default, we bound a <code>NoopTracer</code> but you can provide your own and it must extend <a href="https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/tracer.ts">CoreTracer class</a>.We strongly recommand to use this kind of pattern in your task: <a href="https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests">Domain Probe pattern</a>. But here an example:</p>
 				<pre><code class="language-javascript"><span class="hljs-comment">// Simply bind your custom tracer object like this</span>
 IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);</code></pre>
-				<p>Now, you can access to <code>spans</code> property in <code>IMessage</code> object.</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">TaskBase</span>&lt;<span class="hljs-title">IMessage</span>&gt; </span>{
-  public execute(message: IMessage): <span class="hljs-built_in">Promise</span>&lt;IMessage&gt; {
-      <span class="hljs-keyword">const</span> { properties, spans } = message;
-      <span class="hljs-comment">// --------------------------</span>
-      <span class="hljs-comment">// You can use doamain probe pattern here.</span>
-      <span class="hljs-keyword">const</span> tracer =  spans.tracer();
-      <span class="hljs-keyword">const</span> context = spans.context();
-      <span class="hljs-keyword">const</span> span = tracer.startSpan(<span class="hljs-string">"HelloWorldTask.execute"</span>, { <span class="hljs-attr">childOf</span>: context });
-      span.log({ <span class="hljs-attr">test</span>: <span class="hljs-literal">true</span> });
+  private readonly _tracer: TracerBase;
+
+  <span class="hljs-keyword">constructor</span>(tracer: TracerBase) {
+        <span class="hljs-keyword">this</span>._tracer = tracer
+  }
+
+  public <span class="hljs-keyword">async</span> execute(message: IMessage): <span class="hljs-built_in">Promise</span>&lt;IMessage&gt; {
+      <span class="hljs-keyword">const</span> { properties } = message;
+
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Executing task: <span class="hljs-subst">${properties.activityId}</span>`</span>);
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${properties.bpmnProcessId}</span>::<span class="hljs-subst">${properties.processInstanceId}</span> Servus!`</span>);
+      message.body.test = <span class="hljs-literal">true</span>;
+      <span class="hljs-comment">// This call will be traced automatically</span>
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> axios.get(<span class="hljs-string">'https://jsonplaceholder.typicode.com/todos/1'</span>);
+
+      <span class="hljs-comment">// you can also create a custom trace like this :</span>
+      <span class="hljs-keyword">const</span> span = <span class="hljs-keyword">this</span>._tracer.startChildSpan({ <span class="hljs-attr">name</span>: <span class="hljs-string">'customSpan'</span>, <span class="hljs-attr">kind</span>: SpanKind.CLIENT });
+
+      <span class="hljs-built_in">console</span>.log();
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'data:'</span>);
+      <span class="hljs-built_in">console</span>.log(response.data);
       <span class="hljs-comment">// put your business logic here</span>
-      span.finish();
+
+      <span class="hljs-comment">// finish the span scope</span>
+      span.end();
+
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(message);
   }
 }</code></pre>
 				<p>You can look to <code>sample</code> folder where we provide an example (parallel.ts) using <a href="https://www.jaegertracing.io/docs/latest/">Jaeger</a>.</p>
-				<h3 id="define-your-config-for-each-platform">Define your config for each platform</h3>
+				<p><a href=".docs/WORKER.md#add-traces-to-your-worker-with-opencensus">See get started section with Opencensus</a></p>
+				<a href="#define-your-config-for-each-platform" id="define-your-config-for-each-platform" style="color: inherit; text-decoration: none;">
+					<h3>Define your config for each platform</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> configBase: ICamundaConfig = {
     <span class="hljs-attr">workerId</span>: <span class="hljs-string">'demo'</span>,
     <span class="hljs-attr">baseUrl</span>: <span class="hljs-string">`__undefined__`</span>,
@@ -256,39 +320,59 @@ IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_conf
 IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);
 IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_exporter_config)</code></pre>
 				<p><a href=".docs/CONFIG.md">See documentation</a></p>
-				<h3 id="define-your-strategies-in-case-of-failure-or-success">Define your strategies in case of failure or success</h3>
+				<a href="#define-your-strategies-in-case-of-failure-or-success" id="define-your-strategies-in-case-of-failure-or-success" style="color: inherit; text-decoration: none;">
+					<h3>Define your strategies in case of failure or success</h3>
+				</a>
 				<p>By default, we define simple strategy for sucess or failure.
 					We strongly recommend you to provide yours as your app trigger specific exceptions.
 					Strategies are automatically handled.
 				If an exeption is bubble up from the task, failure strategy  is raised, otherwise it&#39;s success.</p>
 				<pre><code class="language-javascript">TODO: PROVIDE SAMPLE</code></pre>
-				<h2 id="running-the-tests">Running the tests</h2>
+				<a href="#running-the-tests" id="running-the-tests" style="color: inherit; text-decoration: none;">
+					<h2>Running the tests</h2>
+				</a>
 				<pre><code class="language-bash">npm <span class="hljs-built_in">test</span></code></pre>
-				<h2 id="built-with">Built With</h2>
+				<a href="#built-with" id="built-with" style="color: inherit; text-decoration: none;">
+					<h2>Built With</h2>
+				</a>
 				<ul>
 					<li><a href="https://github.com/CreditSenseAU/zeebe-client-node-js">zeebe-node</a> - nodejs client for Zeebe</li>
 					<li><a href="https://github.com/camunda/camunda-external-task-client-js">camunda-external-task-client-js</a> - nodejs client for Camunda BPM</li>
 					<li><a href="https://github.com/inversify/InversifyJS">inversify</a> - Dependency injection</li>
-					<li><a href="https://github.com/opentracing/opentracing-javascript">opentracing</a> - add instrumentation to the operations to be tracked</li>
+					<li><a href="https://opencensus.io/">openCensus</a> - add instrumentation to the operations to be tracked (coming soon <a href="https://github.com/open-telemetry/opentelemetry-js">open-telemetry</a>)</li>
 				</ul>
-				<h2 id="philosophy">Philosophy</h2>
+				<a href="#philosophy" id="philosophy" style="color: inherit; text-decoration: none;">
+					<h2>Philosophy</h2>
+				</a>
 				<ol>
 					<li>Allow Javascript developers to write code that adheres to the SOLID principles.</li>
 					<li>Facilitate and encourage the adherence to the best OOP and IoC practices.</li>
 					<li>Add as little runtime overhead as possible.</li>
 				</ol>
-				<h2 id="kubernetes">Kubernetes</h2>
-				<h3 id="zeebe">Zeebe</h3>
+				<a href="#kubernetes" id="kubernetes" style="color: inherit; text-decoration: none;">
+					<h2>Kubernetes</h2>
+				</a>
+				<a href="#zeebe" id="zeebe" style="color: inherit; text-decoration: none;">
+					<h3>Zeebe</h3>
+				</a>
 				<pre><code class="language-bash">kubernetes/run</code></pre>
-				<h2 id="docker">Docker</h2>
-				<h3 id="zeebe">Zeebe</h3>
+				<a href="#docker" id="docker" style="color: inherit; text-decoration: none;">
+					<h2>Docker</h2>
+				</a>
+				<a href="#zeebe-1" id="zeebe-1" style="color: inherit; text-decoration: none;">
+					<h3>Zeebe</h3>
+				</a>
 				<p>In your terminal</p>
 				<pre><code class="language-bash">docker/run</code></pre>
-				<h3 id="bpmn-platform">Bpmn platform</h3>
+				<a href="#bpmn-platform" id="bpmn-platform" style="color: inherit; text-decoration: none;">
+					<h3>Bpmn platform</h3>
+				</a>
 				<pre><code class="language-bash">docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 // Go: http://localhost:8080/camunda - user/password : `demo/demo`</code></pre>
 				<p><a href="https://github.com/camunda/docker-camunda-bpm-platform">More details</a></p>
-				<h2 id="todo">TODO</h2>
+				<a href="#todo" id="todo" style="color: inherit; text-decoration: none;">
+					<h2>TODO</h2>
+				</a>
 				<details>
 					<summary>Click to expand</summary>
 					<ul>
@@ -308,7 +392,9 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 				</ul>
 				</li>
 				</ul>
-				<h2 id="versionning">Versionning</h2>
+				<a href="#versionning" id="versionning" style="color: inherit; text-decoration: none;">
+					<h2>Versionning</h2>
+				</a>
 				<p>We use <a href="http://semver.org/">SemVer</a> for versioning. For the versions available, see the <a href="https://github.com/VilledeMontreal/workit/tags">tags on this repository</a>.</p>
 				<table>
 					<thead>
@@ -339,16 +425,24 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 							<td>7.6 to latest</td>
 						</tr>
 				</tbody></table>
-				<h2 id="maintainers">Maintainers</h2>
+				<a href="#maintainers" id="maintainers" style="color: inherit; text-decoration: none;">
+					<h2>Maintainers</h2>
+				</a>
 				<ul>
 					<li><strong>Olivier Albertini</strong> - <em>Initial work</em> - <a href="https://github.com/VilledeMontreal">Ville de Montréal</a></li>
 				</ul>
 				<p>See also the list of <a href="CONTRIBUTORS.md">contributors</a> who participated in this project.</p>
-				<h2 id="contributing">Contributing</h2>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h2>Contributing</h2>
+				</a>
 				<p>Please read <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> for details on our code of conduct, and the process for submitting pull requests to us.</p>
-				<h2 id="license">License</h2>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
 				<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details</p>
-				<h2 id="acknowledgments">Acknowledgments</h2>
+				<a href="#acknowledgments" id="acknowledgments" style="color: inherit; text-decoration: none;">
+					<h2>Acknowledgments</h2>
+				</a>
 				<ul>
 					<li><a href="https://github.com/jwulf">Josh Wulf</a> - zeebe-node inspired me during <code>workit-cli</code> development</li>
 				</ul>
@@ -364,17 +458,11 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="enums/apm.html" class="tsd-kind-icon">APM</a>
-					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/camundabpmclient.html" class="tsd-kind-icon">Camunda<wbr>Bpm<wbr>Client</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/camundabpmworker.html" class="tsd-kind-icon">Camunda<wbr>Bpm<wbr>Worker</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/camundaclienttracer.html" class="tsd-kind-icon">Camunda<wbr>Client<wbr>Tracer</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/camundamanager.html" class="tsd-kind-icon">Camunda<wbr>Manager</a>
@@ -416,13 +504,16 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 						<a href="classes/incidentexception.html" class="tsd-kind-icon">Incident<wbr>Exception</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/instrumentation.html" class="tsd-kind-icon">Instrumentation</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="classes/interceptors.html" class="tsd-kind-icon">Interceptors</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/ioc.html" class="tsd-kind-icon">IoC</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/jaegerformat.html" class="tsd-kind-icon">Jaeger<wbr>Format</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/jaegertracerservice.html" class="tsd-kind-icon">Jaeger<wbr>Tracer<wbr>Service</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/paginationutils.html" class="tsd-kind-icon">Pagination<wbr>Utils</a>
@@ -437,6 +528,9 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 						<a href="classes/scprocesshandler.html" class="tsd-kind-icon">SCProcess<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/simpleformat.html" class="tsd-kind-icon">Simple<wbr>Format</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/successstrategysimple.html" class="tsd-kind-icon">Success<wbr>Strategy<wbr>Simple</a>
 					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter">
@@ -444,9 +538,6 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/utils.html" class="tsd-kind-icon">Utils</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/vdmtextmapcodec.html" class="tsd-kind-icon">Vdm<wbr>Text<wbr>Map<wbr>Codec</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/worker.html" class="tsd-kind-icon">Worker</a>
@@ -473,16 +564,7 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 						<a href="interfaces/ibpmndeployresponse.html" class="tsd-kind-icon">IBpmn<wbr>Deploy<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/iccinstrumentationhandler.html" class="tsd-kind-icon">ICCInstrumentation<wbr>Handler</a>
-					</li>
-					<li class=" tsd-kind-interface">
 						<a href="interfaces/icamundaclient.html" class="tsd-kind-icon">ICamunda<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/icamundaclientinstrumentation.html" class="tsd-kind-icon">ICamunda<wbr>Client<wbr>Instrumentation</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/icamundaclienttracer.html" class="tsd-kind-icon">ICamunda<wbr>Client<wbr>Tracer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/icamundaconfig.html" class="tsd-kind-icon">ICamunda<wbr>Config</a>
@@ -608,6 +690,9 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 						<a href="interfaces/itraceroptions.html" class="tsd-kind-icon">ITracer<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/itracerserviceoptions.html" class="tsd-kind-icon">ITracer<wbr>Service<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/iupdateworkflowretry.html" class="tsd-kind-icon">IUpdate<wbr>Workflow<wbr>Retry</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
@@ -650,6 +735,9 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 						<a href="interfaces/iworkflowresponse.html" class="tsd-kind-icon">IWorkflow<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/iworkitformat.html" class="tsd-kind-icon">IWorkit<wbr>Format</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/izeebeclientoptions.html" class="tsd-kind-icon">IZeebe<wbr>Client<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -667,17 +755,41 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#loglevel" class="tsd-kind-icon">Loglevel</a>
 					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#validationfn" class="tsd-kind-icon">Validation<wbr>Fn</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#debug_value" class="tsd-kind-icon">DEBUG_<wbr>VALUE</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#global_timeout_pull" class="tsd-kind-icon">GLOBAL_<wbr>TIMEOUT_<wbr>PULL</a>
 					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#jaeger_debug_header" class="tsd-kind-icon">JAEGER_<wbr>DEBUG_<wbr>HEADER</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#sampled_value" class="tsd-kind-icon">SAMPLED_<wbr>VALUE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#tracer_state_header_name" class="tsd-kind-icon">TRACER_<wbr>STATE_<wbr>HEADER_<wbr>NAME</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#codec" class="tsd-kind-icon">codec</a>
+						<a href="globals.html#baggagepublicreqid" class="tsd-kind-icon">baggage<wbr>Public<wbr>Req<wbr>Id</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#constants" class="tsd-kind-icon">constants</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#container" class="tsd-kind-icon">container</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#isvalidoption" class="tsd-kind-icon">is<wbr>Valid<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#isvalidspanid" class="tsd-kind-icon">is<wbr>Valid<wbr>Span<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#isvalidtraceid" class="tsd-kind-icon">is<wbr>Valid<wbr>Trace<wbr>Id</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#kernel" class="tsd-kind-icon">kernel</a>
@@ -695,16 +807,28 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 						<a href="globals.html#proxytarget" class="tsd-kind-icon">proxy<wbr>Target</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#rootpath" class="tsd-kind-icon">root<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#stringify" class="tsd-kind-icon">stringify</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#tracer" class="tsd-kind-icon">tracer</a>
+						<a href="globals.html#tracerservice" class="tsd-kind-icon">tracer<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#xcorrelationkey" class="tsd-kind-icon">x<wbr>Correlationkey</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#andarraywith" class="tsd-kind-icon">and<wbr>Array<wbr>With</a>
 					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#compose" class="tsd-kind-icon">compose</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#concatpath" class="tsd-kind-icon">concat<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#dispose" class="tsd-kind-icon">dispose</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#error" class="tsd-kind-icon">error</a>
@@ -724,6 +848,15 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 					<li class=" tsd-kind-function">
 						<a href="globals.html#isfunction" class="tsd-kind-icon">is<wbr>Function</a>
 					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#ishex" class="tsd-kind-icon">is<wbr>Hex</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#islength" class="tsd-kind-icon">is<wbr>Length</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#isnotallzeros" class="tsd-kind-icon">is<wbr>Not<wbr>All<wbr>Zeros</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#isobject" class="tsd-kind-icon">is<wbr>Object</a>
 					</li>
@@ -735,6 +868,9 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#isundefinedornull" class="tsd-kind-icon">is<wbr>Undefined<wbr>OrNull</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isworkitpropagator" class="tsd-kind-icon">is<wbr>Workit<wbr>Propagator</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#log" class="tsd-kind-icon">log</a>
@@ -752,10 +888,7 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 						<a href="globals.html#tag" class="tsd-kind-icon">TAG</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-is-not-exported">
-						<a href="globals.html#config" class="tsd-kind-icon">config</a>
-					</li>
-					<li class=" tsd-kind-object-literal tsd-is-not-exported">
-						<a href="globals.html#options" class="tsd-kind-icon">options</a>
+						<a href="globals.html#packageinfo" class="tsd-kind-icon">package<wbr>Info</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-is-not-exported">
 						<a href="globals.html#typematchers" class="tsd-kind-icon">type<wbr>Matchers</a>
@@ -777,6 +910,7 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -825,7 +959,7 @@ IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_expor
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
