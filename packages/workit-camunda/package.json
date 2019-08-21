@@ -1,6 +1,6 @@
 {
   "name": "workit-camunda",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Worker for Node.js system with pluggable Camunda clients that works with both Zeebe and Camunda platform powered by TypeScript",
   "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -14,40 +14,44 @@
     "fast-safe-stringify": "~2.0.6",
     "form-data": "~2.5.0",
     "inversify": "~5.0.1",
-    "opentracing": "~0.14.4",
+    "@opencensus/core": "~0.0.16",
+    "@opencensus/exporter-jaeger": "~0.0.16",
+    "@opencensus/nodejs": "~0.0.16",
     "reflect-metadata": "~0.1.13",
     "zeebe-elasticsearch-client": "^0.2.0",
-    "zeebe-node": "~0.20.0"
+    "zeebe-node": "~0.20.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@types/uuid": "^3.4.5",
+    "@types/axios": "~0.14.0",
+    "@types/debug": "~4.1.4",
+    "@types/events": "~3.0.0",
+    "@types/form-data": "~2.5.0",
+    "@types/jest": "^24.0.16",
+    "@types/nock": "^10.0.3",
+    "@types/node": "^12.6.8",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
-    "@types/axios": "0.14.0",
-    "@types/debug": "^4.1.4",
-    "@types/events": "^3.0.0",
-    "@types/form-data": "2.5.0",
-    "@types/jest": "^24.0.15",
-    "@types/nock": "^10.0.3",
-    "@types/node": "^12.0.10",
-    "husky": "^3.0.0",
-    "jaeger-client": "^3.15.0",
+    "husky": "^3.0.2",
     "jest": "^24.8.0",
     "nock": "^10.0.6",
     "prettier": "^1.18.2",
     "prettier-tslint": "^0.4.2",
-    "source-map-support": "^0.5.12",
+    "source-map-support": "^0.5.13",
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
-    "typedoc": "^0.14.2",
+    "typedoc": "^0.15.0",
     "typescript": "^3.5.3"
   },
   "engines": {
     "node": ">=8.11.4"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --testPathIgnorePatterns integration --coverage",
+    "test:integration": "jest **/tests/**/*.spec.ts --runInBand --detectOpenHandles --coverage",
     "compile": "rm -rf ./lib/ && npm run build",
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc -p ./tsconfig.json --watch",
@@ -56,7 +60,8 @@
     "docs": "typedoc --out ../../docs --tsconfig ./tsconfig.json --excludePrivate --mode file",
     "camunda:deploy": "node ./lib/sample/deploy.js",
     "camunda:create-instance": "node ./lib/sample/create-process-instances.js",
-    "camunda:worker": "node ./lib/sample/worker.js"
+    "camunda:worker": "node ./lib/sample/worker.js",
+    "camunda:trace": "node ./lib/sample/parallel.js"
   },
   "husky": {
     "hooks": {

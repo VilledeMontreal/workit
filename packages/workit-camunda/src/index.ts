@@ -79,12 +79,12 @@ export * from './models/core/strategies/FailureStrategySimple';
 export * from './models/core/strategies/SuccessStrategySimple';
 
 // Core instrumentation
-export * from './models/core/instrumentations/specs/camundaClientInstrumentation';
-export * from './models/core/instrumentations/specs/camundaClientTracer';
-export * from './models/core/instrumentations/specs/instrumentation';
-export * from './models/core/instrumentations/instrumentation';
-export * from './models/core/instrumentations/camundaClientTracer';
-export * from './models/core/instrumentations/enums/apm';
+export * from './models/opentelemetry/jaeger/jaegerFormat';
+export * from './models/opentelemetry/jaeger/simpleFormat';
+export * from './models/opentelemetry/jaeger/tracerService';
+export * from './models/opentelemetry/specs/tracerServiceOptions';
+export * from './models/opentelemetry/specs/workitFormat';
+export * from './models/opentelemetry/validators';
 
 // ProcessHandler
 export * from './models/core/processHandler/specs/processHandler';

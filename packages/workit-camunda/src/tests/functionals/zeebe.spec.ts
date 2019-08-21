@@ -3,13 +3,10 @@
 // See LICENSE file in the project root for full license information.
 
 import * as nock from 'nock';
-import * as opentracing from 'opentracing';
 import { ZBClient } from 'zeebe-node';
 import { Client } from '../../models/camunda-n-mq/client';
 import { ICamundaConfig } from '../../models/camunda/specs/camundaConfig';
 import { Utils } from '../../models/camunda/utils';
-import { CamundaClientTracer } from '../../models/core/instrumentations/camundaClientTracer';
-import { Instrumentation } from '../../models/core/instrumentations/instrumentation';
 import { SCProcessHandler } from '../../models/core/processHandler/simpleCamundaProcessHandler';
 import { FailureStrategySimple } from '../../models/core/strategies/FailureStrategySimple';
 import { SuccessStrategySimple } from '../../models/core/strategies/SuccessStrategySimple';
@@ -48,10 +45,7 @@ describe('Zeebe Worker', function() {
     (async () => {
       const configuration = Utils.buildConfig(config as ICamundaConfig);
       const externalclient = new ZBClient(config.baseUrl!);
-      const noopTracer = new opentracing.Tracer();
-      const ccTracer = new CamundaClientTracer(noopTracer);
-      const instrumentation = new Instrumentation([ccTracer]);
-      const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient);
+      const zeebeClient = new ZeebeClient(configuration, externalclient);
       const successHandler = new SuccessStrategySimple();
       const failureHandler = new FailureStrategySimple();
       const client = new Client(zeebeClient);
@@ -70,10 +64,7 @@ describe('Zeebe Worker', function() {
 
     const configuration = Utils.buildConfig(config as ICamundaConfig);
     const externalclient = new ZBClient(config.baseUrl!);
-    const noopTracer = new opentracing.Tracer();
-    const ccTracer = new CamundaClientTracer(noopTracer);
-    const instrumentation = new Instrumentation([ccTracer]);
-    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+    const zeebeClient = new ZeebeClient(configuration, externalclient, {
       url: 'http://localhost:9200'
     });
     const response = await zeebeClient.getWorkflows();
@@ -89,10 +80,7 @@ describe('Zeebe Worker', function() {
 
     const configuration = Utils.buildConfig(config as ICamundaConfig);
     const externalclient = new ZBClient(config.baseUrl!);
-    const noopTracer = new opentracing.Tracer();
-    const ccTracer = new CamundaClientTracer(noopTracer);
-    const instrumentation = new Instrumentation([ccTracer]);
-    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+    const zeebeClient = new ZeebeClient(configuration, externalclient, {
       url: 'http://localhost:9200'
     });
     const response = await zeebeClient.getWorkflow({ bpmnProcessId: 'MESSAGE_EVENT' });
@@ -104,10 +92,7 @@ describe('Zeebe Worker', function() {
   it('should generate an exception for cancelWorkflowInstance when key is malformed', async () => {
     const configuration = Utils.buildConfig(config as ICamundaConfig);
     const externalclient = new ZBClient(config.baseUrl!);
-    const noopTracer = new opentracing.Tracer();
-    const ccTracer = new CamundaClientTracer(noopTracer);
-    const instrumentation = new Instrumentation([ccTracer]);
-    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient);
+    const zeebeClient = new ZeebeClient(configuration, externalclient);
     try {
       await zeebeClient.cancelWorkflowInstance('hello');
     } catch (error) {
@@ -122,10 +107,7 @@ describe('Zeebe Worker', function() {
       .reply(200, require('../data/elasticResponse.paginated'));
     const configuration = Utils.buildConfig(config as ICamundaConfig);
     const externalclient = new ZBClient(config.baseUrl!);
-    const noopTracer = new opentracing.Tracer();
-    const ccTracer = new CamundaClientTracer(noopTracer);
-    const instrumentation = new Instrumentation([ccTracer]);
-    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+    const zeebeClient = new ZeebeClient(configuration, externalclient, {
       url: 'http://localhost:9200'
     });
     const response = await zeebeClient.getWorkflows({ size });
@@ -143,10 +125,7 @@ describe('Zeebe Worker', function() {
       .reply(200, require('../data/elasticResponse.paginated.skip'));
     const configuration = Utils.buildConfig(config as ICamundaConfig);
     const externalclient = new ZBClient(config.baseUrl!);
-    const noopTracer = new opentracing.Tracer();
-    const ccTracer = new CamundaClientTracer(noopTracer);
-    const instrumentation = new Instrumentation([ccTracer]);
-    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+    const zeebeClient = new ZeebeClient(configuration, externalclient, {
       url: 'http://localhost:9200'
     });
     const response = await zeebeClient.getWorkflows({ size, from });
@@ -167,10 +146,7 @@ describe('Zeebe Worker', function() {
 
     const configuration = Utils.buildConfig(config as ICamundaConfig);
     const externalclient = new ZBClient(config.baseUrl!);
-    const noopTracer = new opentracing.Tracer();
-    const ccTracer = new CamundaClientTracer(noopTracer);
-    const instrumentation = new Instrumentation([ccTracer]);
-    const zeebeClient = new ZeebeClient(configuration, instrumentation, externalclient, {
+    const zeebeClient = new ZeebeClient(configuration, externalclient, {
       url: 'http://localhost:9200'
     });
     const response = await zeebeClient.getWorkflows({ size, bpmnProcessId });

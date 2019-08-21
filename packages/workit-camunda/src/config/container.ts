@@ -2,14 +2,12 @@
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 
+import { CoreTracer } from '@opencensus/core';
 import { logger as camundaLogger } from 'camunda-external-task-client-js';
 import { EventEmitter } from 'events';
 import { Container, decorate, injectable } from 'inversify';
-import * as opentracing from 'opentracing';
 import { logger } from '../models/camunda/logger';
 import { ICamundaConfig } from '../models/camunda/specs/camundaConfig';
-import { CamundaClientTracer } from '../models/core/instrumentations/camundaClientTracer';
-import { Instrumentation } from '../models/core/instrumentations/instrumentation';
 import { SCProcessHandler } from '../models/core/processHandler/simpleCamundaProcessHandler';
 import { FailureStrategySimple } from '../models/core/strategies/FailureStrategySimple';
 import { SuccessStrategySimple } from '../models/core/strategies/SuccessStrategySimple';
@@ -61,12 +59,10 @@ if (!process.env.SKIP_DEMO_CONFIG) {
   kernel.bind(SERVICE_IDENTIFIER.zeebe_elastic_exporter_config).toConstantValue(zeebeElasticExporterConfig);
 }
 
-kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(new opentracing.Tracer());
+kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(new CoreTracer());
 kernel.bind(SERVICE_IDENTIFIER.success_strategy).toConstantValue(new SuccessStrategySimple());
 kernel.bind(SERVICE_IDENTIFIER.failure_strategy).toConstantValue(new FailureStrategySimple());
 kernel.bind(SERVICE_IDENTIFIER.process_handler).to(SCProcessHandler);
-kernel.bind(SERVICE_IDENTIFIER.instrumentation_camunda_client).to(CamundaClientTracer);
-kernel.bind(SERVICE_IDENTIFIER.instrumentation_camunda_client_handler).to(Instrumentation);
 
 export const container = new Container();
 container.parent = kernel;

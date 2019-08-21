@@ -44,10 +44,6 @@ export const SERVICE_IDENTIFIER = {
    */
   client_manager: Symbol('client_manager'),
   /**
-   * Config to pass to the worker
-   */
-  worker_config: Symbol('worker_config'),
-  /**
    * Bind your own config for Camunda system
    */
   camunda_config: Symbol('camunda_config'),
@@ -93,7 +89,5 @@ export const SERVICE_IDENTIFIER = {
    * See more on opentracing web site. https://github.com/opentracing/opentracing-javascript/blob/master/README.md#usage-with-typescript
    * "CustomTracer" must be bound in the IoC defaul is a NoopTracer
    */
-  tracer: Symbol('tracer'),
-  instrumentation_camunda_client_handler: Symbol('instrumentation_camunda_client_handler'),
-  instrumentation_camunda_client: Symbol('instrumentation_camunda_client')
+  tracer: Symbol('tracer')
 };

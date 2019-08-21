@@ -11,4 +11,5 @@ export interface IProcessHandlerConfig {
    * This payload is passed to the task bound to the IoC.
    */
   interceptors: Interceptor | Interceptor[];
+  enableTracing: boolean;
 }

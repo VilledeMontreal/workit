@@ -1,20 +1,26 @@
-import { IMessage } from "../../src";
+import { SpanKind } from '@opencensus/core';
+import axios from 'axios';
+import { IMessage } from '../../src/models/camunda-n-mq/specs/message';
 import { TaskBase } from "../../src/models/core/specs/taskBase";
+import { tracerService } from '../config';
+
 // tslint:disable:no-console
 export class HelloWorldTask extends TaskBase<IMessage> {
-  public execute(message: IMessage): Promise<IMessage> {
-      const { properties, spans } = message;
-      // --------------------------
-      // You can use doamain probe pattern here.
-      const tracer =  spans.tracer();
-      const context = spans.context();
-      const span = tracer.startSpan("HelloWorldTask", { childOf: context });
-      span.log({ test: true });
+  public async execute(message: IMessage): Promise<IMessage> {
+      const { properties } = message;
+      
       console.log(`Executing task: ${properties.activityId}`);
       console.log(`${properties.bpmnProcessId}::${properties.processInstanceId} Servus!`);
       message.body.test = true;
+      
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+      const tracer = tracerService.getTracer();
+      const span = tracer.startChildSpan({ name: 'customSpan', kind: SpanKind.CLIENT });
+      
+      console.log('\ndata:');
+      console.log(response.data);
       // put your business logic here
-      span.finish();
+      span.end();
       return Promise.resolve(message);
   }
 }

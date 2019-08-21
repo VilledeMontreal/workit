@@ -7,9 +7,6 @@ import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
 import { FailureException } from '../camunda-n-mq/specs/failureException';
 import { IMessage } from '../camunda-n-mq/specs/message';
 import { IProperties } from '../camunda-n-mq/specs/properties';
-import { APM } from '../core/instrumentations/enums/apm';
-import { ICamundaClientTracer } from '../core/instrumentations/specs/camundaClientTracer';
-import { ICCInstrumentationHandler } from '../core/instrumentations/specs/instrumentation';
 import { ProxyFactory } from '../core/proxyFactory';
 import { CamundaMapperProperties } from './camundaMapperProperties';
 import { IVariablePayload } from './specs/payload';
@@ -18,23 +15,17 @@ import { IVariables, Variables } from './variables';
 const stringify = require('fast-safe-stringify');
 
 export class CamundaMessage {
-  public static wrap(
-    payload: { task: IVariablePayload; taskService: any },
-    apm: ICCInstrumentationHandler
-  ): [IMessage, ICamundaService] {
+  public static wrap(payload: { task: IVariablePayload; taskService: any }): [IMessage, ICamundaService] {
     const { task } = payload;
     const properties = CamundaMapperProperties.map(task);
     const messageWithoutSpan = {
       body: task.variables.getAll(),
       properties: properties as IProperties
     };
-    const tracerHandler = apm.get(APM.tracer) as ICamundaClientTracer;
-    const spans = tracerHandler.createRootSpanOnMessage(messageWithoutSpan);
     // TODO: create a CamundaMessage builder
     const msg = ProxyFactory.create({
       body: messageWithoutSpan.body,
-      properties: messageWithoutSpan.properties,
-      spans
+      properties: messageWithoutSpan.properties
     });
     return [
       msg,

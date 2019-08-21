@@ -1,12 +1,9 @@
 import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
 import nock = require('nock');
-import * as opentracing from 'opentracing';
 import '../../config/ioc';
 import { CamundaBpmClient } from '../../models/camunda/camundaBpmClient';
 import { CamundaManager } from '../../models/camunda/camundaManager';
 import { ICamundaClient } from '../../models/camunda/specs/camundaClient';
-import { CamundaClientTracer } from '../../models/core/instrumentations/camundaClientTracer';
-import { Instrumentation } from '../../models/core/instrumentations/instrumentation';
 
 let manager: CamundaManager;
 // tslint:disable:ter-prefer-arrow-callback
@@ -23,10 +20,7 @@ describe('Client Manager (Camunda BPM)', function() {
     };
 
     const clientLib: ICamundaClient = new CamundaExternalClient(config) as any;
-    const noopTracer = new opentracing.Tracer();
-    const ccTracer = new CamundaClientTracer(noopTracer);
-    const instrumentation = new Instrumentation([ccTracer]);
-    const camundaClient = new CamundaBpmClient(config, clientLib, instrumentation);
+    const camundaClient = new CamundaBpmClient(config, clientLib);
 
     manager = new CamundaManager(camundaClient);
   });

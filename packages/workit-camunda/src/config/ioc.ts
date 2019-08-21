@@ -20,7 +20,6 @@ IoC.bindTo(
   SERVICE_IDENTIFIER.camunda_client,
   [
     SERVICE_IDENTIFIER.zeebe_external_config,
-    SERVICE_IDENTIFIER.instrumentation_camunda_client_handler,
     SERVICE_IDENTIFIER.camunda_external_client,
     SERVICE_IDENTIFIER.zeebe_elastic_exporter_config
   ],
@@ -37,11 +36,7 @@ IoC.bindTo(
 IoC.bindTo(
   CamundaBpmClient,
   SERVICE_IDENTIFIER.camunda_client,
-  [
-    SERVICE_IDENTIFIER.camunda_external_config,
-    SERVICE_IDENTIFIER.camunda_external_client,
-    SERVICE_IDENTIFIER.instrumentation_camunda_client_handler
-  ],
+  [SERVICE_IDENTIFIER.camunda_external_config, SERVICE_IDENTIFIER.camunda_external_client],
   TAG.camundaBpm,
   false
 );

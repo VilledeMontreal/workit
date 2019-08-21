@@ -2,15 +2,14 @@
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 // tslint:disable: no-floating-promises
-
-import '../src/config/ioc';
+import { tracerService } from './config';
 
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '../src/config/constants/identifiers';
 import { TAG } from '../src/config/constants/tag';
+import '../src/config/ioc';
 import { IWorkflowClient } from '../src/models/camunda-n-mq/specs/workflowClient';
 import { Worker } from '../src/models/core/worker';
-import { IoC } from '../src/models/IoC'
-import { tracer } from './opentracing/customTracer';
+import { IoC } from '../src/models/IoC';
 import { HelloWorldTask } from './tasks/helloWorldTask';
 import { HelloWorldTaskV2 } from './tasks/helloWorldTaskV2';
 import { HelloWorldTaskV3 } from './tasks/helloWorldTaskV3';
@@ -24,7 +23,7 @@ import { HelloWorldTaskV3 } from './tasks/helloWorldTaskV3';
 
     const BPMN_PROCESS_ID = "BPMN_P_DEMO";
 
-    IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);
+    IoC.bindToObject(tracerService.getTracer(), CORE_IDENTIFIER.tracer);
 
     IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.activity1);
     IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.activity2);

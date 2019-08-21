@@ -5,14 +5,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [2.2.0](https://github.com/VilledeMontreal/workit/compare/workit-camunda@2.1.0...workit-camunda@2.2.0) (2019-07-17)
 
-
 ### Features
 
-* **zeebe:** add 0.20.0 compatibility ([e85d4c1](https://github.com/VilledeMontreal/workit/commit/e85d4c1))
-
-
-
-
+*   **zeebe:** add 0.20.0 compatibility ([e85d4c1](https://github.com/VilledeMontreal/workit/commit/e85d4c1))
 
 # [2.1.0](https://github.com/VilledeMontreal/workit/compare/workit-camunda@2.0.1...workit-camunda@2.1.0) (2019-07-16)
 
