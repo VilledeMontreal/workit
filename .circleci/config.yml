@@ -34,6 +34,9 @@ node_tests: &node_tests
     - run:
         name: test
         command: npm run test:integration
+    - run:
+        name: codecov
+        command: npm run codecov
 docs_filters: &docs_filters # Ignores any commit on any branch by default
   branches:
     ignore: gh-pages
