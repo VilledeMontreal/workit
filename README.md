@@ -276,7 +276,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
 ```
 You can look to `sample` folder where we provide an example (parallel.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
-[See get started section with Opencensus](.docs/WORKER.md#add-traces-to-your-worker-with-opencensus)
+[See get started section with Opencensus](packages/workit-camunda/.docs/WORKER.md#add-traces-to-your-worker-with-opencensus)
 
 ### Define your config for the platform you want to use
 
