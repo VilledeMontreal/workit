@@ -9,6 +9,7 @@
     "docs": "lerna run docs",
     "build": "lerna run build",
     "test": "lerna run test",
+    "test:integration": "lerna run test:integration --scope=workit-camunda",
     "clean": "lerna clean",
     "publish:ci": "lerna run lint-fix && lerna publish --canary --yes",
     "publish": "lerna run lint-fix && lerna publish",
