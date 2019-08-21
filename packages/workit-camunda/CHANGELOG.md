@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/VilledeMontreal/workit/compare/workit-camunda@2.2.0...workit-camunda@3.1.0) (2019-08-21)
+
+
+### Bug Fixes
+
+* **package:** update camunda-external-task-client-js to version 1.2.0 ([a2911b2](https://github.com/VilledeMontreal/workit/commit/a2911b2))
+
+
+### Features
+
+* add automatic tracing ([27913ba](https://github.com/VilledeMontreal/workit/commit/27913ba))
+
+
+
+
+
 # [2.2.0](https://github.com/VilledeMontreal/workit/compare/workit-camunda@2.1.0...workit-camunda@2.2.0) (2019-07-17)
 
 ### Features
