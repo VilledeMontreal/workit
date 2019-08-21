@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## workit-camunda@3.0.0 (2019-08-21)
+
+Note: Increase the coverage. Add circleci for integration tests.
+
+#### :books: (Refine Doc)
+*   [#58](https://github.com/VilledeMontreal/workit/pull/58) docs: improving getting started documentation ([@poolfoot](https://github.com/poolfoot))
+
+#### :sparkles: (Feature)
+*   [#60](https://github.com/VilledeMontreal/workit/pull/60) feat: add automatic tracing. **BREAKING CHANGE** We removed opentracing for using opencensus.
+
 ## workit-camunda@2.2.0 (2019-07-17)
 
 ### :sparkles: (Feature)
