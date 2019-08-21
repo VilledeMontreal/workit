@@ -47,18 +47,9 @@ export class SCProcessHandler<T = any, K = any> extends EventEmitter implements 
    */
   public handle = async (message: IMessage<T, K>, service: ICamundaService): Promise<void> => {
     log('handling message');
-
-    if (this._tracer.active) {
-      return this._ocHandle(message, service);
-    }
-
-    return this._handler(message, service);
+    return this._ocHandle(message, service);
   };
-  /**
-   * Camunda Process Handler
-   * T = message.body type
-   * K = message.properties.customHeaders type
-   */
+
   private _ocHandle = (message: IMessage<T, K>, service: ICamundaService): Promise<void> => {
     log('handling message with tracing');
     const { properties } = message;
