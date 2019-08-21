@@ -70,7 +70,6 @@ jobs:
     docker:
       - image: circleci/node:10
       - image: camunda/zeebe:0.20.0
-    working_directory: ./packages/workit-camunda/
     <<: *node_tests
   node11:
     docker:
