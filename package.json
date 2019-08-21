@@ -15,12 +15,14 @@
     "publish": "lerna run lint-fix && lerna publish",
     "bootstrap": "lerna bootstrap",
     "bump": "lerna publish",
-    "remark-lint": "remark ."
+    "remark-lint": "remark .",
+    "codecov": "codecov -f ./packages/workit-camunda/coverage/*.json"
   },
   "devDependencies": {
+    "@types/node": "^12.6.8",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
-    "@types/node": "^12.6.8",
+    "codecov": "^3.5.0",
     "lerna": "^3.16.4",
     "lerna-changelog": "^0.8.2",
     "remark-cli": "^7.0.0",

@@ -5,7 +5,6 @@ node_js:
   - "11"
 
 install:
-  - npm i codecov -g
   - npm i
   - npm run build
 
@@ -13,8 +12,6 @@ script:
   - npm run test
 
 after_success:
-  # - npm run coverage
-  - codecov -f ./packages/workit-camunda/coverage/*.json
   - git remote set-url origin git@${GH_TOKEN}@github.com:${TRAVIS_REPO_SLUG}.git
 
 git:
