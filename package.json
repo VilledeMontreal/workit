@@ -19,7 +19,7 @@
     "codecov": "codecov -f ./packages/workit-camunda/coverage/*.json"
   },
   "devDependencies": {
-    "@types/node": "^12.6.8",
+    "@types/node": "^12.7.3",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "codecov": "^3.5.0",
