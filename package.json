@@ -41,5 +41,15 @@
     "plugins": [
       "remark-preset-lint-recommended"
     ]
+  },
+  "greenkeeper": {
+    "commitMessages": {
+      "initialBadge": "chore: add greenkeeper badge",
+      "initialDependencies": "chore: update dependencies",
+      "dependencyUpdate": "chore: update ${dependency} to version ${version}",
+      "devDependencyUpdate": "chore: update ${dependency} to version ${version}",
+      "dependencyPin": "chore: pin ${dependency} to ${oldVersion}",
+      "devDependencyPin": "chore: pin ${dependency} to ${oldVersion}"
+    }
   }
 }
