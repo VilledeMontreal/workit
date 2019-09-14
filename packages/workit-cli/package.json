@@ -10,7 +10,7 @@
     "workit": "lib/index.js"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest .",
     "build": "tsc -p ./tsconfig.json",
     "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
     "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write",
