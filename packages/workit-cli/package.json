@@ -1,6 +1,6 @@
 {
   "name": "workit-cli",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "cli for workit project. Handy tools.",
   "author": "Olivier Albertini <olivier.albertini@ville.montreal.qc.ca>",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.3.0...workit-cli@0.3.1) (2019-09-14)
+
+
+### Bug Fixes
+
+* **worker-cli:** remove maxTasks in template ([0541f64](https://github.com/VilledeMontreal/workit/commit/0541f64))
+
+
+
+
+
 # [0.3.0](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.2.1...workit-cli@0.3.0) (2019-09-14)
 
 
