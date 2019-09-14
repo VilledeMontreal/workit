@@ -33,7 +33,7 @@
     "hooks": {
       "pre-commit": "lerna run lint-fix && remark .",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "npm test"
+      "pre-push": "lerna exec npm run test"
     }
   },
   "remarkConfig": {
