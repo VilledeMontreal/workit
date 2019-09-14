@@ -3,5 +3,4 @@ export interface ICamundaConfig {
   workerId: string;
   baseUrl: string;
   topicName: string;
-  maxRetry: number;
 }

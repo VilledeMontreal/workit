@@ -32,8 +32,7 @@ export class Configs {
       workerId: config.get<string>('camunda.workerId'),
       baseUrl: config.get<string>('camunda.baseUrl'),
       maxTasks: config.get<number>('camunda.maxTasks'),
-      topicName: config.get<string>('camunda.topicName'),
-      maxRetry: config.get<number>('camunda.maxRetry')
+      topicName: config.get<string>('camunda.topicName')
     };
   }
 
