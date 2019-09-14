@@ -1,6 +1,6 @@
 {
   "name": "zeebe-elasticsearch-client",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Client (Browser and NodeJs) for Zeebe Elasticsearch exporter powered by Typescript",
   "keywords": [
     "zeebe",
@@ -41,8 +41,8 @@
     "tslint": "^5.20.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
-    "typedoc": "^0.15.0",
     "tslint-microsoft-contrib": "^6.2.0",
+    "typedoc": "^0.15.0",
     "typescript": "^3.6.3"
   },
   "repository": {

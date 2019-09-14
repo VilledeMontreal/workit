@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/VilledeMontreal/workit/compare/workit-camunda@3.1.0...workit-camunda@3.2.0) (2019-09-14)
+
+
+### Bug Fixes
+
+* **workit-camunda:** fix semver for zeebe-node ([d8ae65b](https://github.com/VilledeMontreal/workit/commit/d8ae65b))
+* remove opentracing refs ([e5a32cc](https://github.com/VilledeMontreal/workit/commit/e5a32cc))
+
+
+### Features
+
+* **worker-cli:** improve init template ([352d03e](https://github.com/VilledeMontreal/workit/commit/352d03e)), closes [#43](https://github.com/VilledeMontreal/workit/issues/43)
+
+
+
+
+
 # [3.1.0](https://github.com/VilledeMontreal/workit/compare/workit-camunda@2.2.0...workit-camunda@3.1.0) (2019-08-21)
 
 
