@@ -1,6 +1,8 @@
-// Copyright (c) Ville de Montreal. All rights reserved.
-// Licensed under the MIT license.
-// See LICENSE file in the project root for full license information.
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
 
 import { SpanContext, SpanKind, TraceOptions, Tracer } from '@opencensus/core';
 import debug = require('debug');
@@ -66,7 +68,6 @@ export class SCProcessHandler<T = any, K = any> extends EventEmitter implements 
       spanOptions.spanContext = spanContext || undefined;
     }
 
-    // tslint:disable-next-line: no-floating-promises
     return this._tracer.startRootSpan(spanOptions, rootSpan => {
       this._tracer.wrapEmitter(this);
 

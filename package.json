@@ -8,6 +8,7 @@
     "docs-test": "lerna run docs-test",
     "docs": "lerna run docs",
     "build": "lerna run build",
+    "lint-fix": "lerna run lint-fix",
     "test": "lerna run test",
     "test:integration": "lerna run test:integration --scope=workit-camunda",
     "clean": "lerna clean",
@@ -19,7 +20,7 @@
     "codecov": "codecov -f ./packages/workit-camunda/coverage/*.json"
   },
   "devDependencies": {
-    "@types/node": "^12.7.3",
+    "@types/node": "^12.7.5",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "codecov": "^3.5.0",
@@ -27,18 +28,28 @@
     "lerna-changelog": "^0.8.2",
     "remark-cli": "^7.0.0",
     "remark-preset-lint-recommended": "^3.0.3",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.3"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lerna run lint-fix && remark .",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "npm test"
+      "pre-push": "lerna exec npm run test"
     }
   },
   "remarkConfig": {
     "plugins": [
       "remark-preset-lint-recommended"
     ]
+  },
+  "greenkeeper": {
+    "commitMessages": {
+      "initialBadge": "chore: add greenkeeper badge",
+      "initialDependencies": "chore: update dependencies",
+      "dependencyUpdate": "chore: update ${dependency} to version ${version}",
+      "devDependencyUpdate": "chore: update ${dependency} to version ${version}",
+      "dependencyPin": "chore: pin ${dependency} to ${oldVersion}",
+      "devDependencyPin": "chore: pin ${dependency} to ${oldVersion}"
+    }
   }
 }

@@ -1,10 +1,12 @@
-import { Span } from 'opentracing';
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
+
 import { IMessage } from '../models/camunda-n-mq/specs/message';
 import { ProxyFactory } from '../models/core/proxyFactory';
 
-// Copyright (c) Ville de Montreal. All rights reserved.
-// Licensed under the MIT license.
-// See LICENSE file in the project root for full license information.
 export const isFunction = (f: any) => typeof f === 'function';
 export const isObject = (o: any) => typeof o === 'object';
 /**
@@ -43,10 +45,6 @@ export const getVariablesWhenChanged = <T = any>(
     vars = unwrap(message);
   }
   return vars;
-};
-
-export const isSpan = (obj: any): obj is Span => {
-  return obj && isFunction(obj.context) && isFunction(obj.finish) && isFunction(obj.tracer);
 };
 
 export function parseCommaSeparatedBaggage(baggage: any, values: string): void {

@@ -1,8 +1,10 @@
-// Copyright (c) Ville de Montreal. All rights reserved.
-// Licensed under the MIT license.
-// See LICENSE file in the project root for full license information.
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
 
-import { concatPath, isPrimitive, isSpan } from '../../utils/utils';
+import { concatPath, isPrimitive } from '../../utils/utils';
 
 const proxyTarget = Symbol('ProxyTarget');
 
@@ -29,7 +31,7 @@ export class ProxyObserver {
         return value;
       }
 
-      if (target instanceof Date || isSpan(target)) {
+      if (target instanceof Date) {
         return target[property].bind(target);
       }
 

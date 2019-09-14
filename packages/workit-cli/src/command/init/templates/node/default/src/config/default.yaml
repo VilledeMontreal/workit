@@ -2,8 +2,7 @@
 # Camunda configs
 #==========================================
 camunda:
-  baseUrl: __undefined__
+  baseUrl: http://localhost:8080/engine-rest
   workerId: workit
   maxTasks: 1
-  topicName: srPetitionsStatus
-  maxRetry: 500
+  topicName: topic_demo

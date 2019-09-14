@@ -1,14 +1,12 @@
-// Copyright (c) Ville de Montreal. All rights reserved.
-// Licensed under the MIT license.
-// See LICENSE file in the project root for full license information.
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
 
-import * as opentracing from 'opentracing';
 import { ZeebeMessage } from '../../models/zeebe/zeebeMessage';
 
-// tslint:disable:ter-prefer-arrow-callback
-// tslint:disable:only-arrow-functions
-// tslint:disable:max-func-body-length
-describe('zeebeMessage', function() {
+describe('zeebeMessage', () => {
   it('unmap', () => {
     const message = {
       body: { hello: 'world' },
@@ -26,8 +24,7 @@ describe('zeebeMessage', function() {
         lockExpirationTime: new Date(1562269537659),
         topicName: 'topic_demo',
         workerId: 'demo'
-      },
-      spans: new opentracing.Span()
+      }
     };
     const zeebeObject = ZeebeMessage.unwrap(message);
     expect(zeebeObject).toMatchSnapshot();

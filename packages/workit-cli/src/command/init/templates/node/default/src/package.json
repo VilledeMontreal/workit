@@ -16,23 +16,25 @@
       "node": ">=10.9.0"
     },
     "scripts": {
+      "start": "node ./dist/worker.js",
       "test": "",
+      "watch": "tsc -watch -p ./tsconfig.json",
       "build": "tsc -p ./tsconfig.json",
       "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
       "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write"
     },
     "devDependencies": {
-      "@types/node": "^12.7.3",
+      "@types/node": "^12.7.5",
       "prettier": "^1.18.2",
       "prettier-tslint": "^0.4.2",
-      "husky": "^3.0.0",
-      "tslint": "^5.18.0",
+      "husky": "^3.0.5",
+      "tslint": "^5.20.0",
       "tslint-config-airbnb": "^5.11.1",
       "tslint-config-prettier": "^1.18.0",
-      "typescript": "^3.5.3"
+      "typescript": "^3.6.3"
     },
     "dependencies": {
       "workit-camunda": "^3.1.0",
-      "config": "~3.2.0"
+      "config": "~3.2.2"
     }
   }

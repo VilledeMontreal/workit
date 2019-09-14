@@ -1,5 +1,6 @@
 {
-  "extends": ["tslint:recommended", "tslint-config-airbnb", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-config-airbnb", "tslint-config-prettier", "../../tslint.base.js"],
+  "rulesDirectory": ["node_modules/tslint-microsoft-contrib"],
   "rules": {
     "array-type": [true, "array"],
     "no-increment-decrement": false,

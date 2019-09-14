@@ -1,3 +1,8 @@
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
 import { AxiosInstance } from 'axios';
 import { IInterceptors, IRequestConfig } from '../specs/apiConfig';
 import { IResponse } from '../specs/response';

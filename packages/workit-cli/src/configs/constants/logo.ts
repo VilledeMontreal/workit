@@ -1,3 +1,8 @@
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
 export const logo = `
 MMMMMMMMMMN0o:;;;;;;cxXWWXxc;;;;;;:o0WMMMMMMMMMM
 MMMMMMMMWXo;;dOKXXKkl;:ll:;okKXXKOo;;dXMMMMMMMMM

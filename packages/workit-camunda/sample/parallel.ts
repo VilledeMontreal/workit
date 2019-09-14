@@ -1,18 +1,20 @@
-// Copyright (c) Ville de Montreal. All rights reserved.
-// Licensed under the MIT license.
-// See LICENSE file in the project root for full license information.
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
 // tslint:disable: no-floating-promises
-import { tracerService } from './config';
-
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '../src/config/constants/identifiers';
 import { TAG } from '../src/config/constants/tag';
 import '../src/config/ioc';
 import { IWorkflowClient } from '../src/models/camunda-n-mq/specs/workflowClient';
 import { Worker } from '../src/models/core/worker';
 import { IoC } from '../src/models/IoC';
+import { tracerService } from './config';
 import { HelloWorldTask } from './tasks/helloWorldTask';
 import { HelloWorldTaskV2 } from './tasks/helloWorldTaskV2';
 import { HelloWorldTaskV3 } from './tasks/helloWorldTaskV3';
+
 
 (async () => {
     enum LOCAL_IDENTIFIER {
@@ -40,7 +42,7 @@ import { HelloWorldTaskV3 } from './tasks/helloWorldTaskV3';
     const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
     const cm = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 
-    const path = `${process.cwd()}/sample/BPMN_P_DEMO.bpmn`;
+    const path = `${ process.cwd() }/sample/BPMN_P_DEMO.bpmn`;
     await cm.deployWorkflow(path);
     for (let index = 0; index < 1; index++) {
         await cm.createWorkflowInstance({

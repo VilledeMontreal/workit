@@ -1,6 +1,9 @@
-// Copyright (c) Ville de Montreal. All rights reserved.
-// Licensed under the MIT license.
-// See LICENSE file in the project root for full license information.
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
+
 export const SERVICE_IDENTIFIER = {
   /**
    * Bind auth info for your Camunda server
@@ -86,7 +89,7 @@ export const SERVICE_IDENTIFIER = {
 
   /**
    * Pass your custom tracer in order to trace your worker.
-   * See more on opentracing web site. https://github.com/opentracing/opentracing-javascript/blob/master/README.md#usage-with-typescript
+   * See more on opencensus web site.
    * "CustomTracer" must be bound in the IoC defaul is a NoopTracer
    */
   tracer: Symbol('tracer')
