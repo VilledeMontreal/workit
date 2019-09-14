@@ -20,7 +20,7 @@
     "reflect-metadata": "~0.1.13",
     "uuid": "^3.3.2",
     "zeebe-elasticsearch-client": "^0.2.1",
-    "zeebe-node": "~0.20.1"
+    "zeebe-node": "0.20.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
