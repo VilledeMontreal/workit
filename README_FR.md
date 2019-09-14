@@ -420,7 +420,8 @@ Nous utilisons [SemVer](http://semver.org/) pour la gestion des versions. Pour l
 
 workit-camunda | Zeebe | Camunda BPM
 -- | -- | -- 
-2.2.0 | 0.20.x | 7.6 to latest
+3.1.x | 0.20.x < 0.20.1 | 7.6 to latest
+2.2.0 | 0.20.x < 0.20.1 | 7.6 to latest
 2.1.0 | 0.19.x | 7.6 to latest
 2.0.1 | 0.18.x | 7.6 to latest
 < 1.0.0 | <= 0.17.0 | 7.6 to latest
