@@ -1,10 +1,13 @@
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
+
 import { Span } from 'opentracing';
 import { IMessage } from '../models/camunda-n-mq/specs/message';
 import { ProxyFactory } from '../models/core/proxyFactory';
 
-// Copyright (c) Ville de Montreal. All rights reserved.
-// Licensed under the MIT license.
-// See LICENSE file in the project root for full license information.
 export const isFunction = (f: any) => typeof f === 'function';
 export const isObject = (o: any) => typeof o === 'object';
 /**

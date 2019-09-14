@@ -1,10 +1,14 @@
-import { Project, SyntaxKind } from 'ts-morph';
-
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
 import * as colors from 'colors/safe';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as prompt from 'prompt';
 import * as shell from 'shelljs';
+import { Project, SyntaxKind } from 'ts-morph';
 import { symbols } from '../../../configs/constants/symbols';
 
 // Set prompt as green

@@ -1,15 +1,16 @@
-// Copyright (c) Ville de Montreal. All rights reserved.
-// Licensed under the MIT license.
-// See LICENSE file in the project root for full license information.
-
-import '../src/config/ioc';
-
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '../src/config/constants/identifiers';
 import { TAG } from '../src/config/constants/tag';
+import '../src/config/ioc';
 import { IWorkflowClient } from '../src/models/camunda-n-mq/specs/workflowClient';
 import { Worker } from '../src/models/core/worker';
-import { IoC } from '../src/models/IoC'
+import { IoC } from '../src/models/IoC';
 import { HelloWorldTask } from './tasks/helloWorldTask';
+
 // tslint:disable: no-floating-promises
 // tslint:disable: no-console
 (async () => {
@@ -31,7 +32,7 @@ import { HelloWorldTask } from './tasks/helloWorldTask';
         timeToLive: undefined,
         messageId: undefined
     });
-    
+
     await cm.updateJobRetries({ jobKey: "975e1f79-518c-11e9-bd78-0242ac110003", retries: 0 });
     // setTimeout((resp) => {
     //     cm.publishMessage({

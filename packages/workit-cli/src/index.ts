@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
 import * as prog from 'caporal';
 import { about } from './command/about';
 import { task } from './command/create/task';

@@ -8,6 +8,7 @@
     "docs-test": "lerna run docs-test",
     "docs": "lerna run docs",
     "build": "lerna run build",
+    "lint-fix": "lerna run lint-fix",
     "test": "lerna run test",
     "test:integration": "lerna run test:integration --scope=workit-camunda",
     "clean": "lerna clean",

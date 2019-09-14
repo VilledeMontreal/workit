@@ -1,3 +1,9 @@
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
+
 // code origin comes from https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-propagation-jaeger/src/jaeger-format.ts
 
 import { HeaderGetter, HeaderSetter, Propagation, SpanContext } from '@opencensus/core';
