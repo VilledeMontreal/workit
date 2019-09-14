@@ -76,7 +76,7 @@
     "Typescript",
     "Camunda",
     "Zeebe",
-    "Opentracing",
+    "open-telemetry",
     "Worker"
   ],
   "directories": {

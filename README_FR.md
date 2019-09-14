@@ -236,7 +236,7 @@ IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
 ### Open-telemetry
-WorkIt intègrera Open-telemetry afin de fournir des instruments aux développeurs. En attendant, nous utilisons [Opencensus](https://github.com/census-instrumentation/opencensus-node). Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit être compatible avec [l'interface d'Opentracing](https://opentracing.io/docs/overview/tracers/#tracer-interface). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
+WorkIt intègrera Open-telemetry afin de fournir des instruments aux développeurs. En attendant, nous utilisons [Opencensus](https://github.com/census-instrumentation/opencensus-node). Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit étandre [CoreTracer](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/tracer.ts). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
 
 ```javascript
 // Simply bind your custom tracer object like this

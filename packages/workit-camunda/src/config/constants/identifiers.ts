@@ -89,7 +89,7 @@ export const SERVICE_IDENTIFIER = {
 
   /**
    * Pass your custom tracer in order to trace your worker.
-   * See more on opentracing web site. https://github.com/opentracing/opentracing-javascript/blob/master/README.md#usage-with-typescript
+   * See more on opencensus web site.
    * "CustomTracer" must be bound in the IoC defaul is a NoopTracer
    */
   tracer: Symbol('tracer')

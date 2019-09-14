@@ -4,7 +4,6 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { Span } from 'opentracing';
 import { IMessage } from '../models/camunda-n-mq/specs/message';
 import { ProxyFactory } from '../models/core/proxyFactory';
 
@@ -46,10 +45,6 @@ export const getVariablesWhenChanged = <T = any>(
     vars = unwrap(message);
   }
   return vars;
-};
-
-export const isSpan = (obj: any): obj is Span => {
-  return obj && isFunction(obj.context) && isFunction(obj.finish) && isFunction(obj.tracer);
 };
 
 export function parseCommaSeparatedBaggage(baggage: any, values: string): void {
