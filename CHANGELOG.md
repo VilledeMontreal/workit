@@ -1,6 +1,16 @@
 # CHANGELOG
 
-## workit-camunda@3.0.0 (2019-08-21)
+## workit-cli@0.3.0 (2019-09-14)
+
+### :sparkles: (Feature)
+*   [#43](https://github.com/VilledeMontreal/workit/issues/43) feat(worker-cli): improve init template
+
+## workit-camunda@3.2.0 (2019-09-14)
+
+#### :bug: (Bug Fix)
+*   [#83](https://github.com/VilledeMontreal/workit/pull/83) fix(workit-camunda): froze zeebe-node to 0.20.1
+
+## workit-camunda@3.1.0 (2019-08-21)
 
 Note: Increase the coverage. Add circleci for integration tests.
 
