@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## workit-cli@0.3.0 (2019-09-14)
+## workit-cli@0.3.1 (2019-09-14)
 
 ### :sparkles: (Feature)
 *   [#43](https://github.com/VilledeMontreal/workit/issues/43) feat(worker-cli): improve init template
