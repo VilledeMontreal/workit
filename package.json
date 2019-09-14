@@ -19,7 +19,7 @@
     "codecov": "codecov -f ./packages/workit-camunda/coverage/*.json"
   },
   "devDependencies": {
-    "@types/node": "^12.7.3",
+    "@types/node": "^12.7.5",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "codecov": "^3.5.0",
@@ -27,7 +27,7 @@
     "lerna-changelog": "^0.8.2",
     "remark-cli": "^7.0.0",
     "remark-preset-lint-recommended": "^3.0.3",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.3"
   },
   "husky": {
     "hooks": {

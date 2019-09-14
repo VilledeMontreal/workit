@@ -66,7 +66,6 @@ export class SCProcessHandler<T = any, K = any> extends EventEmitter implements 
       spanOptions.spanContext = spanContext || undefined;
     }
 
-    // tslint:disable-next-line: no-floating-promises
     return this._tracer.startRootSpan(spanOptions, rootSpan => {
       this._tracer.wrapEmitter(this);
 
