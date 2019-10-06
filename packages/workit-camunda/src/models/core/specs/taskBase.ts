@@ -16,8 +16,7 @@
 
 import { injectable } from 'inversify';
 import 'reflect-metadata';
-import { IMessage } from '../../camunda-n-mq/specs/message';
-import { ITask } from './task';
+import { IMessage, ITask } from 'workit-types';
 
 @injectable()
 export abstract class TaskBase<I> implements ITask<I> {

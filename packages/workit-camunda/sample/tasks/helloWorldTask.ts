@@ -6,7 +6,7 @@
 
 import { SpanKind } from '@opencensus/core';
 import axios from 'axios';
-import { IMessage } from '../../src/models/camunda-n-mq/specs/message';
+import { IMessage } from 'workit-types';
 import { TaskBase } from "../../src/models/core/specs/taskBase";
 import { tracerService } from '../config';
 

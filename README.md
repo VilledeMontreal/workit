@@ -25,7 +25,7 @@ This package can be useful because:
 
 ## Documentation
 
--   [.docs](packages/workit-camunda/.docs/) contains written documentation
+-   [Documentation is available in this folder](packages/workit-camunda/.docs/)
 -   Comprehensive API documentation is available [online](https://villedemontreal.github.io/workit/) and in the `docs` subdirectory
 
 ## Installing

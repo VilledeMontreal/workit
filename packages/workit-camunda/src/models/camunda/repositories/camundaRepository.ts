@@ -9,37 +9,21 @@ import * as FormData from 'form-data';
 import * as fs from 'fs';
 import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
+import {
+  IBpmn,
+  IBpmnDeployResponse,
+  ICamundaBpmCreateInstanceResponse,
+  ICamundaConfig,
+  ICamundaRepository,
+  IHttpResponse,
+  IIncident,
+  IProcessDefinition,
+  IProcessXmlDefinition,
+  IResolveIncident
+} from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../../../config/constants/identifiers';
-import { ICamundaConfig } from '../specs/camundaConfig';
-import { ICreateWorkflowInstanceResponse } from '../specs/createWorkflowInstanceResponse';
-import { IHttpResponse } from '../specs/httpResponse';
-import { IIncident } from '../specs/incident';
-import { IProcessDefinition } from '../specs/processDefinition';
-import { IProcessXmlDefinition } from '../specs/processXmlDefinition';
-import { IResolveIncident } from '../specs/resolveIncident';
 import { Utils } from '../utils';
-export interface ICamundaRepository {
-  deployWorkflow(deployName: string, absPath: string): Promise<IHttpResponse<IBpmnDeployResponse>>;
-  getWorkflows(options?: { params: {} }): Promise<IHttpResponse<IBpmn[]>>;
-  getWorkflowCount(options?: { params: {} }): Promise<IHttpResponse<{ count: number }>>;
-  getWorkflow(idOrKey: string): Promise<IProcessDefinition & IProcessXmlDefinition>;
-  updateVariables<T = any>(processInstanceId: string, variables: T): Promise<IHttpResponse<void>>;
-  updateJobRetries(id: string, retries: number): Promise<IHttpResponse<void>>;
-  createWorkflowInstance<T = any>(idOrKey: string, variables: T);
-  publishMessage<T = any, K = any>({
-    messageName,
-    processInstanceId,
-    variables,
-    correlationKeys
-  }: {
-    messageName: string;
-    processInstanceId: string;
-    variables: T;
-    correlationKeys: K;
-  });
-  resolveIncident(incidentKey: string): Promise<void>;
-  cancelWorkflowInstance(id: string): Promise<void>;
-}
+
 @injectable()
 export class CamundaRepository implements ICamundaRepository {
   private static getworkflowInstanceUrl(idOrKey: string) {
@@ -100,7 +84,7 @@ export class CamundaRepository implements ICamundaRepository {
   public createWorkflowInstance<T = any>(
     idOrKey: string,
     variables: T
-  ): Promise<IHttpResponse<ICreateWorkflowInstanceResponse>> {
+  ): Promise<IHttpResponse<ICamundaBpmCreateInstanceResponse>> {
     const url = CamundaRepository.getworkflowInstanceUrl(idOrKey);
     return this._request.post(url, {
       businessKey: typeof variables === 'object' ? (variables as any).businessKey : undefined,

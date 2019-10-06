@@ -7,19 +7,18 @@
 import debug = require('debug');
 import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
+import { IClient, IMessage } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../../config/constants/identifiers';
-import { ICamundaService } from './specs/camundaService';
-import { IClient } from './specs/client';
-import { IMessage } from './specs/message';
+
 const log = debug('workit:clientBase');
 @injectable()
 export class Client<TClient extends IClient> {
-  protected _onMessageReceived!: (message: IMessage, service: ICamundaService) => Promise<void>;
+  protected _onMessageReceived!: (message: IMessage, service: unknown) => Promise<void>;
   protected readonly _client: TClient;
   constructor(@inject(SERVICE_IDENTIFIER.camunda_client) client: TClient) {
     this._client = client;
   }
-  public async subscribe(handler: (message: IMessage, service: ICamundaService) => Promise<void>): Promise<void> {
+  public async subscribe(handler: (message: IMessage, service: unknown) => Promise<void>): Promise<void> {
     if (handler != null) {
       this._onMessageReceived = handler;
       await this.startSubscriber();

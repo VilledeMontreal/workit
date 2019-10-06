@@ -5,7 +5,8 @@
  */
 
 import { SpanContext } from '@opencensus/core';
-import { IMessageBase } from '../../camunda-n-mq/specs/message';
+import { IMessageBase } from 'workit-types';
+
 export interface IWorkitFormat {
   extractFromMessage(message: IMessageBase): SpanContext | null;
 }

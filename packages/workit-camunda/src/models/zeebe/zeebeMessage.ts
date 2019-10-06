@@ -4,41 +4,32 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { ZBClient } from 'zeebe-node';
+import { FailureException, ICamundaService, IMessage, IPayload, IWorkflowProps } from 'workit-types';
 // FIXME:dist folder....
 import { CompleteFn } from 'zeebe-node/dist/lib/interfaces';
 import { getVariablesWhenChanged } from '../../utils/utils';
-import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
-import { FailureException } from '../camunda-n-mq/specs/failureException';
-import { IMessage } from '../camunda-n-mq/specs/message';
-import { IProperties } from '../camunda-n-mq/specs/properties';
-import { IPayload } from './specs/payload';
 import { ZeebeMapperProperties } from './zeebeMapperProperties';
 
 export class ZeebeMessage {
   public static wrap<TVariables, TProps>(
     payload: IPayload<TVariables, TProps>,
-    complete: CompleteFn<TVariables>,
-    client: ZBClient
-  ): [IMessage<TVariables, TProps>, ICamundaService] {
+    complete: CompleteFn<TVariables>
+  ): [IMessage<TVariables, IWorkflowProps<TProps>>, ICamundaService] {
     const properties = ZeebeMapperProperties.map(payload);
-    const messageWithoutSpan = {
-      body: payload.variables,
-      properties: properties as IProperties<TProps>
-    };
     return [
       {
-        body: messageWithoutSpan.body,
-        properties: messageWithoutSpan.properties
+        body: payload.variables,
+        properties
       },
       {
         hasBeenThreated: false,
-        async ack(message: IMessage) {
+        async ack(message: IMessage<Partial<TVariables> | undefined, IWorkflowProps<unknown>>) {
           if (this.hasBeenThreated) {
             return Promise.resolve();
           }
 
-          const vars = getVariablesWhenChanged<IPayload<TVariables, TProps>>(message, msg => ZeebeMessage.unwrap(msg));
+          // TODO: change any to real type body
+          const vars = getVariablesWhenChanged<any>(message, msg => ZeebeMessage.unwrap(msg));
 
           if (vars) {
             this.hasBeenThreated = complete.success(vars.variables);
@@ -63,7 +54,9 @@ export class ZeebeMessage {
   /**
    * Shallow copy
    */
-  public static unwrap<TVariables, TProps>(message: IMessage<TVariables, TProps>): IPayload<TVariables, TProps> {
+  public static unwrap<TVariables, TProps>(
+    message: IMessage<TVariables, IWorkflowProps<TProps>>
+  ): IPayload<TVariables, TProps> {
     const emptyPayload = ZeebeMapperProperties.unmap<TProps>(message.properties);
     (emptyPayload as IPayload<TVariables, TProps>).variables = message.body;
     return emptyPayload as IPayload<TVariables, TProps>;

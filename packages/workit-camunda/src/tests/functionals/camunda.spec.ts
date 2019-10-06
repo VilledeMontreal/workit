@@ -1,15 +1,18 @@
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
+
 import { CoreTracer } from '@opencensus/core';
 import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
 import * as nock from 'nock';
+import { ICamundaClient, ICamundaConfig, IMessage, IProcessHandlerConfig, IWorkflowProps } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../../config/constants/identifiers';
 import { Client } from '../../models/camunda-n-mq/client';
-import { IMessage } from '../../models/camunda-n-mq/specs/message';
 import { CamundaBpmClient } from '../../models/camunda/camundaBpmClient';
-import { ICamundaClient } from '../../models/camunda/specs/camundaClient';
-import { ICamundaConfig } from '../../models/camunda/specs/camundaConfig';
 import { Utils } from '../../models/camunda/utils';
 import { SCProcessHandler } from '../../models/core/processHandler/simpleCamundaProcessHandler';
-import { IProcessHandlerConfig } from '../../models/core/processHandler/specs/processHandlerConfig';
 import { FailureStrategySimple } from '../../models/core/strategies/FailureStrategySimple';
 import { SuccessStrategySimple } from '../../models/core/strategies/SuccessStrategySimple';
 import { Worker } from '../../models/core/worker';
@@ -184,7 +187,7 @@ describe('Camunda Worker', function() {
 
     setTimeout(() => {
       worker.stop().catch();
-      const message = executeTaskMock.mock.calls[0][0] as IMessage;
+      const message = executeTaskMock.mock.calls[0][0] as IMessage<any, IWorkflowProps<{ jwt: string; basic: string }>>;
 
       expect(fakeTask.execute).toHaveBeenCalled();
       expect(successHandler.handle).toHaveBeenCalled();

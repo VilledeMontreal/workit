@@ -1,4 +1,10 @@
-import { IMessage } from '../../models/camunda-n-mq/specs/message';
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
+
+import { IMessage, Interceptor } from 'workit-types';
 import { Interceptors } from '../../models/core/interceptors';
 import { ProxyFactory } from '../../models/core/proxyFactory';
 describe('Interceptors', () => {
@@ -29,10 +35,10 @@ describe('Interceptors', () => {
       });
       const messageFromInterceptor = Interceptors.execute(
         [
-          (msg: IMessage) => {
+          _ => {
             return null as any;
           }
-        ],
+        ] as Interceptor[],
         message
       );
       return await expect(messageFromInterceptor).rejects.toThrow();
@@ -47,12 +53,12 @@ describe('Interceptors', () => {
         body: message.body,
         properties: { customHeaders: { hello: 'world' } } as any
       };
-      const interceptorExecution = Interceptors.execute(
+      const interceptorExecution = Interceptors.execute<IMessage>(
         [
-          (msg: IMessage) => {
+          _ => {
             return Promise.resolve(interceptorMessage);
           }
-        ],
+        ] as Interceptor[],
         message
       );
       return expect(interceptorExecution).resolves.toStrictEqual({

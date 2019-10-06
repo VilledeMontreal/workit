@@ -8,10 +8,8 @@ import debug = require('debug');
 import { EventEmitter } from 'events';
 import { injectable, unmanaged } from 'inversify';
 import 'reflect-metadata';
+import { IClient, IProcess, IProcessHandler } from 'workit-types';
 import { Client } from '../camunda-n-mq/client';
-import { IClient } from '../camunda-n-mq/specs/client';
-import { IProcessHandler } from './processHandler/specs/processHandler';
-import { IProcess } from './specs/process';
 
 const log = debug('workit:worker');
 

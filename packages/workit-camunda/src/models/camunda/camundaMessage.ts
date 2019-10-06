@@ -4,15 +4,18 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import {
+  FailureException,
+  ICamundaService,
+  IMessage,
+  IVariablePayload,
+  IVariables,
+  IWorkflowProps
+} from 'workit-types';
 import { getVariablesWhenChanged } from '../../utils/utils';
-import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
-import { FailureException } from '../camunda-n-mq/specs/failureException';
-import { IMessage } from '../camunda-n-mq/specs/message';
-import { IProperties } from '../camunda-n-mq/specs/properties';
 import { ProxyFactory } from '../core/proxyFactory';
 import { CamundaMapperProperties } from './camundaMapperProperties';
-import { IVariablePayload } from './specs/payload';
-import { IVariables, Variables } from './variables';
+import { Variables } from './variables';
 
 const stringify = require('fast-safe-stringify');
 
@@ -22,7 +25,7 @@ export class CamundaMessage {
     const properties = CamundaMapperProperties.map(task);
     const messageWithoutSpan = {
       body: task.variables.getAll(),
-      properties: properties as IProperties
+      properties: properties as IWorkflowProps
     };
     // TODO: create a CamundaMessage builder
     const msg = ProxyFactory.create({

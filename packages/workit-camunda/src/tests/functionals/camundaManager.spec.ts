@@ -1,9 +1,15 @@
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
+
 import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
 import nock = require('nock');
+import { ICamundaClient } from 'workit-types';
 import '../../config/ioc';
 import { CamundaBpmClient } from '../../models/camunda/camundaBpmClient';
 import { CamundaManager } from '../../models/camunda/camundaManager';
-import { ICamundaClient } from '../../models/camunda/specs/camundaClient';
 
 let manager: CamundaManager;
 // tslint:disable:ter-prefer-arrow-callback

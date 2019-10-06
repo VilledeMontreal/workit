@@ -15,7 +15,7 @@ describe('Camunda Message', () => {
         properties: { customHeaders: {} } as any
       };
       const variables = CamundaMessage.unwrap(message);
-      const data = variables.getAll();
+      const data: any = variables.getAll();
 
       expect(data.a).toStrictEqual(1);
       expect(data.b).toBeTruthy();
@@ -27,7 +27,7 @@ describe('Camunda Message', () => {
     it('should unwrap customHeaders in properties message to _meta field in variable object', () => {
       const message = { body: {}, properties: { customHeaders: { a: 1 } } as any };
       const variables = CamundaMessage.unwrap(message);
-      const data = variables.getAll();
+      const data: any = variables.getAll();
 
       expect(data._meta.customHeaders.a).toStrictEqual(1);
     });

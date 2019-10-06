@@ -3,6 +3,7 @@
     "default": {
       "packages": [
         "package.json",
+        "packages/workit-types/package.json",
         "packages/workit-camunda/package.json",
         "packages/zeebe-elasticsearch-client/package.json",
         "packages/workit-cli/package.json",

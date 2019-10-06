@@ -5,10 +5,10 @@
  */
 
 import { BasicAuthInterceptor } from 'camunda-external-task-client-js';
+import { ICamundaConfig, IReadOnlyVariables, IVariables } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../../config/constants/identifiers';
 import { IoC } from '../IoC';
-import { ICamundaConfig } from './specs/camundaConfig';
-import { IReadOnlyVariables, IVariables, Variables } from './variables';
+import { Variables } from './variables';
 
 const GLOBAL_TIMEOUT_PULL = 60000;
 

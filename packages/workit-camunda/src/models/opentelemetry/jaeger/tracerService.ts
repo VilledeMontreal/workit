@@ -7,7 +7,7 @@
 import { Span, TracerBase } from '@opencensus/core';
 import { JaegerTraceExporter } from '@opencensus/exporter-jaeger';
 import * as tracing from '@opencensus/nodejs';
-import { ITracerServiceOptions } from '../specs/tracerServiceOptions';
+import { ITracerServiceOptions } from 'workit-types';
 import { SimpleFormat } from './simpleFormat';
 
 const rootPath = process.cwd();

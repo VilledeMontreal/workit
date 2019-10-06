@@ -4,10 +4,9 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { IMessage, Interceptor } from 'workit-types';
 import { isArrayOfFunctions, isEmptyArray, isFunction, isObject } from '../../utils/utils';
-import { IMessage } from '../camunda-n-mq/specs/message';
 import { ProxyFactory } from './proxyFactory';
-import { Interceptor } from './specs/interceptor';
 
 export class Interceptors {
   public static sanitize = (interceptors: Interceptor | Interceptor[] | undefined): Interceptor[] | undefined => {
@@ -32,10 +31,10 @@ export class Interceptors {
    * body message will be untouched
    * properties will be merged from all returned messages
    */
-  public static async execute(
+  public static async execute<T extends IMessage>(
     interceptors: Interceptor | Interceptor[] | undefined,
-    message: IMessage
-  ): Promise<IMessage> {
+    message: T
+  ): Promise<T> {
     const interceptorsSanitized = Interceptors.sanitize(interceptors);
     if (!interceptorsSanitized) {
       return message;
@@ -43,7 +42,7 @@ export class Interceptors {
     return Interceptors.internalExecute(interceptorsSanitized, message);
   }
 
-  private static async internalExecute(interceptors: Interceptor[], message: IMessage): Promise<IMessage> {
+  private static async internalExecute<T extends IMessage>(interceptors: Interceptor[], message: T): Promise<T> {
     let msg = message;
     for (const interceptor of interceptors) {
       msg = await interceptor(msg);
@@ -56,7 +55,7 @@ export class Interceptors {
     return msg;
   }
 
-  private static validateMessage(msg: IMessage) {
+  private static validateMessage<T extends IMessage>(msg: T) {
     // light validation, perhaps we should check properties
     const isObj = isObject(msg);
     if (!isObj || !isObject(msg.body) || !isObject(msg.properties)) {

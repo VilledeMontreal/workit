@@ -7,18 +7,21 @@
 import debug = require('debug');
 import { injectable, unmanaged } from 'inversify';
 import 'reflect-metadata';
-import { ICreateWorkflowInstance } from './specs/createWorkflowInstance';
-import { ICreateWorkflowInstanceResponse } from './specs/createWorkflowInstanceResponse';
-import { IDeployWorkflowResponse } from './specs/deployWorkflowResponse';
-import { IPagination } from './specs/pagination';
-import { IPaginationOptions } from './specs/paginationOptions';
-import { IPublishMessage } from './specs/publishMessage';
-import { IUpdateWorkflowRetry } from './specs/updateWorkflowRetry';
-import { IUpdateWorkflowVariables } from './specs/updateWorkflowVariables';
-import { IWorkflow } from './specs/workflow';
-import { IWorkflowClient } from './specs/workflowClient';
-import { IWorkflowDefinition, IWorkflowDefinitionRequest } from './specs/workflowDefinition';
-import { IWorkflowOptions } from './specs/workflowOptions';
+import {
+  ICreateWorkflowInstance,
+  ICreateWorkflowInstanceResponse,
+  IDeployWorkflowResponse,
+  IPagination,
+  IPaginationOptions,
+  IPublishMessage,
+  IUpdateWorkflowRetry,
+  IUpdateWorkflowVariables,
+  IWorkflow,
+  IWorkflowClient,
+  IWorkflowDefinition,
+  IWorkflowDefinitionRequest,
+  IWorkflowOptions
+} from 'workit-types';
 
 const log = debug('workit:clientManager');
 @injectable()

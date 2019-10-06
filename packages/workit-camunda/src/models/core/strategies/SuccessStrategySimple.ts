@@ -6,12 +6,10 @@
 
 import { injectable } from 'inversify';
 import 'reflect-metadata';
-import { ICamundaService } from '../../camunda-n-mq/specs/camundaService';
-import { IMessage } from '../../camunda-n-mq/specs/message';
-import { ISuccessStrategy } from '../specs/successStrategy';
+import { ICamundaService, IMessage, ISuccessStrategy } from 'workit-types';
 
 @injectable()
-export class SuccessStrategySimple implements ISuccessStrategy {
+export class SuccessStrategySimple implements ISuccessStrategy<ICamundaService> {
   public handle(message: IMessage, service: ICamundaService): Promise<void> {
     return service.ack(message);
   }

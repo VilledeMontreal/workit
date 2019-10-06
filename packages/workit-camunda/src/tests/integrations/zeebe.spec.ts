@@ -1,11 +1,15 @@
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
+
 import { CoreTracer } from '@opencensus/core';
 import * as crypto from 'crypto';
 import * as path from 'path';
+import { ICamundaService, IMessage, ISuccessStrategy } from 'workit-types';
 import { Client } from '../../models/camunda-n-mq/client';
-import { ICamundaService } from '../../models/camunda-n-mq/specs/camundaService';
-import { IMessage } from '../../models/camunda-n-mq/specs/message';
 import { SCProcessHandler } from '../../models/core/processHandler/simpleCamundaProcessHandler';
-import { ISuccessStrategy } from '../../models/core/specs/successStrategy';
 import { TaskBase } from '../../models/core/specs/taskBase';
 import { FailureStrategySimple } from '../../models/core/strategies/FailureStrategySimple';
 import { Worker } from '../../models/core/worker';
