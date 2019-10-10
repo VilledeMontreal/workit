@@ -33,7 +33,7 @@
     "@types/node": "^12.7.5",
     "husky": "^3.0.5",
     "jest": "^24.9.0",
-    "nock": "^10.0.6",
+    "nock": "^11.4.0",
     "prettier": "^1.18.2",
     "prettier-tslint": "^0.4.2",
     "source-map-support": "^0.5.13",
