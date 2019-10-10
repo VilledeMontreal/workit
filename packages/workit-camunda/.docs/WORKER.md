@@ -96,7 +96,7 @@ docker run -d --name jaeger \
   -p 16686:16686 \
   -p 14268:14268 \
   -p 9411:9411 \
-  jaegertracing/all-in-one:1.13
+  jaegertracing/all-in-one:latest
 ```
 Be sure to have a Camunda platform running. Let's say, you have Camunda BPM (default):
 ```bash

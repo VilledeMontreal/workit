@@ -4,11 +4,10 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { IProperties } from '../camunda-n-mq/specs/properties';
-import { IEmptyPayload, IPayload } from './specs/payload';
+import { IEmptyPayload, IPayload, IWorkflowProps } from 'workit-types';
 
 export class ZeebeMapperProperties {
-  public static map<TVariables = any, TProps = any>(obj: IPayload<TVariables, TProps>): IProperties<TProps> {
+  public static map<TVariables = unknown, TProps = unknown>(obj: IPayload<TVariables, TProps>): IWorkflowProps<TProps> {
     if (!obj.variables) {
       obj.variables = {} as any;
     }
@@ -29,7 +28,7 @@ export class ZeebeMapperProperties {
     };
   }
 
-  public static unmap<TProps = any>(props: IProperties<TProps>): IEmptyPayload<TProps> {
+  public static unmap<TProps = unknown>(props: IWorkflowProps<TProps>): IEmptyPayload<TProps> {
     return {
       elementId: props.activityId,
       elementInstanceKey: props.processInstanceId,

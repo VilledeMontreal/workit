@@ -1,9 +1,6 @@
 # Configurations
 
 If you use our default clients (zeebe-node, camunda-external-task-client-js), below supported configurations.
-Of course, if you `unbind` default clients by using the `IoC`, These configurations doesn't apply except the worker config.
-
-[More details](https://creditsenseau.github.io/zeebe-client-node-js/interfaces/zbworkeroptions.html)
 
 ## Zeebe
 
@@ -20,6 +17,8 @@ Of course, if you `unbind` default clients by using the `IoC`, These configurati
 | failWorkflowOnException | If a handler throws an unhandled exception, if this is set true, the workflow will be failed. | boolean |  |  |
 | logLevel | | LogLevel |  | INFO |
 
+[More details](https://creditsenseau.github.io/zeebe-client-node-js/interfaces/zbworkeroptions.html)
+
 ## Camunda BPM
 
 | Option | Description | Type | Required | Default |
@@ -28,6 +27,7 @@ Of course, if you `unbind` default clients by using the `IoC`, These configurati
 | workerId | The id of the worker on which behalf tasks are fetched. The returned tasks are locked for that worker and can only be completed when providing the same worker id. | string |  | "some-random-id" |
 | topicName | topic to subscribe | string | ✓ |  |
 | maxTasks | The maximum number of tasks to fetch | number |  | 10 |
+| maxParallelExecutions | The maximum number of tasks to be worked on simultaneously | number |  | |
 | interval | Interval of time to wait before making a new poll. | number |  | 300 |
 | lockDuration | The default duration to lock the external tasks for in milliseconds. | number |  | 50000 |
 | autoPoll | If true, then polling start automatically as soon as a Client instance is created. | boolean |  | override to false and you should set to false if you inject you own client that use  `camunda/camunda-external-task-client-js` |

@@ -5,37 +5,39 @@
  */
 
 import { PaginationUtils } from '../camunda-n-mq/paginationUtils';
-import { ICamundaService } from '../camunda-n-mq/specs/camundaService';
-import { IClient } from '../camunda-n-mq/specs/client';
-import { ICreateWorkflowInstance } from '../camunda-n-mq/specs/createWorkflowInstance';
-import { ICreateWorkflowInstanceResponse } from '../camunda-n-mq/specs/createWorkflowInstanceResponse';
-import { IDeployWorkflowResponse } from '../camunda-n-mq/specs/deployWorkflowResponse';
-import { IMessage } from '../camunda-n-mq/specs/message';
-import { IPagination } from '../camunda-n-mq/specs/pagination';
-import { IPaginationOptions } from '../camunda-n-mq/specs/paginationOptions';
-import { IPublishMessage } from '../camunda-n-mq/specs/publishMessage';
-import { IUpdateWorkflowRetry } from '../camunda-n-mq/specs/updateWorkflowRetry';
-import { IUpdateWorkflowVariables } from '../camunda-n-mq/specs/updateWorkflowVariables';
-import { IWorkflow } from '../camunda-n-mq/specs/workflow';
-import { IWorkflowClient } from '../camunda-n-mq/specs/workflowClient';
+
 import {
+  ICamundaClient,
+  ICamundaConfig,
+  ICamundaRepository,
+  ICamundaService,
+  IClient,
+  ICreateWorkflowInstance,
+  ICreateWorkflowInstanceResponse,
+  IDeployWorkflowResponse,
+  IMessage,
+  IPagination,
+  IPaginationOptions,
+  IPublishMessage,
+  ITopicSubscription,
+  IUpdateWorkflowRetry,
+  IUpdateWorkflowVariables,
+  IVariablePayload,
+  IWorkflow,
+  IWorkflowClient,
   IWorkflowDefinition,
   IWorkflowDefinitionRequest,
+  IWorkflowOptions,
   IWorkflowProcessIdDefinition
-} from '../camunda-n-mq/specs/workflowDefinition';
-import { IWorkflowOptions } from '../camunda-n-mq/specs/workflowOptions';
+} from 'workit-types';
 import { CamundaMessage } from './camundaMessage';
-import { CamundaRepository, ICamundaRepository } from './repositories/camundaRepository';
-import { ICamundaClient } from './specs/camundaClient';
-import { ICamundaConfig } from './specs/camundaConfig';
-import { IVariablePayload } from './specs/payload';
-import { ITopicSubscription } from './specs/topicSubscription';
+import { CamundaRepository } from './repositories/camundaRepository';
 
 // export interface IVariables {
 //   [custom: string]: { value: any, type: string, valueInfo: any };
 // }
 
-export class CamundaBpmClient implements IClient, IWorkflowClient {
+export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClient {
   private static getWorkflowParams(options?: Partial<IWorkflowOptions & IPaginationOptions>): any {
     const _params = {} as any;
     if (options && (options as IWorkflowOptions).bpmnProcessId) {

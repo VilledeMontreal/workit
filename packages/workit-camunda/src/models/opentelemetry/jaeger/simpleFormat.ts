@@ -5,7 +5,7 @@
  */
 
 import { SpanContext } from '@opencensus/core';
-import { IMessageBase } from '../../camunda-n-mq/specs/message';
+import { IMessageBase } from 'workit-types';
 import { DEBUG_VALUE, JAEGER_DEBUG_HEADER, JaegerFormat, SAMPLED_VALUE } from './jaegerFormat';
 
 export class SimpleFormat extends JaegerFormat {
@@ -19,7 +19,7 @@ export class SimpleFormat extends JaegerFormat {
   private static getFlags(tracerStateHeaderParts: string[]) {
     return Number(`0x${isNaN(Number(tracerStateHeaderParts[3])) ? SAMPLED_VALUE : Number(tracerStateHeaderParts[3])}`);
   }
-  public extractFromMessage(message: IMessageBase): SpanContext | null {
+  public extractFromMessage(message: IMessageBase<{ requestInfo: any }>): SpanContext | null {
     if (!message.body.requestInfo) {
       return null;
     }

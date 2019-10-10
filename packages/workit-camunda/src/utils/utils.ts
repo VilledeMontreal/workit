@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { IMessage } from '../models/camunda-n-mq/specs/message';
+import { IMessage, IWorkflowProps } from 'workit-types';
 import { ProxyFactory } from '../models/core/proxyFactory';
 
 export const isFunction = (f: any) => typeof f === 'function';
@@ -12,7 +12,7 @@ export const isObject = (o: any) => typeof o === 'object';
 /**
  * Applied test function on each element on the array and ANDs the results
  */
-export const andArrayWith = <T = any>(arr: T[], test: (param: T) => boolean) =>
+export const andArrayWith = <T = unknown>(arr: T[], test: (param: T) => boolean) =>
   arr.reduce((bool, current) => bool && test(current), true);
 /**
  * Checks if parameter is an array of functions
@@ -37,11 +37,11 @@ export const concatPath = (path: string, property: any) => {
 };
 
 export const getVariablesWhenChanged = <T = any>(
-  message: IMessage,
-  unwrap: (message: IMessage) => T
+  message: IMessage<unknown, IWorkflowProps<unknown>>,
+  unwrap: (message: IMessage<unknown, IWorkflowProps<unknown>>) => T
 ): T | undefined => {
   let vars: T | undefined;
-  if (!(message as any).__proxy__ || ProxyFactory.cacheChanges.has(message)) {
+  if ((message && !(message as any).__proxy__) || ProxyFactory.cacheChanges.has(message)) {
     vars = unwrap(message);
   }
   return vars;

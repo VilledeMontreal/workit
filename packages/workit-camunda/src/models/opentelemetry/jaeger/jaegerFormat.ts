@@ -9,7 +9,7 @@
 import { HeaderGetter, HeaderSetter, Propagation, SpanContext } from '@opencensus/core';
 import * as crypto from 'crypto';
 import * as uuid from 'uuid';
-import { IMessageBase } from '../../camunda-n-mq/specs/message';
+import { IMessageBase } from 'workit-types';
 import { IWorkitFormat } from '../specs/workitFormat';
 import { isValidSpanId, isValidTraceId } from '../validators';
 // TRACER_STATE_HEADER_NAME is the header key used for a span's serialized

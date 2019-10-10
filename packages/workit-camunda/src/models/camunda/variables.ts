@@ -7,13 +7,3 @@
 import { Variables } from 'camunda-external-task-client-js';
 
 export { Variables };
-
-export interface IVariables extends IReadOnlyVariables {
-  set(key: string, value: any): void;
-}
-
-export interface IReadOnlyVariables<T = any> {
-  get<K = any>(key: keyof T): K;
-  getAll(): T;
-  [custom: string]: any;
-}

@@ -11,6 +11,7 @@
     "@opencensus/core": "~0.0.17",
     "@opencensus/exporter-jaeger": "~0.0.17",
     "@opencensus/nodejs": "~0.0.17",
+    "workit-types": "^3.2.0",
     "axios": "~0.19.0",
     "camunda-external-task-client-js": "~1.2.0",
     "debug": "~4.1.1",

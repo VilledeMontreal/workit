@@ -6,15 +6,14 @@
 
 import { injectable } from 'inversify';
 import 'reflect-metadata';
-import { ICamundaService } from '../../camunda-n-mq/specs/camundaService';
-import { IMessage } from '../../camunda-n-mq/specs/message';
-import { IFailureStrategy } from '../specs/failureStrategy';
-// const stringify = require('fast-safe-stringify');
+import { ICamundaService, IFailureStrategy, IMessage, IWorkflowProps } from 'workit-types';
+
+const stringify = require('fast-safe-stringify');
 
 // tslint:disable:no-console
 @injectable()
-export class FailureStrategySimple implements IFailureStrategy {
-  public async handle(error: any, message: IMessage, service: ICamundaService): Promise<void> {
+export class FailureStrategySimple implements IFailureStrategy<ICamundaService> {
+  public async handle(error: any, message: IMessage<unknown, IWorkflowProps>, service: ICamundaService): Promise<void> {
     const { properties } = message;
     let retries = properties.retries as number;
 
@@ -29,12 +28,14 @@ export class FailureStrategySimple implements IFailureStrategy {
     }
 
     console.log('warning: You should not use this failure strategy class in production');
-    // console.log({
-    //   errorMessage: error.message,
-    //   errorDetails: stringify(error),
-    //   retries,
-    //   retryTimeout: 1000 * retries * 2
-    // });
+    console.log(
+      JSON.stringify({
+        errorMessage: error.message,
+        errorDetails: stringify(error),
+        retries,
+        retryTimeout: 1000 * retries * 2
+      })
+    );
 
     await service.nack({
       ...error,

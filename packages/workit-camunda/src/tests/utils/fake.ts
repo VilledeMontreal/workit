@@ -1,6 +1,11 @@
+/*!
+ * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+ * Licensed under the MIT license.
+ * See LICENSE file in the project root for full license information.
+ */
+
+import { ICamundaService, IMessage } from 'workit-types';
 import { Client } from '../../models/camunda-n-mq/client';
-import { ICamundaService } from '../../models/camunda-n-mq/specs/camundaService';
-import { IMessage } from '../../models/camunda-n-mq/specs/message';
 import { TaskBase } from '../../models/core/specs/taskBase';
 // tslint:disable:max-classes-per-file
 

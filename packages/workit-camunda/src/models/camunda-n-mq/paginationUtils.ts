@@ -4,9 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { IPaginationOptions } from './specs/paginationOptions';
-import { IPaging } from './specs/paging';
-import { IWorkflowOptions } from './specs/workflowOptions';
+import { IPaginationOptions, IPaging, IWorkflowOptions } from 'workit-types';
 
 export class PaginationUtils {
   public static setElasticPaginationParams<T = any>(

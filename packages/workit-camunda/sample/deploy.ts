@@ -4,10 +4,10 @@
  * See LICENSE file in the project root for full license information.
  */
 // tslint:disable: no-floating-promises
+import { IWorkflowClient } from 'workit-types';
 import { TAG } from '../src';
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '../src/config/constants/identifiers';
 import '../src/config/ioc';
-import { IWorkflowClient } from '../src/models/camunda-n-mq/specs/workflowClient';
 import { IoC } from '../src/models/IoC';
 
 

@@ -4,11 +4,10 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { IProperties } from '../camunda-n-mq/specs/properties';
-import { IVariablePayload } from './specs/payload';
+import { IVariablePayload, IWorkflowProps } from 'workit-types';
 
 export class CamundaMapperProperties {
-  public static map(task: IVariablePayload): IProperties {
+  public static map(task: IVariablePayload): IWorkflowProps {
     return {
       activityId: task.activityId,
       businessKey: task.businessKey,
@@ -26,7 +25,7 @@ export class CamundaMapperProperties {
     };
   }
 
-  public static unmap(props: IProperties): IVariablePayload {
+  public static unmap(props: IWorkflowProps): IVariablePayload {
     throw new Error('Not Implemented yet');
   }
 

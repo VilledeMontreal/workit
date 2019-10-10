@@ -9,29 +9,33 @@ import debug = require('debug');
 import { EventEmitter } from 'events';
 import { inject, injectable, optional } from 'inversify';
 import 'reflect-metadata';
+import {
+  ICamundaService,
+  IFailureStrategy,
+  IMessage,
+  IProcessHandler,
+  IProcessHandlerConfig,
+  ISuccessStrategy,
+  ITask,
+  IWorkflowProps
+} from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../../../config/constants/identifiers';
-import { ICamundaService } from '../../camunda-n-mq/specs/camundaService';
-import { IMessage } from '../../camunda-n-mq/specs/message';
 import { IoC } from '../../IoC';
 import { isWorkitPropagator } from '../../opentelemetry/specs/workitFormat';
 import { Interceptors } from '../interceptors';
-import { IFailureStrategy } from '../specs/failureStrategy';
-import { ISuccessStrategy } from '../specs/successStrategy';
-import { ITask } from '../specs/task';
-import { IProcessHandler } from './specs/processHandler';
-import { IProcessHandlerConfig } from './specs/processHandlerConfig';
 
 const log = debug('workit:processHandler');
 
 @injectable()
-export class SCProcessHandler<T = any, K = any> extends EventEmitter implements IProcessHandler {
+export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps> extends EventEmitter
+  implements IProcessHandler {
   protected readonly _config: Partial<IProcessHandlerConfig>;
-  protected readonly _success: ISuccessStrategy;
-  protected readonly _failure: IFailureStrategy;
+  protected readonly _success: ISuccessStrategy<ICamundaService>;
+  protected readonly _failure: IFailureStrategy<ICamundaService>;
   protected readonly _tracer: Tracer;
   constructor(
-    @inject(SERVICE_IDENTIFIER.success_strategy) successStrategy: ISuccessStrategy,
-    @inject(SERVICE_IDENTIFIER.failure_strategy) failureStrategy: IFailureStrategy,
+    @inject(SERVICE_IDENTIFIER.success_strategy) successStrategy: ISuccessStrategy<ICamundaService>,
+    @inject(SERVICE_IDENTIFIER.failure_strategy) failureStrategy: IFailureStrategy<ICamundaService>,
     @inject(SERVICE_IDENTIFIER.tracer) tracer: Tracer,
     @inject(SERVICE_IDENTIFIER.process_handler_config) @optional() config?: IProcessHandlerConfig
   ) {
@@ -87,7 +91,7 @@ export class SCProcessHandler<T = any, K = any> extends EventEmitter implements 
     });
   };
   private _handler = async (message: IMessage<T, K>, service: ICamundaService, callback?: () => void) => {
-    let msg = message;
+    let msg: IMessage = message;
     const { properties } = message;
     try {
       this.emit('message', msg);

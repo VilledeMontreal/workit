@@ -23,7 +23,7 @@ Ce framework offre les avantages suivants:
 
 ## Documentation
 
--   [.docs](packages/workit-camunda/.docs/) contient la documentation écrite.
+-   [La documentation est disponible dans ce dossier](packages/workit-camunda/.docs/)
 -   Une documentation complète sur l'API est disponible [en ligne](https://villedemontreal.github.io/workit/) et dans le sous répertoire `docs`
 
 ## L'installation

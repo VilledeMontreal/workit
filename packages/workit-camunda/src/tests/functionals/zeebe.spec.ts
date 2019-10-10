@@ -5,9 +5,9 @@
  */
 
 import * as nock from 'nock';
+import { ICamundaConfig } from 'workit-types';
 import { ZBClient } from 'zeebe-node';
 import { Client } from '../../models/camunda-n-mq/client';
-import { ICamundaConfig } from '../../models/camunda/specs/camundaConfig';
 import { Utils } from '../../models/camunda/utils';
 import { SCProcessHandler } from '../../models/core/processHandler/simpleCamundaProcessHandler';
 import { FailureStrategySimple } from '../../models/core/strategies/FailureStrategySimple';

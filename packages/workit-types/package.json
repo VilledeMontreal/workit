@@ -1,0 +1,65 @@
+{
+  "name": "workit-types",
+  "version": "3.2.0",
+  "description": "TypeScript types for Workit",
+  "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
+  "homepage": "https://github.com/VilledeMontreal/workit#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "husky": "^3.0.5",
+    "prettier": "^1.18.2",
+    "prettier-tslint": "^0.4.2",
+    "tslint": "^5.20.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-microsoft-contrib": "^6.2.0",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.6.3"
+  },
+  "engines": {
+    "node": ">=8.11.4"
+  },
+  "scripts": {
+    "test": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
+    "compile": "rm -rf ./lib/ && npm run build",
+    "build": "tsc -p ./tsconfig.json",
+    "watch": "tsc -p ./tsconfig.json --watch",
+    "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
+    "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write",
+    "docs": "typedoc --out ../../docs --tsconfig ./tsconfig.json --excludePrivate --mode file"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-fix",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "keywords": [
+    "Ville de Montreal",
+    "Typescript",
+    "Worker"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VilledeMontreal/workit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VilledeMontreal/workit/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
