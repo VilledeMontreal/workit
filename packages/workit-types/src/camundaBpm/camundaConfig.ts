@@ -3,6 +3,7 @@
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
+// tslint:disable: ban-types
 
 import { ISubscriptionOptions } from './subscriptionOptions';
 
@@ -37,7 +38,6 @@ export interface ICamundaConfig {
   /**
    * Function(s) that have access to the client instance as soon as it is created and before any polling happens. Check out logger for a better understanding of the usage of middlewares.
    */
-  // tslint:disable-next-line: ban-types
   use?: Function | Function[];
   bpmnKey?: string;
   autoPoll?: boolean;
@@ -49,5 +49,5 @@ export interface ICamundaConfig {
    * The Long Polling timeout in milliseconds.
    */
   asyncResponseTimeout?: number;
-  interceptors?: (config: any) => { headers: any };
+  interceptors?: Function | Function[];
 }

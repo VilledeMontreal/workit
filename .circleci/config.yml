@@ -1,4 +1,19 @@
 version: 2
+
+cache_1: &cache_1
+  key: npm-cache-01-{{ .Environment.CIRCLE_JOB }}-{{ checksum "/tmp/checksums.txt" }}-1
+  paths:
+    - ./node_modules
+    - ./yarn.lock
+    - packages/workit-bpm-client/node_modules
+    - packages/workit-camunda/node_modules
+    - packages/workit-cli/node_modules
+    - packages/workit-core/node_modules
+    - packages/workit-types/node_modules
+    - packages/workit-zeebe-client/node_modules
+    - packages/opentelemetry-metrics/node_modules
+    - packages/zeebe-elasticsearch-client/node_modules
+
 node_tests: &node_tests
   steps:
     - checkout
@@ -12,12 +27,7 @@ node_tests: &node_tests
         name: Install Dependencies
         command: yarn install
     - save_cache:
-        key: npm-cache-{{ checksum "/tmp/checksums.txt" }}
-        paths:
-          - ./node_modules
-          - ./yarn.lock
-          - ./packages/*/node_modules
-          - ./packages/*/yarn.lock
+        <<: *cache_1
     - run:
         name: Compile code
         command: yarn build
@@ -58,6 +68,8 @@ workflows:
           filters: *docs_filters
       - node11:
           filters: *docs_filters
+      - node12:
+          filters: *docs_filters
   build-master: # Will only run when a tag is pushed
     jobs:
       - test:
@@ -77,6 +89,11 @@ jobs:
   node11:
     docker:
       - image: circleci/node:11
+      - image: camunda/zeebe:0.20.0
+    <<: *node_tests
+  node12:
+    docker:
+      - image: circleci/node:12
       - image: camunda/zeebe:0.20.0
     <<: *node_tests
 

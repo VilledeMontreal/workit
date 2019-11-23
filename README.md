@@ -28,6 +28,23 @@ This package can be useful because:
 -   [Documentation is available in this folder](packages/workit-camunda/.docs/)
 -   Comprehensive API documentation is available [online](https://villedemontreal.github.io/workit/) and in the `docs` subdirectory
 
+## Packages
+
+### API
+
+| Package                 | Description |
+| ----------------------- | -----------------|
+| [workit-types](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-types) | This package provides TypeScript interfaces and enums for the Workit core model. |
+| [workit-core](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-core) | This package provides default and no-op implementations of the Workit types for Camunda Bpm and Zeebe. |
+
+### Implementation / Clients
+
+| Package                 | Description |
+| ----------------------- | -----------------|
+| [workit-bpm-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) | This module provides a full control over the Camunda Bpm platform. It use [`camunda-external-task-client-js`](https://github.com/camunda/camunda-external-task-client-js) by default. |
+| [workit-zeebe-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-zeebe-client) | This module provides a full control over the Zeebe platform. It use [`zeebe-node`](https://github.com/creditsenseau/zeebe-client-node-js) and [`zeebe-elasticsearch-client`](https://github.com/VilledeMontreal/workit/tree/master/packages/zeebe-elasticsearch-client)  by default. |
+| [workit-camunda](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-camunda) | This module allows you to switch between Camunda BPM and Zeebe easily. It use [`workit-bpm-client`](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) and [`workit-zeebe-client`](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-zeebe-client) by default. |
+
 ## Installing
 
 ```bash
@@ -406,11 +423,6 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 -   Make sample and confirm compatibility with DMN
 -   Adding a common exception error codes between Manager clients
 -   Add metrics by using prometheus lib
--   Questionning about spliting this project in 4 parts (core-camunda-message, core-camunda-engine-client-lib, core-zeebe-engine-client-lib, core-camunda-client-lib)
-    - Dependencies would be 
-        - core-camunda-message -> core-camunda-engine-client-lib
-        - core-camunda-message -> core-zeebe-engine-client-lib
-        - core-camunda-client-lib, core-zeebe-engine-client-lib or core-camunda-engine-client-lib  -> app
 </details>
 
 ## Versionning
@@ -428,7 +440,7 @@ workit-camunda | Zeebe | Camunda BPM
 
 ## Maintainers
 
-See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
+See the list of [contributors](CONTRIBUTORS.md) who participated in this project.
 
 ## Contributing
 

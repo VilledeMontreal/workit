@@ -6,10 +6,9 @@
 // tslint:disable: no-floating-promises
 // tslint:disable: no-console
 
+import { IoC, Worker } from 'workit-core';
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '../src/config/constants/identifiers';
 import '../src/config/ioc';
-import { Worker } from '../src/models/core/worker';
-import { IoC } from '../src/models/IoC';
 import { HelloWorldTask } from './tasks/helloWorldTask';
 import { getTag } from './utils';
 

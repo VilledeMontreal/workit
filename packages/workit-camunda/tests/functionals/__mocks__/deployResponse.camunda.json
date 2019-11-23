@@ -1,0 +1,35 @@
+{
+    "links": [
+        {
+            "method": "GET",
+            "href": "http://localhost:8080/engine-rest/deployment/8e5e6b98-53fb-11e9-8953-0242ac110002",
+            "rel": "self"
+        }
+    ],
+    "id": "8e5e6b98-53fb-11e9-8953-0242ac110002",
+    "name": "Deploy from demo",
+    "source": null,
+    "deploymentTime": "2019-03-31T21:25:50.196+0000",
+    "tenantId": null,
+    "deployedProcessDefinitions": {
+        "message-event:5:8e65496a-53fb-11e9-8953-0242ac110002": {
+            "id": "message-event:5:8e65496a-53fb-11e9-8953-0242ac110002",
+            "key": "message-event",
+            "category": "http://bpmn.io/schema/bpmn",
+            "description": null,
+            "name": "Message event",
+            "version": 5,
+            "resource": "MESSAGE_EVENT.bpmn",
+            "deploymentId": "8e5e6b98-53fb-11e9-8953-0242ac110002",
+            "diagram": null,
+            "suspended": false,
+            "tenantId": null,
+            "versionTag": null,
+            "historyTimeToLive": null,
+            "startableInTasklist": true
+        }
+    },
+    "deployedCaseDefinitions": null,
+    "deployedDecisionDefinitions": null,
+    "deployedDecisionRequirementsDefinitions": null
+}

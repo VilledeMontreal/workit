@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) [![Greenkeeper badge](https://badges.greenkeeper.io/VilledeMontreal/workit.svg)](https://greenkeeper.io/)
 
-<p align="center"><img src=".repo/render1561149492572.gif?raw=true"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/VilledeMontreal/workit/master/.repo/render1561149492572.gif?raw=true"/></p>
 
 ✨Extensible worker for Node.js that work with both Zeebe and Camunda BPM platforms powered by TypeScript ✨
 
@@ -33,11 +33,14 @@ workit create task
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/VilledeMontreal/workit/tags).
 
+## Useful links
+-   [Get started in 2 minutes](https://github.com/VilledeMontreal/workit/blob/master/packages/workit-camunda/.docs/WORKER.md).
+-   [Documentation is available in this folder](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-camunda/.docs)
+-   Comprehensive API documentation is available [online](https://villedemontreal.github.io/workit/) and in the `docs` subdirectory
+
 ## Maintainers
 
-*   **Olivier Albertini** - *Initial work* - [Ville de Montréal](https://github.com/VilledeMontreal)
-
-See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
+See the list of [contributors](CONTRIBUTORS.md) who participated in this project.
 
 ## Contributing
 

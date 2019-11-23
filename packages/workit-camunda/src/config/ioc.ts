@@ -5,17 +5,17 @@
  */
 
 import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
-import { Client } from '../models/camunda-n-mq/client';
-import { CamundaBpmClient } from '../models/camunda/camundaBpmClient';
-import { CamundaBpmWorker } from '../models/camunda/camundaBpmWorker';
-import { CamundaManager } from '../models/camunda/camundaManager';
-import { Worker } from '../models/core/worker';
-import { IoC } from '../models/IoC';
-import { ZeebeClient } from '../models/zeebe/zeebeClient';
-import { ZeebeManager } from '../models/zeebe/zeebeManager';
-import { ZeebeWorker } from '../models/zeebe/zeebeWorker';
+import { CamundaBpmClient } from 'workit-bpm-client';
+import { IoC, Worker } from 'workit-core';
+import { ZeebeClient } from 'workit-zeebe-client';
+import { Client } from '../camunda-n-mq/client';
+import { CamundaBpmWorker } from '../camundaBpm/camundaBpmWorker';
+import { CamundaManager } from '../camundaBpm/camundaManager';
+import { ZeebeManager } from '../zeebe/zeebeManager';
+import { ZeebeWorker } from '../zeebe/zeebeWorker';
 import { SERVICE_IDENTIFIER } from './constants/identifiers';
 import { TAG } from './constants/tag';
+import './container';
 
 IoC.bindTo(
   ZeebeClient,
@@ -52,7 +52,6 @@ IoC.bindTo(
   false
 );
 
-// IoC.bindTo(ClientManager, SERVICE_IDENTIFIER.client_manager, [SERVICE_IDENTIFIER.camunda_client], null, false);
 IoC.bindTo(ZeebeManager, SERVICE_IDENTIFIER.client_manager, [SERVICE_IDENTIFIER.camunda_client], TAG.zeebe, false);
 IoC.bindTo(
   CamundaManager,
