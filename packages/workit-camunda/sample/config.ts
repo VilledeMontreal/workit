@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { JaegerTracerService } from '../src/models/opentelemetry/jaeger/tracerService';
+import { JaegerTracerService } from 'workit-core';
 
 export const tracerService = new JaegerTracerService({
     serviceName: 'Workit DEMO',

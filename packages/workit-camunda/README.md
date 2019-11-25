@@ -361,11 +361,6 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 -   Make sample and confirm compatibility with DMN
 -   Adding a common exception error codes between Manager clients
 -   Add metrics by using prometheus lib
--   Questionning about spliting this project in 4 parts (core-camunda-message, core-camunda-engine-client-lib, core-zeebe-engine-client-lib, core-camunda-client-lib)
-    - Dependencies would be 
-        - core-camunda-message -> core-camunda-engine-client-lib
-        - core-camunda-message -> core-zeebe-engine-client-lib
-        - core-camunda-client-lib, core-zeebe-engine-client-lib or core-camunda-engine-client-lib  -> app
 </details>
 
 ## Versionning
@@ -381,9 +376,7 @@ workit-camunda | Zeebe | Camunda BPM
 
 ## Maintainers
 
-*   **Olivier Albertini** - *Initial work* - [Ville de Montréal](https://github.com/VilledeMontreal)
-
-See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
+See the list of [contributors](CONTRIBUTORS.md) who participated in this project.
 
 ## Contributing
 

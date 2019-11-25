@@ -1,0 +1,26 @@
+{
+    "paging": {
+        "from": 0,
+        "size": 500
+    },
+    "items": [
+        {
+            "bpmnProcessId": "BPMN_P_DEMO",
+            "workflowKey": "BPMN_P_DEMO:1:eb55f07f-7769-11e9-84ff-0242ac110002",
+            "resourceName": "BPMN_P_DEMO.bpmn",
+            "version": 1
+        },
+        {
+            "bpmnProcessId": "invoice",
+            "workflowKey": "invoice:1:64beaa08-9ad1-11e9-8102-0242ac110002",
+            "resourceName": "invoice.v1.bpmn",
+            "version": 1
+        },
+        {
+            "bpmnProcessId": "invoice",
+            "workflowKey": "invoice:2:65434362-9ad1-11e9-8102-0242ac110002",
+            "resourceName": "invoice.v2.bpmn",
+            "version": 2
+        }
+    ]
+}

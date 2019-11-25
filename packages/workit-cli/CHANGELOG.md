@@ -5,16 +5,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.3.1](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.3.0...workit-cli@0.3.1) (2019-09-14)
 
-
 ### Bug Fixes
 
 * **worker-cli:** remove maxTasks in template ([0541f64](https://github.com/VilledeMontreal/workit/commit/0541f64))
 
-
-
-
-
-# [0.3.0](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.2.1...workit-cli@0.3.0) (2019-09-14)
+## [0.3.0](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.2.1...workit-cli@0.3.0) (2019-09-14)
 
 
 ### Bug Fixes
@@ -26,30 +21,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **worker-cli:** improve init template ([352d03e](https://github.com/VilledeMontreal/workit/commit/352d03e)), closes [#43](https://github.com/VilledeMontreal/workit/issues/43)
 
-
-
-
-
 ## [0.2.1](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.2.0...workit-cli@0.2.1) (2019-08-21)
 
 **Note:** Version bump only for package workit-cli
 
-
-
-
-
-# [0.2.0](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.1.0...workit-cli@0.2.0) (2019-07-17)
-
+## [0.2.0](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.1.0...workit-cli@0.2.0) (2019-07-17)
 
 ### Features
 
 * **zeebe:** add 0.20.0 compatibility ([e85d4c1](https://github.com/VilledeMontreal/workit/commit/e85d4c1))
 
-
-
-
-
-# [0.1.0](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.0.11...workit-cli@0.1.0) (2019-07-16)
+## [0.1.0](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.0.11...workit-cli@0.1.0) (2019-07-16)
 
 ## Bug Fixes
 

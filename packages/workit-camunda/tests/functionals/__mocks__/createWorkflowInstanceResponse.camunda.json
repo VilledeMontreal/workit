@@ -1,0 +1,16 @@
+{
+    "links": [
+        {
+            "method": "GET",
+            "href": "http://localhost:8080/engine-rest/process-instance/04f04c4b-5404-11e9-8953-0242ac110002",
+            "rel": "self"
+        }
+    ],
+    "id": "04f04c4b-5404-11e9-8953-0242ac110002",
+    "definitionId": "message-event:5:8e65496a-53fb-11e9-8953-0242ac110002",
+    "businessKey": null,
+    "caseInstanceId": null,
+    "ended": false,
+    "suspended": false,
+    "tenantId": null
+}

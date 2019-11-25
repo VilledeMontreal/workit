@@ -6,8 +6,8 @@
 
 import { SpanKind } from '@opencensus/core';
 import axios from 'axios';
+import { TaskBase } from "workit-core";
 import { IMessage } from 'workit-types';
-import { TaskBase } from "../../src/models/core/specs/taskBase";
 import { tracerService } from '../config';
 
 // tslint:disable:no-console

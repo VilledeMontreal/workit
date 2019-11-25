@@ -1,0 +1,50 @@
+[
+    {
+        "id": "BPMN_P_DEMO:1:eb55f07f-7769-11e9-84ff-0242ac110002",
+        "key": "BPMN_P_DEMO",
+        "category": "http://bpmn.io/schema/bpmn",
+        "description": null,
+        "name": "Parallel workflow",
+        "version": 1,
+        "resource": "BPMN_P_DEMO.bpmn",
+        "deploymentId": "eb53a68d-7769-11e9-84ff-0242ac110002",
+        "diagram": null,
+        "suspended": false,
+        "tenantId": null,
+        "versionTag": null,
+        "historyTimeToLive": null,
+        "startableInTasklist": true
+    },
+    {
+        "id": "invoice:1:64beaa08-9ad1-11e9-8102-0242ac110002",
+        "key": "invoice",
+        "category": "http://www.omg.org/spec/BPMN/20100524/MODEL",
+        "description": null,
+        "name": "Invoice Receipt",
+        "version": 1,
+        "resource": "invoice.v1.bpmn",
+        "deploymentId": "64a46b44-9ad1-11e9-8102-0242ac110002",
+        "diagram": null,
+        "suspended": false,
+        "tenantId": null,
+        "versionTag": "V1.0",
+        "historyTimeToLive": 30,
+        "startableInTasklist": true
+    },
+    {
+        "id": "invoice:2:65434362-9ad1-11e9-8102-0242ac110002",
+        "key": "invoice",
+        "category": "http://www.omg.org/spec/BPMN/20100524/MODEL",
+        "description": null,
+        "name": "Invoice Receipt",
+        "version": 2,
+        "resource": "invoice.v2.bpmn",
+        "deploymentId": "653dec2e-9ad1-11e9-8102-0242ac110002",
+        "diagram": null,
+        "suspended": false,
+        "tenantId": null,
+        "versionTag": "V2.0",
+        "historyTimeToLive": 45,
+        "startableInTasklist": true
+    }
+]

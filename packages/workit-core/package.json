@@ -1,0 +1,84 @@
+{
+  "name": "workit-core",
+  "version": "3.2.0",
+  "description": "This package provides default and no-op implementations of the WorkIt types for client packages.",
+  "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
+  "homepage": "https://github.com/VilledeMontreal/workit#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "dependencies": {
+    "@opencensus/core": "~0.0.19",
+    "@opencensus/exporter-jaeger": "~0.0.19",
+    "@opencensus/nodejs": "~0.0.19",
+    "workit-types": "^3.2.0",
+    "debug": "~4.1.1",
+    "fast-safe-stringify": "~2.0.7",
+    "inversify": "~5.0.1",
+    "reflect-metadata": "~0.1.13",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@types/debug": "~4.1.5",
+    "@types/events": "~3.0.0",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.12",
+    "@types/uuid": "^3.4.6",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "prettier-tslint": "^0.4.2",
+    "source-map-support": "^0.5.16",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-microsoft-contrib": "^6.2.0",
+    "typedoc": "^0.15.3",
+    "typescript": "^3.6.3"
+  },
+  "engines": {
+    "node": ">=8.11.4"
+  },
+  "scripts": {
+    "test": "jest --testPathIgnorePatterns integration --coverage",
+    "compile": "rm -rf ./lib/ && npm run build",
+    "build": "tsc -p ./tsconfig.json",
+    "watch": "tsc -p ./tsconfig.json --watch",
+    "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
+    "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write",
+    "docs": "typedoc --out ./docs --tsconfig ./tsconfig.json --excludePrivate --mode file"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-fix",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm test"
+    }
+  },
+  "keywords": [
+    "Ville de Montreal",
+    "Typescript",
+    "open-telemetry",
+    "Worker"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VilledeMontreal/workit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VilledeMontreal/workit/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

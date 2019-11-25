@@ -4,11 +4,11 @@
  * See LICENSE file in the project root for full license information.
  */
 // tslint:disable: no-floating-promises
+import { IoC } from 'workit-core';
 import { IWorkflowClient } from 'workit-types';
 import { TAG } from '../src';
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '../src/config/constants/identifiers';
 import '../src/config/ioc';
-import { IoC } from '../src/models/IoC';
 
 
 (async () => {
