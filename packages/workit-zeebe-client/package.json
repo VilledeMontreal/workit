@@ -14,7 +14,7 @@
     "inversify": "~5.0.1",
     "reflect-metadata": "~0.1.13",
     "zeebe-elasticsearch-client": "^0.3.0",
-    "zeebe-node": "0.20.1"
+    "zeebe-node": "2.3.0"
   },
   "devDependencies": {
     "@types/debug": "~4.1.5",
