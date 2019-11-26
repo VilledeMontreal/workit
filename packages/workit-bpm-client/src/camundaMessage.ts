@@ -85,11 +85,11 @@ export class CamundaMessage {
         vars.set(key, body[key]);
       }
     }
-    CamundaMessage.setCustomHeaders(vars, message.properties.customHeaders);
+    CamundaMessage._setCustomHeaders(vars, message.properties.customHeaders);
     return vars;
   }
 
-  private static setCustomHeaders(vars: IVariables, customHeaders) {
+  private static _setCustomHeaders(vars: IVariables, customHeaders) {
     if (customHeaders && Object.keys(customHeaders).length > 0) {
       vars.set('_meta', { customHeaders });
     }

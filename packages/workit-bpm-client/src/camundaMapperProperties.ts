@@ -16,7 +16,7 @@ export class CamundaMapperProperties {
       workflowInstanceKey: task.processDefinitionId,
       workflowKey: task.processDefinitionKey,
       bpmnProcessId: task.processDefinitionKey,
-      customHeaders: CamundaMapperProperties.getCustomHeaders(task),
+      customHeaders: CamundaMapperProperties._getCustomHeaders(task),
       jobKey: task.executionId,
       retries: task.retries,
       topicName: task.topicName,
@@ -29,12 +29,12 @@ export class CamundaMapperProperties {
     throw new Error('Not Implemented yet');
   }
 
-  private static getMeta(task: IVariablePayload) {
+  private static _getMeta(task: IVariablePayload) {
     return task.variables.get('_meta');
   }
 
-  private static getCustomHeaders(task: IVariablePayload) {
-    const meta = CamundaMapperProperties.getMeta(task);
+  private static _getCustomHeaders(task: IVariablePayload) {
+    const meta = CamundaMapperProperties._getMeta(task);
     if (meta && meta.customHeaders) {
       return meta.customHeaders;
     }

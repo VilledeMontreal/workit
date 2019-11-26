@@ -48,6 +48,12 @@ const rules = {
       'default': fileHeaderDefault,
     },
   ],
+  'naming-convention': [
+    true,
+    { 'type': 'property', 'modifiers': 'protected', 'leadingUnderscore': 'require' },
+    { 'type': 'member', 'modifiers': 'private', 'leadingUnderscore': 'require' }
+  ],
+  "function-name": [ true, { "method-regex": "^[a-z][\\w\\d]+$", "private-method-regex": "^_?[a-z][\\w\\d]+$", "protected-method-regex": "^_?[a-z][\\w\\d]+$", "static-method-regex": "^_?[a-z][\\w\\d]+$", "function-regex": "^_?[a-z][\\w\\d]+$" } ]
 };
 
 module.exports = {

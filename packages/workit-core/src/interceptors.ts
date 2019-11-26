@@ -39,15 +39,15 @@ export class Interceptors {
     if (!interceptorsSanitized) {
       return message;
     }
-    return Interceptors.internalExecute(interceptorsSanitized, message);
+    return Interceptors._internalExecute(interceptorsSanitized, message);
   }
 
-  private static async internalExecute<T extends IMessage>(interceptors: Interceptor[], message: T): Promise<T> {
+  private static async _internalExecute<T extends IMessage>(interceptors: Interceptor[], message: T): Promise<T> {
     let msg = message;
     for (const interceptor of interceptors) {
       msg = await interceptor(msg);
     }
-    Interceptors.validateMessage(msg);
+    Interceptors._validateMessage(msg);
     if (!(msg as any).__proxy__ || ProxyFactory.cacheChanges.has(msg)) {
       ProxyFactory.cacheChanges.set(msg, true);
       return ProxyFactory.create(msg);
@@ -55,7 +55,7 @@ export class Interceptors {
     return msg;
   }
 
-  private static validateMessage<T extends IMessage>(msg: T) {
+  private static _validateMessage<T extends IMessage>(msg: T) {
     // light validation, perhaps we should check properties
     const isObj = isObject(msg);
     if (!isObj || !isObject(msg.body) || !isObject(msg.properties)) {

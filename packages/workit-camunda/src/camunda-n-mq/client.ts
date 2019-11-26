@@ -21,14 +21,14 @@ export class Client<TClient extends IClient> {
   public async subscribe(handler: (message: IMessage, service: unknown) => Promise<void>): Promise<void> {
     if (handler != null) {
       this._onMessageReceived = handler;
-      await this.startSubscriber();
+      await this._startSubscriber();
     }
   }
 
   public async unsubscribe(): Promise<void> {
-    await this.execute(x => x.unsubscribe());
+    await this._execute(x => x.unsubscribe());
   }
-  private async execute(
+  private async _execute(
     action: (client: TClient) => Promise<void>,
     onException?: (client: TClient) => Promise<void>
   ): Promise<void> {
@@ -41,9 +41,9 @@ export class Client<TClient extends IClient> {
       }
     }
   }
-  private async startSubscriber(): Promise<void> {
+  private async _startSubscriber(): Promise<void> {
     if (this._client != null) {
-      await this.execute(x => x.subscribe(this._onMessageReceived));
+      await this._execute(x => x.subscribe(this._onMessageReceived));
     }
   }
 }

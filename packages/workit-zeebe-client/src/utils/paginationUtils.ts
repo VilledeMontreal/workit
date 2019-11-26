@@ -22,16 +22,16 @@ export class PaginationUtils {
     if (!options) {
       return {
         from: 0,
-        size: PaginationUtils.DEFAULT_SIZE_ITEMS,
+        size: PaginationUtils._DEFAULT_SIZE_ITEMS,
         totalCount
       };
     }
     return {
       from: typeof options.from === 'number' ? options.from : 0,
-      size: options.size || PaginationUtils.DEFAULT_SIZE_ITEMS,
+      size: options.size || PaginationUtils._DEFAULT_SIZE_ITEMS,
       totalCount
     };
   }
 
-  private static DEFAULT_SIZE_ITEMS = 500;
+  private static _DEFAULT_SIZE_ITEMS = 500;
 }

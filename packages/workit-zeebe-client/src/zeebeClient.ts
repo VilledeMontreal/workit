@@ -41,21 +41,13 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
   private _worker: ZBWorker<TVariables, TProps, RVariables> | undefined;
   private readonly _config: IZeebeOptions;
   private readonly _exporterConfig: Partial<IElasticExporterConfig> | undefined;
-  constructor(
-    config: IZeebeOptions,
-    client?: ZBClient,
-    exporterConfig?: Partial<IElasticExporterConfig>
-  );
-  constructor(
-    config: IZeebeOptions,
-    exporterConfig?: Partial<IElasticExporterConfig>
-  );
+  constructor(config: IZeebeOptions, client?: ZBClient, exporterConfig?: Partial<IElasticExporterConfig>);
+  constructor(config: IZeebeOptions, exporterConfig?: Partial<IElasticExporterConfig>);
   constructor(
     config: IZeebeOptions,
     @optional() client?: ZBClient | Partial<IElasticExporterConfig>,
     @optional() exporterConfig?: Partial<IElasticExporterConfig>
   ) {
-
     this._config = config;
 
     if (client && (client as Partial<IElasticExporterConfig>).url) {
@@ -99,11 +91,11 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     };
   }
   public async getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {
-    this.validateExporterConfig();
+    this._validateExporterConfig();
     const params = { _source_excludes: 'bpmnXml' };
     const workflowOptions = { params };
     workflowOptions.params = PaginationUtils.setElasticPaginationParams(params, options);
-    const criteria = this.setWorkflowCriteria(options);
+    const criteria = this._setWorkflowCriteria(options);
     const result = await this._exporterClient.getWorkflows(criteria, workflowOptions);
     const elasticResult = result.data.hits;
     const data = elasticResult.hits.map(doc => {
@@ -122,8 +114,8 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     };
   }
   public async getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition> {
-    this.validateExporterConfig();
-    this.validateObject();
+    this._validateExporterConfig();
+    this._validateObject();
     const key = Number((payload as IWorkflowDefinitionKey).workflowKey);
     const response = await this._exporterClient.getWorkflows({
       key: !isNaN(key) ? key : undefined,
@@ -177,7 +169,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     return this._client.createWorkflowInstance(model.bpmnProcessId, model.variables, model.version);
   }
   public cancelWorkflowInstance(instance: string): Promise<void> {
-    this.validateNumber(instance);
+    this._validateNumber(instance);
     return this._client.cancelWorkflowInstance(instance as any); // TODO: will be fixed https://github.com/zeebe-io/zeebe/issues/2680
   }
   public resolveIncident(incidentKey: string): Promise<void> {
@@ -190,7 +182,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     return Promise.resolve();
   }
 
-  private validateExporterConfig() {
+  private _validateExporterConfig() {
     if (!this._exporterConfig) {
       throw new Error(`
       Please, refer to the warning when you instiate this class. You must pass exporterConfig to the Ctor in order to use this method.
@@ -198,14 +190,14 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       `);
     }
   }
-  private validateObject() {
+  private _validateObject() {
     if (!this._exporterConfig) {
       throw new Error(`
         Object passed to the method can't be undefined
       `);
     }
   }
-  private validateNumber(variable: string) {
+  private _validateNumber(variable: string) {
     const value = Number(variable);
     if (!Number.isInteger(value)) {
       throw new Error(`
@@ -214,7 +206,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     }
   }
 
-  private setWorkflowCriteria(options?: Partial<IWorkflowOptions & IPaginationOptions>) {
+  private _setWorkflowCriteria(options?: Partial<IWorkflowOptions & IPaginationOptions>) {
     if (!options) {
       return {};
     }

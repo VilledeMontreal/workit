@@ -9,14 +9,14 @@ import { IMessageBase } from 'workit-types';
 import { DEBUG_VALUE, JAEGER_DEBUG_HEADER, JaegerFormat, SAMPLED_VALUE } from './jaegerFormat';
 
 export class SimpleFormat extends JaegerFormat {
-  private static getOptions(debugId: string, jflags: number) {
+  private static _getOptions(debugId: string, jflags: number) {
     /* tslint:disable:no-bitwise */
     const sampled = jflags & SAMPLED_VALUE;
     const debug = jflags & DEBUG_VALUE || (debugId ? SAMPLED_VALUE : 0);
     /* tslint:enable:no-bitwise */
     return sampled || debug ? SAMPLED_VALUE : 0;
   }
-  private static getFlags(tracerStateHeaderParts: string[]) {
+  private static _getFlags(tracerStateHeaderParts: string[]) {
     return Number(`0x${isNaN(Number(tracerStateHeaderParts[3])) ? SAMPLED_VALUE : Number(tracerStateHeaderParts[3])}`);
   }
   public extractFromMessage(message: IMessageBase<{ requestInfo: any }>): SpanContext | null {
@@ -38,9 +38,9 @@ export class SimpleFormat extends JaegerFormat {
 
     const traceId = tracerStateHeaderParts[0];
     const spanId = tracerStateHeaderParts[1];
-    const jflags = SimpleFormat.getFlags(tracerStateHeaderParts);
+    const jflags = SimpleFormat._getFlags(tracerStateHeaderParts);
 
-    const options = SimpleFormat.getOptions(debugId, jflags);
+    const options = SimpleFormat._getOptions(debugId, jflags);
 
     return { traceId, spanId, options };
   }

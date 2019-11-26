@@ -45,7 +45,7 @@ export class ZBElasticClient {
     options?: Partial<IOptions>
   ): Promise<IResponse<IElasticResponse<IWorkflow>>> {
     const localUrl = `${this._urls.workflows}/_search`;
-    const q = this.buildWorkflowQuery(model);
+    const q = this._buildWorkflowQuery(model);
     const response = await this.send<IElasticResponse<IWorkflow>, any>(HttpMethods.POST, localUrl, q, options);
 
     if (model.latestVersion) {
@@ -99,7 +99,7 @@ export class ZBElasticClient {
   }
 
   // TODO: use filter not just must for querying elasticsearch, in order to activate caching
-  private buildWorkflowQuery(model: Partial<IWorkflowQuery>): any {
+  private _buildWorkflowQuery(model: Partial<IWorkflowQuery>): any {
     // TODO: Improve with query builder pattern when time
     const q: any = {
       query: {
