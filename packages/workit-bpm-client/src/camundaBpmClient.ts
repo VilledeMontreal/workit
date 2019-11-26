@@ -33,7 +33,7 @@ import {
 import { CamundaMessage } from './camundaMessage';
 import { CamundaRepository } from './repositories/camundaRepository';
 export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClient {
-  private static getWorkflowParams(options?: Partial<IWorkflowOptions & IPaginationOptions>): any {
+  private static _getWorkflowParams(options?: Partial<IWorkflowOptions & IPaginationOptions>): any {
     const _params = {} as any;
     if (options && (options as IWorkflowOptions).bpmnProcessId) {
       _params.key = options.bpmnProcessId;
@@ -59,7 +59,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       }
     );
 
-    this.startSubsciber();
+    this._startSubscriber();
 
     return Promise.resolve();
   }
@@ -93,7 +93,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
     };
   }
   public async getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {
-    const params = CamundaBpmClient.getWorkflowParams(options);
+    const params = CamundaBpmClient._getWorkflowParams(options);
     const apiOptions = { params };
     const requests: Promise<any>[] = [this._repo.getWorkflows(apiOptions), this._repo.getWorkflowCount(apiOptions)];
     const [result, repCount] = await Promise.all(requests);
@@ -114,7 +114,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
   }
   public async getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition> {
     let definition;
-    if (this.hasBpmnProcessId(payload)) {
+    if (this._hasBpmnProcessId(payload)) {
       definition = await this._repo.getWorkflow(payload.bpmnProcessId);
     } else {
       definition = await this._repo.getWorkflow(payload.workflowKey);
@@ -159,12 +159,12 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
   public resolveIncident(incidentKey: string): Promise<void> {
     return this._repo.resolveIncident(incidentKey);
   }
-  private startSubsciber() {
+  private _startSubscriber() {
     if (!this._config.autoPoll) {
       this._client.start();
     }
   }
-  private hasBpmnProcessId(request: IWorkflowDefinitionRequest): request is IWorkflowProcessIdDefinition {
+  private _hasBpmnProcessId(request: IWorkflowDefinitionRequest): request is IWorkflowProcessIdDefinition {
     return (request as IWorkflowProcessIdDefinition).bpmnProcessId !== undefined;
   }
 }

@@ -19,8 +19,8 @@ export class ProxyObserver {
   private readonly _propCache = new WeakMap();
   private readonly _pathCache = new WeakMap();
   private readonly _proxy;
-  private onChange: (proxy: any, property: any, value: any, previous?: any) => void;
-  private handler = {
+  private _onChange: (proxy: any, property: any, value: any, previous?: any) => void;
+  private _handler = {
     get: (target: object, property: string | number | symbol, receiver: any) => {
       if (property === proxyTarget) {
         return target;
@@ -36,7 +36,7 @@ export class ProxyObserver {
       }
 
       // Preserve invariants
-      const descriptor = this.getOwnPropertyDescriptor(target, property);
+      const descriptor = this._getOwnPropertyDescriptor(target, property);
       // TODO: improve if if if
       if (descriptor && !descriptor.configurable) {
         if (descriptor.set && !descriptor.get) {
@@ -49,7 +49,7 @@ export class ProxyObserver {
       }
 
       this._pathCache.set(value, concatPath(this._pathCache.get(target), property));
-      return new Proxy(value, this.handler);
+      return new Proxy(value, this._handler);
     },
 
     set: (target: object, property: string | number | symbol, value: any, receiver: any) => {
@@ -62,7 +62,7 @@ export class ProxyObserver {
       const result = Reflect.set(target, property, value);
 
       if (previous !== value) {
-        this.handleChange(this._pathCache.get(target), property, previous, value);
+        this._handleChange(this._pathCache.get(target), property, previous, value);
       }
 
       return result;
@@ -70,9 +70,9 @@ export class ProxyObserver {
 
     defineProperty: (target: object, property: string | number | symbol, descriptor: PropertyDescriptor) => {
       const result = Reflect.defineProperty(target, property, descriptor);
-      this.invalidateCachedDescriptor(target, property);
+      this._invalidateCachedDescriptor(target, property);
 
-      this.handleChange(this._pathCache.get(target), property, undefined, descriptor.value);
+      this._handleChange(this._pathCache.get(target), property, undefined, descriptor.value);
 
       return result;
     },
@@ -80,9 +80,9 @@ export class ProxyObserver {
     deleteProperty: (target: object, property: string | number | symbol) => {
       const previous = Reflect.get(target, property);
       const result = Reflect.deleteProperty(target, property);
-      this.invalidateCachedDescriptor(target, property);
+      this._invalidateCachedDescriptor(target, property);
 
-      this.handleChange(this._pathCache.get(target), property, previous);
+      this._handleChange(this._pathCache.get(target), property, previous);
 
       return result;
     },
@@ -94,7 +94,7 @@ export class ProxyObserver {
         const result = Reflect.apply(target, thisArg, argumentsList);
 
         if (this._changed) {
-          this.onChange(null, null, null, null);
+          this._onChange(null, null, null, null);
         }
 
         this._inApply = false;
@@ -107,7 +107,7 @@ export class ProxyObserver {
     }
   };
   constructor(object: any, onChangeFunc: (proxy: any, property: any, value: any, previous: any) => void) {
-    this.onChange = onChangeFunc;
+    this._onChange = onChangeFunc;
     this._pathCache.set(object, '');
     Object.defineProperty(object, '__proxy__', {
       value: true,
@@ -115,17 +115,17 @@ export class ProxyObserver {
       configurable: false,
       writable: false
     });
-    this._proxy = new Proxy(object, this.handler);
+    this._proxy = new Proxy(object, this._handler);
     return this._proxy;
   }
-  private handleChange = (path: string, property: any, previous: any, value?: any) => {
+  private _handleChange = (path: string, property: any, previous: any, value?: any) => {
     if (!this._inApply) {
-      this.onChange(this._proxy, concatPath(path, property), value, previous);
+      this._onChange(this._proxy, concatPath(path, property), value, previous);
     } else if (!this._changed) {
       this._changed = true;
     }
   };
-  private getOwnPropertyDescriptor = (target: object, property: string | number | symbol) => {
+  private _getOwnPropertyDescriptor = (target: object, property: string | number | symbol) => {
     let props = this._propCache.get(target);
 
     if (props) {
@@ -143,7 +143,7 @@ export class ProxyObserver {
 
     return prop;
   };
-  private invalidateCachedDescriptor = (target: object, property: any) => {
+  private _invalidateCachedDescriptor = (target: object, property: any) => {
     const props = this._propCache.get(target);
 
     if (props) {

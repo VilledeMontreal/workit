@@ -26,7 +26,7 @@ import { Utils } from '../utils/utils';
 
 @injectable()
 export class CamundaRepository implements ICamundaRepository {
-  private static getworkflowInstanceUrl(idOrKey: string) {
+  private static _getworkflowInstanceUrl(idOrKey: string) {
     let url = `/process-definition`;
     if (idOrKey.split(':').length === 3) {
       url += `/${idOrKey}/start`;
@@ -35,7 +35,7 @@ export class CamundaRepository implements ICamundaRepository {
     }
     return url;
   }
-  private static setStaticHeaders(configs: ICamundaConfig, headers: any) {
+  private static _setStaticHeaders(configs: ICamundaConfig, headers: any) {
     if (configs.interceptors) {
       // TODO: improve this part.
       const basicAuthFunc = (configs.interceptors as any).find((func: any) => func.name === 'bound interceptor');
@@ -57,7 +57,7 @@ export class CamundaRepository implements ICamundaRepository {
       'Content-Type': 'application/json',
       'X-APP': this._configs.workerId || 'unknow'
     };
-    this._headers = CamundaRepository.setStaticHeaders(configs, headers);
+    this._headers = CamundaRepository._setStaticHeaders(configs, headers);
     this._request = axios.create({
       baseURL: this._configs.baseUrl,
       timeout: 30000,
@@ -85,7 +85,7 @@ export class CamundaRepository implements ICamundaRepository {
     idOrKey: string,
     variables: T
   ): Promise<IHttpResponse<ICamundaBpmCreateInstanceResponse>> {
-    const url = CamundaRepository.getworkflowInstanceUrl(idOrKey);
+    const url = CamundaRepository._getworkflowInstanceUrl(idOrKey);
     return this._request.post(url, {
       businessKey: typeof variables === 'object' ? (variables as any).businessKey : undefined,
       variables: Utils.serializeVariables(variables)

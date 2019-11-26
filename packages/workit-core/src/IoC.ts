@@ -62,7 +62,7 @@ export class IoC {
     named?: string | symbol | null,
     singletonMode = true
   ): void {
-    IoC.inject(ctor, dependencies);
+    IoC._inject(ctor, dependencies);
 
     const service = container.bind(serviceIdentifier).to(ctor);
 
@@ -81,7 +81,7 @@ export class IoC {
     serviceIdentifier: string | symbol,
     dependencies?: (symbol | string)[]
   ): void {
-    IoC.inject(ctor, dependencies);
+    IoC._inject(ctor, dependencies);
     container
       .bind(serviceIdentifier)
       .to(ctor)
@@ -90,7 +90,7 @@ export class IoC {
   }
   // todo: merge with bindTo
   public static bindToObject(obj: any, serviceIdentifier: symbol | string, named?: string): void {
-    this.overrideConfig(obj, serviceIdentifier);
+    this._overrideConfig(obj, serviceIdentifier);
     const service = container.bind(serviceIdentifier).toConstantValue(obj);
     if (named) {
       service.whenTargetNamed(named);
@@ -164,7 +164,7 @@ export class IoC {
   }
 
   public static getWorkflowNamed(workflow: { bpmnProcessId: string; version?: number }): string {
-    IoC.validateWorkflow(workflow);
+    IoC._validateWorkflow(workflow);
 
     const workflowId = workflow.bpmnProcessId;
     const workflowVersion = workflow.version;
@@ -192,7 +192,7 @@ export class IoC {
    * Seems Hacky, we should look to use inversify factory in order to inject config and then override.
    *
    */
-  private static overrideConfig(obj: any, serviceIdentifier: string | symbol): void {
+  private static _overrideConfig(obj: any, serviceIdentifier: string | symbol): void {
     if (!obj) {
       return;
     }
@@ -203,7 +203,7 @@ export class IoC {
     }
   }
 
-  private static inject(ctor: any, dependencies?: (string | symbol)[]) {
+  private static _inject(ctor: any, dependencies?: (string | symbol)[]) {
     try {
       decorate(injectable(), ctor);
       (dependencies || []).forEach((dependency, index) => {
@@ -221,7 +221,7 @@ export class IoC {
     }
   }
 
-  private static validateWorkflow(workflow: { bpmnProcessId: string; version?: number }): void {
+  private static _validateWorkflow(workflow: { bpmnProcessId: string; version?: number }): void {
     if (!isObject(workflow) || typeof workflow.bpmnProcessId !== 'string') {
       throw new Error('workflow object is required');
     }
