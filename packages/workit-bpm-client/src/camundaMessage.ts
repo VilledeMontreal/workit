@@ -89,7 +89,7 @@ export class CamundaMessage {
     return vars;
   }
 
-  private static _setCustomHeaders(vars: IVariables, customHeaders) {
+  private static _setCustomHeaders(vars: IVariables, customHeaders: any) {
     if (customHeaders && Object.keys(customHeaders).length > 0) {
       vars.set('_meta', { customHeaders });
     }

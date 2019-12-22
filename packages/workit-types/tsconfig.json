@@ -1,25 +1,8 @@
 {
+  "extends": "../../tsconfig.base",
   "compilerOptions": {
-    "skipLibCheck": true,
-    "declaration": true,
-    "target": "es2017",
-    "module": "commonjs",
-    "charset": "utf8",
-    "suppressImplicitAnyIndexErrors": true,
-    "alwaysStrict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
-    "pretty": true,
-    "outDir": "./lib",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "strictPropertyInitialization": true,
-    "strictNullChecks": true
+    "rootDir": ".",
+    "outDir": "lib",
   },
   "exclude": [
     "lib", 
@@ -29,6 +12,6 @@
     "log",  
     "mocha", 
     ".*",
-    "src/tests"
+    "tests"
   ]
 }

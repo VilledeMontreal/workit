@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+      "allowUnreachableCode": false,
+      "allowUnusedLabels": false,
+      "declaration": true,
+      "forceConsistentCasingInFileNames": true,
+      "module": "commonjs",
+      "noEmitOnError": true,
+      "noFallthroughCasesInSwitch": true,
+      "noImplicitReturns": true,
+      "noUnusedLocals": true,
+      "pretty": true,
+      "sourceMap": true,
+      "strict": true,
+      "strictNullChecks": true,
+      "target": "es2017",
+      "incremental": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "strictPropertyInitialization": true,
+      "skipLibCheck": true,
+      "charset": "utf8",
+      "suppressImplicitAnyIndexErrors": true,
+      "alwaysStrict": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true
+    },
+    "exclude": [
+      "node_modules"
+    ]
+  }

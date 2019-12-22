@@ -6,6 +6,7 @@
 
 import { IHttpResponse } from '../http/httpResponse';
 import { IBpmn, IBpmnDeployResponse } from './bpmnDeployResponse';
+import { ICamundaBpmCreateInstanceResponse } from './camundaBpmCreateInstanceResponse';
 import { IProcessDefinition } from './processDefinition';
 import { IProcessXmlDefinition } from './processXmlDefinition';
 
@@ -16,7 +17,10 @@ export interface ICamundaRepository {
   getWorkflow(idOrKey: string): Promise<IProcessDefinition & IProcessXmlDefinition>;
   updateVariables<T = any>(processInstanceId: string, variables: T): Promise<IHttpResponse<void>>;
   updateJobRetries(id: string, retries: number): Promise<IHttpResponse<void>>;
-  createWorkflowInstance<T = any>(idOrKey: string, variables: T);
+  createWorkflowInstance<T = any>(
+    idOrKey: string,
+    variables: T
+  ): Promise<IHttpResponse<ICamundaBpmCreateInstanceResponse>>;
   publishMessage<T = any, K = any>({
     messageName,
     processInstanceId,
@@ -27,7 +31,7 @@ export interface ICamundaRepository {
     processInstanceId: string;
     variables: T;
     correlationKeys: K;
-  });
+  }): Promise<void>;
   resolveIncident(incidentKey: string): Promise<void>;
   cancelWorkflowInstance(id: string): Promise<void>;
 }

@@ -22,8 +22,8 @@ export interface IAPIConfig {
  * https://www.npmjs.com/package/axios#request-config
  */
 export interface IRequestConfig {
-  headers: IHeaders;
-  timeout: number;
+  headers?: IHeaders;
+  timeout?: number;
   [custom: string]: any;
 }
 

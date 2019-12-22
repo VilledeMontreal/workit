@@ -44,7 +44,8 @@ export class ZeebeMessage {
             return Promise.resolve();
           }
           const retries = error.retries;
-          this.hasBeenThreated = complete.failure(error.message, retries);
+          // TODO: check if zeebe-node made the type correction
+          this.hasBeenThreated = (complete.failure(error.message, retries) as unknown) as boolean;
           return Promise.resolve();
         }
       }
