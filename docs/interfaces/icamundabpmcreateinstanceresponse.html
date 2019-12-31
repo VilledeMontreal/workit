@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ITracerServiceOptions | workit-camunda</title>
+	<title>ICamundaBpmCreateInstanceResponse | workit-types</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">workit-camunda</a>
+					<a href="../index.html" class="title">workit-types</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="itracerserviceoptions.html">ITracerServiceOptions</a>
+					<a href="icamundabpmcreateinstanceresponse.html">ICamundaBpmCreateInstanceResponse</a>
 				</li>
 			</ul>
-			<h1>Interface ITracerServiceOptions</h1>
+			<h1>Interface ICamundaBpmCreateInstanceResponse</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ITracerServiceOptions</span>
+						<span class="target">ICamundaBpmCreateInstanceResponse</span>
 					</li>
 				</ul>
 			</section>
@@ -81,11 +81,14 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#host" class="tsd-kind-icon">host</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#maxpacketsize" class="tsd-kind-icon">max<wbr>Packet<wbr>Size</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#port" class="tsd-kind-icon">port</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#servicename" class="tsd-kind-icon">service<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="itracerserviceoptions.html#tags" class="tsd-kind-icon">tags</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icamundabpmcreateinstanceresponse.html#businesskey" class="tsd-kind-icon">business<wbr>Key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icamundabpmcreateinstanceresponse.html#caseinstanceid" class="tsd-kind-icon">case<wbr>Instance<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icamundabpmcreateinstanceresponse.html#definitionid" class="tsd-kind-icon">definition<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icamundabpmcreateinstanceresponse.html#ended" class="tsd-kind-icon">ended</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icamundabpmcreateinstanceresponse.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icamundabpmcreateinstanceresponse.html#links" class="tsd-kind-icon">links</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icamundabpmcreateinstanceresponse.html#suspended" class="tsd-kind-icon">suspended</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icamundabpmcreateinstanceresponse.html#tenantid" class="tsd-kind-icon">tenant<wbr>Id</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,52 +97,82 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="host" class="tsd-anchor"></a>
-					<h3>host</h3>
-					<div class="tsd-signature tsd-kind-icon">host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="businesskey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> business<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">business<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/aee5fee/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L11">src/models/opentelemetry/specs/tracerServiceOptions.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/camundaBpm/camundaBpmCreateInstanceResponse.ts#L13">src/camundaBpm/camundaBpmCreateInstanceResponse.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="maxpacketsize" class="tsd-anchor"></a>
-					<h3>max<wbr>Packet<wbr>Size</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>Packet<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="caseinstanceid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> case<wbr>Instance<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">case<wbr>Instance<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/aee5fee/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L13">src/models/opentelemetry/specs/tracerServiceOptions.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/camundaBpm/camundaBpmCreateInstanceResponse.ts#L14">src/camundaBpm/camundaBpmCreateInstanceResponse.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="port" class="tsd-anchor"></a>
-					<h3>port</h3>
-					<div class="tsd-signature tsd-kind-icon">port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="definitionid" class="tsd-anchor"></a>
+					<h3>definition<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">definition<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/aee5fee/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L12">src/models/opentelemetry/specs/tracerServiceOptions.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/camundaBpm/camundaBpmCreateInstanceResponse.ts#L12">src/camundaBpm/camundaBpmCreateInstanceResponse.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="servicename" class="tsd-anchor"></a>
-					<h3>service<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">service<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="ended" class="tsd-anchor"></a>
+					<h3>ended</h3>
+					<div class="tsd-signature tsd-kind-icon">ended<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/aee5fee/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L9">src/models/opentelemetry/specs/tracerServiceOptions.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/camundaBpm/camundaBpmCreateInstanceResponse.ts#L15">src/camundaBpm/camundaBpmCreateInstanceResponse.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="tags" class="tsd-anchor"></a>
-					<h3>tags</h3>
-					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="id" class="tsd-anchor"></a>
+					<h3>id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/aee5fee/packages/workit-camunda/src/models/opentelemetry/specs/tracerServiceOptions.ts#L10">src/models/opentelemetry/specs/tracerServiceOptions.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/camundaBpm/camundaBpmCreateInstanceResponse.ts#L11">src/camundaBpm/camundaBpmCreateInstanceResponse.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="links" class="tsd-anchor"></a>
+					<h3>links</h3>
+					<div class="tsd-signature tsd-kind-icon">links<span class="tsd-signature-symbol">:</span> <a href="ilink.html" class="tsd-signature-type">ILink</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/camundaBpm/camundaBpmCreateInstanceResponse.ts#L10">src/camundaBpm/camundaBpmCreateInstanceResponse.ts:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="suspended" class="tsd-anchor"></a>
+					<h3>suspended</h3>
+					<div class="tsd-signature tsd-kind-icon">suspended<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/camundaBpm/camundaBpmCreateInstanceResponse.ts#L16">src/camundaBpm/camundaBpmCreateInstanceResponse.ts:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="tenantid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> tenant<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">tenant<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/camundaBpm/camundaBpmCreateInstanceResponse.ts#L17">src/camundaBpm/camundaBpmCreateInstanceResponse.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -158,22 +191,31 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="itracerserviceoptions.html" class="tsd-kind-icon">ITracer<wbr>Service<wbr>Options</a>
+						<a href="icamundabpmcreateinstanceresponse.html" class="tsd-kind-icon">ICamunda<wbr>Bpm<wbr>Create<wbr>Instance<wbr>Response</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itracerserviceoptions.html#host" class="tsd-kind-icon">host</a>
+								<a href="icamundabpmcreateinstanceresponse.html#businesskey" class="tsd-kind-icon">business<wbr>Key</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itracerserviceoptions.html#maxpacketsize" class="tsd-kind-icon">max<wbr>Packet<wbr>Size</a>
+								<a href="icamundabpmcreateinstanceresponse.html#caseinstanceid" class="tsd-kind-icon">case<wbr>Instance<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itracerserviceoptions.html#port" class="tsd-kind-icon">port</a>
+								<a href="icamundabpmcreateinstanceresponse.html#definitionid" class="tsd-kind-icon">definition<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itracerserviceoptions.html#servicename" class="tsd-kind-icon">service<wbr>Name</a>
+								<a href="icamundabpmcreateinstanceresponse.html#ended" class="tsd-kind-icon">ended</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="itracerserviceoptions.html#tags" class="tsd-kind-icon">tags</a>
+								<a href="icamundabpmcreateinstanceresponse.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="icamundabpmcreateinstanceresponse.html#links" class="tsd-kind-icon">links</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="icamundabpmcreateinstanceresponse.html#suspended" class="tsd-kind-icon">suspended</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="icamundabpmcreateinstanceresponse.html#tenantid" class="tsd-kind-icon">tenant<wbr>Id</a>
 							</li>
 						</ul>
 					</li>
