@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/VilledeMontreal/workit/compare/workit-core@4.0.0...workit-core@4.0.1) (2019-12-31)
+
+**Note:** Version bump only for package workit-core
+
+
+
+
+
 # 4.0.0 (2019-12-31)
 
 
