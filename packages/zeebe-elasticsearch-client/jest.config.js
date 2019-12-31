@@ -5,8 +5,7 @@ module.exports = {
   "globals": {
     "__DEV__": true
   },
-  "testMatch": [ "**/tests/**/*.spec.ts" ],
   "rootDir": ".",
   coverageReporters: ["json", "text"],
-  testPathIgnorePatterns: ['node_modules', 'dist']
+  testPathIgnorePatterns: ['node_modules', 'lib']
 };

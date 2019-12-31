@@ -7,6 +7,7 @@
 import { PaginationUtils } from './utils/paginationUtils';
 
 import {
+  IBpmn,
   ICamundaClient,
   ICamundaConfig,
   ICamundaRepository,
@@ -15,6 +16,7 @@ import {
   ICreateWorkflowInstance,
   ICreateWorkflowInstanceResponse,
   IDeployWorkflowResponse,
+  IHttpResponse,
   IMessage,
   IPagination,
   IPaginationOptions,
@@ -95,9 +97,16 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
   public async getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {
     const params = CamundaBpmClient._getWorkflowParams(options);
     const apiOptions = { params };
-    const requests: Promise<any>[] = [this._repo.getWorkflows(apiOptions), this._repo.getWorkflowCount(apiOptions)];
+    const requests: [
+      Promise<IHttpResponse<IBpmn[]>>,
+      Promise<
+        IHttpResponse<{
+          count: number;
+        }>
+      >
+    ] = [this._repo.getWorkflows(apiOptions), this._repo.getWorkflowCount(apiOptions)];
     const [result, repCount] = await Promise.all(requests);
-    const bpmns = result.data;
+    const bpmns = result.data as IBpmn[];
     const workflows = bpmns.map(definition => {
       return {
         bpmnProcessId: definition.key,
@@ -146,9 +155,10 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
     const result = await this._repo.createWorkflowInstance(model.bpmnProcessId, model.variables);
     const response = result.data;
     const bpmnDef = response.definitionId.split(':');
+    // TODO: fix this type issue
     return {
       bpmnProcessId: bpmnDef[0],
-      version: bpmnDef[1],
+      version: (bpmnDef[1] as unknown) as number,
       workflowInstanceKey: response.id,
       workflowKey: response.definitionId
     };

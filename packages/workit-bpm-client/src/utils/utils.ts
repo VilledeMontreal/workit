@@ -15,42 +15,42 @@ const GLOBAL_TIMEOUT_PULL = 60000;
 /**
  * Checks if parameter is undefined or null
  */
-const isUndefinedOrNull = a => typeof a === 'undefined' || a === null;
+const isUndefinedOrNull = (a: unknown) => typeof a === 'undefined' || a === null;
 const typeMatchers = {
   null: isUndefinedOrNull,
 
   /**
    * @returns {boolean} true if value is Integer
    */
-  integer(a) {
+  integer(a: number) {
     return Number.isInteger(a) && a >= -Math.pow(2, 31) && a <= Math.pow(2, 31) - 1;
   },
 
   /**
    * @returns {boolean} true if value is Long
    */
-  long(a) {
+  long(a: number) {
     return Number.isInteger(a) && !typeMatchers.integer(a);
   },
 
   /**
    * @returns {boolean} true if value is Double
    */
-  double(a) {
+  double(a: number) {
     return typeof a === 'number' && !Number.isInteger(a);
   },
 
   /**
    * @returns {boolean} true if value is Boolean
    */
-  boolean(a) {
+  boolean(a: unknown): a is boolean {
     return typeof a === 'boolean';
   },
 
   /**
    * @returns {boolean} true if value is String
    */
-  string(a) {
+  string(a: unknown): a is string {
     return typeof a === 'string';
   },
 
@@ -65,14 +65,14 @@ const typeMatchers = {
    * @returns {boolean} true if value is Date.
    *
    */
-  date(a) {
+  date(a: unknown) {
     return a instanceof Date;
   },
 
   /**
    * @returns {boolean} true if value is JSON
    */
-  json(a) {
+  json(a: unknown) {
     return typeof a === 'object';
   }
 };
@@ -134,7 +134,7 @@ export class Utils {
    * @returns the type of the variable
    * @param variable: external task variable
    */
-  public static getVariableType = variable => {
+  public static getVariableType = (variable: number) => {
     const match = Object.entries(typeMatchers).filter(([matcherKey, matcherFunction]) => matcherFunction(variable))[0];
 
     return match[0];
@@ -162,7 +162,7 @@ export class Utils {
       //
     }
     // add default timeout for polling
-    interceptors.push(config => {
+    interceptors.push((config: any) => {
       config.timeout = GLOBAL_TIMEOUT_PULL;
       return config;
     });
