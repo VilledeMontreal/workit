@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## workit-camunda@4.0.0 (2019-10-10)
+## workit-camunda@4.0.1 (2019-12-31)
 
 #### :boom: Breaking Change
 *   [#89](https://github.com/VilledeMontreal/workit/pull/89) refactor(workit): add workit-types package
