@@ -1,7 +1,7 @@
 {
   "name": "workit-example-binding",
   "private": true,
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Show how to bind tasks with Workit",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
@@ -34,9 +34,9 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "workit-camunda": "^4.0.1",
-    "workit-core": "^4.0.1",
-    "workit-types": "^4.0.1"
+    "workit-camunda": "^4.0.2",
+    "workit-core": "^4.0.2",
+    "workit-types": "^4.0.2"
   },
   "keywords": [
     "workit",

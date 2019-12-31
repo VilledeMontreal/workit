@@ -1,6 +1,6 @@
 {
   "name": "zeebe-elasticsearch-client",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Client (Browser and NodeJs) for Zeebe Elasticsearch exporter powered by Typescript",
   "keywords": [
     "zeebe",

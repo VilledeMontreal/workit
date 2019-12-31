@@ -1,6 +1,6 @@
 {
   "name": "workit-core",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "This package provides default and no-op implementations of the WorkIt types for client packages.",
   "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -15,7 +15,7 @@
     "inversify": "~5.0.1",
     "reflect-metadata": "~0.1.13",
     "uuid": "^3.3.3",
-    "workit-types": "^4.0.1"
+    "workit-types": "^4.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
