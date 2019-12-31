@@ -19,7 +19,7 @@ Ce framework offre les avantages suivants:
 
 ## Démarrage rapide
 
-[Commencez en 2 minutes](packages/workit-camunda/.docs/WORKER.md).
+[Commencez en 2 minutes](getting-started/README.md).
 
 ## Documentation
 
@@ -253,7 +253,7 @@ IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
 ### Open-telemetry
-WorkIt intègrera Open-telemetry afin de fournir des instruments aux développeurs. En attendant, nous utilisons [Opencensus](https://github.com/census-instrumentation/opencensus-node). Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit étandre [CoreTracer](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/tracer.ts). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
+Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit étandre [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-types/src/trace/tracer.ts#L29). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
 
 ```javascript
 // Simply bind your custom tracer object like this
@@ -294,7 +294,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
 ```
 Vous pouvez consulter le dossier `sample` où nous fournissons un exemple (parallel.ts) en utilisant [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
-[Voir le tutoriel relié aux traces](packages/workit-camunda/.docs/WORKER.md#add-traces-to-your-worker-with-opencensus)
+[Voir le tutoriel relié aux traces](packages/workit-camunda/.docs/WORKER.md#add-traces-to-your-worker-with-opentelemetry)
 
 ### Définissez votre configuration pour la plate-forme que vous souhaitez utiliser
 
@@ -382,7 +382,7 @@ npm test
 *   [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - client nodejs pour Zeebe
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - client nodejs pour Camunda BPM
 *   [inversify](https://github.com/inversify/InversifyJS) - injection de dépendence
-*   [openCensus](https://opencensus.io/) - ajouter de l'instrumentation aux opérations (bientôt [open-telemetry](https://github.com/open-telemetry/opentelemetry-js))
+*   [opentelemetry](https://opentelemetry.io/) - ajouter de l'instrumentation aux opérations
 
 ## Philosophie
 

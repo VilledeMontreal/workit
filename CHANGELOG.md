@@ -10,6 +10,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
     - rename IPropertiesBase => IWorkflowPropsBase
     - rename Properties => IWorkflowProps
     - Now in `IMessage`, `properties` is not of type IWorkflowProps<TProps> but just it's just a generic so you need to tell `IMessage<MyCustomBody, IWorkflowProps<MyCustomProps>>` instead of `IMessage<MyCustomBody, MyCustomProps>`. The reason is that IMessage is a generic interface and `IWorkflowProps` is for Camunda usage. Workit can be used with rabbitmq, aws sqs etc.. If we develop clients like we did with Zeebe and Camunda BPM.
+* 
+    - Replace OpenTelemetry
+
+#### :bug: (Bug Fix)
+    - Remove Opencensus deps
+
+#### :books: (Refine Doc)
+    - Move samples folder to examples folder at root level
+    - Add getting started folder
 
 ## workit-cli@0.3.1 (2019-09-14)
 

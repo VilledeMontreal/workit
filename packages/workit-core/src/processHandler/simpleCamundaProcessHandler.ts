@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { SpanContext, SpanKind, TraceOptions, Tracer } from '@opencensus/core';
+import { SpanKind, SpanOptions, Tracer } from '@opentelemetry/types';
 import debug = require('debug');
 import { EventEmitter } from 'events';
 import { inject, injectable, optional } from 'inversify';
@@ -17,12 +17,12 @@ import {
   IProcessHandlerConfig,
   ISuccessStrategy,
   ITask,
+  ITracerPropagator,
   IWorkflowProps
 } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { Interceptors } from '../interceptors';
 import { IoC } from '../IoC';
-import { isWorkitPropagator } from '../opentelemetry/specs/workitFormat';
 
 const log = debug('workit:processHandler');
 
@@ -32,6 +32,7 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
   protected readonly _config: Partial<IProcessHandlerConfig>;
   protected readonly _success: ISuccessStrategy<ICamundaService>;
   protected readonly _failure: IFailureStrategy<ICamundaService>;
+  protected readonly _propagation: ITracerPropagator;
   protected readonly _tracer: Tracer;
   constructor(
     @inject(SERVICE_IDENTIFIER.success_strategy) successStrategy: ISuccessStrategy<ICamundaService>,
@@ -41,7 +42,8 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
   ) {
     super();
     this._tracer = tracer;
-    this._config = config || {};
+    this._config = config || ({} as IProcessHandlerConfig);
+    this._propagation = this._config.propagation || IoC.get(SERVICE_IDENTIFIER.tracer_propagator);
     this._success = successStrategy;
     this._failure = failureStrategy;
   }
@@ -53,41 +55,35 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
    */
   public handle = async (message: IMessage<T, K>, service: ICamundaService): Promise<void> => {
     log('handling message');
-    return this._ocHandle(message, service);
+    return this._otHandle(message, service);
   };
 
-  private _ocHandle = (message: IMessage<T, K>, service: ICamundaService): Promise<void> => {
+  private _otHandle = (message: IMessage<T, K>, service: ICamundaService): Promise<void> => {
     log('handling message with tracing');
     const { properties } = message;
     const identifier = properties.activityId;
-    let spanContext: SpanContext | null = null;
-
-    const propagation = this._tracer.propagation as unknown;
-    const spanOptions: TraceOptions = {
-      name: identifier,
-      kind: SpanKind.SERVER
+    const spanOptions: SpanOptions = {
+      kind: SpanKind.SERVER,
+      attributes: {
+        'wf.activityId': identifier,
+        'wf.processInstanceId': properties.processInstanceId,
+        'wf.workflowInstanceKey': properties.workflowInstanceKey,
+        'wf.retries': properties.retries || 0,
+        'wf.topicName': properties.topicName,
+        'worker.id': properties.workerId
+      }
     };
-    if (isWorkitPropagator(propagation)) {
-      spanContext = propagation.extractFromMessage(message);
-      spanOptions.spanContext = spanContext || undefined;
-    }
+    spanOptions.parent = this._propagation.extractFromMessage(message);
 
-    return this._tracer.startRootSpan(spanOptions, rootSpan => {
-      this._tracer.wrapEmitter(this);
-
-      rootSpan.addAttribute('wf.activityId', identifier);
-      rootSpan.addAttribute('wf.processInstanceId', properties.processInstanceId);
-      rootSpan.addAttribute('wf.workflowInstanceKey', properties.workflowInstanceKey);
+    const span = this._tracer.startSpan(identifier, spanOptions);
+    return this._tracer.withSpan(span, () => {
+      this._tracer.bind(this);
 
       if (properties.businessKey) {
-        rootSpan.addAttribute('wf.businessKey', properties.businessKey);
+        span.setAttribute('wf.businessKey', properties.businessKey);
       }
 
-      rootSpan.addAttribute('wf.retries', properties.retries || 0);
-      rootSpan.addAttribute('wf.topicName', properties.topicName);
-      rootSpan.addAttribute('worker.id', properties.workerId);
-
-      return this._handler(message, service, () => rootSpan.end());
+      return this._handler(message, service, () => span.end());
     });
   };
   private _handler = async (message: IMessage<T, K>, service: ICamundaService, callback?: () => void) => {

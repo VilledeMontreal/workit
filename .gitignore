@@ -50,9 +50,12 @@ coverage
 
 #ignore transpile code
 dist
+lib
 
 local.json
 local.yaml
 
 .changelog/
 .changelog/**/*
+
+examples/*/yarn.lock

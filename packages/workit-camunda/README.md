@@ -229,7 +229,7 @@ IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
 ### Open-telemetry
-WorkIt will integrate Open-telemetry in order to provide instrumentations to developers. In the meantime, we use [Opencensus](https://github.com/census-instrumentation/opencensus-node). By default, we bound a `NoopTracer` but you can provide your own and it must extend [CoreTracer class](https://github.com/census-instrumentation/opencensus-node/blob/master/packages/opencensus-core/src/trace/model/tracer.ts).We strongly recommand to use this kind of pattern in your task: [Domain Probe pattern](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). But here an example:
+By default, we bound a `NoopTracer` but you can provide your own and it must extend [Tracer class](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-types/src/trace/tracer.ts#L29).We strongly recommand to use this kind of pattern in your task: [Domain Probe pattern](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). But here an example:
 
 ```javascript
 // Simply bind your custom tracer object like this
@@ -270,7 +270,7 @@ export class HelloWorldTask extends TaskBase<IMessage> {
 ```
 You can look to `sample` folder where we provide an example (parallel.ts) using [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
-[See get started section with Opencensus](.docs/WORKER.md#add-traces-to-your-worker-with-opencensus)
+[See get started section with OpenTelemetry](.docs/WORKER.md#add-traces-to-your-worker-with-opentelemetry)
 
 ### Define your config for each platform
 
@@ -321,8 +321,7 @@ npm test
 *   [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - nodejs client for Zeebe
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - nodejs client for Camunda BPM
 *   [inversify](https://github.com/inversify/InversifyJS) - Dependency injection
-*   [openCensus](https://opencensus.io/) - add instrumentation to the operations to be tracked (coming soon [open-telemetry](https://github.com/open-telemetry/opentelemetry-js))
-
+*   [opentelemtry](https://opentelemetry.io/) - add instrumentation (provides a single set of APIs, libraries to capture distributed traces) 
 ## Philosophy
 
 1.  Allow Javascript developers to write code that adheres to the SOLID principles.

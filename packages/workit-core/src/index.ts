@@ -17,13 +17,6 @@ export * from './strategies/SuccessStrategySimple';
 
 export * from './IoC';
 
-// Core instrumentation
-export * from './opentelemetry/jaeger/jaegerFormat';
-export * from './opentelemetry/jaeger/simpleFormat';
-export * from './opentelemetry/jaeger/tracerService';
-export * from './opentelemetry/specs/workitFormat';
-export * from './opentelemetry/validators';
-
 // Proxy
 export * from './proxyFactory';
 export * from './proxyObserver';

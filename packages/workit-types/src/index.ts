@@ -30,7 +30,7 @@ export * from './core/camunda';
 export * from './tasks/task';
 
 // Tracer
-export * from './tracer/tracerServiceOptions';
+export * from './tracer/tracerPropagator';
 
 // Http
 export * from './http/headers';
