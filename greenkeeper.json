@@ -3,6 +3,11 @@
     "default": {
       "packages": [
         "package.json",
+        "examples/basic/package.json",
+        "examples/binding/package.json",
+        "examples/event/package.json",
+        "examples/opentelemetry/package.json",
+        "examples/parallel/package.json",
         "packages/workit-types/package.json",
         "packages/workit-core/package.json",
         "packages/workit-bpm-client/package.json",

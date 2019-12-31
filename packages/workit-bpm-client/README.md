@@ -46,7 +46,7 @@ npm i workit-bpm-client
 ## Start a worker
 
 ```js
-    import { CoreTracer } from '@opencensus/core';
+    import { NodeTracer } from '@opentelemetry/node';
     import { BasicAuthInterceptor, Client as CamundaExternalClient } from 'camunda-external-task-client-js';
     import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
 
@@ -54,7 +54,7 @@ npm i workit-bpm-client
     const client = new CamundaBpmClient(config, clientLib);
     const successHandler = new SuccessStrategySimple();
     const failureHandler = new FailureStrategySimple();
-    const tracer = new CoreTracer();
+    const tracer = new NodeTracer();
     const processHandler = new SCProcessHandler(successHandler, failureHandler, tracer);
     const worker = new Worker(client, processHandler);
 

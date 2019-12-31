@@ -3,16 +3,13 @@ lerna-debug.log
 packages/*/lib
 .idea
 # Add any directories, files, or patterns you don't want to be tracked by version control
-.vscode
 npm-debug.log
 typings
 .tags*
 
-# OSX
+# OS generated files
 .DS_Store
-**/.DS_Store
 
-**/swagger.json
 .nyc_output/
 
 ### Node ###
@@ -49,10 +46,18 @@ coverage
 /bin/artillery*report.json
 
 #ignore transpile code
-dist
+lib
 
-local.json
-local.yaml
+#lerna
+.changelog
 
-.changelog/
-.changelog/**/*
+# lock files
+yarn.lock
+package-lock.json
+packages/**/yarn.lock
+packages/**/package-lock.json
+examples/**/yarn.lock
+examples/**/package-lock.json
+
+# VsCode configs
+.vscode

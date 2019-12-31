@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { CoreTracer } from '@opencensus/core';
+import { NoopTracer } from '@opentelemetry/core';
 import * as crypto from 'crypto';
 import * as path from 'path';
 import { FailureStrategySimple, IoC, SCProcessHandler, TaskBase, Worker } from 'workit-core';
@@ -57,7 +57,7 @@ describe('ZeebeClient', () => {
     const successHandler = new SuccessStrategy(done);
     const failureHandler = new FailureStrategySimple();
     const client = new Client(new ZeebeClient({ workerId: 'jest-integration', baseUrl: 'localhost:26500', topicName }));
-    const processHandler = new SCProcessHandler(successHandler, failureHandler, new CoreTracer());
+    const processHandler = new SCProcessHandler(successHandler, failureHandler, new NoopTracer());
     return new Worker(client, processHandler);
   };
   beforeEach(() => {

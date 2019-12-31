@@ -24,7 +24,7 @@
     "@types/nock":"^11.1.0",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "@opencensus/core":"^0.0.19",
+    "@opentelemetry/core":"^0.3.1",
     "nock":"^11.7.0",
     "husky": "^3.1.0",
     "jest": "^24.9.0",

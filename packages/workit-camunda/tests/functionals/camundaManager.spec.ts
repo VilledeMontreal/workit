@@ -40,7 +40,7 @@ describe('Client Manager (Camunda BPM)', function() {
       .post('/engine-rest/deployment/create')
       .reply(200, require('./__mocks__/deployResponse.camunda.json'));
 
-    const path = `${process.cwd()}/sample/MESSAGE_EVENT.bpmn`;
+    const path = `${process.cwd()}/tests/data/bpmn/camunda-bpm/MESSAGE_EVENT.bpmn`;
     const result = await manager.deployWorkflow(path);
 
     expect(result).toMatchObject(require('./__mocks__/deployWorkflowResult.json'));

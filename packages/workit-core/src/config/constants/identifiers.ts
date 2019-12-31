@@ -21,7 +21,6 @@ export const SERVICE_IDENTIFIER = {
    * You can bind your own process handler by implementing IProcessHandler interface.
    * Default is provided.
    */
-
   process_handler: Symbol('process_handler'),
   /**
    * Config to pass to the process handler
@@ -32,11 +31,14 @@ export const SERVICE_IDENTIFIER = {
    * e.g IoC.get<Worker>(SERVICE_IDENTIFIER.worker);
    */
   worker: Symbol('Worker'),
-
   /**
-   * Pass your custom tracer in order to trace your worker.
-   * See more on opencensus web site.
-   * "CustomTracer" must be bound in the IoC defaul is a NoopTracer
+   * Pass your custom tracer or [NodeTracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-node/src/NodeTracer.ts#L25) in order to trace operations in your worker.
+   * `NodeTracer` must be bound in the IoC defaul is a [NoopTracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-core/src/trace/NoopTracer.ts#L31)
    */
-  tracer: Symbol('tracer')
+  tracer: Symbol('tracer'),
+  /**
+   * Pass your custom propagator in order to get traceId from Camunda platform.
+   * "TracerPropagator" must be bound in the IoC defaul is a NoopTracerPropagator
+   */
+  tracer_propagator: Symbol('tracer_propagator')
 };

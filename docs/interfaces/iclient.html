@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IClient | workit-camunda</title>
+	<title>IClient | workit-types</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">workit-camunda</a>
+					<a href="../index.html" class="title">workit-types</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -59,26 +59,27 @@
 					<a href="iclient.html">IClient</a>
 				</li>
 			</ul>
-			<h1>Interface IClient</h1>
+			<h1>Interface IClient&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
 						<span class="target">IClient</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/camundabpmclient.html" class="tsd-signature-type">CamundaBpmClient</a></li>
-					<li><a href="../classes/zeebeclient.html" class="tsd-signature-type">ZeebeClient</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -107,7 +108,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/aee5fee/packages/workit-camunda/src/models/camunda-n-mq/specs/client.ts#L11">src/models/camunda-n-mq/specs/client.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/core/client.ts#L10">src/core/client.ts:10</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -117,7 +118,7 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="imessage.html" class="tsd-signature-type">IMessage</a>, service<span class="tsd-signature-symbol">: </span><a href="icamundaservice.html" class="tsd-signature-type">ICamundaService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="imessage.html" class="tsd-signature-type">IMessage</a>, service<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
@@ -127,7 +128,7 @@
 															<h5>message: <a href="imessage.html" class="tsd-signature-type">IMessage</a></h5>
 														</li>
 														<li>
-															<h5>service: <a href="icamundaservice.html" class="tsd-signature-type">ICamundaService</a></h5>
+															<h5>service: <span class="tsd-signature-type">T</span></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -151,7 +152,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/VilledeMontreal/workit/blob/aee5fee/packages/workit-camunda/src/models/camunda-n-mq/specs/client.ts#L12">src/models/camunda-n-mq/specs/client.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/975c5dd/packages/workit-types/src/core/client.ts#L11">src/core/client.ts:11</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -172,7 +173,7 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
 						<a href="iclient.html" class="tsd-kind-icon">IClient</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">

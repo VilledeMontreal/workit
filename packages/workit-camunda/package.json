@@ -5,8 +5,8 @@
   "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
   "license": "MIT",
-  "main": "lib/src/index.js",
-  "typings": "lib/src/index.d.ts",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "dependencies": {
     "workit-core": "^3.2.0",
     "workit-types": "^3.2.0",
@@ -22,10 +22,10 @@
     "@commitlint/config-conventional": "^8.2.0",
     "@types/debug": "~4.1.5",
     "@types/events": "~3.0.0",
-    "@types/jest": "^24.0.23",
+    "@types/jest": "^24.0.25",
     "@types/nock": "^10.0.3",
-    "@types/node": "^13.1.0",
-    "@opencensus/core": "~0.0.17",
+    "@types/node": "^13.1.2",
+    "@opentelemetry/core": "~0.3.1",
     "axios":"^0.19.0",
     "husky": "^3.1.0",
     "jest": "^24.9.0",
@@ -39,8 +39,8 @@
     "tslint-config-airbnb": "^5.11.2",
     "tslint-config-prettier": "^1.18.0",
     "tslint-microsoft-contrib": "^6.2.0",
-    "typedoc": "^0.15.3",
-    "typescript": "^3.6.3"
+    "typedoc": "^0.15.6",
+    "typescript": "^3.7.4"
   },
   "engines": {
     "node": ">=8.11.4"
@@ -53,11 +53,7 @@
     "watch": "tsc -p ./tsconfig.json --watch",
     "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
     "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write",
-    "docs": "typedoc --out ../../docs --tsconfig ./tsconfig.json --excludePrivate --mode file",
-    "camunda:deploy": "node ./lib/sample/deploy.js",
-    "camunda:create-instance": "node ./lib/sample/create-process-instances.js",
-    "camunda:worker": "node ./lib/sample/worker.js",
-    "camunda:trace": "node ./lib/sample/parallel.js"
+    "docs": "typedoc --out ./docs --tsconfig ./tsconfig.json --excludePrivate --mode file"
   },
   "husky": {
     "hooks": {

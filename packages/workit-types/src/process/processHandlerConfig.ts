@@ -5,6 +5,7 @@
  */
 
 import { Interceptor } from '../core/interceptor';
+import { ITracerPropagator } from '../tracer/tracerPropagator';
 
 export interface IProcessHandlerConfig {
   /**
@@ -13,5 +14,8 @@ export interface IProcessHandlerConfig {
    * This payload is passed to the task (bound to the IoC).
    */
   interceptors?: Interceptor | Interceptor[];
-  enableTracing?: boolean;
+  /**
+   * Used for extracting traceId from message
+   */
+  propagation?: ITracerPropagator;
 }
