@@ -3,15 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## Unreleased workit-camunda@4.0.0 (2019-10-10)
+## workit-camunda@4.0.0 (2019-10-10)
 
 #### :boom: Breaking Change
 *   [#89](https://github.com/VilledeMontreal/workit/pull/89) refactor(workit): add workit-types package
     - rename IPropertiesBase => IWorkflowPropsBase
     - rename Properties => IWorkflowProps
     - Now in `IMessage`, `properties` is not of type IWorkflowProps<TProps> but just it's just a generic so you need to tell `IMessage<MyCustomBody, IWorkflowProps<MyCustomProps>>` instead of `IMessage<MyCustomBody, MyCustomProps>`. The reason is that IMessage is a generic interface and `IWorkflowProps` is for Camunda usage. Workit can be used with rabbitmq, aws sqs etc.. If we develop clients like we did with Zeebe and Camunda BPM.
-* 
-    - Replace OpenTelemetry
+*   [#110](https://github.com/VilledeMontreal/workit/pull/110) feat(opentelemetry): switch to opentelemetry
+    - Replace Opencensus to OpenTelemetry
 
 #### :bug: (Bug Fix)
     - Remove Opencensus deps
