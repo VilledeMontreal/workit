@@ -30,15 +30,15 @@ Ce framework offre les avantages suivants:
 
 ### API
 
-| Librairie               | Description |
-| ----------------------- | -----------------|
+| <div style="width:100px">Librairie</div> | Description |
+| ---------------------------------------- | -----------------|
 | [workit-types](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-types) | Cette librairie fournit les interfaces / enums TypeScript pour les classes de Workit|
 | [workit-core](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-core) | Cette librairie fournit les implémentations par défaut de la librairie "Workit types" pour Camunda Bpm et Zeebe. |
 
 ### Implémentation / Clients
 
-| Librairie               | Description |
-| ----------------------- | -----------------|
+| <div style="width:150px">Librairie</div>     | Description |
+| -------------------------------------------- | -----------------|
 | [workit-bpm-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) | Ce module fournit un contrôle complet pour intéragir avec la plateforme Camunda Bpm. Il utilise [`camunda-external-task-client-js`](https://github.com/camunda/camunda-external-task-client-js) par défaut. |
 | [workit-zeebe-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-zeebe-client) | Ce module fournit un contrôle complet pour intéragir avec la plateforme Zeebe. Il utilise [`zeebe-node`](https://github.com/creditsenseau/zeebe-client-node-js) and [`zeebe-elasticsearch-client`](https://github.com/VilledeMontreal/workit/tree/master/packages/zeebe-elasticsearch-client) par défaut. |
 | [workit-camunda](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-camunda) | Ce module permet de changer de plateforme (Camunda BPM / Zeebe) très facilement. Il suffit de remplacer un flag. Il utilise [`workit-bpm-client`](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) and [`workit-zeebe-client`](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-zeebe-client) par défaut. |
