@@ -9,7 +9,7 @@
   "typings": "lib/index.d.ts",
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^12.7.5",
+    "@types/node": "^13.1.0",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "husky": "^3.0.5",
