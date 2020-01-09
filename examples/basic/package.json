@@ -22,7 +22,7 @@
     "url": "git+https://github.com/VilledeMontreal/workit.git"
   },
   "devDependencies": {
-    "@types/node": "^12.12.12",
+    "@types/node": "^13.1.6",
     "prettier": "^1.19.1",
     "prettier-tslint": "^0.4.2",
     "tslint": "^5.20.1",
