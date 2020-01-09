@@ -15,7 +15,7 @@ If you don't have Camunda installed, you can use docker command to run it in the
 docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 ```
 
-Make sure to have Camunda running at http://localhost:8080 (user/pass demo/demo)
+Make sure to have Camunda running at http://localhost:8080/camunda (user/pass demo/demo)
 
 Run in your terminal in the root folder:
 
