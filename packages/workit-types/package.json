@@ -11,7 +11,7 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "@opentelemetry/types": "^0.3.1",
-    "@types/node": "^13.1.0",
+    "@types/node": "^13.1.6",
     "husky": "^3.0.5",
     "prettier": "^1.18.2",
     "prettier-tslint": "^0.4.2",
