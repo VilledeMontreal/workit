@@ -4,8 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { logger as camundaLogger } from 'camunda-external-task-client-js';
-import { logger } from 'workit-bpm-client';
+import { camundaLogger, logger } from 'workit-bpm-client';
 import { kernel } from 'workit-core';
 import { ICamundaConfig } from 'workit-types';
 import { constants } from './constants';

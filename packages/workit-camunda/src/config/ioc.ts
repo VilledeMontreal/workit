@@ -4,8 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
-import { CamundaBpmClient } from 'workit-bpm-client';
+import { CamundaBpmClient, CamundaExternalClient } from 'workit-bpm-client';
 import { IoC, Worker } from 'workit-core';
 import { ZeebeClient } from 'workit-zeebe-client';
 import { Client } from '../camunda-n-mq/client';
