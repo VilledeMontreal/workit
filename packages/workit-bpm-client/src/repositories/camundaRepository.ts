@@ -15,6 +15,8 @@ import {
   ICamundaBpmCreateInstanceResponse,
   ICamundaConfig,
   ICamundaRepository,
+  IDeployment,
+  IDeploymentResource,
   IHttpResponse,
   IIncident,
   IProcessDefinition,
@@ -168,5 +170,20 @@ export class CamundaRepository implements ICamundaRepository {
     return this._request.post(`/process-instance/${processInstanceId}/variables`, {
       modifications: Utils.serializeVariables(variables, local)
     });
+  }
+  public getDeployments(options?: { params: {} }): Promise<IHttpResponse<IDeployment[]>> {
+    return this._request.get('/deployment', options);
+  }
+  public getDeploymentResourceList(
+    deploymentId: string,
+    options?: { params: {} }
+  ): Promise<IHttpResponse<IDeploymentResource[]>> {
+    return this._request.get(`/deployment/${deploymentId}/resources`, options);
+  }
+  public getDeploymentResource(deploymentId: string, resourceId: string, options?: { params: {} }): Promise<IHttpResponse<Buffer>> {
+    return this._request.get(`/deployment/${deploymentId}/resources/${resourceId}/data`, options);
+  }
+  public deleteDeployment(deploymentId: string, options?: { params: {} }): Promise<IHttpResponse<void>> {
+    return this._request.delete(`/deployment/${deploymentId}`, options);
   }
 }

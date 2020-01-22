@@ -39,3 +39,23 @@ export interface IBpmn {
   historyTimeToLive: number;
   startableInTasklist: boolean;
 }
+
+/**
+ * Descriptor for a deployment in the Camunda BPM engine.
+ */
+export interface IDeployment {
+  id: string;
+  name: string;
+  source: string;
+  tenantId: string;
+  deploymentTime: Date;
+}
+
+/**
+ * Descriptor for a deployment's resource.
+ */
+export interface IDeploymentResource {
+  id: string;
+  name: string;
+  deploymentId: string;
+}

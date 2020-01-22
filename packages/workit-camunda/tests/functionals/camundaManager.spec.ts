@@ -6,9 +6,12 @@
 
 import nock = require('nock');
 import { CamundaBpmClient, CamundaExternalClient } from 'workit-bpm-client';
-import { ICamundaClient } from 'workit-types';
+import { ICamundaClient, IDeployment, IDeploymentResource } from 'workit-types';
 import { CamundaManager } from '../../src/camundaBpm/camundaManager';
 import '../../src/config/ioc';
+
+import * as fs from 'fs';
+import * as path from 'path';
 
 let manager: CamundaManager;
 // tslint:disable:ter-prefer-arrow-callback
@@ -230,6 +233,57 @@ describe('Client Manager (Camunda BPM)', function() {
     const result = await manager.cancelWorkflowInstance(instanceId);
 
     expect(result).toBeUndefined();
+    expect(scope.isDone()).toBeTruthy();
+  });
+
+  it('Get deployments', async () => {
+    const scope = nock('http://localhost:8080')
+      .get(`/engine-rest/deployment`)
+      .reply(200, require('./__mocks__/getDeploymentsResult.json'));
+
+    const result: IDeployment[] = await manager.getDeployments();
+
+    expect(result).toBeDefined();
+    expect(scope.isDone()).toBeTruthy();
+  });
+
+  it('Get deployment resource list', async () => {
+    const deploymentId = "8d72e88d-3de3-11ea-83a0-0242ac1f0007";
+    const scope = nock('http://localhost:8080')
+      .get(`/engine-rest/deployment/${deploymentId}/resources`)
+      .reply(200, require('./__mocks__/getDeploymentResourcelistResult.json'));
+
+    const result: IDeploymentResource[] = await manager.getDeploymentResourceList(deploymentId);
+
+    expect(result).toBeDefined();
+    expect(scope.isDone()).toBeTruthy();
+  });
+
+  it('Get deployment resource', async () => {
+    const deploymentId = "8d72e88d-3de3-11ea-83a0-0242ac1f0007";
+    const resourceId = "8d72e88e-3de3-11ea-83a0-0242ac1f0007";
+    const scope = nock('http://localhost:8080')
+      .get(`/engine-rest/deployment/${deploymentId}/resources/${resourceId}/data`)
+      .reply(200, fs.readFileSync(path.resolve(__dirname, './__mocks__/getDeploymentResourceData.xml')));
+
+    const result = await manager.getDeploymentResource(deploymentId, resourceId);
+
+    expect(result).toBeDefined();
+    expect(scope.isDone()).toBeTruthy();
+  });
+
+  it('Delete deployment', async () => {
+    const deploymentId = "be4d1bfb-3641-11ea-a10b-0242ac1b0007";
+    const scope = nock('http://localhost:8080')
+      .delete(`/engine-rest/deployment/${deploymentId}`)
+      .reply(204);
+
+    const result = await manager.deleteDeployment(deploymentId);
+
+    // tslint:disable-next-line:no-console
+    console.log(result);
+
+    expect(result).toEqual("");
     expect(scope.isDone()).toBeTruthy();
   });
 });

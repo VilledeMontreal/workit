@@ -10,6 +10,8 @@ import 'reflect-metadata';
 import {
   ICreateWorkflowInstance,
   ICreateWorkflowInstanceResponse,
+  IDeployment,
+  IDeploymentResource,
   IDeployWorkflowResponse,
   IPagination,
   IPaginationOptions,
@@ -61,5 +63,17 @@ export abstract class ClientManager<TClient extends IWorkflowClient> implements 
   }
   public cancelWorkflowInstance(instanceId: string): Promise<void> {
     return this._client.cancelWorkflowInstance(instanceId);
+  }
+  public async getDeployments(): Promise<IDeployment[]> {
+    return this._client.getDeployments();
+  }
+  public async getDeploymentResourceList(deploymentId: string): Promise<IDeploymentResource[]> {
+    return this._client.getDeploymentResourceList(deploymentId);
+  }
+  public async getDeploymentResource(deploymentId: string, resourceId: string): Promise<Buffer> {
+    return this._client.getDeploymentResource(deploymentId, resourceId);
+  }
+  public async deleteDeployment(deploymentId: string): Promise<void> {
+    return this._client.deleteDeployment(deploymentId);
   }
 }

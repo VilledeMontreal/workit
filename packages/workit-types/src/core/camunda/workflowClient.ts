@@ -8,6 +8,7 @@ import { IPagination } from '../../commons/pagination';
 import { IPaginationOptions } from '../../commons/paginationOptions';
 import { ICreateWorkflowInstance } from './createWorkflowInstance';
 import { ICreateWorkflowInstanceResponse } from './createWorkflowInstanceResponse';
+import { IDeployment, IDeploymentResource } from './deployment';
 import { IDeployWorkflowResponse } from './deployWorkflowResponse';
 import { IPublishMessage } from './publishMessage';
 import { IUpdateWorkflowRetry } from './updateWorkflowRetry';
@@ -26,4 +27,8 @@ export interface IWorkflowClient {
   createWorkflowInstance<T = unknown>(payload: ICreateWorkflowInstance<T>): Promise<ICreateWorkflowInstanceResponse>;
   resolveIncident(incidentKey: string): Promise<void>;
   getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition>;
+  getDeployments(): Promise<IDeployment[]>;
+  getDeploymentResourceList(deploymentId: string): Promise<IDeploymentResource[]>;
+  getDeploymentResource(deploymentId: string, resourceId: string): Promise<Buffer>;
+  deleteDeployment(deploymentId: string): Promise<void>;
 }

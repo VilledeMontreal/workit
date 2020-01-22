@@ -33,6 +33,7 @@ import { ZBClient, ZBWorker } from 'zeebe-node';
 import { CompleteFn } from 'zeebe-node/dist/lib/interfaces';
 import { PaginationUtils } from './utils/paginationUtils';
 import { ZeebeMessage } from './zeebeMessage';
+import { IDeployment, IDeploymentResource } from 'workit-types/lib/src/core/camunda/deployment';
 
 export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TVariables>
   implements IClient<ICamundaService>, IWorkflowClient {
@@ -180,6 +181,18 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       return this._worker.close();
     }
     return Promise.resolve();
+  }
+  public getDeployments(): Promise<IDeployment[]> {
+    throw new Error("Method not implemented.");
+  }
+  public getDeploymentResourceList(deploymentId: string): Promise<IDeploymentResource[]> {
+    throw new Error("Method not implemented.");
+  }
+  public getDeploymentResource(deploymentId: string, resourceId: string): Promise<Buffer> {
+    throw new Error("Method not implemented.");
+  }
+  public deleteDeployment(deploymentId: string): Promise<void> {
+    throw new Error("Method not implemented.");
   }
 
   private _validateExporterConfig() {

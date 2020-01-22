@@ -15,6 +15,8 @@ import {
   IClient,
   ICreateWorkflowInstance,
   ICreateWorkflowInstanceResponse,
+  IDeployment,
+  IDeploymentResource,
   IDeployWorkflowResponse,
   IHttpResponse,
   IMessage,
@@ -169,6 +171,27 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
   public resolveIncident(incidentKey: string): Promise<void> {
     return this._repo.resolveIncident(incidentKey);
   }
+  public async getDeployments(): Promise<IDeployment[]> {
+    const result = await this._repo.getDeployments();
+    const response = result.data;
+    return response;
+  }
+  public async getDeploymentResourceList(deploymentId: string): Promise<IDeploymentResource[]> {
+    const result = await this._repo.getDeploymentResourceList(deploymentId);
+    const response = result.data;
+    return response;
+  }
+  public async getDeploymentResource(deploymentId: string, resourceId: string): Promise<Buffer> {
+    const result = await this._repo.getDeploymentResource(deploymentId, resourceId);
+    const response = result.data;
+    return response;
+  }
+  public async deleteDeployment(deploymentId: string): Promise<void> {
+    const result = await this._repo.deleteDeployment(deploymentId);
+    const response = result.data;
+    return response;
+  }
+
   private _startSubscriber() {
     if (!this._config.autoPoll) {
       this._client.start();
