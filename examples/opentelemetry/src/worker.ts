@@ -7,10 +7,10 @@
 // tslint:disable: no-console
 
 // First load
-import { NodeTracer } from '@opentelemetry/node';
+import { NodeTracerRegistry } from '@opentelemetry/node';
 const ingoreUrls = [/\/external\-task\/fetchAndLock/i];
 // TODO: fix any
-const tracer = new NodeTracer({
+const tracer = new NodeTracerRegistry({
   plugins: {
     http: {
       enabled: true,
