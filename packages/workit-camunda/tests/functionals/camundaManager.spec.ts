@@ -251,7 +251,7 @@ describe('Client Manager (Camunda BPM)', function() {
     const deploymentId = "8d72e88d-3de3-11ea-83a0-0242ac1f0007";
     const scope = nock('http://localhost:8080')
       .get(`/engine-rest/deployment/${deploymentId}/resources`)
-      .reply(200, require('./__mocks__/getDeploymentResourcelistResult.json'));
+      .reply(200, require('./__mocks__/getDeploymentResourceListResult.json'));
 
     const result: IDeploymentResource[] = await manager.getDeploymentResourceList(deploymentId);
 
@@ -279,9 +279,6 @@ describe('Client Manager (Camunda BPM)', function() {
       .reply(204);
 
     const result = await manager.deleteDeployment(deploymentId);
-
-    // tslint:disable-next-line:no-console
-    console.log(result);
 
     expect(result).toEqual("");
     expect(scope.isDone()).toBeTruthy();

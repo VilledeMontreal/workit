@@ -5,12 +5,13 @@
  */
 
 import { IHttpResponse } from '../http/httpResponse';
-import { IBpmn, IBpmnDeployResponse, IDeployment, IDeploymentResource } from './bpmnDeployResponse';
+import { IBpmn, IBpmnDeployResponse } from './bpmnDeployResponse';
 import { ICamundaBpmCreateInstanceResponse } from './camundaBpmCreateInstanceResponse';
+import { ICamundaDeployable } from './camundaDeployable';
 import { IProcessDefinition } from './processDefinition';
 import { IProcessXmlDefinition } from './processXmlDefinition';
 
-export interface ICamundaRepository {
+export interface ICamundaRepository extends ICamundaDeployable {
   deployWorkflow(deployName: string, absPath: string): Promise<IHttpResponse<IBpmnDeployResponse>>;
   getWorkflows(options?: { params: {} }): Promise<IHttpResponse<IBpmn[]>>;
   getWorkflowCount(options?: { params: {} }): Promise<IHttpResponse<{ count: number }>>;
@@ -34,11 +35,4 @@ export interface ICamundaRepository {
   }): Promise<void>;
   resolveIncident(incidentKey: string): Promise<void>;
   cancelWorkflowInstance(id: string): Promise<void>;
-  getDeployments(options?: { params: {} }): Promise<IHttpResponse<IDeployment[]>>;
-  getDeploymentResourceList(
-    deploymentId: string,
-    options?: { params: {} }
-  ): Promise<IHttpResponse<IDeploymentResource[]>>;
-  getDeploymentResource(deploymentId: string, resourceId: string, options?: { params: {} }): Promise<IHttpResponse<Buffer>>;
-  deleteDeployment(deploymentId: string, options?: { params: {} }): Promise<IHttpResponse<void>>;
 }

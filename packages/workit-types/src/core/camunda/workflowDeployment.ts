@@ -7,7 +7,7 @@
 /**
  * Descriptor for a deployment in the Camunda BPM engine.
  */
-export interface IDeployment {
+export interface IBpmDeployment {
   id: string;
   name: string;
   source: string;
@@ -18,8 +18,15 @@ export interface IDeployment {
 /**
  * Descriptor for a deployment's resource.
  */
-export interface IDeploymentResource {
+export interface IBpmDeploymentResource {
   id: string;
   name: string;
   deploymentId: string;
+}
+
+export interface IWorkflowDeployment {
+  getDeployments(): Promise<IBpmDeployment[]>;
+  getDeploymentResourceList(deploymentId: string): Promise<IBpmDeploymentResource[]>;
+  getDeploymentResource(deploymentId: string, resourceId: string): Promise<Buffer>;
+  deleteDeployment(deploymentId: string): Promise<void>;
 }
