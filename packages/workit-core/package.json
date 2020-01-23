@@ -8,13 +8,13 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@opentelemetry/core": "^0.3.1",
-    "@opentelemetry/types": "^0.3.1",
+    "@opentelemetry/core": "0.3.3",
+    "@opentelemetry/types": "0.3.3",
     "debug": "~4.1.1",
     "fast-safe-stringify": "~2.0.7",
     "inversify": "~5.0.1",
     "reflect-metadata": "~0.1.13",
-    "uuid": "^3.3.3",
+    "uuid": "^3.4.0",
     "workit-types": "^4.0.2"
   },
   "devDependencies": {

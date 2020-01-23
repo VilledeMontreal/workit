@@ -11,7 +11,7 @@
     "lint-fix": "lerna run lint-fix",
     "test": "lerna run test",
     "test:integration": "lerna run test:integration --scope=workit-camunda",
-    "clean": "lerna clean",
+    "clean": "lerna clean -y",
     "publish:ci": "lerna run lint-fix && lerna publish --canary --yes",
     "publish": "lerna run lint-fix && lerna publish",
     "bootstrap": "lerna bootstrap",
