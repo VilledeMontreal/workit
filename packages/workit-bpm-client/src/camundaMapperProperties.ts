@@ -17,7 +17,7 @@ export class CamundaMapperProperties {
       workflowKey: task.processDefinitionKey,
       bpmnProcessId: task.processDefinitionKey,
       customHeaders: CamundaMapperProperties._getCustomHeaders(task),
-      jobKey: task.executionId,
+      jobKey: task.id,
       retries: task.retries,
       topicName: task.topicName,
       workerId: task.workerId,
