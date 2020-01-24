@@ -4,9 +4,8 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
 import nock = require('nock');
-import { CamundaBpmClient } from 'workit-bpm-client';
+import { CamundaBpmClient, CamundaExternalClient } from 'workit-bpm-client';
 import { ICamundaClient } from 'workit-types';
 import { CamundaManager } from '../../src/camundaBpm/camundaManager';
 import '../../src/config/ioc';

@@ -8,6 +8,9 @@
 export * from './config/constants/identifiers';
 
 export * from './camundaBpmClient';
+export * from './bpmClient';
+export * from './bpmLogger';
+export * from './camundaBpmClient';
 export * from './camundaMapperProperties';
 export * from './logger';
 export * from './camundaMessage';
