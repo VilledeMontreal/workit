@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.3](https://github.com/VilledeMontreal/workit/compare/workit-core@4.0.2...workit-core@4.0.3) (2020-01-24)
+
+
+### Features
+
+* **opentelemetry:** make it compatible with 0.3.3 ([#129](https://github.com/VilledeMontreal/workit/issues/129)) ([2edf7e3](https://github.com/VilledeMontreal/workit/commit/2edf7e38a2bd5ad56d775c27e220a90c230f57f4))
+
+
+
+
+
 ## [4.0.2](https://github.com/VilledeMontreal/workit/compare/workit-core@4.0.1...workit-core@4.0.2) (2019-12-31)
 
 **Note:** Version bump only for package workit-core

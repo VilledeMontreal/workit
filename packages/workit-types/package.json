@@ -1,6 +1,6 @@
 {
   "name": "workit-types",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "TypeScript types for Workit",
   "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",

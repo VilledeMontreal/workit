@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.3](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.3.2...workit-cli@0.3.3) (2020-01-24)
+
+**Note:** Version bump only for package workit-cli
+
+
+
+
+
 ## [0.3.2](https://github.com/VilledeMontreal/workit/compare/workit-cli@0.3.1...workit-cli@0.3.2) (2019-12-31)
 
 
