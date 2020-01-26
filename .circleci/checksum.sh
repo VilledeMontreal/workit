@@ -21,6 +21,6 @@ fi
 
 openssl md5 package.json >> $FILE
 
-find packages/*/package.json | xargs -I{} openssl md5 {} >> $FILE
+find packages/*/package.json examples/*/package.json | xargs -I{} openssl md5 {} >> $FILE
 
 sort -o $FILE $FILE

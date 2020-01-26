@@ -5,6 +5,12 @@ cache_1: &cache_1
   paths:
     - ./node_modules
     - ./yarn.lock
+    - examples/basic/node_modules
+    - examples/binding/node_modules
+    - examples/event/node_modules
+    - examples/failure-strategy/node_modules
+    - examples/opentelemetry/node_modules
+    - examples/parallel/node_modules
     - packages/workit-bpm-client/node_modules
     - packages/workit-camunda/node_modules
     - packages/workit-cli/node_modules
@@ -20,9 +26,19 @@ node_tests: &node_tests
     - run:
         name: Create Checksum
         command: sh .circleci/checksum.sh /tmp/checksums.txt
+    - run:
+        name: Setup environment variables
+        command: |
+          echo "export CIRCLE_NODE_VERSION=\$(node --version | grep -oE 'v[0-9]+')" >> $BASH_ENV
+          source $BASH_ENV
+    - run:
+        name: Log out node.js version
+        command: |
+          node --version
+          echo "CIRCLE_NODE_VERSION=${CIRCLE_NODE_VERSION}"
     - restore_cache:
         keys:
-          - npm-cache-{{ checksum "/tmp/checksums.txt" }}
+          - npm-cache-01-{{ .Environment.CIRCLE_JOB }}-{{ checksum "/tmp/checksums.txt" }}-1
     - run:
         name: Install Dependencies
         command: yarn install
@@ -43,10 +59,10 @@ node_tests: &node_tests
           echo Failed waiting for Zeebe && exit 1
     - run:
         name: test
-        command: npm run test:integration
+        command: npm run test:all
     - run:
-        name: codecov
-        command: npm run codecov
+        name: report coverage
+        command: if [ "${CIRCLE_NODE_VERSION}" = "v12" ]; then npm run codecov; fi
 docs_filters: &docs_filters # Ignores any commit on any branch by default
   branches:
     ignore: gh-pages

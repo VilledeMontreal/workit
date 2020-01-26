@@ -8,6 +8,7 @@
         "examples/event/package.json",
         "examples/opentelemetry/package.json",
         "examples/parallel/package.json",
+        "examples/failure-strategy/package.json",
         "packages/workit-types/package.json",
         "packages/workit-core/package.json",
         "packages/workit-bpm-client/package.json",

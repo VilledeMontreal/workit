@@ -2,7 +2,7 @@
   "name": "workit-bpm-client",
   "version": "4.0.3",
   "description": "Camunda BPM client for WorkIt that works with Camunda platform powered by TypeScript",
-  "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
+  "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
   "license": "MIT",
   "main": "lib/src/index.js",
@@ -44,6 +44,7 @@
     "tslint-consistent-codestyle": "^1.16.0",
     "tslint-microsoft-contrib": "^6.2.0",
     "typedoc": "^0.16.0",
+    "codecov": "^3.6.2",
     "typescript": "^3.7.4"
   },
   "engines": {
@@ -51,12 +52,14 @@
   },
   "scripts": {
     "test": "jest --testPathIgnorePatterns integration --coverage",
+    "test:all": "jest **/tests/**/*.spec.ts --coverage",
     "compile": "rm -rf ./lib/ && npm run build",
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc -p ./tsconfig.json --watch",
     "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
     "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write",
-    "docs": "typedoc --out ./docs --tsconfig ./tsconfig.json --excludePrivate --mode file"
+    "docs": "typedoc --out ./docs --tsconfig ./tsconfig.json --excludePrivate --mode file",
+    "codecov": "codecov -f coverage/*.json -p ../../"
   },
   "husky": {
     "hooks": {
@@ -76,7 +79,10 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "lib/src/**/*.js",
+    "lib/src/**/*.d.ts",
+    "LICENSE",
+    "README.md"
   ],
   "repository": {
     "type": "git",
