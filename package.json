@@ -10,6 +10,7 @@
     "build": "lerna run build",
     "lint-fix": "lerna run lint-fix",
     "test": "lerna run test",
+    "test:all": "lerna run test:all",
     "test:integration": "lerna run test:integration --scope=workit-camunda",
     "clean": "lerna clean -y",
     "publish:ci": "lerna run lint-fix && lerna publish --canary --yes",
@@ -17,13 +18,13 @@
     "bootstrap": "lerna bootstrap",
     "bump": "lerna publish",
     "remark-lint": "remark .",
-    "codecov": "codecov -f ./packages/workit-camunda/coverage/*.json"
+    "codecov": "lerna run codecov"
   },
   "devDependencies": {
     "@types/node": "^13.1.6",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "codecov": "^3.6.1",
+    "codecov": "^3.6.2",
     "lerna": "^3.19.0",
     "lerna-changelog": "^0.8.3",
     "remark-cli": "^7.0.1",

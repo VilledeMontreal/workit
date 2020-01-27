@@ -6,8 +6,10 @@
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
+    "test": "echo \"no test specified\"",
+    "test:all": "echo \"no test specified\"",
     "docs": "echo \"no doc specified\"",
+    "codecov": "echo \"no tests yet\"",
     "compile": "rm -rf ./lib/ && npm run build",
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc -p ./tsconfig.json --watch",
@@ -44,7 +46,7 @@
     "camunda",
     "zeebe"
   ],
-  "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
+  "author": "Montreal City Authors",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/VilledeMontreal/workit/issues"

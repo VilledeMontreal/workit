@@ -6,7 +6,7 @@
     "zeebe",
     "elasticsearch"
   ],
-  "author": "Olivier Albertini <olivier.albertini@montreal.ca>",
+  "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
   "license": "MIT",
   "main": "lib/src/index.js",
@@ -15,8 +15,10 @@
     "lib": "lib"
   },
   "files": [
-    "lib",
-    "src"
+    "lib/src/**/*.js",
+    "lib/src/**/*.d.ts",
+    "LICENSE",
+    "README.md"
   ],
   "dependencies": {
     "axios": "~0.19.0"
@@ -44,7 +46,8 @@
     "tslint-consistent-codestyle": "^1.16.0",
     "tslint-microsoft-contrib": "^6.2.0",
     "typedoc": "^0.16.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "codecov": "^3.6.2"
   },
   "repository": {
     "type": "git",
@@ -52,12 +55,14 @@
   },
   "scripts": {
     "test": "jest .",
+    "test:all": "jest **/tests/**/*.spec.ts --coverage",
     "compile": "rm -rf ./lib/ && npm run build",
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc -p ./tsconfig.json --watch",
     "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
     "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write",
-    "docs": "typedoc --out ../../docs --tsconfig ./tsconfig.json --excludePrivate --mode file"
+    "docs": "typedoc --out ../../docs --tsconfig ./tsconfig.json --excludePrivate --mode file",
+    "codecov": "codecov -f coverage/*.json -p ../../"
   },
   "bugs": {
     "url": "https://github.com/VilledeMontreal/workit/issues"

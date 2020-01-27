@@ -62,7 +62,7 @@ describe('ZeebeClient', () => {
   };
   beforeEach(() => {
     // tslint:disable-next-line: no-empty
-    workers.push(createWorkerInstance('', () => {}));
+    workers.push(createWorkerInstance('console-log', () => {}));
   });
 
   afterEach(async () => {
