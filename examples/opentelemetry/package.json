@@ -27,7 +27,7 @@
     "@types/node": "^13.1.6",
     "prettier": "^1.19.1",
     "prettier-tslint": "^0.4.2",
-    "tslint": "^5.20.1",
+    "tslint": "^6.0.0",
     "tslint-config-airbnb": "^5.11.2",
     "tslint-config-prettier": "^1.18.0",
     "tslint-consistent-codestyle": "^1.16.0",
