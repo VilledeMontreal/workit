@@ -9,6 +9,7 @@ export * from './config/constants/identifiers';
 export * from './config/constants';
 
 export * from './processHandler/simpleCamundaProcessHandler';
+export * from './interceptors';
 
 export * from './specs/taskBase';
 
