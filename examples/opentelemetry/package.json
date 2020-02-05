@@ -35,7 +35,7 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@opentelemetry/exporter-jaeger": "0.3.3",
+    "@opentelemetry/exporter-jaeger": "0.4.0",
     "@opentelemetry/node": "0.3.3",
     "@opentelemetry/plugin-http": "0.3.3",
     "@opentelemetry/plugin-https": "0.3.3",
