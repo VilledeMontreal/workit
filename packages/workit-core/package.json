@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@opentelemetry/core": "0.3.3",
+    "@opentelemetry/core": "0.4.0",
     "@opentelemetry/types": "0.3.3",
     "debug": "~4.1.1",
     "fast-safe-stringify": "~2.0.7",
