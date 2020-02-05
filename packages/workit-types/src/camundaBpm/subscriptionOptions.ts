@@ -8,7 +8,7 @@ export interface ISubscriptionOptions<T = unknown> {
   /**
    * Defines a subset of variables available in the handler.
    */
-  variables: T[];
+  variables: (keyof T)[];
   /**
    * A value which allows to filter tasks based on process instance business key
    */
@@ -29,6 +29,14 @@ export interface ISubscriptionOptions<T = unknown> {
    * A value which allows to filter tasks based on process definition keys
    */
   processDefinitionKeyIn: string;
+  /**
+   * A value which allows to filter tasks based on process definition Version Tag
+   */
+  processDefinitionVersionTag: string;
+  /**
+   * A JSON object used for filtering tasks based on process instance variable values. A property name of the object represents a process variable name, while the property value represents the process variable value to filter tasks by.
+   */
+  processVariables: Partial<T>;
   /**
    * A value which allows to filter tasks based on tenant ids
    */
