@@ -1,6 +1,6 @@
 {
   "name": "workit-core",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "This package provides default and no-op implementations of the WorkIt types for client packages.",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -15,7 +15,7 @@
     "inversify": "~5.0.1",
     "reflect-metadata": "~0.1.13",
     "uuid": "^3.4.0",
-    "workit-types": "^4.0.3"
+    "workit-types": "^4.0.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
@@ -25,6 +25,7 @@
     "@types/jest": "^25.1.1",
     "@types/node": "^13.1.6",
     "@types/uuid": "^3.4.6",
+    "codecov": "^3.6.2",
     "husky": "^3.1.0",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
@@ -37,8 +38,7 @@
     "tslint-consistent-codestyle": "^1.16.0",
     "tslint-microsoft-contrib": "^6.2.0",
     "typedoc": "^0.16.0",
-    "typescript": "^3.6.3",
-    "codecov": "^3.6.2"
+    "typescript": "^3.6.3"
   },
   "engines": {
     "node": ">=8.11.4"

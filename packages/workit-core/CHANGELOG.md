@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/VilledeMontreal/workit/compare/workit-core@4.0.3...workit-core@4.0.4) (2020-02-05)
+
+
+### Features
+
+* export Interceptors class to ease custom process handler impl. ([#143](https://github.com/VilledeMontreal/workit/issues/143)) ([b95d882](https://github.com/VilledeMontreal/workit/commit/b95d882581a33a5b8df0b5a64c3c616aa6dd7b09)), closes [#144](https://github.com/VilledeMontreal/workit/issues/144)
+
+
+
+
+
 ## [4.0.3](https://github.com/VilledeMontreal/workit/compare/workit-core@4.0.2...workit-core@4.0.3) (2020-01-24)
 
 

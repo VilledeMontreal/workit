@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/VilledeMontreal/workit/compare/workit-types@4.0.3...workit-types@4.0.4) (2020-02-05)
+
+
+### Features
+
+* add subscription options for task filtering ([#141](https://github.com/VilledeMontreal/workit/issues/141)) ([a3d6f97](https://github.com/VilledeMontreal/workit/commit/a3d6f9769723575ab7122070283a546cf4070e7a))
+
+
+
+
+
 ## [4.0.3](https://github.com/VilledeMontreal/workit/compare/workit-types@4.0.2...workit-types@4.0.3) (2020-01-24)
 
 

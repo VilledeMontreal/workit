@@ -1,6 +1,6 @@
 {
   "name": "workit-types",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "TypeScript types for Workit",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -12,6 +12,7 @@
     "@commitlint/config-conventional": "^8.1.0",
     "@opentelemetry/types": "0.3.3",
     "@types/node": "^13.1.6",
+    "codecov": "^3.6.2",
     "husky": "^3.0.5",
     "prettier": "^1.18.2",
     "prettier-tslint": "^0.4.2",
@@ -21,8 +22,7 @@
     "tslint-consistent-codestyle": "^1.16.0",
     "tslint-microsoft-contrib": "^6.2.0",
     "typedoc": "^0.16.0",
-    "typescript": "^3.6.3",
-    "codecov": "^3.6.2"
+    "typescript": "^3.6.3"
   },
   "engines": {
     "node": ">=8.11.4"
