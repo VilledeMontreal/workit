@@ -17,7 +17,7 @@
     "repo": "VilledeMontreal/workit",
     "labels": {
       "breaking": ":boom: Breaking Change",
-      "enchancement": ":rocket: (Enhancement)",
+      "enhancement": ":rocket: (Enhancement)",
       "bug": ":bug: (Bug Fix)",
       "core": ":wrench: Core",
       "documentation": ":books: (Refine Doc)",

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.0.3 (2020-02-05)
+
+#### :rocket: (Enhancement)
+
+*    [#141](https://github.com/VilledeMontreal/workit/pull/141) Add subscription options for task filtering through 'camunda-external-task-client-js' ([@sylvain-bouchard](https://github.com/sylvain-bouchard))
+
+#### :wrench: Core
+
+*    [#143](https://github.com/VilledeMontreal/workit/pull/143) Export 'Interceptors' class to ease custom process handler implementation ([@sylvain-bouchard](https://github.com/sylvain-bouchard))
+
 ## workit-camunda@4.0.2 (2019-12-31)
 
 #### :boom: Breaking Change
