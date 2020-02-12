@@ -26,7 +26,7 @@
     "@types/node": "^13.1.6",
     "@types/uuid": "^3.4.6",
     "codecov": "^3.6.2",
-    "husky": "^3.1.0",
+    "husky": "^4.2.2",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "prettier-tslint": "^0.4.2",
