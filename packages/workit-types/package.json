@@ -13,7 +13,7 @@
     "@opentelemetry/types": "0.3.3",
     "@types/node": "^13.1.6",
     "codecov": "^3.6.2",
-    "husky": "^3.0.5",
+    "husky": "^4.2.2",
     "prettier": "^1.18.2",
     "prettier-tslint": "^0.4.2",
     "tslint": "^5.20.0",
