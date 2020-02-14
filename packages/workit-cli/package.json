@@ -27,7 +27,7 @@
     "progress": "^2.0.3",
     "prompt": "^1.0.0",
     "shelljs": "^0.8.3",
-    "ts-morph": "^3.0.0",
+    "ts-morph": "^6.0.3",
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
