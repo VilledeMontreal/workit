@@ -82,9 +82,9 @@ workflows:
     jobs:
       - node10:
           filters: *docs_filters
-      - node11:
-          filters: *docs_filters
       - node12:
+          filters: *docs_filters
+      - node13:
           filters: *docs_filters
   build-master: # Will only run when a tag is pushed
     jobs:
@@ -102,14 +102,14 @@ jobs:
       - image: circleci/node:10
       - image: camunda/zeebe:0.20.0
     <<: *node_tests
-  node11:
-    docker:
-      - image: circleci/node:11
-      - image: camunda/zeebe:0.20.0
-    <<: *node_tests
   node12:
     docker:
       - image: circleci/node:12
+      - image: camunda/zeebe:0.20.0
+    <<: *node_tests
+  node13:
+    docker:
+      - image: circleci/node:13
       - image: camunda/zeebe:0.20.0
     <<: *node_tests
 
