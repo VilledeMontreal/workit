@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NoopTracer } from '@opentelemetry/core';
+import { NOOP_TRACER } from '@opentelemetry/api';
 import * as nock from 'nock';
 import { CamundaBpmClient, CamundaExternalClient, Utils } from 'workit-bpm-client';
 import { FailureStrategySimple, IoC, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
@@ -28,6 +28,11 @@ let processHandler: SCProcessHandler;
 // tslint:disable:max-func-body-length
 describe('Camunda Worker', function() {
   beforeEach(() => {
+    // init
+    const basicOauth = { username: 'admin', password: 'admin123' };
+    IoC.unbind(SERVICE_IDENTIFIER.camunda_oauth_info);
+    IoC.bindToObject(basicOauth, SERVICE_IDENTIFIER.camunda_oauth_info);
+
     config = {
       maxTasks: 1,
       workerId: 'demo',
@@ -37,17 +42,13 @@ describe('Camunda Worker', function() {
       autoPoll: false,
       interceptors: Utils.defaultInterceptors()
     };
-    // init
-    const basicOauth = { username: 'admin', password: 'admin123' };
-    IoC.unbind(SERVICE_IDENTIFIER.camunda_oauth_info);
-    IoC.bindToObject(basicOauth, SERVICE_IDENTIFIER.camunda_oauth_info);
 
     const clientLib: ICamundaClient = new CamundaExternalClient(config) as any;
     camundaClient = new CamundaBpmClient(config, clientLib);
     successHandler = new SuccessStrategySimple();
     failureHandler = new FailureStrategySimple();
     client = new Client(camundaClient);
-    processHandler = new SCProcessHandler(successHandler, failureHandler, new NoopTracer(), config as any);
+    processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER, config as any);
 
     successHandler.handle = jest.fn().mockResolvedValueOnce({});
     worker = new Worker(client, processHandler);
@@ -172,7 +173,7 @@ describe('Camunda Worker', function() {
     const newProcessHandler = new SCProcessHandler(
       successHandler,
       failureHandler,
-      new NoopTracer(),
+      NOOP_TRACER,
       configWithInterceptors
     );
     worker = new Worker(client, newProcessHandler);

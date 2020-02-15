@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NoopTracer } from '@opentelemetry/core';
+import { NOOP_TRACER } from '@opentelemetry/api';
 import { BasicAuthInterceptor, Client as CamundaExternalClient } from 'camunda-external-task-client-js';
 import * as nock from 'nock';
 import { FailureStrategySimple, IoC, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
@@ -48,7 +48,7 @@ describe('Camunda Worker', function() {
     client = new CamundaBpmClient(config, clientLib);
     successHandler = new SuccessStrategySimple();
     failureHandler = new FailureStrategySimple();
-    processHandler = new SCProcessHandler(successHandler, failureHandler, new NoopTracer(), handlerConfig);
+    processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER, handlerConfig);
     successHandler.handle = jest.fn().mockResolvedValueOnce({});
     worker = new Worker(client, processHandler);
 
@@ -172,7 +172,7 @@ describe('Camunda Worker', function() {
     const newProcessHandler = new SCProcessHandler(
       successHandler,
       failureHandler,
-      new NoopTracer(),
+      NOOP_TRACER,
       configWithInterceptors
     );
     worker = new Worker(client, newProcessHandler);

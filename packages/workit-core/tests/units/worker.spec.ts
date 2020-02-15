@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NoopTracer } from '@opentelemetry/core';
+import { NOOP_TRACER } from '@opentelemetry/api';
 import { SCProcessHandler } from '../../src/processHandler/simpleCamundaProcessHandler';
 import { FailureStrategySimple } from '../../src/strategies/FailureStrategySimple';
 import { SuccessStrategySimple } from '../../src/strategies/SuccessStrategySimple';
@@ -17,7 +17,7 @@ describe('Worker', () => {
     const successHandler = new SuccessStrategySimple();
     const failureHandler = new FailureStrategySimple();
     const fakeClient = new FakeClient();
-    const processHandler = new SCProcessHandler(successHandler, failureHandler, new NoopTracer());
+    const processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER);
     const worker = new Worker(fakeClient, processHandler);
     expect(worker).toBeInstanceOf(Worker);
   });
@@ -31,7 +31,7 @@ describe('Worker', () => {
       failureHandler.handle = jest.fn().mockResolvedValueOnce({});
 
       const fakeClient = new FakeClient();
-      const processHandler = new SCProcessHandler(successHandler, failureHandler, new NoopTracer());
+      const processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER);
       const worker = new Worker(fakeClient, processHandler);
 
       expect(worker).toBeInstanceOf(Worker);
@@ -46,7 +46,7 @@ describe('Worker', () => {
       fakeClient.subscribe = jest.fn().mockResolvedValueOnce({});
       fakeClient.unsubscribe = jest.fn().mockResolvedValueOnce({});
 
-      const processHandler = new SCProcessHandler(successHandler, failureHandler, new NoopTracer());
+      const processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER);
       const worker = new Worker(fakeClient, processHandler);
 
       expect(worker).toBeInstanceOf(Worker);
@@ -64,7 +64,7 @@ describe('Worker', () => {
       fakeClient.subscribe = jest.fn().mockResolvedValueOnce({});
       fakeClient.unsubscribe = jest.fn().mockResolvedValueOnce({});
 
-      const processHandler = new SCProcessHandler(successHandler, failureHandler, new NoopTracer());
+      const processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER);
       const worker = new Worker(fakeClient, processHandler);
       worker.run();
       worker.stop().catch();

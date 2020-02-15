@@ -37,14 +37,13 @@ npm i workit-zeebe-client
 ## Start a worker
 
 ```js
-    import { NodeTracer } from '@opentelemetry/core';
+    import { NOOP_TRACER } from '@opentelemetry/api';
     import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
 
     const client = new ZeebeClient(config);
     const successHandler = new SuccessStrategySimple();
     const failureHandler = new FailureStrategySimple();
-    const tracer = new NodeTracer();
-    const processHandler = new SCProcessHandler(successHandler, failureHandler, tracer);
+    const processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER);
     const worker = new Worker(client, processHandler);
 
     worker.start();
