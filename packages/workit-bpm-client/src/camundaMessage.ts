@@ -68,6 +68,9 @@ export class CamundaMessage {
             retryTimeout: 1000 * retries * 2
           });
           this.hasBeenThreated = true;
+        },
+        async error(error: Error & { code: string }, message: IMessage): Promise<void> {
+          await payload.taskService.handleBpmnError(task, error.code, error.message, message.body);
         }
       }
     ];

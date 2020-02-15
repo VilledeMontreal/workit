@@ -9,6 +9,17 @@ import { FailureException } from './failureException';
 
 export interface ICamundaService {
   hasBeenThreated: boolean;
+  /** Complete the task with a success */
   ack(message: IMessage): Promise<void>;
+
+  /**
+   * Fail the task with an informative message as to the cause. Optionally pass in a value remaining retries.
+   * Pass in 0 for retries to raise an incident
+   */
   nack(e: FailureException): Promise<void>;
+  /**
+   * Report a business error (i.e. non-technical) that occurs while processing a task.
+   * The error is handled in the workflow by an error catch event.
+   */
+  error(error: Error & { code: string }, message: IMessage): Promise<void>;
 }
