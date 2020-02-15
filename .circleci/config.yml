@@ -100,17 +100,17 @@ jobs:
   node10:
     docker:
       - image: circleci/node:10
-      - image: camunda/zeebe:0.20.0
+      - image: camunda/zeebe:0.22.1
     <<: *node_tests
   node11:
     docker:
       - image: circleci/node:11
-      - image: camunda/zeebe:0.20.0
+      - image: camunda/zeebe:0.22.1
     <<: *node_tests
   node12:
     docker:
       - image: circleci/node:12
-      - image: camunda/zeebe:0.20.0
+      - image: camunda/zeebe:0.22.1
     <<: *node_tests
 
 
