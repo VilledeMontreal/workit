@@ -14,7 +14,7 @@
     "workit-core": "^4.0.4",
     "workit-types": "^4.0.4",
     "zeebe-elasticsearch-client": "^0.3.3",
-    "zeebe-node": "0.20.1"
+    "zeebe-node": "0.22.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",

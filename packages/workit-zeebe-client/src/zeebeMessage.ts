@@ -31,15 +31,9 @@ export class ZeebeMessage {
           // TODO: change any to real type body
           const vars = getVariablesWhenChanged<any>(message, msg => ZeebeMessage.unwrap(msg));
 
-          if (vars) {
-            this.hasBeenThreated = complete.success(vars.variables);
-          } else {
-            this.hasBeenThreated = complete.success();
-          }
-
-          return Promise.resolve();
+          this.hasBeenThreated = await complete.success(vars.variables);
         },
-        async nack(error: FailureException) {
+        nack(error: FailureException) {
           if (this.hasBeenThreated) {
             return Promise.resolve();
           }
