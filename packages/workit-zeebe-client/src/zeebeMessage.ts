@@ -41,6 +41,10 @@ export class ZeebeMessage {
           // TODO: check if zeebe-node made the type correction
           this.hasBeenThreated = (complete.failure(error.message, retries) as unknown) as boolean;
           return Promise.resolve();
+        },
+        error(error: Error & { code: string }, message: IMessage): Promise<void> {
+          complete.error(error.code, error.message);
+          return Promise.resolve();
         }
       }
     ];

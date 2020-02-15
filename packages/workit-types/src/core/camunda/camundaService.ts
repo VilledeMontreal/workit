@@ -17,4 +17,9 @@ export interface ICamundaService {
    * Pass in 0 for retries to raise an incident
    */
   nack(e: FailureException): Promise<void>;
+  /**
+   * Report a business error (i.e. non-technical) that occurs while processing a task.
+   * The error is handled in the workflow by an error catch event.
+   */
+  error(error: Error & { code: string }, message: IMessage): Promise<void>;
 }
