@@ -253,7 +253,7 @@ IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
 ### Open-telemetry
-Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit étandre [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-types/src/trace/tracer.ts#L29). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
+Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit étandre [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-api/src/trace/tracer.ts#L29). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
 
 ```javascript
 // Simply bind your custom tracer object like this
@@ -262,9 +262,9 @@ IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);
 
 ```javascript
 export class HelloWorldTask extends TaskBase<IMessage> {
-  private readonly _tracer: TracerBase;
+  private readonly _tracer: Tracer;
     
-  constructor(tracer: TracerBase) {
+  constructor(tracer: Tracer) {
         this._tracer = tracer
   }
 
@@ -273,19 +273,24 @@ export class HelloWorldTask extends TaskBase<IMessage> {
       
       console.log(`Executing task: ${properties.activityId}`);
       console.log(`${properties.bpmnProcessId}::${properties.processInstanceId} Servus!`);
-      message.body.test = true;
+
       // This call will be traced automatically
       const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
       
       // you can also create a custom trace like this :
-      const span = this._tracer.startChildSpan({ name: 'customSpan', kind: SpanKind.CLIENT });
+      const currentSpan = tracer.getCurrentSpan();
+      const span = this._tracer.startSpan('customSpan', {
+        parent: currentSpan,
+        kind: SpanKind.CLIENT,
+        attributes: { key: 'value' },
+      });
       
       console.log();
       console.log('data:');
       console.log(response.data);
       // put your business logic here
 
-      // finish
+      // finish the span scope
       span.end();
       
       return Promise.resolve(message);
@@ -321,7 +326,7 @@ const zeebeElasticExporterConfig = {
 IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);
 IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_exporter_config)
 ```
-[See documentation](packages/workit-camunda/.docs/CONFIG.md)
+[Voir la documentation](packages/workit-camunda/.docs/CONFIG.md)
 
 ### Définissez vos stratégies en cas d'échec ou de succès
 
