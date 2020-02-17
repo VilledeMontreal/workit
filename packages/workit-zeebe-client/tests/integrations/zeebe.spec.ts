@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NoopTracer } from '@opentelemetry/core';
+import { NOOP_TRACER } from '@opentelemetry/api';
 import * as crypto from 'crypto';
 import * as path from 'path';
 import { ICamundaService, IMessage, ISuccessStrategy } from 'workit-types';
@@ -57,7 +57,7 @@ describe('ZeebeClient', () => {
     const successHandler = new SuccessStrategy(done);
     const failureHandler = new FailureStrategySimple();
     const client = new ZeebeClient({ workerId: 'jest-integration', baseUrl: 'localhost:26500', topicName });
-    const processHandler = new SCProcessHandler(successHandler, failureHandler, new NoopTracer());
+    const processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER);
     return new Worker(client, processHandler);
   };
   beforeEach(() => {

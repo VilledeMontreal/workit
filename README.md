@@ -32,10 +32,10 @@ This package can be useful because:
 
 ### API
 
-| Package                 | Description |
-| ----------------------- | -----------------|
-| [workit-types](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-types) | This package provides TypeScript interfaces and enums for the Workit core model. |
-| [workit-core](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-core) | This package provides default and no-op implementations of the Workit types for Camunda Bpm and Zeebe. |
+| Package | Description |
+| --- | ---|
+| [workit-types](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-types) | This package provides TypeScript interfaces and enums for the Workit core model. 
+| [workit-core](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-core) | This package provides default and no-op implementations of the Workit types 
 
 ### Implementation / Clients
 
@@ -251,8 +251,8 @@ const workerConfig = {
 IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
-### Open-telemetry
-By default, we bound a `NoopTracer` but you can provide your own and it must extend [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-types/src/trace/tracer.ts#L29).We strongly recommand to use this kind of pattern in your task: [Domain Probe pattern](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). But here an example:
+### OpenTelemetry
+By default, we bound a `NoopTracer` but you can provide your own and it must extend [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-api/src/trace/tracer.ts#L29).We strongly recommand to use this kind of pattern in your task: [Domain Probe pattern](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). But here an example:
 
 ```javascript
 // Simply bind your custom tracer object like this
@@ -261,9 +261,9 @@ IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);
 
 ```javascript
 export class HelloWorldTask extends TaskBase<IMessage> {
-  private readonly _tracer: TracerBase;
+  private readonly _tracer: Tracer;
     
-  constructor(tracer: TracerBase) {
+  constructor(tracer: Tracer) {
         this._tracer = tracer
   }
 
@@ -272,12 +272,17 @@ export class HelloWorldTask extends TaskBase<IMessage> {
       
       console.log(`Executing task: ${properties.activityId}`);
       console.log(`${properties.bpmnProcessId}::${properties.processInstanceId} Servus!`);
-      message.body.test = true;
+
       // This call will be traced automatically
       const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
       
       // you can also create a custom trace like this :
-      const span = this._tracer.startChildSpan({ name: 'customSpan', kind: SpanKind.CLIENT });
+      const currentSpan = tracer.getCurrentSpan();
+      const span = this._tracer.startSpan('customSpan', {
+        parent: currentSpan,
+        kind: SpanKind.CLIENT,
+        attributes: { key: 'value' },
+      });
       
       console.log();
       console.log('data:');
@@ -381,7 +386,7 @@ npm test
 *   [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - nodejs client for Zeebe
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - nodejs client for Camunda BPM
 *   [inversify](https://github.com/inversify/InversifyJS) - Dependency injection
-*   [opentelemtry](https://opentelemetry.io/) - add instrumentation to the operations (provides a single set of APIs, libraries to capture distributed traces)
+*   [opentelemetry](https://opentelemetry.io/) - add instrumentation to the operations (provides a single set of APIs, libraries to capture distributed traces)
 
 ## Philosophy
 

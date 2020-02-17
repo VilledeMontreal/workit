@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NoopTracer } from '@opentelemetry/core';
+import { NOOP_TRACER } from '@opentelemetry/api';
 import { EventEmitter } from 'events';
 import { Container, decorate, injectable } from 'inversify';
 import { SCProcessHandler } from '../processHandler/simpleCamundaProcessHandler';
@@ -25,7 +25,7 @@ try {
 export const kernel = new Container();
 
 kernel.bind(SERVICE_IDENTIFIER.tracer_propagator).toConstantValue(new NoopTracerPropagator());
-kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(new NoopTracer());
+kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(NOOP_TRACER);
 kernel.bind(SERVICE_IDENTIFIER.success_strategy).toConstantValue(new SuccessStrategySimple());
 kernel.bind(SERVICE_IDENTIFIER.failure_strategy).toConstantValue(new FailureStrategySimple());
 kernel.bind(SERVICE_IDENTIFIER.process_handler).to(SCProcessHandler);

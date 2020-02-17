@@ -8,21 +8,21 @@
   "main": "lib/src/index.js",
   "typings": "lib/src/index.d.ts",
   "devDependencies": {
-    "@commitlint/cli": "^8.1.0",
-    "@commitlint/config-conventional": "^8.1.0",
-    "@opentelemetry/types": "0.3.3",
-    "@types/node": "^13.1.6",
-    "codecov": "^3.6.2",
-    "husky": "^3.0.5",
-    "prettier": "^1.18.2",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@opentelemetry/api": "0.4.0",
+    "@types/node": "^13.7.1",
+    "codecov": "^3.6.5",
+    "husky": "^4.2.3",
+    "prettier": "^1.19.1",
     "prettier-tslint": "^0.4.2",
-    "tslint": "^5.20.0",
+    "tslint": "^6.0.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-consistent-codestyle": "^1.16.0",
     "tslint-microsoft-contrib": "^6.2.0",
-    "typedoc": "^0.16.0",
-    "typescript": "^3.6.3"
+    "typedoc": "^0.16.9",
+    "typescript": "^3.7.5"
   },
   "engines": {
     "node": ">=8.11.4"
