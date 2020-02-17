@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { SpanContext } from '@opentelemetry/types';
+import { SpanContext } from '@opentelemetry/api';
 import { IMessageBase } from '../core/message';
 
 /**

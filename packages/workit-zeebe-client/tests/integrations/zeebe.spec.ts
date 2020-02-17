@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NoopTracer } from '@opentelemetry/core';
+import { NOOP_TRACER } from '@opentelemetry/api';
 import * as crypto from 'crypto';
 import * as path from 'path';
 import { ICamundaService, IMessage, ISuccessStrategy } from 'workit-types';
@@ -57,7 +57,7 @@ describe('ZeebeClient', () => {
     const successHandler = new SuccessStrategy(done);
     const failureHandler = new FailureStrategySimple();
     const client = new ZeebeClient({ workerId: 'jest-integration', baseUrl: 'localhost:26500', topicName });
-    const processHandler = new SCProcessHandler(successHandler, failureHandler, new NoopTracer());
+    const processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER);
     return new Worker(client, processHandler);
   };
   beforeEach(() => {
@@ -118,7 +118,7 @@ describe('ZeebeClient', () => {
     }
   });
 
-  it('Can start a workflow with a message', async done => {
+  it.only('Can start a workflow with a message', async done => {
     const deploy = await zbc.deployWorkflow(path.join(__dirname, '..', './data/bpmn/zeebe/msg-start.bpmn'));
     expect(deploy.key).toBeTruthy();
 
@@ -127,24 +127,23 @@ describe('ZeebeClient', () => {
     await zbc.publishMessage({
       correlation: '',
       name: 'MSG-START_JOB',
-      timeToLive: 1000,
+      timeToLive: 30_000,
       variables: {
         testKey: randomId
       }
     });
 
-    workers.unshift(createWorkerInstance('console-log-msg', done));
-
-    IoC.unbind('ServiceTask_0f6zc7d');
-    IoC.bindToObject(
-      new HelloWorldTask(message => {
-        expect(message.properties.customHeaders.message.indexOf('Workflow') !== -1).toBe(true);
-        expect(message.body.testKey).toBe(randomId); // Makes sure the worker isn't responding to another message
-      }),
-      'ServiceTask_0f6zc7d'
-    );
-
     try {
+      workers.unshift(createWorkerInstance('console-log-msg', done));
+
+      IoC.unbind('ServiceTask_0f6zc7d');
+      IoC.bindToObject(
+        new HelloWorldTask(message => {
+          expect(message.properties.customHeaders.message.indexOf('Workflow') !== -1).toBe(true);
+          expect(message.body.testKey).toBe(randomId); // Makes sure the worker isn't responding to another message
+        }),
+        'ServiceTask_0f6zc7d'
+      );
       await workers[0].run();
     } catch (e) {
       done(e);

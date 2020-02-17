@@ -17,7 +17,6 @@ cache_1: &cache_1
     - packages/workit-core/node_modules
     - packages/workit-types/node_modules
     - packages/workit-zeebe-client/node_modules
-    - packages/opentelemetry-metrics/node_modules
     - packages/zeebe-elasticsearch-client/node_modules
 
 node_tests: &node_tests
@@ -62,7 +61,8 @@ node_tests: &node_tests
         command: npm run test:all
     - run:
         name: report coverage
-        command: if [ "${CIRCLE_NODE_VERSION}" = "v12" ]; then npm run codecov; fi
+        # command: if [ "${CIRCLE_NODE_VERSION}" = "v12" ]; then npm run codecov; fi
+        command: npm run codecov
 docs_filters: &docs_filters # Ignores any commit on any branch by default
   branches:
     ignore: gh-pages
@@ -80,11 +80,11 @@ workflows:
   version: 2
   test:
     jobs:
-      - node10:
-          filters: *docs_filters
-      - node11:
-          filters: *docs_filters
-      - node12:
+      # - node10:
+      #     filters: *docs_filters
+      # - node12:
+      #     filters: *docs_filters
+      - node-lts:
           filters: *docs_filters
   build-master: # Will only run when a tag is pushed
     jobs:
@@ -97,19 +97,19 @@ workflows:
 
 jobs:
   # Runs the tests, including integration
-  node10:
+  # node10:
+  #   docker:
+  #     - image: circleci/node:10
+  #     - image: camunda/zeebe:0.22.1
+  #   <<: *node_tests
+  # node12:
+  #   docker:
+  #     - image: circleci/node:12
+  #     - image: camunda/zeebe:0.22.1
+  #   <<: *node_tests
+  node-lts:
     docker:
-      - image: circleci/node:10
-      - image: camunda/zeebe:0.22.1
-    <<: *node_tests
-  node11:
-    docker:
-      - image: circleci/node:11
-      - image: camunda/zeebe:0.22.1
-    <<: *node_tests
-  node12:
-    docker:
-      - image: circleci/node:12
+      - image: circleci/node:lts
       - image: camunda/zeebe:0.22.1
     <<: *node_tests
 

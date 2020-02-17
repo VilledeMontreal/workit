@@ -7,10 +7,15 @@
 // tslint:disable: no-console
 
 // First load
-import { NodeTracerRegistry } from '@opentelemetry/node';
+import { JaegerExporter } from '@opentelemetry/exporter-jaeger';
+import { NodeTracerProvider } from '@opentelemetry/node';
+import { SimpleSpanProcessor } from '@opentelemetry/tracing';
+import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from 'workit-camunda';
+import { IoC, Worker } from 'workit-core';
+import { HelloWorldTask } from '../tasks/helloWorldTask';
 const ingoreUrls = [/\/external\-task\/fetchAndLock/i];
-// TODO: fix any
-const tracer = new NodeTracerRegistry({
+// TODO: Fix any
+const provider = new NodeTracerProvider({
   plugins: {
     http: {
       enabled: true,
@@ -23,12 +28,7 @@ const tracer = new NodeTracerRegistry({
     }
   }
 });
-
-import { JaegerExporter } from '@opentelemetry/exporter-jaeger';
-import { SimpleSpanProcessor } from '@opentelemetry/tracing';
-import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from 'workit-camunda';
-import { IoC, Worker } from 'workit-core';
-import { HelloWorldTask } from '../tasks/helloWorldTask';
+const tracer = provider.getTracer('default');
 
 (async () => {
   enum LOCAL_IDENTIFIER {
@@ -45,7 +45,7 @@ import { HelloWorldTask } from '../tasks/helloWorldTask';
     serviceName: 'workit example',
     host: 'localhost'
   });
-  tracer.addSpanProcessor(new SimpleSpanProcessor(jaegerExporter));
+  provider.addSpanProcessor(new SimpleSpanProcessor(jaegerExporter));
   IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);
   const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
 

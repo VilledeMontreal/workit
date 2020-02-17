@@ -33,7 +33,7 @@ export const SERVICE_IDENTIFIER = {
   worker: Symbol('Worker'),
   /**
    * Pass your custom tracer or [NodeTracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-node/src/NodeTracer.ts#L25) in order to trace operations in your worker.
-   * `NodeTracer` must be bound in the IoC defaul is a [NoopTracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-core/src/trace/NoopTracer.ts#L31)
+   * `NodeTracer` must be bound in the IoC defaul is a [NoopTracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-api/src/trace/NoopTracer.ts#L25)
    */
   tracer: Symbol('tracer'),
   /**

@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { SpanKind, SpanOptions, Tracer } from '@opentelemetry/types';
+import { SpanKind, SpanOptions, Tracer } from '@opentelemetry/api';
 import debug = require('debug');
 import { EventEmitter } from 'events';
 import { inject, injectable, optional } from 'inversify';
