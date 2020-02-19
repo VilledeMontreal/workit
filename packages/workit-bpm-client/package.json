@@ -34,7 +34,7 @@
     "codecov": "^3.6.5",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
-    "nock": "^10.0.6",
+    "nock": "^12.0.1",
     "prettier": "^1.19.1",
     "prettier-tslint": "^0.4.2",
     "source-map-support": "^0.5.16",
