@@ -436,7 +436,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 workit-* | Zeebe | Camunda BPM
 -- | -- | -- 
->=4.0.5 | 0.22.1 | 7.6 to latest
+\>=4.0.5 | 0.22.1 | 7.6 to latest
 3.2.x <=4.0.4 | 0.20.x < 0.20.1 | 7.6 to latest
 3.1.x | 0.20.x < 0.20.1 | 7.6 to latest
 2.2.0 | 0.20.x < 0.20.1 | 7.6 to latest
