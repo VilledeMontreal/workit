@@ -7,5 +7,6 @@ module.exports = {
   },
   "rootDir": ".",
   coverageReporters: ["json", "text"],
-  testPathIgnorePatterns: ['node_modules', 'lib']
+  testPathIgnorePatterns: ['node_modules', 'lib'],
+  setupFilesAfterEnv: ['./jest.setup.js']
 };

@@ -166,7 +166,10 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
   public createWorkflowInstance<T = unknown>(
     model: ICreateWorkflowInstance<T>
   ): Promise<ICreateWorkflowInstanceResponse> {
-    return this._client.createWorkflowInstance(model.bpmnProcessId, model.variables, model.version);
+    if (!model.version) {
+      return this._client.createWorkflowInstance<T>(model.bpmnProcessId, model.variables);
+    }
+    return this._client.createWorkflowInstance<T>(model as Required<ICreateWorkflowInstance<T>>);
   }
   public cancelWorkflowInstance(instance: string): Promise<void> {
     this._validateNumber(instance);
