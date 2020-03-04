@@ -118,7 +118,7 @@ describe('ZeebeClient', () => {
     }
   });
 
-  it('Can start a workflow with a message', async done => {
+  it.only('Can start a workflow with a message', async done => {
     const deploy = await zbc.deployWorkflow(path.join(__dirname, '..', './data/bpmn/zeebe/msg-start.bpmn'));
     expect(deploy.key).toBeTruthy();
 
@@ -127,24 +127,23 @@ describe('ZeebeClient', () => {
     await zbc.publishMessage({
       correlation: '',
       name: 'MSG-START_JOB',
-      timeToLive: 1000,
+      timeToLive: 30_000,
       variables: {
         testKey: randomId
       }
     });
 
-    workers.unshift(createWorkerInstance('console-log-msg', done));
-
-    IoC.unbind('ServiceTask_0f6zc7d');
-    IoC.bindToObject(
-      new HelloWorldTask(message => {
-        expect(message.properties.customHeaders.message.indexOf('Workflow') !== -1).toBe(true);
-        expect(message.body.testKey).toBe(randomId); // Makes sure the worker isn't responding to another message
-      }),
-      'ServiceTask_0f6zc7d'
-    );
-
     try {
+      workers.unshift(createWorkerInstance('console-log-msg', done));
+
+      IoC.unbind('ServiceTask_0f6zc7d');
+      IoC.bindToObject(
+        new HelloWorldTask(message => {
+          expect(message.properties.customHeaders.message.indexOf('Workflow') !== -1).toBe(true);
+          expect(message.body.testKey).toBe(randomId); // Makes sure the worker isn't responding to another message
+        }),
+        'ServiceTask_0f6zc7d'
+      );
       await workers[0].run();
     } catch (e) {
       done(e);
