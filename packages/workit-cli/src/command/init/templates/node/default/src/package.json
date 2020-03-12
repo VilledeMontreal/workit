@@ -34,7 +34,7 @@
       "typescript": "^3.6.3"
     },
     "dependencies": {
-      "workit-camunda": "^3.2.0",
+      "workit-camunda": "^4.1.0",
       "config": "~3.2.2"
     }
   }
