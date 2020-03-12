@@ -80,6 +80,10 @@ node_tests: &node_tests
     - run:
         name: test
         command: npm run test
+    - run:
+        name: report coverage
+        command: if [ "${CIRCLE_NODE_VERSION}" = "v12" ]; then npm run codecov; fi
+        # command: npm run codecov
 
 node_integraton_tests: &node_integraton_tests
   steps:
@@ -145,7 +149,7 @@ workflows:
     jobs:
       - node10:
           filters: *docs_filters
-      - integration-tests-node-12:
+      - node12:
           filters: *docs_filters
       - node13:
           filters: *docs_filters
@@ -166,12 +170,11 @@ jobs:
     docker:
       - image: circleci/node:10
     <<: *node_tests
-  # Runs the tests, including integration
-  integration-tests-node-12:
+  node12:
     docker:
       - image: circleci/node:12
-      - image: camunda/zeebe:0.22.1
-    <<: *node_integraton_tests
+      # - image: camunda/zeebe:0.22.1
+    <<: *node_tests
   lint:
     docker:
       - image: circleci/node:lts
