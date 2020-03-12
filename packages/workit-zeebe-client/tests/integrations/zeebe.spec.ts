@@ -118,7 +118,7 @@ describe('ZeebeClient', () => {
     }
   });
 
-  it.only('Can start a workflow with a message', async done => {
+  it('Can start a workflow with a message', async done => {
     const deploy = await zbc.deployWorkflow(path.join(__dirname, '..', './data/bpmn/zeebe/msg-start.bpmn'));
     expect(deploy.key).toBeTruthy();
 

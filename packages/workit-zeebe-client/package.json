@@ -1,6 +1,6 @@
 {
   "name": "workit-zeebe-client",
-  "version": "4.0.4",
+  "version": "4.1.0",
   "description": "Zeebe client for WorkIt that works with Zeebe platform powered by TypeScript",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -11,8 +11,8 @@
     "debug": "~4.1.1",
     "inversify": "~5.0.1",
     "reflect-metadata": "~0.1.13",
-    "workit-core": "^4.0.4",
-    "workit-types": "^4.0.4",
+    "workit-core": "^4.1.0",
+    "workit-types": "^4.1.0",
     "zeebe-elasticsearch-client": "^0.3.3",
     "zeebe-node": "0.22.1"
   },

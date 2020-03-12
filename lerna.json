@@ -1,14 +1,17 @@
 {
-  "lerna": "3.19.0",
+  "lerna": "3.20.2",
+  "version": "4.1.0",
   "packages": [
-    "packages/*",
-    "examples/*"
+    "examples/*",
+    "packages/*"
   ],
   "command": {
     "publish": {
       "conventionalCommits": true,
       "registry": "https://registry.npmjs.org/",
-      "ignoreChanges": ["*.lock"],
+      "ignoreChanges": [
+        "*.lock"
+      ],
       "allowBranch": "master",
       "message": "chore(release): publish"
     }
@@ -25,6 +28,5 @@
     },
     "cacheDir": ".changelog"
   },
-  "npmClient": "yarn",
-  "version": "independent"
+  "npmClient": "yarn"
 }
