@@ -1,8 +1,8 @@
 {
-  "name": "workit-example-basic",
+  "name": "workit-camunda-cloud",
   "private": true,
-  "version": "4.1.0",
-  "description": "Basic example of workit usage",
+  "version": "2.0.4",
+  "description": "Basic example of workit usage with Camunda Cloud",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
   "scripts": {
@@ -15,9 +15,9 @@
     "watch": "tsc -p ./tsconfig.json --watch",
     "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
     "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write",
-    "camunda:deploy": "node ./lib/src/deploy.js",
-    "camunda:create-instance": "node ./lib/src/create-process-instances.js",
-    "camunda:worker": "node ./lib/src/worker.js"
+    "camunda:deploy": "node -r ./lib/src/setup.js ./lib/src/deploy.js",
+    "camunda:create-instance": "node -r ./lib/src/setup.js ./lib/src/create-process-instances.js",
+    "camunda:worker": "node -r ./lib/src/setup.js ./lib/src/worker.js"
   },
   "repository": {
     "type": "git",
@@ -35,10 +35,9 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "workit-camunda": "^4.1.0",
-    "workit-core": "^4.1.0",
-    "workit-types": "^4.1.0"
+    "workit-camunda": "^4.0.4",
+    "workit-core": "^4.0.4",
+    "workit-types": "^4.0.4"
   },
   "keywords": [
     "workit",

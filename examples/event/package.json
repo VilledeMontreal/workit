@@ -1,7 +1,7 @@
 {
   "name": "workit-example-event",
   "private": true,
-  "version": "2.0.4",
+  "version": "4.1.0",
   "description": "Show how to send an event with Workit",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
@@ -36,9 +36,9 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "workit-camunda": "^4.0.4",
-    "workit-core": "^4.0.4",
-    "workit-types": "^4.0.4"
+    "workit-camunda": "^4.1.0",
+    "workit-core": "^4.1.0",
+    "workit-types": "^4.1.0"
   },
   "keywords": [
     "workit",

@@ -1,9 +1,17 @@
-# CHANGELOG
+# Change Log
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 4.0.3 (2020-02-05)
+## 4.1.0 (2020-03-12)
+
+#### :rocket: (Enhancement)
+* `workit-types`, `workit-zeebe-client`
+  * [#161](https://github.com/VilledeMontreal/workit/pull/161) feat(zeebe): upgrade to 0.22.1
+* `workit-bpm-client`, `workit-camunda`, `workit-core`, `workit-types`, `workit-zeebe-client`
+  * [#158](https://github.com/VilledeMontreal/workit/pull/158) fix(opentelemetry): upgrade to 0.4.0 
+
+## 4.0.4 (2020-02-05)
 
 #### :rocket: (Enhancement)
 
