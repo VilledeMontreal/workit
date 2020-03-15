@@ -19,6 +19,15 @@ If you use our default clients (zeebe-node, camunda-external-task-client-js), be
 
 [More details](https://creditsenseau.github.io/zeebe-client-node-js/interfaces/zbworkeroptions.html)
 
+### Environment variables
+
+| Variable | Description 
+|:--------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| ZEEBE_ADDRESS | Broker address |
+| ZEEBE_CLIENT_ID | ClientId for OAuth authentification  |
+| ZEEBE_CLIENT_SECRET | Secret for OAuth authentification |
+| ZEEBE_AUTHORIZATION_SERVER_URL | OAuth Server |
+
 ## Camunda BPM
 
 | Option | Description | Type | Required | Default |
@@ -37,6 +46,12 @@ If you use our default clients (zeebe-node, camunda-external-task-client-js), be
 | subscriptionOptions | Options about subscriptions. Like restricting what Camunda will send to the worker | ISubscriptionOptions |  |  |
 
 [More details](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/Client.md)
+
+### Environment variables
+
+| Variable | Description 
+|:--------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| CAMUNDA_BPM_ADDRESS | REST API Server |
 
 ## Process handler
 

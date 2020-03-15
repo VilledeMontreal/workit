@@ -6,6 +6,7 @@
 
 // IOC
 export * from './config/constants/identifiers';
+import './config/container';
 
 export * from './camundaBpmClient';
 export * from './bpmClient';
