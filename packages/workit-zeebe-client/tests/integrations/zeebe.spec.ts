@@ -17,9 +17,11 @@ process.env.ZB_NODE_LOG_LEVEL = process.env.ZB_NODE_LOG_LEVEL || 'NONE';
 
 export class SuccessStrategy implements ISuccessStrategy {
   private readonly _done: (e?: Error, message?: IMessage) => void;
+
   constructor(done: (e?: Error, message?: IMessage) => void) {
     this._done = done;
   }
+
   public handle(message: IMessage, service: ICamundaService): Promise<void> {
     try {
       return service.ack(message);
@@ -35,10 +37,12 @@ export class SuccessStrategy implements ISuccessStrategy {
 // tslint:disable-next-line: max-classes-per-file
 export class HelloWorldTask extends TaskBase<IMessage> {
   private readonly _expect: ((message: IMessage<any, any>) => void) | undefined;
+
   constructor(expect?: ((message: IMessage<any, any>) => void) | undefined) {
     super();
     this._expect = expect;
   }
+
   public async execute(message: IMessage): Promise<IMessage> {
     if (this._expect) {
       this._expect(message);
@@ -67,9 +71,11 @@ describe('ZeebeClient', () => {
 
   afterEach(async () => {
     try {
-      for (const worker of workers) {
-        await worker.stop();
-      }
+      await Promise.all(
+        workers.map(async worker => {
+          await worker.stop();
+        })
+      );
       await zbc.unsubscribe(); // Makes sure we don't forget to close connection
     } catch (error) {
       // tslint:disable-next-line: no-console
@@ -310,7 +316,7 @@ describe('ZeebeClient', () => {
       new HelloWorldTask(message => {
         expect(message.properties.workflowInstanceKey).toBe(wfi);
         let retries = message.properties.retries || 0;
-        retries++;
+        retries += 1;
         // Succeed on the third attempt
         if (retries < 3) {
           throw new Error('jest test');

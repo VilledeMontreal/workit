@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -19,23 +19,6 @@ export const andArrayWith = <T = unknown>(arr: T[], test: (param: T) => boolean)
  */
 export const isArrayOfFunctions = (a: any): boolean => Array.isArray(a) && a.length > 0 && andArrayWith(a, isFunction);
 export const isEmptyArray = (a: any): boolean => Array.isArray(a) && a.length === 0;
-/**
- * Checks if parameter is a primitive value
- */
-export const isPrimitive = (value: any) => value === null || (typeof value !== 'object' && typeof value !== 'function');
-export const concatPath = (path: string, property: any) => {
-  let clonePath = path;
-  if (property && property.toString) {
-    if (path) {
-      clonePath += '.';
-    }
-
-    clonePath += property.toString();
-  }
-
-  return clonePath;
-};
-
 export const getVariablesWhenChanged = <T = any>(
   message: IMessage<unknown, IWorkflowProps<unknown>>,
   unwrap: (message: IMessage<unknown, IWorkflowProps<unknown>>) => T
@@ -51,7 +34,9 @@ export function parseCommaSeparatedBaggage(baggage: any, values: string): void {
   values.split(',').forEach(keyVal => {
     const splitKeyVal: string[] = keyVal.trim().split('=');
     if (splitKeyVal.length === 2) {
-      baggage[splitKeyVal[0]] = splitKeyVal[1];
+      const [key, val] = splitKeyVal;
+      // eslint-disable-next-line no-param-reassign
+      baggage[key] = val;
     }
   });
 }

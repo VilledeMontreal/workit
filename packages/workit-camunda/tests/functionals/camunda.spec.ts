@@ -170,12 +170,7 @@ describe('Camunda Worker', function() {
       autoPoll: false,
       enableTracing: false
     };
-    const newProcessHandler = new SCProcessHandler(
-      successHandler,
-      failureHandler,
-      NOOP_TRACER,
-      configWithInterceptors
-    );
+    const newProcessHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER, configWithInterceptors);
     worker = new Worker(client, newProcessHandler);
     worker.start();
     worker.run();

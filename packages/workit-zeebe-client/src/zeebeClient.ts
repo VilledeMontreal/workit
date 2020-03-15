@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -37,12 +37,19 @@ import { ZeebeMessage } from './zeebeMessage';
 export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TVariables>
   implements IClient<ICamundaService>, IWorkflowClient {
   private readonly _client: ZBClient;
+
   private readonly _exporterClient: ZBElasticClient;
+
   private _worker: ZBWorker<TVariables, TProps, RVariables> | undefined;
+
   private readonly _config: IZeebeOptions;
+
   private readonly _exporterConfig: Partial<IElasticExporterConfig> | undefined;
+
   constructor(config: IZeebeOptions, client?: ZBClient, exporterConfig?: Partial<IElasticExporterConfig>);
+
   constructor(config: IZeebeOptions, exporterConfig?: Partial<IElasticExporterConfig>);
+
   constructor(
     config: IZeebeOptions,
     @optional() client?: ZBClient | Partial<IElasticExporterConfig>,
@@ -59,13 +66,14 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     }
 
     if (!exporterConfig) {
-      // tslint:disable-next-line: no-console
+      // TODO: use real logger
       console.log(
         "warning: no exporterConfig has been provided to Zeebe. getWorkflow and getWorkflows methods won't work. "
       );
     }
     this._exporterClient = new ZBElasticClient(new Configs(exporterConfig));
   }
+
   public subscribe(
     onMessageReceived: (
       message: IMessage<TVariables, IWorkflowProps<TProps>>,
@@ -83,6 +91,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     );
     return Promise.resolve();
   }
+
   public async deployWorkflow(bpmnPath: string): Promise<IDeployWorkflowResponse> {
     const result = await this._client.deployWorkflow(bpmnPath);
     return {
@@ -90,6 +99,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       key: result.key.toString() // TODO: interface say number but it return string, need to PR to zeebe-node
     };
   }
+
   public async getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {
     this._validateExporterConfig();
     const params = { _source_excludes: 'bpmnXml' };
@@ -113,12 +123,13 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       items: data
     };
   }
+
   public async getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition> {
     this._validateExporterConfig();
     this._validateObject();
     const key = Number((payload as IWorkflowDefinitionKey).workflowKey);
     const response = await this._exporterClient.getWorkflows({
-      key: !isNaN(key) ? key : undefined,
+      key: !Number.isNaN(key) ? key : undefined,
       bpmnProcessId: (payload as IWorkflowProcessIdDefinition).bpmnProcessId,
       version: (payload as IWorkflowProcessIdDefinition).version,
       latestVersion: typeof (payload as IWorkflowProcessIdDefinition).version !== 'number'
@@ -140,6 +151,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       bpmnProcessId: doc.bpmnProcessId
     };
   }
+
   public updateVariables<T = unknown>(model: IUpdateWorkflowVariables<Partial<T>>): Promise<void> {
     return this._client.setVariables<T>({
       elementInstanceKey: model.processInstanceId,
@@ -147,9 +159,11 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       local: !!model.local
     });
   }
+
   public updateJobRetries(payload: IUpdateWorkflowRetry): Promise<void> {
     return this._client.updateJobRetries(payload);
   }
+
   /**
    * Publish a message event
    * If you don't specify correlationKey, message will be treated as message start event
@@ -163,6 +177,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       name: payload.name
     });
   }
+
   public createWorkflowInstance<T = unknown>(
     model: ICreateWorkflowInstance<T>
   ): Promise<ICreateWorkflowInstanceResponse> {
@@ -171,13 +186,16 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     }
     return this._client.createWorkflowInstance<T>(model as Required<ICreateWorkflowInstance<T>>);
   }
+
   public cancelWorkflowInstance(instance: string): Promise<void> {
     this._validateNumber(instance);
     return this._client.cancelWorkflowInstance(instance as any); // TODO: will be fixed https://github.com/zeebe-io/zeebe/issues/2680
   }
+
   public resolveIncident(incidentKey: string): Promise<void> {
     return this._client.resolveIncident(incidentKey);
   }
+
   public unsubscribe(): Promise<void> {
     if (this._worker) {
       return this._worker.close();
@@ -193,6 +211,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       `);
     }
   }
+
   private _validateObject() {
     if (!this._exporterConfig) {
       throw new Error(`
@@ -200,6 +219,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       `);
     }
   }
+
   private _validateNumber(variable: string) {
     const value = Number(variable);
     if (!Number.isInteger(value)) {

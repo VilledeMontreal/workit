@@ -12,7 +12,6 @@ import { ICamundaService, IMessage, ISuccessStrategy } from 'workit-types';
 import { ZeebeClient } from 'workit-zeebe-client';
 import { Client } from '../../src/camunda-n-mq/client';
 
-
 process.env.ZB_NODE_LOG_LEVEL = process.env.ZB_NODE_LOG_LEVEL || 'NONE';
 
 export class SuccessStrategy implements ISuccessStrategy {

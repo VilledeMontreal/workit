@@ -1,21 +1,15 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
 
 import { getVariablesWhenChanged, ProxyFactory } from 'workit-core';
-import {
-  FailureException,
-  ICamundaService,
-  IMessage,
-  IVariablePayload,
-  IVariables,
-  IWorkflowProps
-} from 'workit-types';
+import { FailureException, ICamundaService, IMessage, IVariablePayload, IVariables } from 'workit-types';
 import { CamundaMapperProperties } from './camundaMapperProperties';
 import { Variables } from './variables';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const stringify = require('fast-safe-stringify');
 
 export class CamundaMessage {
@@ -24,7 +18,7 @@ export class CamundaMessage {
     const properties = CamundaMapperProperties.map(task);
     const messageWithoutSpan = {
       body: task.variables.getAll(),
-      properties: properties as IWorkflowProps
+      properties
     };
     // TODO: create a CamundaMessage builder
     const msg = ProxyFactory.create({
@@ -59,7 +53,7 @@ export class CamundaMessage {
           if (this.hasBeenThreated) {
             return;
           }
-          const retries = error.retries;
+          const { retries } = error;
           await payload.taskService.handleFailure(task, {
             errorMessage: error.message,
             errorDetails: stringify(error),
@@ -74,17 +68,17 @@ export class CamundaMessage {
   }
 
   public static unwrap(message: IMessage): IVariables {
-    const body = message.body;
+    const { body } = message;
     const vars = new Variables(body);
-    for (const key in body) {
-      if (Object.prototype.toString.call(body[key]) === '[object Date]') {
+    Object.entries(body).forEach(([key, val]) => {
+      if (Object.prototype.toString.call(val) === '[object Date]') {
         // Otherwise, we got invalid date
         // TODO: Check the cause
-        vars.setTyped(key, { type: 'date', value: (body[key] as Date).toUTCString(), valueInfo: {} });
+        vars.setTyped(key, { type: 'date', value: (val as Date).toUTCString(), valueInfo: {} });
       } else {
-        vars.set(key, body[key]);
+        vars.set(key, val);
       }
-    }
+    });
     CamundaMessage._setCustomHeaders(vars, message.properties.customHeaders);
     return vars;
   }

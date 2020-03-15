@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -14,6 +14,7 @@ export enum Env {
 
 export class Configs {
   private readonly _elastic: IAPIConfig;
+
   constructor(customConfig?: Partial<IAPIConfig>) {
     this._elastic = {
       url: `http://localhost:9200`,
@@ -26,7 +27,7 @@ export class Configs {
     } as IAPIConfig;
   }
 
-  get elastic() {
+  public get elastic() {
     return this._elastic;
   }
 }

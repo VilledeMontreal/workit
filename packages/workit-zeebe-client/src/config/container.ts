@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -31,11 +31,10 @@ if (process.env.ZEEBE_AUTHORIZATION_SERVER_URL) {
   }, {});
 }
 
-const zeebeClientConfig = Object.assign(
-  {},
-  configBase,
-  { baseUrl: process.env.ZEEBE_ADDRESS || `localhost:26500` },
-  camundaCloudConfig
-);
+const zeebeClientConfig = {
+  ...configBase,
+  baseUrl: process.env.ZEEBE_ADDRESS || `localhost:26500`,
+  ...camundaCloudConfig
+};
 kernel.bind(SERVICE_IDENTIFIER.zeebe_external_config).toConstantValue(zeebeClientConfig);
 kernel.bind(SERVICE_IDENTIFIER.zeebe_elastic_exporter_config).toConstantValue(zeebeElasticExporterConfig);

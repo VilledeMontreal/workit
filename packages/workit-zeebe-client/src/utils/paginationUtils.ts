@@ -1,12 +1,11 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-
 import { IPaginationOptions, IPaging, IWorkflowOptions } from 'workit-types';
 
-export class PaginationUtils {
+class PaginationUtils {
   public static setElasticPaginationParams<T = any>(
     params: T,
     options?: Partial<IWorkflowOptions & IPaginationOptions>
@@ -14,7 +13,7 @@ export class PaginationUtils {
     if (!options) {
       return params;
     }
-    return Object.assign({}, params, { from: options.from, size: options.size });
+    return { ...params, from: options.from, size: options.size };
   }
 
   public static getPagingFromOptions(totalCount: number, options?: (any & IPaginationOptions) | undefined): IPaging {
@@ -35,3 +34,5 @@ export class PaginationUtils {
 
   private static _DEFAULT_SIZE_ITEMS = 500;
 }
+
+export { PaginationUtils };

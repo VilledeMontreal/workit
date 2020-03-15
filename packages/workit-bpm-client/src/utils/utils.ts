@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -11,7 +11,7 @@ import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { Variables } from '../variables';
 
 const GLOBAL_TIMEOUT_PULL = 60000;
-
+const CONSTANTS_INTEGER_VALUE = 2 ** 31;
 /**
  * Checks if parameter is undefined or null
  */
@@ -23,7 +23,7 @@ const typeMatchers = {
    * @returns {boolean} true if value is Integer
    */
   integer(a: number) {
-    return Number.isInteger(a) && a >= -Math.pow(2, 31) && a <= Math.pow(2, 31) - 1;
+    return Number.isInteger(a) && a >= -CONSTANTS_INTEGER_VALUE && a <= CONSTANTS_INTEGER_VALUE - 1;
   },
 
   /**
@@ -79,13 +79,10 @@ const typeMatchers = {
 
 export class Utils {
   public static assign(target: IVariables, object: any): IVariables {
-    for (const key in object) {
-      if (object.hasOwnProperty(key)) {
-        target.set(key, object[key]);
-      }
-    }
+    Object.entries(object).forEach(keyVal => target.set(keyVal[0], keyVal[1]));
     return target;
   }
+
   /**
    * Not a deep copy
    */
@@ -102,19 +99,22 @@ export class Utils {
    * @memberof Utils
    */
   public static buildConfig(config?: ICamundaConfig): ICamundaConfig {
-    return Object.assign(
-      {
-        maxTasks: 1,
-        baseUrl: 'http://localhost:8080/engine-rest',
-        workerId: `worker-${config ? config.topicName : 'demo'}`,
-        interceptors: Utils.defaultInterceptors(),
-        use: Utils.getLogger()
-      },
-      config
-    );
+    return {
+      maxTasks: 1,
+      baseUrl: 'http://localhost:8080/engine-rest',
+      workerId: `worker-${config ? config.topicName : 'demo'}`,
+      interceptors: Utils.defaultInterceptors(),
+      use: Utils.getLogger(),
+      topicName: 'topic_demo',
+      ...config
+    };
   }
 
-  public static serializeVariable({ typedValue }: { typedValue: { value: any; type: string; valueInfo?: any } }) {
+  public static serializeVariable({
+    typedValue
+  }: {
+    typedValue: { value?: any; type: string; valueInfo?: unknown; [custom: string]: any };
+  }) {
     let { value, type } = { ...typedValue };
 
     type = type.toLowerCase();
@@ -135,14 +135,19 @@ export class Utils {
    * @param variable: external task variable
    */
   public static getVariableType = (variable: number) => {
-    const match = Object.entries(typeMatchers).filter(([matcherKey, matcherFunction]) => matcherFunction(variable))[0];
+    const match = Object.entries(typeMatchers).filter(([, matcherFunction]) => matcherFunction(variable))[0];
 
     return match[0];
   };
 
-  public static serializeVariables<T = any>(variables: T, local: boolean = false) {
+  public static serializeVariables<T = any>(
+    variables: T,
+    local = false
+  ):
+    | { [custom: string]: { type: string; value?: string | number | boolean; valueInfo: {}; local: boolean } }
+    | undefined {
     if (!variables) {
-      return;
+      return undefined;
     }
     const dirtyVariables = {};
     Object.entries(variables).forEach(([key, value]) => {
@@ -162,13 +167,11 @@ export class Utils {
       //
     }
     // add default timeout for polling
-    interceptors.push((config: any) => {
-      config.timeout = GLOBAL_TIMEOUT_PULL;
-      return config;
-    });
+    interceptors.push((config: any) => ({ timeout: GLOBAL_TIMEOUT_PULL, ...config }));
     return interceptors;
   }
-  public static getLogger() {
+
+  public static getLogger(): Function | Function[] | undefined {
     try {
       return IoC.get(SERVICE_IDENTIFIER.logger, process.env.NODE_ENV);
     } catch (error) {

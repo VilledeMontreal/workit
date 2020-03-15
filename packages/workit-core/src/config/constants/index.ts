@@ -1,13 +1,7 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
- */
-
-/**
- * Manage constant value
- * @export
- * @class Constants
  */
 export class Constants {
   private static _instance: Readonly<Constants>;
@@ -37,7 +31,7 @@ export class Constants {
    * @type {Constants}
    * @memberof Constants
    */
-  static get instance(): Readonly<Constants> {
+  public static get instance(): Readonly<Constants> {
     if (!this._instance) {
       this._instance = Object.freeze(new Constants());
     }
@@ -49,7 +43,7 @@ export class Constants {
    * @readonly
    * @memberof Constants
    */
-  get envs() {
+  public get envs() {
     return this._envs;
   }
 }

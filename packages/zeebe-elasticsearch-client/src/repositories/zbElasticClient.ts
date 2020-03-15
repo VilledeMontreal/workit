@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -17,11 +17,13 @@ import { Utils } from '../utils/utils';
 
 export class ZBElasticClient {
   private readonly _request: AxiosInstance;
+
   private readonly _urls: IEndpoints;
+
   constructor(configs: Configs) {
     const config = configs.elastic;
     const _url = configs.elastic.url;
-    const endpoints = configs.elastic.endpoints;
+    const { endpoints } = configs.elastic;
     this._urls = endpoints;
     this._request = axios.create({
       baseURL: _url,
@@ -50,7 +52,7 @@ export class ZBElasticClient {
 
     if (model.latestVersion) {
       // TODO: make a guard (e.g IElasticResponse<IWorkflow> | IElasticAggResponse<IWorkflow>)
-      let data = response.data;
+      let { data } = response;
       const aggs = (data as any).aggregations;
       if (aggs) {
         data = {
@@ -109,7 +111,7 @@ export class ZBElasticClient {
       }
     };
 
-    const key = model.key;
+    const { key } = model;
     if (key) {
       const mustMatchKey = {
         match: {

@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -7,11 +7,11 @@
 import { NOOP_TRACER } from '@opentelemetry/api';
 import { EventEmitter } from 'events';
 import { Container, decorate, injectable } from 'inversify';
-import { SCProcessHandler } from '../processHandler/simpleCamundaProcessHandler';
 import { FailureStrategySimple } from '../strategies/FailureStrategySimple';
 import { SuccessStrategySimple } from '../strategies/SuccessStrategySimple';
 import { NoopTracerPropagator } from '../tracer/noopTracerPropagator';
 import { SERVICE_IDENTIFIER } from './constants/identifiers';
+import { IOC } from '../IoC';
 
 try {
   decorate(injectable(), EventEmitter);
@@ -22,13 +22,15 @@ try {
   );
 }
 
-export const kernel = new Container();
+const kernel = new Container();
+const container = new Container();
 
 kernel.bind(SERVICE_IDENTIFIER.tracer_propagator).toConstantValue(new NoopTracerPropagator());
 kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(NOOP_TRACER);
 kernel.bind(SERVICE_IDENTIFIER.success_strategy).toConstantValue(new SuccessStrategySimple());
 kernel.bind(SERVICE_IDENTIFIER.failure_strategy).toConstantValue(new FailureStrategySimple());
-kernel.bind(SERVICE_IDENTIFIER.process_handler).to(SCProcessHandler);
 
-export const container = new Container();
 container.parent = kernel;
+const IoC = new IOC(container);
+
+export { kernel, container, IoC };

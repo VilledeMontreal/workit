@@ -17,7 +17,7 @@ export class FakeTask extends TaskBase<IMessage> {
   }
 }
 
-export class FakeClient  {
+export class FakeClient {
   public subscribe(onMessageReceived: (message: IMessage, service: ICamundaService) => Promise<void>): Promise<void> {
     return Promise.resolve();
   }

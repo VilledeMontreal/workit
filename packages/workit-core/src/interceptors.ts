@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -44,6 +44,7 @@ export class Interceptors {
 
   private static async _internalExecute<T extends IMessage>(interceptors: Interceptor[], message: T): Promise<T> {
     let msg = message;
+    // eslint-disable-next-line no-restricted-syntax
     for (const interceptor of interceptors) {
       msg = await interceptor(msg);
     }
