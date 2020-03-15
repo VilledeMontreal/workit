@@ -24,11 +24,18 @@ if (process.env.ZEEBE_AUTHORIZATION_SERVER_URL) {
     url: process.env.ZEEBE_AUTHORIZATION_SERVER_URL,
     audience: process.env.ZEEBE_ADDRESS?.split(':')[0],
     clientId: process.env.ZEEBE_CLIENT_ID,
-    clientSecret: process.env.ZEEBE_CLIENT_SECRET,
-  }).reduce((acc, [key, val]) => { if (val) acc[key] = val; return acc; }, {});
+    clientSecret: process.env.ZEEBE_CLIENT_SECRET
+  }).reduce((acc, [key, val]) => {
+    if (val) acc[key] = val;
+    return acc;
+  }, {});
 }
 
-const zeebeClientConfig = Object.assign({}, configBase, { baseUrl: process.env.ZEEBE_ADDRESS || `localhost:26500` }, camundaCloudConfig);
+const zeebeClientConfig = Object.assign(
+  {},
+  configBase,
+  { baseUrl: process.env.ZEEBE_ADDRESS || `localhost:26500` },
+  camundaCloudConfig
+);
 kernel.bind(SERVICE_IDENTIFIER.zeebe_external_config).toConstantValue(zeebeClientConfig);
 kernel.bind(SERVICE_IDENTIFIER.zeebe_elastic_exporter_config).toConstantValue(zeebeElasticExporterConfig);
-

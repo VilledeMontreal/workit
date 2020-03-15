@@ -1,6 +1,6 @@
 # Overview
 
-This example shows how to use [Workit](https://villedemontreal.github.io/workit/) to create a simple Node.js application - e.g. a worker that executes a simple task. You will learn how to manage versionning through the IoC between tasks and BPMN
+This example shows how to use [Workit](https://villedemontreal.github.io/workit/) to create a simple Node.js application - e.g. a worker that executes a simple task. You will learn how to manage versioning through the IoC between tasks and BPMN
 
 Have fun!
 

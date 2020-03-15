@@ -8,7 +8,6 @@ import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from 'workit-camunda';
 import { IoC } from 'workit-core';
 import { IWorkflowClient } from 'workit-types';
 
-
 // tslint:disable-next-line: no-floating-promises
 (async () => {
   const cm = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.zeebe); // TAG.zeebe

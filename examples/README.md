@@ -15,7 +15,6 @@ $ npm install
 
 (Optional) Setup, we can switch to `TAG.camundaBpm` or `TAG.zeebe` in order to use both plateform (some comments are added in examples when BPMN is available see [basic example](basic)). 
 
-
 ## Run the Application
 
 ```sh
@@ -30,8 +29,8 @@ $ npm camunda:worker
 ```
 
 ## Useful links
-- For more information on OpenTelemetry, visit: <https://opentelemetry.io/>
-- For more information on workit, visit: <https://villedemontreal.github.io/workit/>
+-   For more information on OpenTelemetry, visit: <https://opentelemetry.io/>
+-   For more information on workit, visit: <https://villedemontreal.github.io/workit/>
 
 ## LICENSE
 
