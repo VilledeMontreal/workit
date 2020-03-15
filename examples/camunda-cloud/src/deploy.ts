@@ -9,7 +9,6 @@
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from 'workit-camunda';
 import { IoC } from 'workit-core';
 import { IWorkflowClient } from 'workit-types';
-import './setup';
 
 (async () => {
   const cm = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.zeebe);

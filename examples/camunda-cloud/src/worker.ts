@@ -5,12 +5,9 @@
  */
 // tslint:disable: no-floating-promises
 // tslint:disable: no-console
-
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from 'workit-camunda';
 import { IoC, Worker } from 'workit-core';
 import { HelloWorldTask } from '../tasks/helloWorldTask';
-import './setup';
-
 enum LOCAL_IDENTIFIER {
   sample_activity = 'sample_activity'
 }

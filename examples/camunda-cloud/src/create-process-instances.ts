@@ -7,7 +7,7 @@
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from 'workit-camunda';
 import { IoC } from 'workit-core';
 import { IWorkflowClient } from 'workit-types';
-import './setup';
+
 
 // tslint:disable-next-line: no-floating-promises
 (async () => {

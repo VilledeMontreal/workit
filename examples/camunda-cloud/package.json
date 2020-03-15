@@ -15,9 +15,9 @@
     "watch": "tsc -p ./tsconfig.json --watch",
     "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
     "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write",
-    "camunda:deploy": "node ./lib/src/deploy.js",
-    "camunda:create-instance": "node ./lib/src/create-process-instances.js",
-    "camunda:worker": "node ./lib/src/worker.js"
+    "camunda:deploy": "node -r ./lib/src/setup.js ./lib/src/deploy.js",
+    "camunda:create-instance": "node -r ./lib/src/setup.js ./lib/src/create-process-instances.js",
+    "camunda:worker": "node -r ./lib/src/setup.js ./lib/src/worker.js"
   },
   "repository": {
     "type": "git",
