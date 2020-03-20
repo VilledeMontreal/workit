@@ -48,7 +48,7 @@
     "node": ">=8.11.4"
   },
   "scripts": {
-    "test": "jest -u --testPathIgnorePatterns integration --coverage",
+    "test": "jest --testPathIgnorePatterns integration --coverage",
     "test:all": "jest **/tests/**/*.spec.ts --runInBand --coverage",
     "compile": "rm -rf ./lib/ && npm run build",
     "build": "tsc -p ./tsconfig.json",
