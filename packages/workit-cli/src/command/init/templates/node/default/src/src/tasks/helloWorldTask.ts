@@ -1,5 +1,6 @@
-import { IMessage, TaskBase } from 'workit-camunda';
-// tslint:disable:no-console
+import { TaskBase } from 'workit-core';
+import { IMessage } from 'workit-types';
+
 export class HelloWorldTask extends TaskBase<IMessage> {
   public execute(message: IMessage): Promise<IMessage> {
     const { properties } = message;

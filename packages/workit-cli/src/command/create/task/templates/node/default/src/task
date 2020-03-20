@@ -1,4 +1,5 @@
-import { IMessage, TaskBase } from "workit-camunda";
+import { TaskBase } from 'workit-core';
+import { IMessage } from 'workit-types';
 
 export class [CLASSNAME] extends TaskBase<IMessage> {
     constructor() {

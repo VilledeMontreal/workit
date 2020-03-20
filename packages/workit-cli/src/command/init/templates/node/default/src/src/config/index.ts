@@ -5,12 +5,11 @@ import { ICamundaConfig } from '../specs/camundaConfig';
 let message = `\n------------------------------------\n`;
 message += `Configuration files loaded:\n`;
 const sources = config.util.getConfigSources();
-for (const source of sources) {
+sources.forEach(source => {
   message += `- ${source.name}\n`;
-}
+});
 message += `------------------------------------\n`;
-// tslint:disable:no-console
-console.log(message);
+console.info(message);
 
 /**
  * Configurations for the application.
@@ -25,7 +24,9 @@ export class Configs {
   // @see https://github.com/lorenwest/node-config/wiki/Configuration-Files#default-node_env
   // ==========================================
   private readonly _environment: string;
+
   private readonly _camunda: Readonly<ICamundaConfig>;
+
   private constructor() {
     this._environment = config.util.getEnv('NODE_ENV');
     this._camunda = {
@@ -49,7 +50,7 @@ export class Configs {
   /**
    * Current environment info.
    */
-  get environment() {
+  get environment(): { type: string; isDev: boolean; isAcc: boolean; isProd: boolean } {
     return {
       type: this._environment,
       isDev: this._environment === ENV.DEV,

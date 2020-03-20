@@ -1,25 +1,26 @@
 // tslint:disable:no-console
 
-import { IoC, SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG, Worker } from 'workit-camunda';
+import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from 'workit-camunda';
+import { IoC, Worker } from 'workit-core';
 import './config/ioc';
 
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
 worker.start();
 worker.run().catch(err => {
-  console.log('DO SOMETHING');
+  console.error('DO SOMETHING', err);
 });
 
-const stop = () => {
-  console.info('SIGTERM signal received.');
-  console.log('Closing worker');
+const stop = (): void => {
+  console.info('Signal received');
+  console.info('Closing worker');
   worker
     .stop()
     .then(() => {
-      console.log('Worker closed');
+      console.info('Worker closed');
       process.exit(0);
     })
     .catch((e: Error) => {
-      console.log(e);
+      console.error(e);
       process.exit(1);
     });
 };

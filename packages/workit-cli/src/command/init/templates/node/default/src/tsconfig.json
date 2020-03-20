@@ -19,7 +19,8 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "strictPropertyInitialization": true,
-      "strictNullChecks": true
+      "strictNullChecks": true,
+      "incremental": true
     },
     "exclude": [
       "dist", 

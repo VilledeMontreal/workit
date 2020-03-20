@@ -16,7 +16,7 @@ prompt.message = colors.green('Replace');
  * Command function
  */
 
-export const init = (args, options, logger) => {
+export const init = (args, options, logger): void => {
   const localPath = process.cwd();
   const template = args.template.toLowerCase();
   const language = options.lang.toLowerCase();

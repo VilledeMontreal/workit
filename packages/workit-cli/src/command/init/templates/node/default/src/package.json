@@ -1,40 +1,46 @@
 {
-    "name": "[NAME]",
-    "version": "[VERSION]",
-    "description": "[DESCRIPTION]",
-    "author": {
-      "name": "[AUTHOR]"
-    },
-    "license": "[LICENSE]",
-    "husky": {
-      "hooks": {
-        "pre-commit": "npm run lint-fix",
-        "pre-push": "npm test"
-      }
-    },
-    "engines": {
-      "node": ">=10.9.0"
-    },
-    "scripts": {
-      "start": "node ./dist/worker.js",
-      "test": "",
-      "watch": "tsc -watch -p ./tsconfig.json",
-      "build": "tsc -p ./tsconfig.json",
-      "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
-      "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write"
-    },
-    "devDependencies": {
-      "@types/node": "^13.1.6",
-      "prettier": "^1.18.2",
-      "prettier-tslint": "^0.4.2",
-      "husky": "^3.0.5",
-      "tslint": "^5.20.0",
-      "tslint-config-airbnb": "^5.11.1",
-      "tslint-config-prettier": "^1.18.0",
-      "typescript": "^3.6.3"
-    },
-    "dependencies": {
-      "workit-camunda": "^3.2.0",
-      "config": "~3.2.2"
+  "name": "test",
+  "version": "0.0.1",
+  "description": "",
+  "author": {
+    "name": ""
+  },
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-fix",
+      "pre-push": "npm test"
     }
+  },
+  "engines": {
+    "node": ">=10.9.0"
+  },
+  "scripts": {
+    "start": "node ./dist/worker.js",
+    "test": "",
+    "watch": "tsc -watch -p ./tsconfig.json",
+    "build": "tsc -p ./tsconfig.json",
+    "lint": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
+    "lint-fix": "prettier \"./**/*.ts\" --write && eslint . --ext .ts --fix",
+    "check-conflicts": "eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.2",
+    "prettier": "^1.19.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.2.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "husky": "^4.2.3",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "workit-camunda": "^4.1.0",
+    "workit-core": "^4.1.0",
+    "workit-types": "^4.1.0",
+    "config": "^3.3.0"
   }
+}
