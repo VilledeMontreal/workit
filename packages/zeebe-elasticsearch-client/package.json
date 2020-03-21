@@ -37,7 +37,7 @@
     "husky": "^3.0.5",
     "jest": "^24.9.0",
     "nock": "^11.7.0",
-    "prettier": "^1.18.2",
+    "prettier": "^2.0.0",
     "prettier-tslint": "^0.4.2",
     "source-map-support": "^0.5.13",
     "ts-jest": "^25.1.0",
