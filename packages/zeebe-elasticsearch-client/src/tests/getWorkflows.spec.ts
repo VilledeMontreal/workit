@@ -16,7 +16,6 @@ const elasticAggResponse = require('./data/elasticResponseAggs.workflow');
 const elasticEmptyResponse = require('./data/elasticEmptyResponse');
 const bpmnProcessId = 'MESSAGE_EVENT';
 
-// tslint:disable-next-line: max-func-body-length
 describe('getWorkflows', () => {
   beforeAll(() => {
     api = new ZBElasticClient(config);

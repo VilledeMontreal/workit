@@ -35,7 +35,7 @@ function processHandler(className, contentFile, isBpmn = false): Promise<void> {
     `${localPath}/src/tasks/${classNameSanitized}.ts`,
     contentFile.toString().replace('[CLASSNAME]', classNameWithMaj)
   );
-  // tslint:disable: no-console
+
   const filePath = path.resolve(`${localPath}/src/config/ioc.ts`);
   project.addExistingSourceFiles(filePath);
   const file = project.getSourceFile(filePath);
@@ -154,7 +154,6 @@ export const task = async (args, options, logger): Promise<void> => {
   const language = options.lang;
   const workflowPath = options.file;
   const { template } = args;
-  // tslint:disable: no-console
   // console.log(options);
   // console.log(args);
   if (!template || template !== 'default') {
@@ -186,7 +185,6 @@ export const task = async (args, options, logger): Promise<void> => {
       throw new Error("Le fichier n'a pas été trouvé");
     }
     const tasks = getExternalTasks(workflowPath);
-    // tslint:disable-next-line: variable-name
     const ProgressBar = require('progress');
     const bar = new ProgressBar('  generating tasks [:bar] :percent :etas', {
       complete: '=',

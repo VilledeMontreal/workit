@@ -1,11 +1,8 @@
-/*!
+/*
  * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-
-// tslint:disable: max-classes-per-file
-// tslint:disable: no-console
 
 import axios, { AxiosError } from 'axios';
 import { ICamundaService, IFailureStrategy, IMessage, IWorkflowProps } from 'workit-types';
@@ -16,20 +13,22 @@ export interface IHandlerStrategy extends IFailureStrategy<ICamundaService> {
 
 export class FailureStrategySimple implements IFailureStrategy<ICamundaService> {
   private readonly _handlers: IHandlerStrategy[];
+
   constructor(handlers: IHandlerStrategy[]) {
     this._handlers = handlers || [];
   }
 
   public async handle(error: any, message: IMessage<unknown, IWorkflowProps>, service: ICamundaService): Promise<void> {
     let isHandled = false;
-    for (const handler of this._handlers) {
+    await this._handlers.reduce(async (promise, handler) => {
+      await promise;
       isHandled = handler.isHandled(error, message);
       if (!isHandled) {
         return;
       }
 
       await handler.handle(error, message, service);
-    }
+    }, Promise.resolve());
 
     if (!isHandled) {
       const { properties } = message;
@@ -37,7 +36,7 @@ export class FailureStrategySimple implements IFailureStrategy<ICamundaService> 
       if (!retries) {
         retries = 1;
       } else {
-        retries++;
+        retries += 1;
       }
 
       if (retries > 20) {
@@ -46,7 +45,7 @@ export class FailureStrategySimple implements IFailureStrategy<ICamundaService> 
       await service.nack({
         ...error,
         retries,
-        retryTimeout: 1000 * retries * 2
+        retryTimeout: 1000 * retries * 2,
       });
     }
   }
@@ -65,11 +64,11 @@ export class AxiosNotFoundHandler implements IHandlerStrategy {
     try {
       await axios.post(`http://localhost:8080/engine-rest/external-task/${message.properties.jobKey}/bpmnError`, {
         workerId: 'demo',
-        errorCode: 'not_found'
+        errorCode: 'not_found',
       });
-    } catch (error) {
+    } catch (err) {
       console.log('Woops!');
-      console.log(error);
+      console.log(error, err);
     }
   }
 }

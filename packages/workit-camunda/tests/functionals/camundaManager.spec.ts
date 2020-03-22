@@ -11,9 +11,7 @@ import { CamundaManager } from '../../src/camundaBpm/camundaManager';
 import '../../src/config/ioc';
 
 let manager: CamundaManager;
-// tslint:disable:ter-prefer-arrow-callback
-// tslint:disable:only-arrow-functions
-// tslint:disable:max-func-body-length
+
 describe('Client Manager (Camunda BPM)', function() {
   beforeAll(() => {
     const config = {

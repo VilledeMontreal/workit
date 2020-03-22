@@ -1,5 +1,3 @@
-// tslint:disable:no-console
-
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from 'workit-camunda';
 import { IoC, Worker } from 'workit-core';
 import './config/ioc';

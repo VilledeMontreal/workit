@@ -35,7 +35,7 @@ describe('Camunda Client', () => {
     clientLib.stop = jest.fn().mockReturnValue(undefined);
     // issue with definition - fix with any
     camundaClient = new CamundaBpmClient(configuration, clientLib as any);
-    // tslint:disable-next-line: no-console
+
     console.log(camundaClient);
   });
 

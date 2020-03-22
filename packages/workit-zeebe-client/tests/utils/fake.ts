@@ -6,7 +6,6 @@
 
 import { TaskBase } from 'workit-core';
 import { ICamundaService, IMessage } from 'workit-types';
-// tslint:disable:max-classes-per-file
 
 export class FakeTask extends TaskBase<IMessage> {
   public execute(model: IMessage): Promise<IMessage> {

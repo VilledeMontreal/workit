@@ -34,7 +34,6 @@ const error = (message: string | {}) =>
  * logs various events from client
  * @param client
  */
-// tslint:disable-next-line:max-func-body-length
 const log = (client: any) => {
   client.on('subscribe', (topic: string) => {
     process.stdout.write(

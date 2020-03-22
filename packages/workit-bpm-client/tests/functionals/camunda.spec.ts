@@ -21,9 +21,6 @@ let failureHandler: FailureStrategySimple;
 let client: CamundaBpmClient;
 let processHandler: SCProcessHandler;
 
-// tslint:disable:ter-prefer-arrow-callback
-// tslint:disable:only-arrow-functions
-// tslint:disable:max-func-body-length
 describe('Camunda Worker', function() {
   beforeEach(() => {
     const basicOauth = { username: 'admin', password: 'admin123' };

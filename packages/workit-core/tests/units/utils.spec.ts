@@ -5,7 +5,7 @@
  */
 
 import { andArrayWith, isArrayOfFunctions, isFunction } from '../../src/utils/utils';
-// tslint:disable-next-line: max-func-body-length
+
 describe('utils', () => {
   describe('isFunction', () => {
     it('should return false if param is not a function', () => {
