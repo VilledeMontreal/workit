@@ -16,7 +16,7 @@
     "@types/node": "^13.9.1",
     "codecov": "^3.6.5",
     "husky": "^4.2.3",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.2",
     "eslint": "^6.8.0",
     "eslint-plugin-header":"^3.0.0",
     "eslint-config-airbnb-typescript": "^7.0.0",
