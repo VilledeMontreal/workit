@@ -1,12 +1,14 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const stringify = require('fast-safe-stringify');
-const pid = process.pid;
-const platform = process.platform;
+
+const { pid } = process;
+const { platform } = process;
 
 /**
  * @returns a formatted success message
@@ -32,7 +34,6 @@ const error = (message: string | {}) =>
  * logs various events from client
  * @param client
  */
-// tslint:disable-next-line:max-func-body-length
 const log = (client: any) => {
   client.on('subscribe', (topic: string) => {
     process.stdout.write(

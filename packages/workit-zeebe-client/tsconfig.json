@@ -6,12 +6,12 @@
   },
   "exclude": [
     "lib", 
-    "temp", 
+    "temp",
+    "tests", 
     "node_modules", 
     "output", 
     "log",  
     "mocha", 
-    ".*",
-    "tests"
+    ".*"
   ]
 }

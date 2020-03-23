@@ -6,7 +6,6 @@
 
 import { TaskBase } from 'workit-core';
 import { ICamundaService, IMessage } from 'workit-types';
-// tslint:disable:max-classes-per-file
 
 export class FakeTask extends TaskBase<IMessage> {
   constructor() {
@@ -17,7 +16,7 @@ export class FakeTask extends TaskBase<IMessage> {
   }
 }
 
-export class FakeClient  {
+export class FakeClient {
   public subscribe(onMessageReceived: (message: IMessage, service: ICamundaService) => Promise<void>): Promise<void> {
     return Promise.resolve();
   }

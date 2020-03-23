@@ -1,11 +1,12 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
 
-import debug = require('debug');
 import { ProxyObserver } from './proxyObserver';
+
+import debug = require('debug');
 
 const log = debug('workit:proxy');
 /**
@@ -14,6 +15,7 @@ const log = debug('workit:proxy');
  */
 export class ProxyFactory {
   public static readonly cacheChanges = new WeakMap();
+
   /**
    * Create a ProxyObserver instance with default handler.
    * You can check with ProxyFactory.cacheChanges.has(obj) that return a boolean if object has changed.

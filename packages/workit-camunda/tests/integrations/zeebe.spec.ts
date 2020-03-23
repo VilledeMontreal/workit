@@ -12,7 +12,6 @@ import { ICamundaService, IMessage, ISuccessStrategy } from 'workit-types';
 import { ZeebeClient } from 'workit-zeebe-client';
 import { Client } from '../../src/camunda-n-mq/client';
 
-
 process.env.ZB_NODE_LOG_LEVEL = process.env.ZB_NODE_LOG_LEVEL || 'NONE';
 
 export class SuccessStrategy implements ISuccessStrategy {
@@ -32,7 +31,6 @@ export class SuccessStrategy implements ISuccessStrategy {
   }
 }
 
-// tslint:disable-next-line: max-classes-per-file
 export class HelloWorldTask extends TaskBase<IMessage> {
   private readonly _expect: ((message: IMessage<any, any>) => void) | undefined;
   constructor(expect?: ((message: IMessage<any, any>) => void) | undefined) {
@@ -49,7 +47,6 @@ export class HelloWorldTask extends TaskBase<IMessage> {
 
 IoC.bindToObject(new HelloWorldTask(), 'ServiceTask_0g6tf5f');
 
-// tslint:disable-next-line: max-func-body-length
 describe('ZeebeClient', () => {
   const zbc: ZeebeClient = new ZeebeClient({ workerId: 'jest-integration', baseUrl: 'localhost:26500', topicName: '' });
   const workers: Worker[] = [];
@@ -61,7 +58,6 @@ describe('ZeebeClient', () => {
     return new Worker(client, processHandler);
   };
   beforeEach(() => {
-    // tslint:disable-next-line: no-empty
     workers.push(createWorkerInstance('', () => {}));
   });
 
@@ -72,7 +68,6 @@ describe('ZeebeClient', () => {
       }
       await zbc.unsubscribe(); // Makes sure we don't forget to close connection
     } catch (error) {
-      // tslint:disable-next-line: no-console
       console.log(error);
     }
   });
@@ -203,7 +198,6 @@ describe('ZeebeClient', () => {
     const wfi = wf.workflowInstanceKey;
     expect(wfi).toBeTruthy();
 
-    // tslint:disable-next-line: no-empty
     workers.unshift(createWorkerInstance('wait', () => {}));
     workers.unshift(createWorkerInstance('pathA', done));
 
@@ -253,7 +247,6 @@ describe('ZeebeClient', () => {
       }
     });
 
-    // tslint:disable-next-line: no-empty
     workers.unshift(createWorkerInstance('wait', () => {}));
     workers.unshift(createWorkerInstance('pathB', done));
 
@@ -303,7 +296,6 @@ describe('ZeebeClient', () => {
       }
     });
 
-    // tslint:disable-next-line: no-empty
     workers.unshift(createWorkerInstance('wait', done));
 
     IoC.unbind('ServiceTask_0cz2k8t');

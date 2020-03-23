@@ -17,9 +17,11 @@ process.env.ZB_NODE_LOG_LEVEL = process.env.ZB_NODE_LOG_LEVEL || 'NONE';
 
 export class SuccessStrategy implements ISuccessStrategy {
   private readonly _done: (e?: Error, message?: IMessage) => void;
+
   constructor(done: (e?: Error, message?: IMessage) => void) {
     this._done = done;
   }
+
   public handle(message: IMessage, service: ICamundaService): Promise<void> {
     try {
       return service.ack(message);
@@ -32,13 +34,14 @@ export class SuccessStrategy implements ISuccessStrategy {
   }
 }
 
-// tslint:disable-next-line: max-classes-per-file
 export class HelloWorldTask extends TaskBase<IMessage> {
   private readonly _expect: ((message: IMessage<any, any>) => void) | undefined;
+
   constructor(expect?: ((message: IMessage<any, any>) => void) | undefined) {
     super();
     this._expect = expect;
   }
+
   public async execute(message: IMessage): Promise<IMessage> {
     if (this._expect) {
       this._expect(message);
@@ -49,7 +52,6 @@ export class HelloWorldTask extends TaskBase<IMessage> {
 
 IoC.bindToObject(new HelloWorldTask(), 'ServiceTask_0g6tf5f');
 
-// tslint:disable-next-line: max-func-body-length
 describe('ZeebeClient', () => {
   const zbc: ZeebeClient = new ZeebeClient({ workerId: 'jest-integration', baseUrl: 'localhost:26500', topicName: '' });
   const workers: Worker[] = [];
@@ -61,18 +63,18 @@ describe('ZeebeClient', () => {
     return new Worker(client, processHandler);
   };
   beforeEach(() => {
-    // tslint:disable-next-line: no-empty
     workers.push(createWorkerInstance('console-log', () => {}));
   });
 
   afterEach(async () => {
     try {
-      for (const worker of workers) {
-        await worker.stop();
-      }
+      await Promise.all(
+        workers.map(async worker => {
+          await worker.stop();
+        })
+      );
       await zbc.unsubscribe(); // Makes sure we don't forget to close connection
     } catch (error) {
-      // tslint:disable-next-line: no-console
       console.log(error);
     }
   });
@@ -202,7 +204,6 @@ describe('ZeebeClient', () => {
     const wfi = wf.workflowInstanceKey;
     expect(wfi).toBeTruthy();
 
-    // tslint:disable-next-line: no-empty
     workers.unshift(createWorkerInstance('wait', () => {}));
     workers.unshift(createWorkerInstance('pathA', done));
 
@@ -252,7 +253,6 @@ describe('ZeebeClient', () => {
       }
     });
 
-    // tslint:disable-next-line: no-empty
     workers.unshift(createWorkerInstance('wait', () => {}));
     workers.unshift(createWorkerInstance('pathB', done));
 
@@ -302,7 +302,6 @@ describe('ZeebeClient', () => {
       }
     });
 
-    // tslint:disable-next-line: no-empty
     workers.unshift(createWorkerInstance('wait', done));
 
     IoC.unbind('ServiceTask_0cz2k8t');
@@ -310,7 +309,7 @@ describe('ZeebeClient', () => {
       new HelloWorldTask(message => {
         expect(message.properties.workflowInstanceKey).toBe(wfi);
         let retries = message.properties.retries || 0;
-        retries++;
+        retries += 1;
         // Succeed on the third attempt
         if (retries < 3) {
           throw new Error('jest test');

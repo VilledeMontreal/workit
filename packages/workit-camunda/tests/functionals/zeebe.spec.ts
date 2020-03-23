@@ -20,9 +20,7 @@ const run = (worker: Worker, done: any, delay: number = 500) => {
     done();
   }, delay);
 };
-// tslint:disable:ter-prefer-arrow-callback
-// tslint:disable:only-arrow-functions
-// tslint:disable:max-func-body-length
+
 describe('Zeebe Worker', function() {
   let worker: Worker;
   let config: ICamundaConfig;

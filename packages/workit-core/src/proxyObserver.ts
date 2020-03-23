@@ -1,10 +1,11 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
 
-import { concatPath, isPrimitive } from './utils/utils';
+import { isPrimitive } from './utils/isPrimitive';
+import { concatPath } from './utils/concat';
 
 const proxyTarget = Symbol('ProxyTarget');
 
@@ -15,11 +16,17 @@ const proxyTarget = Symbol('ProxyTarget');
  */
 export class ProxyObserver {
   private _inApply = false;
+
   private _changed = false;
+
   private readonly _propCache = new WeakMap();
+
   private readonly _pathCache = new WeakMap();
+
   private readonly _proxy;
+
   private _onChange: (proxy: any, property: any, value: any, previous?: any) => void;
+
   private _handler = {
     get: (target: object, property: string | number | symbol, receiver: any) => {
       if (property === proxyTarget) {
@@ -106,6 +113,7 @@ export class ProxyObserver {
       return Reflect.apply(target, thisArg, argumentsList);
     }
   };
+
   constructor(object: any, onChangeFunc: (proxy: any, property: any, value: any, previous: any) => void) {
     this._onChange = onChangeFunc;
     this._pathCache.set(object, '');
@@ -118,6 +126,7 @@ export class ProxyObserver {
     this._proxy = new Proxy(object, this._handler);
     return this._proxy;
   }
+
   private _handleChange = (path: string, property: any, previous: any, value?: any) => {
     if (!this._inApply) {
       this._onChange(this._proxy, concatPath(path, property), value, previous);
@@ -125,6 +134,7 @@ export class ProxyObserver {
       this._changed = true;
     }
   };
+
   private _getOwnPropertyDescriptor = (target: object, property: string | number | symbol) => {
     let props = this._propCache.get(target);
 
@@ -143,6 +153,7 @@ export class ProxyObserver {
 
     return prop;
   };
+
   private _invalidateCachedDescriptor = (target: object, property: any) => {
     const props = this._propCache.get(target);
 

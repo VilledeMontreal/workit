@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -15,10 +15,7 @@ export class PaginationUtils {
       return params;
     }
     // make no sens to set size to 0
-    return Object.assign({}, params, {
-      firstResult: options.from,
-      maxResults: options.size || PaginationUtils._DEFAULT_SIZE_ITEMS
-    });
+    return { ...params, firstResult: options.from, maxResults: options.size || PaginationUtils._DEFAULT_SIZE_ITEMS };
   }
 
   public static getPagingFromOptions(totalCount: number, options?: (any & IPaginationOptions) | undefined): IPaging {

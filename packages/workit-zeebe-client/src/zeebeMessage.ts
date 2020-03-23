@@ -1,9 +1,8 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-
 import { getVariablesWhenChanged } from 'workit-core';
 import { FailureException, ICamundaService, IMessage, IPayload, IWorkflowProps } from 'workit-types';
 // FIXME:dist folder....
@@ -23,21 +22,21 @@ export class ZeebeMessage {
       },
       {
         hasBeenThreated: false,
-        async ack(message: IMessage<Partial<TVariables> | undefined, IWorkflowProps<unknown>>) {
+        async ack(message: IMessage<Partial<TVariables> | undefined, IWorkflowProps<unknown>>): Promise<void> {
           if (this.hasBeenThreated) {
-            return Promise.resolve();
+            return;
           }
 
           // TODO: change any to real type body
           const vars = getVariablesWhenChanged<any>(message, msg => ZeebeMessage.unwrap(msg));
 
-          this.hasBeenThreated = await complete.success(vars.variables);
+          this.hasBeenThreated = await complete.success(vars?.variables);
         },
         nack(error: FailureException) {
           if (this.hasBeenThreated) {
             return Promise.resolve();
           }
-          const retries = error.retries;
+          const { retries } = error;
           // TODO: check if zeebe-node made the type correction
           this.hasBeenThreated = (complete.failure(error.message, retries) as unknown) as boolean;
           return Promise.resolve();

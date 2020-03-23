@@ -13,8 +13,9 @@
     "compile": "rm -rf ./lib/ && npm run build",
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc -p ./tsconfig.json --watch",
-    "lint": "tslint --project ./tsconfig.json && prettier -l \"src/**/*.ts\"",
-    "lint-fix": "tslint --project ./tsconfig.json --fix && prettier \"src/**/*.ts\" --write",
+    "lint": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
+    "lint-fix": "prettier \"./**/*.ts\" --write && eslint . --ext .ts --fix",
+    "check-conflicts":"eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
     "camunda:deploy": "node ./lib/src/deploy.js",
     "camunda:create-instance": "node ./lib/src/create-process-instances.js",
     "camunda:worker": "node ./lib/src/worker.js"
@@ -26,16 +27,18 @@
   "devDependencies": {
     "@types/node": "^13.1.6",
     "prettier": "^1.19.1",
-    "prettier-tslint": "^0.4.2",
-    "tslint": "^5.20.1",
-    "tslint-config-airbnb": "^5.11.2",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-consistent-codestyle": "^1.16.0",
-    "tslint-microsoft-contrib": "^6.2.0",
-    "typescript": "^3.6.3"
+    "eslint": "^6.8.0",
+    "eslint-plugin-header":"^3.0.0",
+    "eslint-config-airbnb-typescript": "^7.2.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-config-prettier":"^6.10.1",
+    "eslint-plugin-prettier":"^3.1.2",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "workit-camunda": "^4.1.0",
     "workit-core": "^4.1.0",
     "workit-types": "^4.1.0"

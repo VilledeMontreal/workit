@@ -21,9 +21,6 @@ let failureHandler: FailureStrategySimple;
 let client: CamundaBpmClient;
 let processHandler: SCProcessHandler;
 
-// tslint:disable:ter-prefer-arrow-callback
-// tslint:disable:only-arrow-functions
-// tslint:disable:max-func-body-length
 describe('Camunda Worker', function() {
   beforeEach(() => {
     const basicOauth = { username: 'admin', password: 'admin123' };
@@ -41,7 +38,7 @@ describe('Camunda Worker', function() {
     const handlerConfig = {
       enableTracing: false,
       interceptors: []
-    }
+    };
 
     // init
     const clientLib: ICamundaClient = new CamundaExternalClient(config);
@@ -169,12 +166,7 @@ describe('Camunda Worker', function() {
       autoPoll: false,
       enableTracing: false
     };
-    const newProcessHandler = new SCProcessHandler(
-      successHandler,
-      failureHandler,
-      NOOP_TRACER,
-      configWithInterceptors
-    );
+    const newProcessHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER, configWithInterceptors);
     worker = new Worker(client, newProcessHandler);
     worker.start();
     worker.run();

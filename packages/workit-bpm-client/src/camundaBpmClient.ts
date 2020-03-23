@@ -1,10 +1,8 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-
-import { PaginationUtils } from './utils/paginationUtils';
 
 import {
   IBpmn,
@@ -32,8 +30,11 @@ import {
   IWorkflowOptions,
   IWorkflowProcessIdDefinition
 } from 'workit-types';
+import { PaginationUtils } from './utils/paginationUtils';
+
 import { CamundaMessage } from './camundaMessage';
 import { CamundaRepository } from './repositories/camundaRepository';
+
 export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClient {
   private static _getWorkflowParams(options?: Partial<IWorkflowOptions & IPaginationOptions>): any {
     const _params = {} as any;
@@ -42,15 +43,21 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
     }
     return PaginationUtils.setCamundaBpmPaginationParams(_params, options);
   }
+
   private readonly _client: ICamundaClient;
+
   private _topicSubscription: ITopicSubscription | undefined;
+
   private readonly _config: ICamundaConfig;
+
   private readonly _repo: ICamundaRepository;
+
   constructor(config: ICamundaConfig, client: ICamundaClient) {
     this._client = client;
     this._config = config;
     this._repo = new CamundaRepository(config);
   }
+
   public subscribe(onMessageReceived: (message: IMessage, service: ICamundaService) => Promise<void>): Promise<void> {
     this._topicSubscription = this._client.subscribe(
       this._config.topicName,
@@ -65,6 +72,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
 
     return Promise.resolve();
   }
+
   public unsubscribe(): Promise<void> {
     try {
       if (this._topicSubscription) {
@@ -76,6 +84,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       return Promise.reject(error);
     }
   }
+
   public async deployWorkflow(absPath: string): Promise<IDeployWorkflowResponse> {
     const result = await this._repo.deployWorkflow(`Deploy from ${this._config.workerId}`, absPath);
     const response = result.data;
@@ -94,6 +103,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       key: response.id
     };
   }
+
   public async getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {
     const params = CamundaBpmClient._getWorkflowParams(options);
     const apiOptions = { params };
@@ -106,21 +116,20 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       >
     ] = [this._repo.getWorkflows(apiOptions), this._repo.getWorkflowCount(apiOptions)];
     const [result, repCount] = await Promise.all(requests);
-    const bpmns = result.data as IBpmn[];
-    const workflows = bpmns.map(definition => {
-      return {
-        bpmnProcessId: definition.key,
-        workflowKey: definition.id,
-        resourceName: definition.resource,
-        version: definition.version
-      };
-    });
+    const bpmns = result.data;
+    const workflows = bpmns.map(definition => ({
+      bpmnProcessId: definition.key,
+      workflowKey: definition.id,
+      resourceName: definition.resource,
+      version: definition.version
+    }));
 
     return {
       paging: PaginationUtils.getPagingFromOptions(repCount.data.count, options),
       items: workflows
     };
   }
+
   public async getWorkflow(payload: IWorkflowDefinitionRequest): Promise<IWorkflowDefinition> {
     let definition;
     if (this._hasBpmnProcessId(payload)) {
@@ -137,12 +146,15 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       workflowKey: definition.id
     };
   }
+
   public async updateVariables<T = any>(model: IUpdateWorkflowVariables<Partial<T>>): Promise<void> {
     await this._repo.updateVariables(model.processInstanceId, model.variables);
   }
+
   public async updateJobRetries({ jobKey, retries }: IUpdateWorkflowRetry): Promise<void> {
     await this._repo.updateJobRetries(jobKey, retries);
   }
+
   public publishMessage<T, K>(payload: IPublishMessage<T, K>): Promise<void> {
     return this._repo.publishMessage({
       messageName: payload.name,
@@ -151,6 +163,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       variables: payload.variables
     });
   }
+
   public async createWorkflowInstance<T>(model: ICreateWorkflowInstance<T>): Promise<ICreateWorkflowInstanceResponse> {
     const result = await this._repo.createWorkflowInstance(model.bpmnProcessId, model.variables);
     const response = result.data;
@@ -163,17 +176,21 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       workflowKey: response.definitionId
     };
   }
+
   public cancelWorkflowInstance(instanceId: string): Promise<void> {
     return this._repo.cancelWorkflowInstance(instanceId);
   }
+
   public resolveIncident(incidentKey: string): Promise<void> {
     return this._repo.resolveIncident(incidentKey);
   }
+
   private _startSubscriber() {
     if (!this._config.autoPoll) {
       this._client.start();
     }
   }
+
   private _hasBpmnProcessId(request: IWorkflowDefinitionRequest): request is IWorkflowProcessIdDefinition {
     return (request as IWorkflowProcessIdDefinition).bpmnProcessId !== undefined;
   }

@@ -1,9 +1,8 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-
 export const SERVICE_IDENTIFIER = {
   /**
    * Bind the Zeebe client you want to use
@@ -20,6 +19,5 @@ export const SERVICE_IDENTIFIER = {
   /**
    * Bind your own Elastic exporter config for Zeebe
    */
-
   zeebe_elastic_exporter_config: Symbol('zeebe_elastic_exporter_config')
 };

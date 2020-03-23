@@ -1,18 +1,19 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-
 import { IEmptyPayload, IPayload, IWorkflowProps } from 'workit-types';
 
 export class ZeebeMapperProperties {
   public static map<TVariables = unknown, TProps = unknown>(obj: IPayload<TVariables, TProps>): IWorkflowProps<TProps> {
-    if (!obj.variables) {
-      obj.variables = {} as any;
+    let businessKey;
+    if (obj.variables || (obj.variables as any).businessKey) {
+      businessKey = (obj.variables as any).businessKey;
     }
+
     return {
-      businessKey: (obj.variables as any).businessKey, // retro compatibility with bpmn workflow engine
+      businessKey, // retro compatibility with bpmn workflow engine
       activityId: obj.elementId,
       processInstanceId: obj.elementInstanceKey,
       workflowDefinitionVersion: obj.workflowDefinitionVersion,

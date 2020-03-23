@@ -5,7 +5,7 @@
  */
 
 import { Utils } from '../../src/utils/utils';
-// tslint:disable-next-line: max-func-body-length
+
 describe('utils', () => {
   describe('serializeVariable', () => {
     it('value should remain the same if type is neither json nor date', () => {

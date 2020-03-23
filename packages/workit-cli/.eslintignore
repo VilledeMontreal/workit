@@ -1,0 +1,9 @@
+node_modules
+lib
+.vscode
+coverage
+*lock*
+*.md
+tests
+*.js
+templates

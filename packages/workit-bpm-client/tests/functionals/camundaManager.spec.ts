@@ -10,9 +10,7 @@ import { ICamundaClient } from 'workit-types';
 import { CamundaBpmClient } from '../../src/camundaBpmClient';
 
 let manager: CamundaBpmClient;
-// tslint:disable:ter-prefer-arrow-callback
-// tslint:disable:only-arrow-functions
-// tslint:disable:max-func-body-length
+
 describe('Client Manager (Camunda BPM)', function() {
   beforeAll(() => {
     const config = {

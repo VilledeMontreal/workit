@@ -7,7 +7,6 @@
 import { TaskBase } from 'workit-core';
 import { ICamundaService, IMessage } from 'workit-types';
 import { Client } from '../../src/camunda-n-mq/client';
-// tslint:disable:max-classes-per-file
 
 export class FakeTask extends TaskBase<IMessage> {
   constructor() {

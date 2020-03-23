@@ -1,5 +1,5 @@
-/*!
- * Copyright (c) 2019 Ville de Montreal. All rights reserved.
+/*
+ * Copyright (c) 2020 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -8,11 +8,15 @@ import { injectable } from 'inversify';
 import 'reflect-metadata';
 import { ICamundaService, IFailureStrategy, IMessage, IWorkflowProps } from 'workit-types';
 
+// eslint-disable-next-line
 const stringify = require('fast-safe-stringify');
 
-// tslint:disable:no-console
 @injectable()
 export class FailureStrategySimple implements IFailureStrategy<ICamundaService> {
+  constructor() {
+    console.log('warning: You should not use this failure strategy class in production');
+  }
+
   public async handle(error: any, message: IMessage<unknown, IWorkflowProps>, service: ICamundaService): Promise<void> {
     const { properties } = message;
     let retries = properties.retries as number;
@@ -20,14 +24,13 @@ export class FailureStrategySimple implements IFailureStrategy<ICamundaService> 
     if (!retries) {
       retries = 1;
     } else {
-      retries++;
+      retries += 1;
     }
 
     if (retries > 20) {
       retries = 0;
     }
 
-    console.log('warning: You should not use this failure strategy class in production');
     console.log(
       JSON.stringify({
         errorMessage: error.message,

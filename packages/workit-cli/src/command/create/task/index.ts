@@ -15,72 +15,8 @@ import { symbols } from '../../../configs/constants/symbols';
 prompt.message = colors.green('Replace');
 
 const localPath = process.cwd();
-/*
- * Command function
- */
-export const task = async (args, options, logger) => {
-  const language = options.lang;
-  const workflowPath = options.file;
-  const template = args.template;
-  // tslint:disable: no-console
-  // console.log(options);
-  // console.log(args);
-  if (!template || template !== 'default') {
-    throw new Error(`Invalid template ${template}`);
-  }
-  if (!language || language !== 'node') {
-    throw new Error(`This language is not supported ${language}`);
-  }
 
-  const templatePath = `${__dirname}/templates/${language}/${template}`.replace(
-    'workit-cli/lib/command',
-    'workit-cli/src/command'
-  );
-  const contentFile = fs.readFileSync(`${templatePath}/src/task`);
-  /*
-   * File variables
-   */
-
-  const variables = require(`${templatePath}/_variables`);
-
-  // Remove variables file from the current directory
-  // since it only is needed on the template directory
-  if (fs.existsSync(`${localPath}/_variables.js`)) {
-    shell.rm(`${localPath}/_variables.js`);
-  }
-
-  if (workflowPath) {
-    if (!fs.existsSync(workflowPath)) {
-      throw new Error("Le fichier n'a pas été trouvé");
-    }
-    const tasks = getExternalTasks(workflowPath);
-    // tslint:disable-next-line: variable-name
-    const ProgressBar = require('progress');
-    const bar = new ProgressBar('  generating tasks [:bar] :percent :etas', {
-      complete: '=',
-      incomplete: ' ',
-      width: 30,
-      total: tasks.size
-    });
-    for (const currentTask of tasks) {
-      await processHandler(currentTask, contentFile, true);
-      bar.tick(1);
-    }
-    logger.info(`\n${symbols.ok} Success!`);
-  } else {
-    logger.info('Please fill the following values…');
-    prompt.start().get(variables, (err, result) => {
-      if (err || !result || !result.className) {
-        return;
-      }
-      processHandler(result.className, contentFile)
-        .then(() => logger.info(`${symbols.ok} Success!`))
-        .catch((error: any) => logger.error(`${symbols.err} Fail!\n${error.message}`));
-    });
-  }
-};
-
-async function processHandler(className, contentFile, isBpmn = false) {
+function processHandler(className, contentFile, isBpmn = false): Promise<void> {
   const camelCase = require('camelcase');
   const classNameWithMaj = camelCase(className, { pascalCase: true });
   const classNameSanitized = camelCase(className);
@@ -99,7 +35,7 @@ async function processHandler(className, contentFile, isBpmn = false) {
     `${localPath}/src/tasks/${classNameSanitized}.ts`,
     contentFile.toString().replace('[CLASSNAME]', classNameWithMaj)
   );
-  // tslint:disable: no-console
+
   const filePath = path.resolve(`${localPath}/src/config/ioc.ts`);
   project.addExistingSourceFiles(filePath);
   const file = project.getSourceFile(filePath);
@@ -126,9 +62,9 @@ async function processHandler(className, contentFile, isBpmn = false) {
             `IoC.bindTo(${classNameWithMaj}, '${isBpmn ? className : '<ACTIVITY_ID>'}');\n${exp.getText()}`
           );
         }
-        i++;
+        i += 1;
       }
-      j++;
+      j += 1;
     }
     // improve this with a pattern
     if (!iocFound) {
@@ -138,7 +74,7 @@ async function processHandler(className, contentFile, isBpmn = false) {
           namedImports: [{ name: classNameWithMaj }]
         });
         file.addImportDeclaration({
-          moduleSpecifier: `workit-camunda`,
+          moduleSpecifier: `workit-core`,
           namedImports: [{ name: 'IoC' }]
         });
       } else {
@@ -160,8 +96,10 @@ async function processHandler(className, contentFile, isBpmn = false) {
       }
     }
     file.organizeImports();
-    await project.save();
+    return project.save();
   }
+
+  return Promise.resolve();
 }
 
 function getExternalTasks(pathToFile: string): Set<string> {
@@ -208,3 +146,69 @@ function getExternalTasks(pathToFile: string): Set<string> {
   });
   return externalTasks;
 }
+
+/*
+ * Command function
+ */
+export const task = async (args, options, logger): Promise<void> => {
+  const language = options.lang;
+  const workflowPath = options.file;
+  const { template } = args;
+  // console.log(options);
+  // console.log(args);
+  if (!template || template !== 'default') {
+    throw new Error(`Invalid template ${template}`);
+  }
+  if (!language || language !== 'node') {
+    throw new Error(`This language is not supported ${language}`);
+  }
+
+  const templatePath = `${__dirname}/templates/${language}/${template}`.replace(
+    'workit-cli/lib/command',
+    'workit-cli/src/command'
+  );
+  const contentFile = fs.readFileSync(`${templatePath}/src/task`);
+  /*
+   * File variables
+   */
+
+  const variables = require(`${templatePath}/_variables`);
+
+  // Remove variables file from the current directory
+  // since it only is needed on the template directory
+  if (fs.existsSync(`${localPath}/_variables.js`)) {
+    shell.rm(`${localPath}/_variables.js`);
+  }
+
+  if (workflowPath) {
+    if (!fs.existsSync(workflowPath)) {
+      throw new Error("Le fichier n'a pas été trouvé");
+    }
+    const tasks = getExternalTasks(workflowPath);
+    const ProgressBar = require('progress');
+    const bar = new ProgressBar('  generating tasks [:bar] :percent :etas', {
+      complete: '=',
+      incomplete: ' ',
+      width: 30,
+      total: tasks.size
+    });
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const currentTask of tasks) {
+      await processHandler(currentTask, contentFile, true);
+      bar.tick(1);
+    }
+
+    logger.info(`\n${symbols.ok} Success!`);
+  } else {
+    logger.info('Please fill the following values…');
+    prompt.start().get(variables, (err, result) => {
+      if (err || !result || !result.className) {
+        return;
+      }
+      processHandler(result.className, contentFile)
+        .then(() => logger.info(`${symbols.ok} Success!`))
+        .catch((error: any) => logger.error(`${symbols.err} Fail!\n${error.message}`));
+    });
+  }
+};
