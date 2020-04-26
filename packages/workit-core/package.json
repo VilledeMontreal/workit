@@ -31,7 +31,7 @@
     "prettier": "^1.19.1",
     "source-map-support": "^0.5.16",
     "ts-jest": "^25.2.1",
-    "typedoc": "^0.16.9",
+    "typedoc": "^0.17.5",
     "typescript": "^3.7.5",
     "eslint": "^6.8.0",
     "eslint-plugin-header":"^3.0.0",
