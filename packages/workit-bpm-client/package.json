@@ -21,7 +21,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@opentelemetry/api": "0.4.0",
+    "@opentelemetry/api": "0.8.2",
     "@types/axios": "~0.14.0",
     "@types/chai": "^4.2.11",
     "@types/debug": "~4.1.5",
