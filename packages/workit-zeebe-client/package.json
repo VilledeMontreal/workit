@@ -40,7 +40,7 @@
     "nock": "^11.8.2",
     "prettier": "^1.19.1",
     "source-map-support": "^0.5.16",
-    "ts-jest": "^25.2.1",
+    "ts-jest": "^26.0.0",
     "typedoc": "^0.16.11",
     "typescript": "^3.8.3"
   },
