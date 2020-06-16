@@ -53,13 +53,14 @@ export class CamundaMessage {
           if (this.hasBeenThreated) {
             return;
           }
-          const { retries } = error;
+          const { retries, retryTimeout } = error;
+          const retryTimeoutInMs = retryTimeout || 1000 * retries * 2;
           await payload.taskService.handleFailure(task, {
             errorMessage: error.message,
             errorDetails: stringify(error),
             retries,
             // TODO: Add to configuration
-            retryTimeout: 1000 * retries * 2
+            retryTimeoutInMs
           });
           this.hasBeenThreated = true;
         }
