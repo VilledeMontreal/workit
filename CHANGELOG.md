@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.2.0 (2020-09-15)
+
+#### :rocket: (Enhancement)
+* [#212](https://github.com/VilledeMontreal/workit/pull/212) Use custom retry timeout upon failure
+* [#178](https://github.com/VilledeMontreal/workit/pull/178) fix: move from tslint to eslint
+
+#### :books: (Refine Doc)
+* [#172](https://github.com/VilledeMontreal/workit/pull/172) docs(examples): add camunda-cloud
+
+#### Committers: 2
+- Olivier Albertini ([@OlivierAlbertini](https://github.com/OlivierAlbertini))
+- Sylvain Bouchard ([@sylvain-bouchard](https://github.com/sylvain-bouchard))
+
 ## 4.1.0 (2020-03-12)
 
 #### :rocket: (Enhancement)

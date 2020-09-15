@@ -5,7 +5,7 @@
  */
 
 import { ProxyObserver } from './proxyObserver';
-
+// eslint-disable-next-line import/order
 import debug = require('debug');
 
 const log = debug('workit:proxy');

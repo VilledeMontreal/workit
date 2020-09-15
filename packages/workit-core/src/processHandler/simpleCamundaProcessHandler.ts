@@ -22,7 +22,7 @@ import {
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { Interceptors } from '../interceptors';
 import { IoC, kernel } from '../config/container';
-
+// eslint-disable-next-line import/order
 import debug = require('debug');
 
 const log = debug('workit:processHandler');

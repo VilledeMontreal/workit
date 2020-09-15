@@ -8,7 +8,7 @@ import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
 import { IClient, IMessage } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
-
+// eslint-disable-next-line import/order
 import debug = require('debug');
 
 const log = debug('workit:clientBase');

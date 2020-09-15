@@ -31,6 +31,10 @@ This package can be useful because:
 
 ## Packages
 
+<p style="color:red;"><strong>Packages will move under @villedemontreal organization after the 4.2.0 version. Packages must be renamed in your package.json file.</strong></p>
+
+For example, instead of `workit-camunda` it will be `@villedemontreal/workit-camunda`.
+
 ### API
 
 | Package | Description |
