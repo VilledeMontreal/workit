@@ -1,6 +1,6 @@
 {
   "name": "workit-bpm-client",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "Camunda BPM client for WorkIt that works with Camunda platform powered by TypeScript",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -15,8 +15,8 @@
     "form-data": "~2.5.1",
     "inversify": "~5.0.1",
     "reflect-metadata": "~0.1.13",
-    "workit-core": "^4.1.0",
-    "workit-types": "^4.1.0"
+    "workit-core": "^4.2.0",
+    "workit-types": "^4.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
@@ -30,8 +30,16 @@
     "@types/jest": "^25.1.4",
     "@types/nock": "^10.0.3",
     "@types/node": "^14.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
     "chai": "^4.2.0",
     "codecov": "^3.6.5",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-header": "^3.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.4",
     "jest": "^25.1.0",
     "nock": "^10.0.6",
@@ -39,14 +47,6 @@
     "source-map-support": "^0.5.16",
     "ts-jest": "^26.0.0",
     "typedoc": "^0.16.11",
-    "eslint": "^6.8.0",
-    "eslint-plugin-header":"^3.0.0",
-    "eslint-config-airbnb-typescript": "^7.0.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-config-prettier":"^6.10.0",
-    "eslint-plugin-prettier":"^3.1.2",
-    "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.23.0",
     "typescript": "^3.8.3"
   },
   "engines": {
@@ -60,7 +60,7 @@
     "watch": "tsc -p ./tsconfig.json --watch",
     "lint": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
     "lint-fix": "prettier \"./**/*.ts\" --write && eslint . --ext .ts --fix",
-    "check-conflicts":"eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
+    "check-conflicts": "eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
     "docs": "typedoc --out ./docs --tsconfig ./tsconfig.json --excludePrivate --mode file",
     "codecov": "codecov -f coverage/*.json -p ../../"
   },

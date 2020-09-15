@@ -1,7 +1,7 @@
 {
   "name": "workit-example-failure-strategy",
   "private": true,
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "Failure strategy example",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
@@ -15,7 +15,7 @@
     "watch": "tsc -p ./tsconfig.json --watch",
     "lint": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
     "lint-fix": "prettier \"./**/*.ts\" --write && eslint . --ext .ts --fix",
-    "check-conflicts":"eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
+    "check-conflicts": "eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
     "camunda:deploy": "node ./lib/src/deploy.js",
     "camunda:create-instance": "node ./lib/src/create-process-instances.js",
     "camunda:worker": "node ./lib/src/worker.js"
@@ -26,22 +26,22 @@
   },
   "devDependencies": {
     "@types/node": "^14.0.0",
-    "prettier": "^2.0.1",
-    "eslint": "^6.8.0",
-    "eslint-plugin-header":"^3.0.0",
-    "eslint-config-airbnb-typescript": "^7.2.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-config-prettier":"^6.10.1",
-    "eslint-plugin-prettier":"^3.1.2",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.2.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-header": "^3.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^2.0.1",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "workit-camunda": "^4.1.0",
-    "workit-core": "^4.1.0",
-    "workit-types": "^4.1.0"
+    "workit-camunda": "^4.2.0",
+    "workit-core": "^4.2.0",
+    "workit-types": "^4.2.0"
   },
   "keywords": [
     "workit",
