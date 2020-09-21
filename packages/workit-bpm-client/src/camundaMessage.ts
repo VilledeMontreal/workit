@@ -60,7 +60,7 @@ export class CamundaMessage {
             errorDetails: stringify(error),
             retries,
             // TODO: Add to configuration
-            retryTimeoutInMs
+            retryTimeout: retryTimeoutInMs
           });
           this.hasBeenThreated = true;
         }
