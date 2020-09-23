@@ -1,7 +1,7 @@
 {
   "name": "workit-example-failure-strategy",
   "private": true,
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "Failure strategy example",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
@@ -39,9 +39,9 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "workit-camunda": "^4.2.1",
-    "workit-core": "^4.2.0",
-    "workit-types": "^4.2.0"
+    "workit-camunda": "^4.2.2",
+    "workit-core": "^4.2.2",
+    "workit-types": "^4.2.2"
   },
   "keywords": [
     "workit",
