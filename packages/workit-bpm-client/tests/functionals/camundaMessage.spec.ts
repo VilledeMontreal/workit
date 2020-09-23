@@ -5,6 +5,7 @@
  */
 
 import { CamundaMessage } from '../../src/camundaMessage';
+import { Variables } from '../../src/variables';
 
 describe('camundaMessage', () => {
   it('unmap', () => {
@@ -28,5 +29,20 @@ describe('camundaMessage', () => {
     };
     const camundaObject = CamundaMessage.unwrap(message);
     expect(camundaObject).toMatchSnapshot();
+  });
+
+  it('wrap', () => {
+    const camundaPayload = {
+      task: { processInstanceId: '38963', processDefinitionId: 'xxxxx', variables: new Variables() } as any,
+      taskService: {
+        handleFailure: jest.fn(),
+        complete: jest.fn()
+      }
+    };
+    const [, service] = CamundaMessage.wrap(camundaPayload);
+    service.nack({ name: 'error', message: 'Oopps', retries: 0, retryTimeout: 15_000 });
+    expect(camundaPayload.taskService.handleFailure).toBeCalledTimes(1);
+    expect(camundaPayload.taskService.complete).toBeCalledTimes(0);
+    expect(camundaPayload.taskService.handleFailure.mock.calls[0][1]).toMatchSnapshot();
   });
 });

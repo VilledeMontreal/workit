@@ -13,3 +13,12 @@ Variables {
   "setTyped": [Function],
 }
 `;
+
+exports[`camundaMessage wrap 1`] = `
+Object {
+  "errorDetails": "{\\"name\\":\\"error\\",\\"message\\":\\"Oopps\\",\\"retries\\":0,\\"retryTimeout\\":15000}",
+  "errorMessage": "Oopps",
+  "retries": 0,
+  "retryTimeout": 15000,
+}
+`;
