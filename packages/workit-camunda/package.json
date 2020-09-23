@@ -1,6 +1,6 @@
 {
   "name": "workit-camunda",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Worker for Node.js system with pluggable Camunda clients that works with both Zeebe and Camunda platform powered by TypeScript",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -11,7 +11,7 @@
     "debug": "~4.1.1",
     "inversify": "~5.0.1",
     "reflect-metadata": "~0.1.13",
-    "workit-bpm-client": "^4.2.0",
+    "workit-bpm-client": "^4.2.1",
     "workit-core": "^4.2.0",
     "workit-types": "^4.2.0",
     "workit-zeebe-client": "^4.2.0"

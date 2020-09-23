@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.1](https://github.com/VilledeMontreal/workit/compare/v4.2.0...v4.2.1) (2020-09-23)
+
+
+### Bug Fixes
+
+* retryTimeoutInMs → retryTimeout ([#213](https://github.com/VilledeMontreal/workit/issues/213)) ([dc02fe6](https://github.com/VilledeMontreal/workit/commit/dc02fe68f4a0bc30c1126dc189ac2e8dd1bcc16c))
+
+
+
+
+
 ## 4.2.1 (2020-09-23)
 
 #### :bug: (Bug Fix)
