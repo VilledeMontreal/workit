@@ -5,7 +5,7 @@ import { ICamundaConfig } from '../specs/camundaConfig';
 let message = `\n------------------------------------\n`;
 message += `Configuration files loaded:\n`;
 const sources = config.util.getConfigSources();
-sources.forEach(source => {
+sources.forEach((source) => {
   message += `- ${source.name}\n`;
 });
 message += `------------------------------------\n`;
@@ -33,7 +33,7 @@ export class Configs {
       workerId: config.get<string>('camunda.workerId'),
       baseUrl: config.get<string>('camunda.baseUrl'),
       maxTasks: config.get<number>('camunda.maxTasks'),
-      topicName: config.get<string>('camunda.topicName')
+      topicName: config.get<string>('camunda.topicName'),
     };
   }
 
@@ -55,7 +55,7 @@ export class Configs {
       type: this._environment,
       isDev: this._environment === ENV.DEV,
       isAcc: this._environment === ENV.ACCEPTATION,
-      isProd: this._environment === ENV.PROD
+      isProd: this._environment === ENV.PROD,
     };
   }
 

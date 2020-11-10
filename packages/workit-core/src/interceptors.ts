@@ -49,6 +49,7 @@ export class Interceptors {
       msg = await interceptor(msg);
     }
     Interceptors._validateMessage(msg);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (!(msg as any).__proxy__ || ProxyFactory.cacheChanges.has(msg)) {
       ProxyFactory.cacheChanges.set(msg, true);
       return ProxyFactory.create(msg);

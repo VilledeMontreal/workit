@@ -12,5 +12,5 @@ export const message = {
   },
   get properties(): any {
     return this._properties;
-  }
+  },
 };

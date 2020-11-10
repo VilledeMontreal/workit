@@ -4,6 +4,13 @@
  * See LICENSE file in the project root for full license information.
  */
 
+/* eslint @typescript-eslint/no-unsafe-assignment: 0 */
+/* eslint @typescript-eslint/ban-types: 0 */
+/* eslint @typescript-eslint/restrict-template-expressions: 0 */
+/* eslint @typescript-eslint/no-unsafe-call: 0 */
+/* eslint @typescript-eslint/no-unsafe-member-access: 0 */
+/* eslint @typescript-eslint/no-unsafe-return: 0 */
+
 import axios, { AxiosInstance } from 'axios';
 import * as FormData from 'form-data';
 import * as fs from 'fs';
@@ -19,7 +26,7 @@ import {
   IIncident,
   IProcessDefinition,
   IProcessXmlDefinition,
-  IResolveIncident
+  IResolveIncident,
 } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { Utils } from '../utils/utils';
@@ -60,13 +67,13 @@ export class CamundaRepository implements ICamundaRepository {
     const headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'X-APP': this._configs.workerId || 'unknow'
+      'X-APP': this._configs.workerId || 'unknow',
     };
     this._headers = CamundaRepository._setStaticHeaders(configs, headers);
     this._request = axios.create({
       baseURL: this._configs.baseUrl,
       timeout: 30000,
-      headers: this._headers
+      headers: this._headers,
     });
   }
 
@@ -76,7 +83,7 @@ export class CamundaRepository implements ICamundaRepository {
     formData.append('deployment-name', deployName);
     formData.append('process', xmlStream);
     return this._request.post('/deployment/create', formData, {
-      headers: { ...this._headers, 'content-type': `multipart/form-data; boundary=${formData.getBoundary()}` }
+      headers: { ...this._headers, 'content-type': `multipart/form-data; boundary=${formData.getBoundary()}` },
     });
   }
 
@@ -95,7 +102,7 @@ export class CamundaRepository implements ICamundaRepository {
     const url = CamundaRepository._getworkflowInstanceUrl(idOrKey);
     return this._request.post(url, {
       businessKey: typeof variables === 'object' ? (variables as any).businessKey : undefined,
-      variables: Utils.serializeVariables(variables)
+      variables: Utils.serializeVariables(variables),
     });
   }
 
@@ -106,7 +113,7 @@ export class CamundaRepository implements ICamundaRepository {
     messageName,
     processInstanceId,
     variables,
-    correlationKeys
+    correlationKeys,
   }: {
     messageName: string;
     processInstanceId: string;
@@ -120,7 +127,7 @@ export class CamundaRepository implements ICamundaRepository {
       businessKey: typeof variables === 'object' ? (variables as any).businessKey : undefined,
       processVariables: Utils.serializeVariables(variables),
       resultEnabled: false,
-      all: true // same behaviour than Zeebe
+      all: true, // same behaviour than Zeebe
     });
   }
 
@@ -144,9 +151,9 @@ export class CamundaRepository implements ICamundaRepository {
       instructions: [
         {
           type: 'cancel', // change for enum
-          activityId: incident.activityId
-        }
-      ]
+          activityId: incident.activityId,
+        },
+      ],
     } as IResolveIncident);
   }
 
@@ -170,7 +177,7 @@ export class CamundaRepository implements ICamundaRepository {
 
   public updateJobRetries(id: string, retries: number): Promise<IHttpResponse<void>> {
     return this._request.put(`/external-task/${id}/retries`, {
-      retries
+      retries,
     });
   }
 
@@ -180,7 +187,7 @@ export class CamundaRepository implements ICamundaRepository {
     local = false
   ): Promise<IHttpResponse<void>> {
     return this._request.post(`/process-instance/${processInstanceId}/variables`, {
-      modifications: Utils.serializeVariables(variables, local)
+      modifications: Utils.serializeVariables(variables, local),
     });
   }
 }

@@ -54,7 +54,7 @@ describe('getWorkflows', () => {
   it.skip('Should not get workflow by bpmnProcessId and latest version with "from" out of range', async () => {
     const query = {
       query: { bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }] } },
-      aggs: { doc_with_latestVersion: { top_hits: { sort: [{ version: { order: 'desc' } }], size: 1 } } }
+      aggs: { doc_with_latestVersion: { top_hits: { sort: [{ version: { order: 'desc' } }], size: 1 } } },
     };
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', query)
@@ -83,7 +83,7 @@ describe('getWorkflows', () => {
     const query = {
       size: 0,
       query: { bool: { must: [{ match: { bpmnProcessId: { query: 'MESSAGE_EVENT' } } }] } },
-      aggs: { doc_with_latestVersion: { top_hits: { sort: [{ version: { order: 'desc' } }], size: 1 } } }
+      aggs: { doc_with_latestVersion: { top_hits: { sort: [{ version: { order: 'desc' } }], size: 1 } } },
     };
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', query)
@@ -100,7 +100,7 @@ describe('getWorkflows', () => {
     const query = {
       query: { bool: { must: [] } },
       size: 0,
-      aggs: { doc_with_latestVersion: { top_hits: { sort: [{ version: { order: 'desc' } }], size: 1 } } }
+      aggs: { doc_with_latestVersion: { top_hits: { sort: [{ version: { order: 'desc' } }], size: 1 } } },
     };
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', query)
@@ -114,8 +114,8 @@ describe('getWorkflows', () => {
   it('Should get workflow by bpmnProcessId and version', async () => {
     const query = {
       query: {
-        bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }, { match: { version: { query: 1 } } }] }
-      }
+        bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }, { match: { version: { query: 1 } } }] },
+      },
     };
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', query)
@@ -129,8 +129,8 @@ describe('getWorkflows', () => {
   it('Should not get workflow with bad version but good bpmnProcessId', async () => {
     const query = {
       query: {
-        bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }, { match: { version: { query: 0 } } }] }
-      }
+        bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }, { match: { version: { query: 0 } } }] },
+      },
     };
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', query)
@@ -145,7 +145,7 @@ describe('getWorkflows', () => {
     const query = {
       query: { bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }] } },
       size: 0,
-      aggs: { doc_with_latestVersion: { top_hits: { sort: [{ version: { order: 'desc' } }], size: 1 } } }
+      aggs: { doc_with_latestVersion: { top_hits: { sort: [{ version: { order: 'desc' } }], size: 1 } } },
     };
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', query)

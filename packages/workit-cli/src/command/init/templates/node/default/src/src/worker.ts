@@ -4,7 +4,7 @@ import './config/ioc';
 
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
 worker.start();
-worker.run().catch(err => {
+worker.run().catch((err) => {
   console.error('DO SOMETHING', err);
 });
 

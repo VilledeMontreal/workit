@@ -31,8 +31,8 @@ export class ZBElasticClient {
       maxRedirects: config.retry,
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     });
     Utils.addInterceptors(this._request, configs.elastic.interceptors);
   }
@@ -59,7 +59,7 @@ export class ZBElasticClient {
           _shards: data._shards,
           timed_out: data.timed_out,
           took: data.took,
-          hits: aggs.doc_with_latestVersion.hits
+          hits: aggs.doc_with_latestVersion.hits,
         };
       }
 
@@ -67,7 +67,7 @@ export class ZBElasticClient {
         headers: response.headers,
         data,
         status: response.status,
-        statusText: response.statusText
+        statusText: response.statusText,
       };
     }
 
@@ -86,7 +86,7 @@ export class ZBElasticClient {
       data: doc,
       params: _options.params,
       withCredentials: true,
-      headers: _options.headers
+      headers: _options.headers,
     });
   }
 
@@ -96,7 +96,7 @@ export class ZBElasticClient {
       method: HttpMethods.GET,
       params: _options.params,
       withCredentials: true,
-      headers: _options.headers
+      headers: _options.headers,
     });
   }
 
@@ -106,9 +106,9 @@ export class ZBElasticClient {
     const q: any = {
       query: {
         bool: {
-          must: [] as any[]
-        }
-      }
+          must: [] as any[],
+        },
+      },
     };
 
     const { key } = model;
@@ -116,18 +116,18 @@ export class ZBElasticClient {
       const mustMatchKey = {
         match: {
           key: {
-            query: key
-          }
-        }
+            query: key,
+          },
+        },
       };
       q.query.bool.must.push(mustMatchKey);
     } else if (model.bpmnProcessId) {
       const mustMatchBpmnProcessId = {
         match: {
           bpmnProcessId: {
-            query: model.bpmnProcessId
-          }
-        }
+            query: model.bpmnProcessId,
+          },
+        },
       };
       q.query.bool.must.push(mustMatchBpmnProcessId);
     }
@@ -140,25 +140,25 @@ export class ZBElasticClient {
             sort: [
               {
                 version: {
-                  order: 'desc'
-                }
-              }
+                  order: 'desc',
+                },
+              },
             ],
-            size: 1
-          }
-        }
+            size: 1,
+          },
+        },
       };
     } else if (hasVersionParam) {
       const mustMatchVersion = {
         match: {
           version: {
-            query: model.version
-          }
-        }
+            query: model.version,
+          },
+        },
       };
       q.query.bool.must.push(mustMatchVersion);
     }
-
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return q;
   }
 }

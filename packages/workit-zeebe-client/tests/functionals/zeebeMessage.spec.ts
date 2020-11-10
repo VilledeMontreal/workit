@@ -23,8 +23,8 @@ describe('zeebeMessage', () => {
         retries: 1,
         lockExpirationTime: new Date(1562269537659),
         topicName: 'topic_demo',
-        workerId: 'demo'
-      }
+        workerId: 'demo',
+      },
     };
     const zeebeObject = ZeebeMessage.unwrap(message);
     expect(zeebeObject).toMatchSnapshot();

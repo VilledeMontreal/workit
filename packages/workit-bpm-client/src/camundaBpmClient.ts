@@ -28,7 +28,7 @@ import {
   IWorkflowDefinition,
   IWorkflowDefinitionRequest,
   IWorkflowOptions,
-  IWorkflowProcessIdDefinition
+  IWorkflowProcessIdDefinition,
 } from 'workit-types';
 import { PaginationUtils } from './utils/paginationUtils';
 
@@ -37,7 +37,7 @@ import { CamundaRepository } from './repositories/camundaRepository';
 
 export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClient {
   private static _getWorkflowParams(options?: Partial<IWorkflowOptions & IPaginationOptions>): any {
-    const _params = {} as any;
+    const _params = {} as Record<string, unknown>;
     if (options && (options as IWorkflowOptions).bpmnProcessId) {
       _params.key = options.bpmnProcessId;
     }
@@ -95,17 +95,19 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
         bpmnProcessId: definition.key,
         workflowKey: definition.id,
         resourceName: definition.resource,
-        version: definition.version
-      }
+        version: definition.version,
+      },
     ];
     return {
       workflows,
-      key: response.id
+      key: response.id,
     };
   }
 
   public async getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const params = CamundaBpmClient._getWorkflowParams(options);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const apiOptions = { params };
     const requests: [
       Promise<IHttpResponse<IBpmn[]>>,
@@ -117,16 +119,16 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
     ] = [this._repo.getWorkflows(apiOptions), this._repo.getWorkflowCount(apiOptions)];
     const [result, repCount] = await Promise.all(requests);
     const bpmns = result.data;
-    const workflows = bpmns.map(definition => ({
+    const workflows = bpmns.map((definition) => ({
       bpmnProcessId: definition.key,
       workflowKey: definition.id,
       resourceName: definition.resource,
-      version: definition.version
+      version: definition.version,
     }));
 
     return {
       paging: PaginationUtils.getPagingFromOptions(repCount.data.count, options),
-      items: workflows
+      items: workflows,
     };
   }
 
@@ -143,7 +145,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       bpmnXml: definition.bpmn20Xml,
       resourceName: definition.resource,
       version: definition.version,
-      workflowKey: definition.id
+      workflowKey: definition.id,
     };
   }
 
@@ -160,7 +162,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       messageName: payload.name,
       processInstanceId: payload.messageId as string,
       correlationKeys: payload.correlation,
-      variables: payload.variables
+      variables: payload.variables,
     });
   }
 
@@ -173,7 +175,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       bpmnProcessId: bpmnDef[0],
       version: (bpmnDef[1] as unknown) as number,
       workflowInstanceKey: response.id,
-      workflowKey: response.definitionId
+      workflowKey: response.definitionId,
     };
   }
 

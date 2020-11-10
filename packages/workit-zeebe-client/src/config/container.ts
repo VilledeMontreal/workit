@@ -11,20 +11,20 @@ import { SERVICE_IDENTIFIER } from './constants/identifiers';
 const configBase: ICamundaConfig = {
   workerId: 'demo',
   baseUrl: `__undefined__`,
-  topicName: 'topic_demo'
+  topicName: 'topic_demo',
 };
 
 const zeebeElasticExporterConfig = {
-  url: `http://localhost:9200`
+  url: `http://localhost:9200`,
 };
 
-const camundaCloudConfig = {} as Partial<{ oAuth: object }>;
+const camundaCloudConfig = {} as Partial<{ oAuth: Record<string, unknown> }>;
 if (process.env.ZEEBE_AUTHORIZATION_SERVER_URL) {
   camundaCloudConfig.oAuth = Object.entries({
     url: process.env.ZEEBE_AUTHORIZATION_SERVER_URL,
     audience: process.env.ZEEBE_ADDRESS?.split(':')[0],
     clientId: process.env.ZEEBE_CLIENT_ID,
-    clientSecret: process.env.ZEEBE_CLIENT_SECRET
+    clientSecret: process.env.ZEEBE_CLIENT_SECRET,
   }).reduce((acc, [key, val]) => {
     if (val) acc[key] = val;
     return acc;
@@ -34,7 +34,7 @@ if (process.env.ZEEBE_AUTHORIZATION_SERVER_URL) {
 const zeebeClientConfig = {
   ...configBase,
   baseUrl: process.env.ZEEBE_ADDRESS || `localhost:26500`,
-  ...camundaCloudConfig
+  ...camundaCloudConfig,
 };
 kernel.bind(SERVICE_IDENTIFIER.zeebe_external_config).toConstantValue(zeebeClientConfig);
 kernel.bind(SERVICE_IDENTIFIER.zeebe_elastic_exporter_config).toConstantValue(zeebeElasticExporterConfig);

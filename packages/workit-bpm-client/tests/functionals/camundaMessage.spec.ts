@@ -24,8 +24,8 @@ describe('camundaMessage', () => {
         retries: 1,
         lockExpirationTime: new Date(1562269537659),
         topicName: 'topic_demo',
-        workerId: 'demo'
-      }
+        workerId: 'demo',
+      },
     };
     const camundaObject = CamundaMessage.unwrap(message);
     expect(camundaObject).toMatchSnapshot();
@@ -36,8 +36,8 @@ describe('camundaMessage', () => {
       task: { processInstanceId: '38963', processDefinitionId: 'xxxxx', variables: new Variables() } as any,
       taskService: {
         handleFailure: jest.fn(),
-        complete: jest.fn()
-      }
+        complete: jest.fn(),
+      },
     };
     const [, service] = CamundaMessage.wrap(camundaPayload);
     service.nack({ name: 'error', message: 'Oopps', retries: 0, retryTimeout: 15_000 });

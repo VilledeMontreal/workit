@@ -12,8 +12,8 @@ import { IProcessXmlDefinition } from './processXmlDefinition';
 
 export interface ICamundaRepository {
   deployWorkflow(deployName: string, absPath: string): Promise<IHttpResponse<IBpmnDeployResponse>>;
-  getWorkflows(options?: { params: {} }): Promise<IHttpResponse<IBpmn[]>>;
-  getWorkflowCount(options?: { params: {} }): Promise<IHttpResponse<{ count: number }>>;
+  getWorkflows(options?: { params: Record<string, unknown> }): Promise<IHttpResponse<IBpmn[]>>;
+  getWorkflowCount(options?: { params: Record<string, unknown> }): Promise<IHttpResponse<{ count: number }>>;
   getWorkflow(idOrKey: string): Promise<IProcessDefinition & IProcessXmlDefinition>;
   updateVariables<T = any>(processInstanceId: string, variables: T): Promise<IHttpResponse<void>>;
   updateJobRetries(id: string, retries: number): Promise<IHttpResponse<void>>;
@@ -25,7 +25,7 @@ export interface ICamundaRepository {
     messageName,
     processInstanceId,
     variables,
-    correlationKeys
+    correlationKeys,
   }: {
     messageName: string;
     processInstanceId: string;

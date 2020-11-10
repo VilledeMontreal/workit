@@ -86,15 +86,12 @@ export class IOC {
 
   public bindToAsDefault(ctor: any, serviceIdentifier: string | symbol, dependencies?: (symbol | string)[]): void {
     IOC._inject(ctor, dependencies);
-    this._container
-      .bind(serviceIdentifier)
-      .to(ctor)
-      .inSingletonScope()
-      .whenTargetIsDefault();
+    this._container.bind(serviceIdentifier).to(ctor).inSingletonScope().whenTargetIsDefault();
   }
 
   // todo: merge with bindTo
   public bindToObject(obj: any, serviceIdentifier: symbol | string, named?: string): void {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const newObj = IOC._overrideConfig(obj, serviceIdentifier);
     const service = this._container.bind(serviceIdentifier).toConstantValue(newObj);
     if (named) {

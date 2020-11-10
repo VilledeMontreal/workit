@@ -40,5 +40,5 @@ export const SERVICE_IDENTIFIER = {
    * Pass your custom propagator in order to get traceId from Camunda platform.
    * "TracerPropagator" must be bound in the IoC defaul is a NoopTracerPropagator
    */
-  tracer_propagator: Symbol('tracer_propagator')
+  tracer_propagator: Symbol('tracer_propagator'),
 };

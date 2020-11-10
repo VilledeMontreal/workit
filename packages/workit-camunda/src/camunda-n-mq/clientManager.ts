@@ -19,7 +19,7 @@ import {
   IWorkflowClient,
   IWorkflowDefinition,
   IWorkflowDefinitionRequest,
-  IWorkflowOptions
+  IWorkflowOptions,
 } from 'workit-types';
 
 import debug = require('debug');

@@ -20,9 +20,12 @@ export class ProxyFactory {
    * Create a ProxyObserver instance with default handler.
    * You can check with ProxyFactory.cacheChanges.has(obj) that return a boolean if object has changed.
    */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   public static create<T extends object = any>(object: T): T {
-    return new ProxyObserver(object, function(path, value, previousValue) {
+    return new ProxyObserver(object, function (path, value, previousValue) {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       log(`message change. Previous value ${previousValue}, new value ${value} on ${path}`);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       ProxyFactory.cacheChanges.set(this._proxy, true);
     }) as T;
   }

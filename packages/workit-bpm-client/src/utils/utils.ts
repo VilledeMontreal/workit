@@ -4,6 +4,13 @@
  * See LICENSE file in the project root for full license information.
  */
 
+/* eslint @typescript-eslint/no-unsafe-assignment: 0 */
+/* eslint @typescript-eslint/ban-types: 0 */
+/* eslint @typescript-eslint/restrict-template-expressions: 0 */
+/* eslint @typescript-eslint/no-unsafe-call: 0 */
+/* eslint @typescript-eslint/no-unsafe-member-access: 0 */
+/* eslint @typescript-eslint/no-unsafe-return: 0 */
+
 import { BasicAuthInterceptor } from 'camunda-external-task-client-js';
 import { IoC } from 'workit-core';
 import { ICamundaConfig, IReadOnlyVariables, IVariables } from 'workit-types';
@@ -12,6 +19,7 @@ import { Variables } from '../variables';
 
 const GLOBAL_TIMEOUT_PULL = 60000;
 const CONSTANTS_INTEGER_VALUE = 2 ** 31;
+
 /**
  * Checks if parameter is undefined or null
  */
@@ -74,12 +82,12 @@ const typeMatchers = {
    */
   json(a: unknown) {
     return typeof a === 'object';
-  }
+  },
 };
 
 export class Utils {
   public static assign(target: IVariables, object: any): IVariables {
-    Object.entries(object).forEach(keyVal => target.set(keyVal[0], keyVal[1]));
+    Object.entries(object).forEach((keyVal) => target.set(keyVal[0], keyVal[1]));
     return target;
   }
 
@@ -106,12 +114,12 @@ export class Utils {
       interceptors: Utils.defaultInterceptors(),
       use: Utils.getLogger(),
       topicName: 'topic_demo',
-      ...config
+      ...config,
     };
   }
 
   public static serializeVariable({
-    typedValue
+    typedValue,
   }: {
     typedValue: { value?: any; type: string; valueInfo?: unknown; [custom: string]: any };
   }) {

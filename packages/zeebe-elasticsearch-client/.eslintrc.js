@@ -16,5 +16,10 @@ module.exports = {
     "parserOptions": {
         "project": "./tsconfig.json"
     },
-    "rules": require('../../eslint.rules.js')
+    "rules": {
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        ...require('../../eslint.rules.js')
+    }
 }

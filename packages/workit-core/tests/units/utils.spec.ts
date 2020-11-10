@@ -23,7 +23,7 @@ describe('utils', () => {
   });
   describe('andArrayWith', () => {
     it('should apply test function on each element on the array and ANDs the results', () => {
-      const biggerThan5 = a => a > 5;
+      const biggerThan5 = (a) => a > 5;
       const arr1 = [1, 2, 3, 4];
       const arr2 = [6, 7, 8, 9];
       const arr3 = [6, 7, 2, 8, 9];
@@ -50,7 +50,7 @@ describe('utils', () => {
           },
           () => {
             //
-          }
+          },
         ])
       ).toBeTruthy();
     });

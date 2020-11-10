@@ -9,7 +9,7 @@ export enum Env {
   local = 'local',
   dev = 'development',
   accept = 'acceptation',
-  prod = 'production'
+  prod = 'production',
 }
 
 export class Configs {
@@ -19,11 +19,11 @@ export class Configs {
     this._elastic = {
       url: `http://localhost:9200`,
       endpoints: {
-        workflows: '/operate-workflow_alias'
+        workflows: '/operate-workflow_alias',
       },
       retry: 3,
       timeout: 30000,
-      ...customConfig
+      ...customConfig,
     } as IAPIConfig;
   }
 

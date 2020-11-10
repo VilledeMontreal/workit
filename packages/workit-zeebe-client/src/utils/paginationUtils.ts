@@ -16,19 +16,19 @@ class PaginationUtils {
     return { ...params, from: options.from, size: options.size };
   }
 
-  public static getPagingFromOptions(totalCount: number, options?: (any & IPaginationOptions) | undefined): IPaging {
+  public static getPagingFromOptions(totalCount: number, options?: Partial<IPaginationOptions>): IPaging {
     // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html
     if (!options) {
       return {
         from: 0,
         size: PaginationUtils._DEFAULT_SIZE_ITEMS,
-        totalCount
+        totalCount,
       };
     }
     return {
       from: typeof options.from === 'number' ? options.from : 0,
       size: options.size || PaginationUtils._DEFAULT_SIZE_ITEMS,
-      totalCount
+      totalCount,
     };
   }
 

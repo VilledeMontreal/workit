@@ -30,11 +30,11 @@ describe('Zeebe Worker', () => {
       workerId: 'test-worker',
       baseUrl: 'localhost:26500',
       topicName: 'demo-service',
-      bpmnKey: 'test'
+      bpmnKey: 'test',
     };
   });
 
-  it('should instanciate the worker', done => {
+  it('should instanciate the worker', (done) => {
     (async () => {
       const zeebeClient = new ZeebeClient(config);
       const successHandler = new SuccessStrategySimple();
@@ -52,7 +52,7 @@ describe('Zeebe Worker', () => {
       .query({ _source_excludes: 'bpmnXml' })
       .reply(200, require(`${process.cwd()}/tests/data/elasticResponse.workflow`));
     const zeebeClient = new ZeebeClient(config, undefined, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflows();
 
@@ -66,7 +66,7 @@ describe('Zeebe Worker', () => {
       .reply(200, require(`${process.cwd()}/tests/data/elasticResponseAgg.workflow`));
 
     const zeebeClient = new ZeebeClient(config, undefined, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflow({ bpmnProcessId: 'MESSAGE_EVENT' });
 
@@ -90,7 +90,7 @@ describe('Zeebe Worker', () => {
       .reply(200, require(`${process.cwd()}/tests/data/elasticResponse.paginated`));
 
     const zeebeClient = new ZeebeClient(config, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflows({ size });
     scope.done();
@@ -107,7 +107,7 @@ describe('Zeebe Worker', () => {
       .reply(200, require(`${process.cwd()}/tests/data/elasticResponse.paginated.skip`));
 
     const zeebeClient = new ZeebeClient(config, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflows({ size, from });
     scope.done();
@@ -120,13 +120,13 @@ describe('Zeebe Worker', () => {
     const bpmnProcessId = 'MESSAGE_EVENT';
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', {
-        query: { bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }] } }
+        query: { bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }] } },
       })
       .query({ _source_excludes: 'bpmnXml', size })
       .reply(200, require(`${process.cwd()}/tests/data/elasticResponseBpmnProcessId.paginated`));
 
     const zeebeClient = new ZeebeClient(config, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflows({ size, bpmnProcessId });
     scope.done();

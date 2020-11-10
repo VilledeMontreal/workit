@@ -13,7 +13,7 @@ import { HelloWorldTaskV3 } from '../tasks/helloWorldTaskV3';
 enum LOCAL_IDENTIFIER {
   activity1 = 'activity_1',
   activity2 = 'activity_2',
-  activity3 = 'activity_3'
+  activity3 = 'activity_3',
 }
 
 const BPMN_PROCESS_ID = 'BPMN_P_DEMO';

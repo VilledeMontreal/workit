@@ -21,7 +21,7 @@ describe('Camunda Client', () => {
       baseUrl: `http://localhost:8080/engine-rest`,
       topicName: 'topic_demo',
       bpmnKey: 'BPMN_DEMO',
-      autoPoll: false
+      autoPoll: false,
     };
 
     IoC.unbind(SERVICE_IDENTIFIER.logger);

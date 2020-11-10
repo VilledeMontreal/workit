@@ -9,6 +9,7 @@ export * from './commons/pagination';
 export * from './commons/paginationOptions';
 export * from './commons/paging';
 export * from './commons/logLevel';
+export * from './commons/logger';
 
 // ProcessHandler
 export * from './process/process';

@@ -71,11 +71,11 @@ function processHandler(className, contentFile, isBpmn = false): Promise<void> {
       if (imports.length === 0) {
         file.addImportDeclaration({
           moduleSpecifier: `../tasks/${classNameSanitized}`,
-          namedImports: [{ name: classNameWithMaj }]
+          namedImports: [{ name: classNameWithMaj }],
         });
         file.addImportDeclaration({
           moduleSpecifier: `workit-core`,
-          namedImports: [{ name: 'IoC' }]
+          namedImports: [{ name: 'IoC' }],
         });
       } else {
         const firstImport = imports[0];
@@ -85,7 +85,7 @@ function processHandler(className, contentFile, isBpmn = false): Promise<void> {
       }
 
       if (statements.length === 0) {
-        file.addStatements(writer =>
+        file.addStatements((writer) =>
           writer.newLine().writeLine(`IoC.bindTo(${classNameWithMaj}, '${isBpmn ? className : '<ACTIVITY_ID>'}');`)
         );
       } else {
@@ -116,8 +116,8 @@ function getExternalTasks(pathToFile: string): Set<string> {
     format: false,
     indentBy: '  ',
     supressEmptyNode: false,
-    tagValueProcessor: a => he.encode(a, { useNamedReferences: true }), // default is a=>a
-    attrValueProcessor: a => he.encode(a, { isAttributeValue: true, useNamedReferences: true }) // default is a=>a
+    tagValueProcessor: (a) => he.encode(a, { useNamedReferences: true }), // default is a=>a
+    attrValueProcessor: (a) => he.encode(a, { isAttributeValue: true, useNamedReferences: true }), // default is a=>a
   };
 
   const xmlData = fs.readFileSync(pathToFile).toString();
@@ -190,7 +190,7 @@ export const task = async (args, options, logger): Promise<void> => {
       complete: '=',
       incomplete: ' ',
       width: 30,
-      total: tasks.size
+      total: tasks.size,
     });
 
     // eslint-disable-next-line no-restricted-syntax

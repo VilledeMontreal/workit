@@ -71,7 +71,7 @@ export const init = (args, options, logger): void => {
     shell.ls('-Rl', '.').forEach((entry: any) => {
       if (entry.isFile()) {
         // Replace '[VARIABLE]` with the corresponding variable value from the prompt
-        variables.forEach(variable => {
+        variables.forEach((variable) => {
           shell.sed('-i', `\\[${variable.name.toUpperCase()}\\]`, result[variable.name], entry.name);
         });
 

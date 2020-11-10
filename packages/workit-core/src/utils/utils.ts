@@ -24,6 +24,7 @@ export const getVariablesWhenChanged = <T = any>(
   unwrap: (message: IMessage<unknown, IWorkflowProps<unknown>>) => T
 ): T | undefined => {
   let vars: T | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if ((message && !(message as any).__proxy__) || ProxyFactory.cacheChanges.has(message)) {
     vars = unwrap(message);
   }
@@ -31,11 +32,11 @@ export const getVariablesWhenChanged = <T = any>(
 };
 
 export function parseCommaSeparatedBaggage(baggage: any, values: string): void {
-  values.split(',').forEach(keyVal => {
+  values.split(',').forEach((keyVal) => {
     const splitKeyVal: string[] = keyVal.trim().split('=');
     if (splitKeyVal.length === 2) {
       const [key, val] = splitKeyVal;
-      // eslint-disable-next-line no-param-reassign
+      // eslint-disable-next-line no-param-reassign, @typescript-eslint/no-unsafe-member-access
       baggage[key] = val;
     }
   });

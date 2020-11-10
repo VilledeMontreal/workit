@@ -11,14 +11,14 @@ import { CamundaBpmClient } from '../../src/camundaBpmClient';
 
 let manager: CamundaBpmClient;
 
-describe('Client Manager (Camunda BPM)', function() {
+describe('Client Manager (Camunda BPM)', function () {
   beforeAll(() => {
     const config = {
       maxTasks: 1,
       workerId: 'demo',
       baseUrl: `http://localhost:8080/engine-rest`,
       topicName: 'topic_demo',
-      autoPoll: false
+      autoPoll: false,
     };
 
     const clientLib: ICamundaClient = new CamundaExternalClient(config) as any;
@@ -42,16 +42,14 @@ describe('Client Manager (Camunda BPM)', function() {
   });
 
   it('Publish message', async () => {
-    const scope = nock('http://localhost:8080')
-      .post('/engine-rest/message')
-      .reply(200);
+    const scope = nock('http://localhost:8080').post('/engine-rest/message').reply(200);
 
     const result = await manager.publishMessage({
       correlation: undefined,
       name: '__MESSAGE_START_EVENT__',
       variables: { amount: 1000 },
       timeToLive: undefined,
-      messageId: undefined
+      messageId: undefined,
     });
 
     expect(result).toBeUndefined();
@@ -67,8 +65,8 @@ describe('Client Manager (Camunda BPM)', function() {
       bpmnProcessId: 'message-event',
       variables: {
         amount: 1000,
-        hello: 'world'
-      }
+        hello: 'world',
+      },
     });
 
     expect(result).toMatchObject(require('./__mocks__/createInstanceResult.json'));
@@ -146,7 +144,7 @@ describe('Client Manager (Camunda BPM)', function() {
       .reply(200, require('./__mocks__/getWorkflowResponse.1.camunda.json'));
 
     const result = await manager.getWorkflow({
-      bpmnProcessId
+      bpmnProcessId,
     });
 
     expect(result).toMatchObject(require('./__mocks__/getWorkflowResult.json'));
@@ -162,7 +160,7 @@ describe('Client Manager (Camunda BPM)', function() {
       .reply(200, require('./__mocks__/getWorkflowResponse.1.camunda.json'));
 
     const result = await manager.getWorkflow({
-      workflowKey
+      workflowKey,
     });
 
     expect(result).toMatchObject(require('./__mocks__/getWorkflowResult.json'));
@@ -177,8 +175,8 @@ describe('Client Manager (Camunda BPM)', function() {
     const result = await manager.updateVariables({
       processInstanceId,
       variables: {
-        amount: 5
-      }
+        amount: 5,
+      },
     });
 
     expect(result).toBeUndefined();
@@ -187,13 +185,11 @@ describe('Client Manager (Camunda BPM)', function() {
 
   it('Update retries', async () => {
     const jobKey = '76c93b00-5410-11e9-8953-0242ac110002';
-    const scope = nock('http://localhost:8080')
-      .put(`/engine-rest/external-task/${jobKey}/retries`)
-      .reply(204);
+    const scope = nock('http://localhost:8080').put(`/engine-rest/external-task/${jobKey}/retries`).reply(204);
 
     const result = await manager.updateJobRetries({
       jobKey,
-      retries: 0
+      retries: 0,
     });
 
     expect(result).toBeUndefined();

@@ -8,6 +8,12 @@ import { isPrimitive } from './utils/isPrimitive';
 import { concatPath } from './utils/concat';
 
 const proxyTarget = Symbol('ProxyTarget');
+/* eslint @typescript-eslint/restrict-template-expressions: 0 */
+/* eslint @typescript-eslint/no-unsafe-assignment: 0 */
+/* eslint @typescript-eslint/no-unsafe-call: 0 */
+/* eslint @typescript-eslint/no-unsafe-member-access: 0 */
+/* eslint @typescript-eslint/no-unsafe-return: 0 */
+/* eslint @typescript-eslint/ban-types: 0 */
 
 /**
  * It's for observing an object. In this package,
@@ -111,7 +117,7 @@ export class ProxyObserver {
       }
 
       return Reflect.apply(target, thisArg, argumentsList);
-    }
+    },
   };
 
   constructor(object: any, onChangeFunc: (proxy: any, property: any, value: any, previous: any) => void) {
@@ -121,7 +127,7 @@ export class ProxyObserver {
       value: true,
       enumerable: false,
       configurable: false,
-      writable: false
+      writable: false,
     });
     this._proxy = new Proxy(object, this._handler);
     return this._proxy;
