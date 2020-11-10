@@ -13,7 +13,7 @@ describe('Interceptors', () => {
       const cDate = new Date();
       const message = ProxyFactory.create({
         body: { a: 1, b: true, c: cDate, d: { d1: new Date() }, e: [] },
-        properties: { customHeaders: {} } as any
+        properties: { customHeaders: {} } as any,
       });
       const interceptorExecution = Interceptors.execute([null as any], message);
       return expect(interceptorExecution).rejects.toThrow('interceptors passed in parameter are not valid.');
@@ -22,7 +22,7 @@ describe('Interceptors', () => {
       const cDate = new Date();
       const message = ProxyFactory.create({
         body: { a: 1, b: true, c: cDate, d: { d1: cDate }, e: [] },
-        properties: { customHeaders: {} } as any
+        properties: { customHeaders: {} } as any,
       });
       const interceptorExecution = Interceptors.execute([], message);
       return expect(interceptorExecution).resolves.toStrictEqual(message);
@@ -31,13 +31,13 @@ describe('Interceptors', () => {
       const cDate = new Date();
       const message = ProxyFactory.create({
         body: { a: 1, b: true, c: cDate, d: { d1: cDate }, e: [] },
-        properties: { customHeaders: {} } as any
+        properties: { customHeaders: {} } as any,
       });
       const messageFromInterceptor = Interceptors.execute(
         [
-          _ => {
+          (_) => {
             return null as any;
-          }
+          },
         ] as Interceptor[],
         message
       );
@@ -47,23 +47,23 @@ describe('Interceptors', () => {
       const cDate = new Date();
       const message = ProxyFactory.create({
         body: { a: 1, b: true, c: cDate, d: { d1: new Date() }, e: [] },
-        properties: { customHeaders: {} } as any
+        properties: { customHeaders: {} } as any,
       });
       const interceptorMessage = {
         body: message.body,
-        properties: { customHeaders: { hello: 'world' } } as any
+        properties: { customHeaders: { hello: 'world' } } as any,
       };
       const interceptorExecution = Interceptors.execute<IMessage>(
         [
-          _ => {
+          (_) => {
             return Promise.resolve(interceptorMessage);
-          }
+          },
         ] as Interceptor[],
         message
       );
       return expect(interceptorExecution).resolves.toStrictEqual({
         body: message.body,
-        properties: interceptorMessage.properties
+        properties: interceptorMessage.properties,
       });
     });
     // it.skip('should only merge custom headers in properties object', () => {

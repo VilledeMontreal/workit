@@ -19,5 +19,5 @@ export const SERVICE_IDENTIFIER = {
   /**
    * Bind your own Elastic exporter config for Zeebe
    */
-  zeebe_elastic_exporter_config: Symbol('zeebe_elastic_exporter_config')
+  zeebe_elastic_exporter_config: Symbol('zeebe_elastic_exporter_config'),
 };

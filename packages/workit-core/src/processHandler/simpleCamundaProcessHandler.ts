@@ -17,7 +17,7 @@ import {
   ISuccessStrategy,
   ITask,
   ITracerPropagator,
-  IWorkflowProps
+  IWorkflowProps,
 } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { Interceptors } from '../interceptors';
@@ -28,7 +28,8 @@ import debug = require('debug');
 const log = debug('workit:processHandler');
 
 @injectable()
-export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps> extends EventEmitter
+export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps>
+  extends EventEmitter
   implements IProcessHandler {
   protected readonly _config: Partial<IProcessHandlerConfig>;
 
@@ -76,8 +77,8 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
         'wf.workflowInstanceKey': properties.workflowInstanceKey,
         'wf.retries': properties.retries || 0,
         'wf.topicName': properties.topicName,
-        'worker.id': properties.workerId
-      }
+        'worker.id': properties.workerId,
+      },
     };
     spanOptions.parent = this._propagation.extractFromMessage(message);
 
@@ -101,7 +102,7 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
 
       const workflowCriteria = {
         bpmnProcessId: properties.bpmnProcessId,
-        version: properties.workflowDefinitionVersion
+        version: properties.workflowDefinitionVersion,
       };
 
       const task = IoC.getTask<ITask<IMessage>>(properties.activityId, workflowCriteria);
@@ -111,7 +112,8 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
       await this._success.handle(msg, service);
       this.emit('message-handled', null, msg);
     } catch (e) {
-      log(e.message);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      log(typeof e === 'object' ? e.message : e);
       await this._failure.handle(e, message, service);
       this.emit('message-handled', e, message);
     } finally {

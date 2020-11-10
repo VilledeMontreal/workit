@@ -22,11 +22,11 @@ describe('utils', () => {
       const typedValue = {
         value: parsedValue,
         type: 'json',
-        valueInfo: {}
+        valueInfo: {},
       };
       const expectedTypedValue = {
         ...typedValue,
-        value: JSON.stringify(parsedValue)
+        value: JSON.stringify(parsedValue),
       };
 
       // then
@@ -39,7 +39,7 @@ describe('utils', () => {
       const typedValue = {
         value,
         type: 'json',
-        valueInfo: {}
+        valueInfo: {},
       };
 
       // then
@@ -54,7 +54,7 @@ describe('utils', () => {
       const typedValue = {
         value: dateObj,
         type: 'Date',
-        valueInfo: {}
+        valueInfo: {},
       };
 
       // then
@@ -76,11 +76,11 @@ describe('utils', () => {
       const typedValue = {
         value: parsedValue,
         type: 'json',
-        valueInfo: {}
+        valueInfo: {},
       };
       const expectedTypedValue = {
         ...typedValue,
-        value: JSON.stringify(parsedValue)
+        value: JSON.stringify(parsedValue),
       };
 
       // then
@@ -93,7 +93,7 @@ describe('utils', () => {
       const typedValue = {
         value,
         type: 'string', // notice that we could detect that it's json but is it expected ?
-        valueInfo: {}
+        valueInfo: {},
       };
 
       // then
@@ -108,7 +108,7 @@ describe('utils', () => {
       const typedValue = {
         value: formattedDate,
         type: 'date',
-        valueInfo: {}
+        valueInfo: {},
       };
 
       // then

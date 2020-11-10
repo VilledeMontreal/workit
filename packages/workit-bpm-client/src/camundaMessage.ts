@@ -4,6 +4,10 @@
  * See LICENSE file in the project root for full license information.
  */
 
+/* eslint @typescript-eslint/no-unsafe-assignment: 0 */
+/* eslint @typescript-eslint/no-unsafe-call: 0 */
+/* eslint @typescript-eslint/no-unsafe-member-access: 0 */
+
 import { getVariablesWhenChanged, ProxyFactory } from 'workit-core';
 import { FailureException, ICamundaService, IMessage, IVariablePayload, IVariables } from 'workit-types';
 import { CamundaMapperProperties } from './camundaMapperProperties';
@@ -18,12 +22,12 @@ export class CamundaMessage {
     const properties = CamundaMapperProperties.map(task);
     const messageWithoutSpan = {
       body: task.variables.getAll(),
-      properties
+      properties,
     };
     // TODO: create a CamundaMessage builder
     const msg = ProxyFactory.create({
       body: messageWithoutSpan.body,
-      properties: messageWithoutSpan.properties
+      properties: messageWithoutSpan.properties,
     });
     return [
       msg,
@@ -39,7 +43,7 @@ export class CamundaMessage {
             return;
           }
 
-          const vars = getVariablesWhenChanged<IVariables>(message, m => CamundaMessage.unwrap(m));
+          const vars = getVariablesWhenChanged<IVariables>(message, (m) => CamundaMessage.unwrap(m));
 
           await payload.taskService.complete(task, vars);
           this.hasBeenThreated = true;
@@ -60,11 +64,11 @@ export class CamundaMessage {
             errorDetails: stringify(error),
             retries,
             // TODO: Add to configuration
-            retryTimeout: retryTimeoutInMs
+            retryTimeout: retryTimeoutInMs,
           });
           this.hasBeenThreated = true;
-        }
-      }
+        },
+      },
     ];
   }
 
@@ -81,6 +85,7 @@ export class CamundaMessage {
       }
     });
     CamundaMessage._setCustomHeaders(vars, message.properties.customHeaders);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return vars;
   }
 

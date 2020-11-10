@@ -9,7 +9,7 @@
 export const symbols = {
   ok: '✓',
   err: '✖',
-  dot: '․'
+  dot: '․',
 };
 
 // With node.js on Windows: use symbols available in terminal default fonts

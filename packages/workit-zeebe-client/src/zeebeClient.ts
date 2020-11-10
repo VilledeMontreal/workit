@@ -25,7 +25,7 @@ import {
   IWorkflowOptions,
   IWorkflowProcessIdDefinition,
   IWorkflowProps,
-  IZeebeOptions
+  IZeebeOptions,
 } from 'workit-types';
 import { Configs, IAPIConfig as IElasticExporterConfig, ZBElasticClient } from 'zeebe-elasticsearch-client';
 import { ZBClient, ZBWorker } from 'zeebe-node';
@@ -96,7 +96,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     const result = await this._client.deployWorkflow(bpmnPath);
     return {
       workflows: result.workflows,
-      key: result.key.toString() // TODO: interface say number but it return string, need to PR to zeebe-node
+      key: result.key.toString(), // TODO: interface say number but it return string, need to PR to zeebe-node
     };
   }
 
@@ -108,19 +108,19 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     const criteria = this._setWorkflowCriteria(options);
     const result = await this._exporterClient.getWorkflows(criteria, workflowOptions);
     const elasticResult = result.data.hits;
-    const data = elasticResult.hits.map(doc => {
+    const data = elasticResult.hits.map((doc) => {
       const workflow = doc._source;
       return {
         bpmnProcessId: workflow.bpmnProcessId,
         version: workflow.version,
         workflowKey: workflow.key.toString(),
-        resourceName: workflow.resourceName
+        resourceName: workflow.resourceName,
       };
     });
 
     return {
       paging: PaginationUtils.getPagingFromOptions(elasticResult.total, options),
-      items: data
+      items: data,
     };
   }
 
@@ -132,7 +132,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       key: !Number.isNaN(key) ? key : undefined,
       bpmnProcessId: (payload as IWorkflowProcessIdDefinition).bpmnProcessId,
       version: (payload as IWorkflowProcessIdDefinition).version,
-      latestVersion: typeof (payload as IWorkflowProcessIdDefinition).version !== 'number'
+      latestVersion: typeof (payload as IWorkflowProcessIdDefinition).version !== 'number',
     });
 
     const data = response.data.hits.hits[0];
@@ -148,7 +148,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       resourceName: doc.resourceName,
       bpmnXml: doc.bpmnXml,
       workflowKey: doc.key.toString(),
-      bpmnProcessId: doc.bpmnProcessId
+      bpmnProcessId: doc.bpmnProcessId,
     };
   }
 
@@ -156,7 +156,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     return this._client.setVariables<T>({
       elementInstanceKey: model.processInstanceId,
       variables: model.variables,
-      local: !!model.local
+      local: !!model.local,
     });
   }
 
@@ -174,7 +174,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
       variables: payload.variables,
       messageId: payload.messageId,
       timeToLive: payload.timeToLive,
-      name: payload.name
+      name: payload.name,
     });
   }
 

@@ -26,5 +26,5 @@ export const SERVICE_IDENTIFIER = {
   /**
    * Bind your own config for Camunda system
    */
-  camunda_config: Symbol('camunda_config')
+  camunda_config: Symbol('camunda_config'),
 };

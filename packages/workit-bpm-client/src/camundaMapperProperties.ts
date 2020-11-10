@@ -4,6 +4,11 @@
  * See LICENSE file in the project root for full license information.
  */
 
+/* eslint @typescript-eslint/no-unsafe-assignment: 0 */
+/* eslint @typescript-eslint/no-unsafe-call: 0 */
+/* eslint @typescript-eslint/no-unsafe-member-access: 0 */
+/* eslint @typescript-eslint/no-unsafe-return: 0 */
+
 import { IVariablePayload, IWorkflowProps } from 'workit-types';
 
 export class CamundaMapperProperties {
@@ -21,7 +26,7 @@ export class CamundaMapperProperties {
       retries: task.retries,
       topicName: task.topicName,
       workerId: task.workerId,
-      lockExpirationTime: new Date(task.lockExpirationTime)
+      lockExpirationTime: new Date(task.lockExpirationTime),
     };
   }
 

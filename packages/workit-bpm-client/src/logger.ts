@@ -4,6 +4,11 @@
  * See LICENSE file in the project root for full license information.
  */
 
+/* eslint @typescript-eslint/no-unsafe-assignment: 0 */ // --> OFF
+/* eslint @typescript-eslint/ban-types: 0 */ // --> OFF
+/* eslint @typescript-eslint/restrict-template-expressions: 0 */ // --> OFF
+/* eslint @typescript-eslint/no-unsafe-call: 0 */ // --> OFF
+/* eslint @typescript-eslint/no-unsafe-member-access: 0 */ // --> OFF
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const stringify = require('fast-safe-stringify');
 

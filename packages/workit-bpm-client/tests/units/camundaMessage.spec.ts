@@ -12,7 +12,7 @@ describe('Camunda Message', () => {
       const cDate = new Date();
       const message = {
         body: { a: 1, b: true, c: cDate, d: { d1: new Date() }, e: [] },
-        properties: { customHeaders: {} } as any
+        properties: { customHeaders: {} } as any,
       };
       const variables = CamundaMessage.unwrap(message);
       const data: any = variables.getAll();

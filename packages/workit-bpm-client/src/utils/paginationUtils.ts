@@ -24,13 +24,15 @@ export class PaginationUtils {
       return {
         from: 0,
         size: PaginationUtils._DEFAULT_SIZE_ITEMS,
-        totalCount
+        totalCount,
       };
     }
     return {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
       from: typeof options.from === 'number' ? options.from : 0,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
       size: options.size || PaginationUtils._DEFAULT_SIZE_ITEMS,
-      totalCount
+      totalCount,
     };
   }
 

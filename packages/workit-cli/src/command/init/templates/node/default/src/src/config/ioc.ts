@@ -4,7 +4,7 @@ import { configs } from '.';
 import { HelloWorldTask } from '../tasks/helloWorldTask';
 
 enum LOCAL_IDENTIFIER {
-  sampleActivity = 'sample_activity'
+  sampleActivity = 'sample_activity',
 }
 
 IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sampleActivity);

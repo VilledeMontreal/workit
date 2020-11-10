@@ -69,7 +69,7 @@ describe('ZeebeClient', () => {
   afterEach(async () => {
     try {
       await Promise.all(
-        workers.map(async worker => {
+        workers.map(async (worker) => {
           await worker.stop();
         })
       );
@@ -104,13 +104,13 @@ describe('ZeebeClient', () => {
 
     const workflowInstance = await zbc.createWorkflowInstance({
       bpmnProcessId: 'hello-world',
-      variables: {}
+      variables: {},
     });
     expect(workflowInstance.bpmnProcessId).toBe('hello-world');
     expect(workflowInstance.workflowInstanceKey).toBeTruthy();
   });
 
-  it('Can receive a valid workflow instance', async done => {
+  it('Can receive a valid workflow instance', async (done) => {
     await zbc.deployWorkflow(path.join(__dirname, '..', './data/bpmn/zeebe/hello-world.bpmn'));
     workers.unshift(createWorkerInstance('console-log', done));
     try {
@@ -120,7 +120,7 @@ describe('ZeebeClient', () => {
     }
   });
 
-  it('Can start a workflow with a message', async done => {
+  it('Can start a workflow with a message', async (done) => {
     const deploy = await zbc.deployWorkflow(path.join(__dirname, '..', './data/bpmn/zeebe/msg-start.bpmn'));
     expect(deploy.key).toBeTruthy();
 
@@ -131,8 +131,8 @@ describe('ZeebeClient', () => {
       name: 'MSG-START_JOB',
       timeToLive: 30_000,
       variables: {
-        testKey: randomId
-      }
+        testKey: randomId,
+      },
     });
 
     try {
@@ -140,7 +140,7 @@ describe('ZeebeClient', () => {
 
       IoC.unbind('ServiceTask_0f6zc7d');
       IoC.bindToObject(
-        new HelloWorldTask(message => {
+        new HelloWorldTask((message) => {
           expect(message.properties.customHeaders.message.indexOf('Workflow') !== -1).toBe(true);
           expect(message.body.testKey).toBe(randomId); // Makes sure the worker isn't responding to another message
         }),
@@ -152,14 +152,14 @@ describe('ZeebeClient', () => {
     }
   });
 
-  it('Can cancel a workflow', async done => {
+  it('Can cancel a workflow', async (done) => {
     const res = await zbc.deployWorkflow(path.join(__dirname, '..', './data/bpmn/zeebe/hello-world.bpmn'));
     expect(res.workflows.length).toBe(1);
     expect(res.workflows[0].bpmnProcessId).toBe('hello-world');
 
     const wf = await zbc.createWorkflowInstance({
       bpmnProcessId: 'hello-world',
-      variables: {}
+      variables: {},
     });
     const wfi = wf.workflowInstanceKey;
     expect(wfi).toBeTruthy();
@@ -190,7 +190,7 @@ describe('ZeebeClient', () => {
     }
   });
 
-  it('Correctly branches on variables', async done => {
+  it('Correctly branches on variables', async (done) => {
     const res = await zbc.deployWorkflow(path.join(__dirname, '..', './data/bpmn/zeebe/conditional-pathway.bpmn'));
     expect(res.workflows.length).toBe(1);
     expect(res.workflows[0].bpmnProcessId).toBe('condition-test');
@@ -198,8 +198,8 @@ describe('ZeebeClient', () => {
     const wf = await zbc.createWorkflowInstance({
       bpmnProcessId: 'condition-test',
       variables: {
-        conditionVariable: true
-      }
+        conditionVariable: true,
+      },
     });
     const wfi = wf.workflowInstanceKey;
     expect(wfi).toBeTruthy();
@@ -209,14 +209,14 @@ describe('ZeebeClient', () => {
 
     IoC.unbind('ServiceTask_0cz2k8t');
     IoC.bindToObject(
-      new HelloWorldTask(message => {
+      new HelloWorldTask((message) => {
         expect(message.properties.workflowInstanceKey).toBe(wfi);
       }),
       'ServiceTask_0cz2k8t'
     );
 
     IoC.bindToObject(
-      new HelloWorldTask(message => {
+      new HelloWorldTask((message) => {
         expect(message.properties.workflowInstanceKey).toBe(wfi);
         expect(message.body.conditionVariable).toBe(true);
       }),
@@ -231,7 +231,7 @@ describe('ZeebeClient', () => {
     }
   });
 
-  it('Can update workflow variables', async done => {
+  it('Can update workflow variables', async (done) => {
     const res = await zbc.deployWorkflow(path.join(__dirname, '..', './data/bpmn/zeebe/conditional-pathway.bpmn'));
     expect(res.workflows.length).toBe(1);
     expect(res.workflows[0].bpmnProcessId).toBe('condition-test');
@@ -239,8 +239,8 @@ describe('ZeebeClient', () => {
     const wf = await zbc.createWorkflowInstance({
       bpmnProcessId: 'condition-test',
       variables: {
-        conditionVariable: true
-      }
+        conditionVariable: true,
+      },
     });
     const wfi = wf.workflowInstanceKey;
     expect(wfi).toBeTruthy();
@@ -249,8 +249,8 @@ describe('ZeebeClient', () => {
       processInstanceId: wfi,
       local: false,
       variables: {
-        conditionVariable: false
-      }
+        conditionVariable: false,
+      },
     });
 
     workers.unshift(createWorkerInstance('wait', () => {}));
@@ -258,14 +258,14 @@ describe('ZeebeClient', () => {
 
     IoC.unbind('ServiceTask_0cz2k8t');
     IoC.bindToObject(
-      new HelloWorldTask(message => {
+      new HelloWorldTask((message) => {
         expect(message.properties.workflowInstanceKey).toBe(wfi);
       }),
       'ServiceTask_0cz2k8t'
     );
 
     IoC.bindToObject(
-      new HelloWorldTask(message => {
+      new HelloWorldTask((message) => {
         expect(message.properties.workflowInstanceKey).toBe(wfi);
         expect(message.body.conditionVariable).toBe(false);
       }),
@@ -280,7 +280,7 @@ describe('ZeebeClient', () => {
     }
   });
 
-  it('Causes 2 retries handled by FailureStrategySimple', async done => {
+  it('Causes 2 retries handled by FailureStrategySimple', async (done) => {
     const res = await zbc.deployWorkflow(path.join(__dirname, '..', './data/bpmn/zeebe/conditional-pathway.bpmn'));
     expect(res.workflows.length).toBe(1);
     expect(res.workflows[0].bpmnProcessId).toBe('condition-test');
@@ -288,8 +288,8 @@ describe('ZeebeClient', () => {
     const wf = await zbc.createWorkflowInstance({
       bpmnProcessId: 'condition-test',
       variables: {
-        conditionVariable: true
-      }
+        conditionVariable: true,
+      },
     });
     const wfi = wf.workflowInstanceKey;
     expect(wfi).toBeTruthy();
@@ -298,15 +298,15 @@ describe('ZeebeClient', () => {
       processInstanceId: wfi,
       local: false,
       variables: {
-        conditionVariable: false
-      }
+        conditionVariable: false,
+      },
     });
 
     workers.unshift(createWorkerInstance('wait', done));
 
     IoC.unbind('ServiceTask_0cz2k8t');
     IoC.bindToObject(
-      new HelloWorldTask(message => {
+      new HelloWorldTask((message) => {
         expect(message.properties.workflowInstanceKey).toBe(wfi);
         let retries = message.properties.retries || 0;
         retries += 1;

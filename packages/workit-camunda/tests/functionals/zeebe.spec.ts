@@ -21,7 +21,7 @@ const run = (worker: Worker, done: any, delay: number = 500) => {
   }, delay);
 };
 
-describe('Zeebe Worker', function() {
+describe('Zeebe Worker', function () {
   let worker: Worker;
   let config: ICamundaConfig;
 
@@ -32,11 +32,11 @@ describe('Zeebe Worker', function() {
       baseUrl: `localhost:26500`,
       topicName: 'demo-service',
       bpmnKey: 'test',
-      autoPoll: false
+      autoPoll: false,
     };
   });
 
-  it('should instanciate the worker', done => {
+  it('should instanciate the worker', (done) => {
     (async () => {
       const zeebeClient = new ZeebeClient(config);
       const successHandler = new SuccessStrategySimple();
@@ -56,7 +56,7 @@ describe('Zeebe Worker', function() {
       .reply(200, require('../data/elasticResponse.workflow'));
 
     const zeebeClient = new ZeebeClient(config, undefined, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflows();
 
@@ -70,7 +70,7 @@ describe('Zeebe Worker', function() {
       .reply(200, require('../data/elasticResponseAgg.workflow'));
 
     const zeebeClient = new ZeebeClient(config, undefined, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflow({ bpmnProcessId: 'MESSAGE_EVENT' });
 
@@ -94,7 +94,7 @@ describe('Zeebe Worker', function() {
       .reply(200, require('../data/elasticResponse.paginated'));
 
     const zeebeClient = new ZeebeClient(config, undefined, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflows({ size });
     scope.done();
@@ -111,7 +111,7 @@ describe('Zeebe Worker', function() {
       .reply(200, require('../data/elasticResponse.paginated.skip'));
 
     const zeebeClient = new ZeebeClient(config, undefined, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflows({ size, from });
     scope.done();
@@ -124,13 +124,13 @@ describe('Zeebe Worker', function() {
     const bpmnProcessId = 'MESSAGE_EVENT';
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', {
-        query: { bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }] } }
+        query: { bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }] } },
       })
       .query({ _source_excludes: 'bpmnXml', size })
       .reply(200, require('../data/elasticResponseBpmnProcessId.paginated'));
 
     const zeebeClient = new ZeebeClient(config, undefined, {
-      url: 'http://localhost:9200'
+      url: 'http://localhost:9200',
     });
     const response = await zeebeClient.getWorkflows({ size, bpmnProcessId });
     scope.done();

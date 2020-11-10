@@ -11,24 +11,24 @@ export class Utils {
   public static addRequestInterceptors(
     request: AxiosInstance,
     interceptors?: ((config: IRequestConfig) => IRequestConfig)[]
-  ) {
+  ): void {
     if (!Array.isArray(interceptors)) {
       return;
     }
-    interceptors.forEach(interceptor => request.interceptors.request.use(interceptor));
+    interceptors.forEach((interceptor) => request.interceptors.request.use(interceptor));
   }
 
   public static addResponseInterceptors(
     request: AxiosInstance,
     interceptors?: (((value: IResponse<any>) => IResponse<any> | Promise<IResponse<any>>) | undefined)[]
-  ) {
+  ): void {
     if (!Array.isArray(interceptors)) {
       return;
     }
-    interceptors.forEach(interceptor => request.interceptors.response.use(interceptor as any));
+    interceptors.forEach((interceptor) => request.interceptors.response.use(interceptor as any));
   }
 
-  public static addInterceptors(request: AxiosInstance, interceptors: Partial<IInterceptors>) {
+  public static addInterceptors(request: AxiosInstance, interceptors: Partial<IInterceptors>): void {
     if (typeof interceptors !== 'object') {
       return;
     }

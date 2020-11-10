@@ -20,7 +20,7 @@ export class Constants {
       // ==========================================
       // "production" seems to be the standard Node label, not "prod".
       // ==========================================
-      prod: 'production'
+      prod: 'production',
     };
   }
 

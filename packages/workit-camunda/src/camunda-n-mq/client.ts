@@ -8,10 +8,7 @@ import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
 import { IClient, IMessage } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
-// eslint-disable-next-line import/order
-import debug = require('debug');
 
-const log = debug('workit:clientBase');
 @injectable()
 export class Client<TClient extends IClient> {
   protected _onMessageReceived!: (message: IMessage, service: unknown) => Promise<void>;
@@ -30,7 +27,7 @@ export class Client<TClient extends IClient> {
   }
 
   public async unsubscribe(): Promise<void> {
-    await this._execute(x => x.unsubscribe());
+    await this._execute((x) => x.unsubscribe());
   }
 
   private async _execute(
@@ -40,7 +37,6 @@ export class Client<TClient extends IClient> {
     try {
       return await action(this._client);
     } catch (ex) {
-      log(ex.message);
       if (!onException) {
         return Promise.resolve();
       }
@@ -50,7 +46,7 @@ export class Client<TClient extends IClient> {
 
   private async _startSubscriber(): Promise<void> {
     if (this._client != null) {
-      await this._execute(x => x.subscribe(this._onMessageReceived));
+      await this._execute((x) => x.subscribe(this._onMessageReceived));
     }
   }
 }

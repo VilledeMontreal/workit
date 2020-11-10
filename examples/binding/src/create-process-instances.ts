@@ -15,8 +15,8 @@ import { IWorkflowClient } from 'workit-types';
       bpmnProcessId: 'BPMN_P_DEMO',
       variables: {
         amount: 1000,
-        hello: 'world'
-      }
+        hello: 'world',
+      },
     });
   }
   console.log('Success!');

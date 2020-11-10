@@ -8,11 +8,12 @@ import { IEmptyPayload, IPayload, IWorkflowProps } from 'workit-types';
 export class ZeebeMapperProperties {
   public static map<TVariables = unknown, TProps = unknown>(obj: IPayload<TVariables, TProps>): IWorkflowProps<TProps> {
     let businessKey;
-    if (obj.variables || (obj.variables as any).businessKey) {
-      businessKey = (obj.variables as any).businessKey;
+    if (obj.variables || (obj.variables as Record<string, unknown>).businessKey) {
+      businessKey = (obj.variables as Record<string, unknown>).businessKey;
     }
 
     return {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       businessKey, // retro compatibility with bpmn workflow engine
       activityId: obj.elementId,
       processInstanceId: obj.elementInstanceKey,
@@ -25,7 +26,7 @@ export class ZeebeMapperProperties {
       retries: obj.retries,
       topicName: obj.type,
       workerId: obj.worker,
-      lockExpirationTime: new Date(Number(obj.deadline))
+      lockExpirationTime: new Date(Number(obj.deadline)),
     };
   }
 
@@ -42,7 +43,7 @@ export class ZeebeMapperProperties {
       deadline: props.lockExpirationTime.getTime().toString(),
       customHeaders: { ...props.customHeaders },
       key: props.jobKey,
-      type: props.topicName
+      type: props.topicName,
     };
   }
 }
