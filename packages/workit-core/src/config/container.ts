@@ -12,6 +12,7 @@ import { SuccessStrategySimple } from '../strategies/SuccessStrategySimple';
 import { NoopTracerPropagator } from '../tracer/noopTracerPropagator';
 import { SERVICE_IDENTIFIER } from './constants/identifiers';
 import { IOC } from '../IoC';
+import { NOOP_LOGGER } from '../common/noopLogger';
 
 try {
   decorate(injectable(), EventEmitter);
@@ -24,6 +25,7 @@ try {
 const kernel = new Container();
 const container = new Container();
 
+kernel.bind(SERVICE_IDENTIFIER.logger).toConstantValue(NOOP_LOGGER);
 kernel.bind(SERVICE_IDENTIFIER.tracer_propagator).toConstantValue(new NoopTracerPropagator());
 kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(NOOP_TRACER);
 kernel.bind(SERVICE_IDENTIFIER.success_strategy).toConstantValue(new SuccessStrategySimple());

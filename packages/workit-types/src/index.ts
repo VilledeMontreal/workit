@@ -26,9 +26,13 @@ export * from './core/client';
 export * from './core/successStrategy';
 export * from './core/failureStrategy';
 export * from './core/camunda';
+export * from './core/ioc';
 
 // Task
 export * from './tasks/task';
+
+// Plugin
+export * from './plugin';
 
 // Tracer
 export * from './tracer/tracerPropagator';
