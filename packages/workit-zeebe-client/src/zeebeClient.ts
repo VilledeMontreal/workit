@@ -58,7 +58,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     @optional() exporterConfig?: Partial<IElasticExporterConfig>
   ) {
     this._config = config;
-    const pluginLoader = new PluginLoader(IoC, this.getLogger());
+    const pluginLoader = new PluginLoader(IoC, this._getLogger());
     if (config.plugins) {
       pluginLoader.load(config.plugins);
     }
@@ -242,7 +242,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
     return { bpmnProcessId: options.bpmnProcessId };
   }
 
-  private getLogger(): ILogger {
+  private _getLogger(): ILogger {
     try {
       return IoC.get(SERVICE_IDENTIFIER.logger);
     } catch (error) {

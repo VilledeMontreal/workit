@@ -58,7 +58,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
     this._client = client;
     this._config = config;
     this._repo = new CamundaRepository(config);
-    const pluginLoader = new PluginLoader(IoC, this.getLogger());
+    const pluginLoader = new PluginLoader(IoC, this._getLogger());
     if (config.plugins) {
       pluginLoader.load(config.plugins);
     }
@@ -203,7 +203,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
     return (request as IWorkflowProcessIdDefinition).bpmnProcessId !== undefined;
   }
 
-  private getLogger(): ILogger {
+  private _getLogger(): ILogger {
     try {
       return IoC.get(SERVICE_IDENTIFIER.logger);
     } catch (error) {
