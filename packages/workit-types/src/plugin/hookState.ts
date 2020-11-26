@@ -6,6 +6,6 @@
 
 export enum HookState {
   UNINITIALIZED,
-  ENABLED,
-  DISABLED,
+  LOADED,
+  UNLOADED,
 }

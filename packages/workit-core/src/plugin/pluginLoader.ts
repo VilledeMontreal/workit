@@ -58,7 +58,7 @@ export class PluginLoader {
       const modulesToHook = Object.keys(pluginsToLoad);
 
       if (modulesToHook.length === 0) {
-        this._hookState = HookState.DISABLED;
+        this._hookState = HookState.UNLOADED;
         return;
       }
 
@@ -109,8 +109,8 @@ export class PluginLoader {
           return exports;
         }
       });
-      this._hookState = HookState.ENABLED;
-    } else if (this._hookState === HookState.DISABLED) {
+      this._hookState = HookState.LOADED;
+    } else if (this._hookState === HookState.UNLOADED) {
       this.logger.error('PluginLoader#load: Currently cannot re-enable plugin loader.');
     } else {
       this.logger.error('PluginLoader#load: Plugin loader already enabled.');
@@ -119,12 +119,12 @@ export class PluginLoader {
 
   /** Unloads plugins. */
   unload(): void {
-    if (this._hookState === HookState.ENABLED) {
+    if (this._hookState === HookState.LOADED) {
       for (const plugin of this._plugins) {
         plugin.disable();
       }
       this._plugins = [];
-      this._hookState = HookState.DISABLED;
+      this._hookState = HookState.UNLOADED;
     }
   }
 }

@@ -69,18 +69,18 @@ describe('PluginLoader', () => {
       expect(pluginLoader['_hookState']).toBe(HookState.UNINITIALIZED);
     });
 
-    it('transitions from UNINITIALIZED to ENABLED', () => {
+    it('transitions from UNINITIALIZED to LOADED', () => {
       const pluginLoader = new PluginLoader(IoC, logger);
       pluginLoader.load(simplePlugins);
-      expect(pluginLoader['_hookState']).toBe(HookState.ENABLED);
+      expect(pluginLoader['_hookState']).toBe(HookState.LOADED);
       pluginLoader.unload();
     });
 
-    it('transitions from ENABLED to DISABLED', () => {
+    it('transitions from LOADED to UNLOADED', () => {
       const pluginLoader = new PluginLoader(IoC, logger);
       pluginLoader.load(simplePlugins);
       pluginLoader.unload();
-      expect(pluginLoader['_hookState']).toBe(HookState.DISABLED);
+      expect(pluginLoader['_hookState']).toBe(HookState.UNLOADED);
     });
   });
   describe('.load()', () => {
