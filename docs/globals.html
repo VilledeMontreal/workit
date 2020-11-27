@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> workit-types</h1>
+			<h1>workit-types</h1>
 		</div>
 	</div>
 </header>
@@ -67,6 +67,12 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Enumerations</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum"><a href="enums/hookstate.html" class="tsd-kind-icon">Hook<wbr>State</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
@@ -97,13 +103,17 @@
 								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/ihttpresponse.html" class="tsd-kind-icon">IHttp<wbr>Response</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/iincident.html" class="tsd-kind-icon">IIncident</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/iinstruction.html" class="tsd-kind-icon">IInstruction</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iioc.html" class="tsd-kind-icon">IIoC</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/ilink.html" class="tsd-kind-icon">ILink</a></li>
-								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/imessage.html" class="tsd-kind-icon">IMessage</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/ilogger.html" class="tsd-kind-icon">ILogger</a></li>
 								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/imessagebase.html" class="tsd-kind-icon">IMessage<wbr>Base</a></li>
 								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/ipagination.html" class="tsd-kind-icon">IPagination</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/ipaginationoptions.html" class="tsd-kind-icon">IPagination<wbr>Options</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/ipaging.html" class="tsd-kind-icon">IPaging</a></li>
 								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/ipayload.html" class="tsd-kind-icon">IPayload</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iplugin.html" class="tsd-kind-icon">IPlugin</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/ipluginconfig.html" class="tsd-kind-icon">IPlugin<wbr>Config</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iplugins.html" class="tsd-kind-icon">IPlugins</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/iprocess.html" class="tsd-kind-icon">IProcess</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/iprocessdefinition.html" class="tsd-kind-icon">IProcess<wbr>Definition</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/iprocesshandler.html" class="tsd-kind-icon">IProcess<wbr>Handler</a></li>
@@ -141,8 +151,10 @@
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#imessage" class="tsd-kind-icon">IMessage</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#iworkflowdefinitionrequest" class="tsd-kind-icon">IWorkflow<wbr>Definition<wbr>Request</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#interceptor" class="tsd-kind-icon">Interceptor</a></li>
+								<li class="tsd-kind-type-alias"><a href="globals.html#logfunction" class="tsd-kind-icon">Log<wbr>Function</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#loglevel" class="tsd-kind-icon">Loglevel</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#validationfn" class="tsd-kind-icon">Validation<wbr>Fn</a></li>
 							</ul>
@@ -152,23 +164,42 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
+					<a name="imessage" class="tsd-anchor"></a>
+					<h3>IMessage</h3>
+					<div class="tsd-signature tsd-kind-icon">IMessage&lt;TBody, TProps&gt;<span class="tsd-signature-symbol">:</span> <a href="interfaces/imessagebase.html" class="tsd-signature-type">IMessageBase</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/f5eef8d/packages/workit-types/src/core/message.ts#L12">src/core/message.ts:12</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>TBody</h4>
+						</li>
+						<li>
+							<h4>TProps</h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="iworkflowdefinitionrequest" class="tsd-anchor"></a>
 					<h3>IWorkflow<wbr>Definition<wbr>Request</h3>
 					<div class="tsd-signature tsd-kind-icon">IWorkflow<wbr>Definition<wbr>Request<span class="tsd-signature-symbol">:</span> <a href="interfaces/iworkflowprocessiddefinition.html" class="tsd-signature-type">IWorkflowProcessIdDefinition</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/iworkflowdefinitionkey.html" class="tsd-signature-type">IWorkflowDefinitionKey</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/77fb10c/packages/workit-types/src/core/camunda/workflowDefinition.ts#L13">src/core/camunda/workflowDefinition.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/f5eef8d/packages/workit-types/src/core/camunda/workflowDefinition.ts#L13">src/core/camunda/workflowDefinition.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="interceptor" class="tsd-anchor"></a>
 					<h3>Interceptor</h3>
-					<div class="tsd-signature tsd-kind-icon">Interceptor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<div class="tsd-signature tsd-kind-icon">Interceptor<span class="tsd-signature-symbol">:</span> &lt;T&gt;<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/77fb10c/packages/workit-types/src/core/interceptor.ts#L13">src/core/interceptor.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/f5eef8d/packages/workit-types/src/core/interceptor.ts#L13">src/core/interceptor.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -182,7 +213,7 @@
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-has-type-parameter tsd-is-not-exported">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-has-type-parameter">
 									<li class="tsd-signature tsd-kind-icon">&lt;T&gt;<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
@@ -207,29 +238,63 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
-					<a name="loglevel" class="tsd-anchor"></a>
-					<h3>Loglevel</h3>
-					<div class="tsd-signature tsd-kind-icon">Loglevel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"INFO"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"DEBUG"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"NONE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ERROR"</span></div>
+					<a name="logfunction" class="tsd-anchor"></a>
+					<h3>Log<wbr>Function</h3>
+					<div class="tsd-signature tsd-kind-icon">Log<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/77fb10c/packages/workit-types/src/commons/logLevel.ts#L7">src/commons/logLevel.ts:7</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias">
-					<a name="validationfn" class="tsd-anchor"></a>
-					<h3>Validation<wbr>Fn</h3>
-					<div class="tsd-signature tsd-kind-icon">Validation<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/77fb10c/packages/workit-types/src/utils/validation.ts#L7">src/utils/validation.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/f5eef8d/packages/workit-types/src/commons/logger.ts#L6">src/commons/logger.ts:6</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>message: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="loglevel" class="tsd-anchor"></a>
+					<h3>Loglevel</h3>
+					<div class="tsd-signature tsd-kind-icon">Loglevel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"INFO"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"DEBUG"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"NONE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ERROR"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/f5eef8d/packages/workit-types/src/commons/logLevel.ts#L7">src/commons/logLevel.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="validationfn" class="tsd-anchor"></a>
+					<h3>Validation<wbr>Fn</h3>
+					<div class="tsd-signature tsd-kind-icon">Validation<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/OlivierAlbertini/workit/blob/f5eef8d/packages/workit-types/src/utils/validation.ts#L7">src/utils/validation.ts:7</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
 									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
@@ -259,6 +324,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/hookstate.html" class="tsd-kind-icon">Hook<wbr>State</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/failureexception.html" class="tsd-kind-icon">Failure<wbr>Exception</a>
 					</li>
@@ -326,10 +394,13 @@
 						<a href="interfaces/iinstruction.html" class="tsd-kind-icon">IInstruction</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/iioc.html" class="tsd-kind-icon">IIoC</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/ilink.html" class="tsd-kind-icon">ILink</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/imessage.html" class="tsd-kind-icon">IMessage</a>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ilogger.html" class="tsd-kind-icon">ILogger</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="interfaces/imessagebase.html" class="tsd-kind-icon">IMessage<wbr>Base</a>
@@ -345,6 +416,15 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="interfaces/ipayload.html" class="tsd-kind-icon">IPayload</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iplugin.html" class="tsd-kind-icon">IPlugin</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ipluginconfig.html" class="tsd-kind-icon">IPlugin<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iplugins.html" class="tsd-kind-icon">IPlugins</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/iprocess.html" class="tsd-kind-icon">IProcess</a>
@@ -442,11 +522,17 @@
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/izeebeworkeroptions.html" class="tsd-kind-icon">IZeebe<wbr>Worker<wbr>Options</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#imessage" class="tsd-kind-icon">IMessage</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#iworkflowdefinitionrequest" class="tsd-kind-icon">IWorkflow<wbr>Definition<wbr>Request</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#interceptor" class="tsd-kind-icon">Interceptor</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#logfunction" class="tsd-kind-icon">Log<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#loglevel" class="tsd-kind-icon">Loglevel</a>
