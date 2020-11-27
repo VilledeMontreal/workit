@@ -4,6 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { IPlugins } from '../plugin';
 import { ISubscriptionOptions } from './subscriptionOptions';
 
 export interface ICamundaConfig {
@@ -51,4 +52,6 @@ export interface ICamundaConfig {
   asyncResponseTimeout?: number;
   // eslint-disable-next-line @typescript-eslint/ban-types
   interceptors?: Function | Function[];
+  /** load librairies containing workflow tasks */
+  plugins?: IPlugins;
 }

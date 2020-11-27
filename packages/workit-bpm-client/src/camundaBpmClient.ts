@@ -15,6 +15,7 @@ import {
   ICreateWorkflowInstanceResponse,
   IDeployWorkflowResponse,
   IHttpResponse,
+  ILogger,
   IMessage,
   IPagination,
   IPaginationOptions,
@@ -30,6 +31,7 @@ import {
   IWorkflowOptions,
   IWorkflowProcessIdDefinition,
 } from 'workit-types';
+import { IoC, PluginLoader, SERVICE_IDENTIFIER, NOOP_LOGGER } from 'workit-core';
 import { PaginationUtils } from './utils/paginationUtils';
 
 import { CamundaMessage } from './camundaMessage';
@@ -56,6 +58,10 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
     this._client = client;
     this._config = config;
     this._repo = new CamundaRepository(config);
+    const pluginLoader = new PluginLoader(IoC, this._getLogger());
+    if (config.plugins) {
+      pluginLoader.load(config.plugins);
+    }
   }
 
   public subscribe(onMessageReceived: (message: IMessage, service: ICamundaService) => Promise<void>): Promise<void> {
@@ -195,5 +201,13 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
 
   private _hasBpmnProcessId(request: IWorkflowDefinitionRequest): request is IWorkflowProcessIdDefinition {
     return (request as IWorkflowProcessIdDefinition).bpmnProcessId !== undefined;
+  }
+
+  private _getLogger(): ILogger {
+    try {
+      return IoC.get(SERVICE_IDENTIFIER.logger);
+    } catch (error) {
+      return NOOP_LOGGER;
+    }
   }
 }

@@ -7,6 +7,7 @@
 export * from './config/container';
 export * from './config/constants/identifiers';
 export * from './config/constants';
+export * from './common/noopLogger';
 
 export * from './processHandler/simpleCamundaProcessHandler';
 export * from './interceptors';
@@ -23,5 +24,7 @@ export * from './proxyFactory';
 export * from './proxyObserver';
 
 export * from './worker';
+
+export * from './plugin';
 
 export * from './utils/utils';
