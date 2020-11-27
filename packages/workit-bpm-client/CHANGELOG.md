@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.3-alpha.0](https://github.com/VilledeMontreal/workit/compare/v4.2.2...v4.2.3-alpha.0) (2020-11-27)
+
+
+### Features
+
+* add plugin system to workit ([#216](https://github.com/VilledeMontreal/workit/issues/216)) ([3d28cab](https://github.com/VilledeMontreal/workit/commit/3d28cab7265948f479228e3142cd341c57b6531a))
+
+
+
+
+
 ## [4.2.2](https://github.com/VilledeMontreal/workit/compare/v4.2.1...v4.2.2) (2020-09-23)
 
 **Note:** Version bump only for package workit-bpm-client
