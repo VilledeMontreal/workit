@@ -38,9 +38,9 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
-    "@villedemontreal/workit-camunda": "^4.2.8",
-    "@villedemontreal/workit-core": "^4.2.8",
-    "@villedemontreal/workit-types": "^4.2.8",
+    "@villedemontreal/workit-camunda": "^4.2.9",
+    "@villedemontreal/workit-core": "^4.2.9",
+    "@villedemontreal/workit-types": "^4.2.9",
     "config": "^3.3.0"
   }
 }

@@ -73,5 +73,8 @@
   "bugs": {
     "url": "https://github.com/VilledeMontreal/workit/issues"
   },
-  "gitHead": "4d109b9f2978bac5ec5338a39adc49ccf9bf2651"
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "4f2ab6d55a596098fe130547e4277a365a1e05ae"
 }
