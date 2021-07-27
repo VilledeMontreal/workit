@@ -1,5 +1,5 @@
 {
-  "name": "workit-camunda",
+  "name": "@villedemontreal/workit-camunda",
   "version": "4.2.5",
   "description": "Worker for Node.js system with pluggable Camunda clients that works with both Zeebe and Camunda platform powered by TypeScript",
   "author": "Montreal City Authors",

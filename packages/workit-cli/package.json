@@ -1,5 +1,5 @@
 {
-  "name": "workit-cli",
+  "name": "@villedemontreal/workit-cli",
   "version": "4.2.5",
   "description": "cli for workit project. Handy tools.",
   "author": "Olivier Albertini <olivier.albertini@ville.montreal.qc.ca>",

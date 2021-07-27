@@ -1,5 +1,5 @@
 {
-  "name": "workit-types",
+  "name": "@villedemontreal/workit-types",
   "version": "4.2.5",
   "description": "TypeScript types for Workit",
   "author": "Montreal City Authors",

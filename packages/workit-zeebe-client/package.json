@@ -1,5 +1,5 @@
 {
-  "name": "workit-zeebe-client",
+  "name": "@villedemontreal/workit-zeebe-client",
   "version": "4.2.5",
   "description": "Zeebe client for WorkIt that works with Zeebe platform powered by TypeScript",
   "author": "Montreal City Authors",
