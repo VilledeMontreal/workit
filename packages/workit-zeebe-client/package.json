@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit-zeebe-client",
-  "version": "4.2.5",
+  "version": "4.2.6",
   "description": "Zeebe client for WorkIt that works with Zeebe platform powered by TypeScript",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",

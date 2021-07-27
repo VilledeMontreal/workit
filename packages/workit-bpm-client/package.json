@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit-bpm-client",
-  "version": "4.2.5",
+  "version": "4.2.6",
   "description": "Camunda BPM client for WorkIt that works with Camunda platform powered by TypeScript",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
