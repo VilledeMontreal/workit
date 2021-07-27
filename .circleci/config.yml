@@ -147,32 +147,32 @@ workflows:
   version: 2
   test:
     jobs:
-      - node10:
-          filters: *docs_filters
       - node12:
+          filters: *docs_filters
+      - node14:
           filters: *docs_filters
       - node13:
           filters: *docs_filters
       - lint:
           filters: *docs_filters
-  build-master: # Will only run when a tag is pushed
-    jobs:
-      - test:
-          filters: *prod_filters
-      - publish:
-          requires:
-            - test
-          filters: *prod_filters
+  # build-master: # Will only run when a tag is pushed
+  #   jobs:
+  #     - test:
+  #         filters: *prod_filters
+  #     - publish:
+  #         requires:
+  #           - test
+  #         filters: *prod_filters
 
 jobs:
   # Runs the tests
-  node10:
-    docker:
-      - image: circleci/node:10
-    <<: *node_tests
   node12:
     docker:
       - image: circleci/node:12
+    <<: *node_tests
+  node14:
+    docker:
+      - image: circleci/node:14
       # - image: camunda/zeebe:0.22.1
     <<: *node_tests
   lint:

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2021 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -30,7 +30,8 @@ const log = debug('workit:processHandler');
 @injectable()
 export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps>
   extends EventEmitter
-  implements IProcessHandler {
+  implements IProcessHandler
+{
   protected readonly _config: Partial<IProcessHandlerConfig>;
 
   protected readonly _success: ISuccessStrategy<ICamundaService>;

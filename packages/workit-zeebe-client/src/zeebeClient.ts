@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2021 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -37,7 +37,8 @@ import { PaginationUtils } from './utils/paginationUtils';
 import { ZeebeMessage } from './zeebeMessage';
 
 export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TVariables>
-  implements IClient<ICamundaService>, IWorkflowClient {
+  implements IClient<ICamundaService>, IWorkflowClient
+{
   private readonly _client: ZBClient;
 
   private readonly _exporterClient: ZBElasticClient;

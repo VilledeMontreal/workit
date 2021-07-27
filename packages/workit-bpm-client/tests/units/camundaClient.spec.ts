@@ -36,7 +36,6 @@ describe('Camunda Client', () => {
     // issue with definition - fix with any
     camundaClient = new CamundaBpmClient(configuration, clientLib as any);
 
-    console.log(camundaClient);
   });
 
   it('should be an instance of CamundaClient', () => {
