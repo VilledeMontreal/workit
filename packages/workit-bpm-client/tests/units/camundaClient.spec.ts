@@ -35,7 +35,6 @@ describe('Camunda Client', () => {
     clientLib.stop = jest.fn().mockReturnValue(undefined);
     // issue with definition - fix with any
     camundaClient = new CamundaBpmClient(configuration, clientLib as any);
-
   });
 
   it('should be an instance of CamundaClient', () => {
