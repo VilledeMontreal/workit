@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.8](https://github.com/VilledeMontreal/workit/compare/v4.2.5...v4.2.8) (2021-07-27)
+
+
+### Bug Fixes
+
+* prettier on workit-cli package ([#223](https://github.com/VilledeMontreal/workit/issues/223)) ([383de6d](https://github.com/VilledeMontreal/workit/commit/383de6d3890c43ca84cb54e8c20b2680447c7839))
+
+
+
+
+
 ## [4.2.7](https://github.com/VilledeMontreal/workit/compare/v4.2.5...v4.2.7) (2021-07-27)
 
 **Note:** Version bump only for package workit-example-parallel
