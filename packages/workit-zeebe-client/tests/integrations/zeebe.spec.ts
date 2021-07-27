@@ -5,13 +5,13 @@
  */
 
 import { NOOP_TRACER } from '@opentelemetry/api';
+import { FailureStrategySimple, IoC, SCProcessHandler, TaskBase, Worker } from '@villedemontreal/workit-core';
+import { ICamundaService, IMessage, ISuccessStrategy } from '@villedemontreal/workit-types';
 import * as crypto from 'crypto';
 import * as path from 'path';
-import { ICamundaService, IMessage, ISuccessStrategy } from 'workit-types';
-
-import { FailureStrategySimple, IoC, SCProcessHandler, TaskBase, Worker } from 'workit-core';
-
 import { ZeebeClient } from '../../src/zeebeClient';
+
+
 
 process.env.ZB_NODE_LOG_LEVEL = process.env.ZB_NODE_LOG_LEVEL || 'NONE';
 
@@ -63,7 +63,7 @@ describe('ZeebeClient', () => {
     return new Worker(client, processHandler);
   };
   beforeEach(() => {
-    workers.push(createWorkerInstance('console-log', () => {}));
+    workers.push(createWorkerInstance('console-log', () => { }));
   });
 
   afterEach(async () => {
@@ -204,7 +204,7 @@ describe('ZeebeClient', () => {
     const wfi = wf.workflowInstanceKey;
     expect(wfi).toBeTruthy();
 
-    workers.unshift(createWorkerInstance('wait', () => {}));
+    workers.unshift(createWorkerInstance('wait', () => { }));
     workers.unshift(createWorkerInstance('pathA', done));
 
     IoC.unbind('ServiceTask_0cz2k8t');
@@ -253,7 +253,7 @@ describe('ZeebeClient', () => {
       },
     });
 
-    workers.unshift(createWorkerInstance('wait', () => {}));
+    workers.unshift(createWorkerInstance('wait', () => { }));
     workers.unshift(createWorkerInstance('pathB', done));
 
     IoC.unbind('ServiceTask_0cz2k8t');

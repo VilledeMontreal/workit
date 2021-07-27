@@ -4,9 +4,9 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { Worker } from '@villedemontreal/workit-core';
+import { IClient, IProcessHandler } from '@villedemontreal/workit-types';
 import { inject, injectable, named } from 'inversify';
-import { Worker } from 'workit-core';
-import { IClient, IProcessHandler } from 'workit-types';
 import { Client } from '../camunda-n-mq/client';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { TAG } from '../config/constants/tag';

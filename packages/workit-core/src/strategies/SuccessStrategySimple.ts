@@ -4,9 +4,9 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { ICamundaService, IMessage, ISuccessStrategy } from '@villedemontreal/workit-types';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
-import { ICamundaService, IMessage, ISuccessStrategy } from 'workit-types';
 
 @injectable()
 export class SuccessStrategySimple implements ISuccessStrategy<ICamundaService> {

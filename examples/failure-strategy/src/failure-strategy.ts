@@ -4,8 +4,8 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { ICamundaService, IFailureStrategy, IMessage, IWorkflowProps } from '@villedemontreal/workit-types';
 import axios, { AxiosError } from 'axios';
-import { ICamundaService, IFailureStrategy, IMessage, IWorkflowProps } from 'workit-types';
 
 export interface IHandlerStrategy extends IFailureStrategy<ICamundaService> {
   isHandled(error: any, message: IMessage<unknown, IWorkflowProps>): boolean;
@@ -62,7 +62,7 @@ export class AxiosNotFoundHandler implements IHandlerStrategy {
     service: ICamundaService
   ): Promise<void> {
     try {
-      await axios.post(`http://localhost:8080/engine-rest/external-task/${message.properties.jobKey}/bpmnError`, {
+      await axios.post(`http://localhost:8080/engine-rest/external-task/${ message.properties.jobKey }/bpmnError`, {
         workerId: 'demo',
         errorCode: 'not_found',
       });

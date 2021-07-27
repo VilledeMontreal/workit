@@ -4,9 +4,9 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { IMessage, ITask } from '@villedemontreal/workit-types';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
-import { IMessage, ITask } from 'workit-types';
 
 @injectable()
 export abstract class TaskBase<I> implements ITask<I> {

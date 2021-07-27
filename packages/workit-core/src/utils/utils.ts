@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { IMessage, IWorkflowProps } from 'workit-types';
+import { IMessage, IWorkflowProps } from '@villedemontreal/workit-types';
 import { ProxyFactory } from '../proxyFactory';
 
 export const isFunction = (f: any) => typeof f === 'function';

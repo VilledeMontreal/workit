@@ -4,9 +4,9 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from '@villedemontreal/workit-core';
+import { ICamundaConfig } from '@villedemontreal/workit-types';
 import * as nock from 'nock';
-import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
-import { ICamundaConfig } from 'workit-types';
 import { ZeebeClient } from '../../src/zeebeClient';
 
 process.env.ZB_NODE_LOG_LEVEL = process.env.ZB_NODE_LOG_LEVEL || 'NONE';
@@ -50,7 +50,7 @@ describe('Zeebe Worker', () => {
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search')
       .query({ _source_excludes: 'bpmnXml' })
-      .reply(200, require(`${process.cwd()}/tests/data/elasticResponse.workflow`));
+      .reply(200, require(`${ process.cwd() }/tests/data/elasticResponse.workflow`));
     const zeebeClient = new ZeebeClient(config, undefined, {
       url: 'http://localhost:9200',
     });
@@ -63,7 +63,7 @@ describe('Zeebe Worker', () => {
   it('should get MESSAGE_EVENT workflow', async () => {
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search')
-      .reply(200, require(`${process.cwd()}/tests/data/elasticResponseAgg.workflow`));
+      .reply(200, require(`${ process.cwd() }/tests/data/elasticResponseAgg.workflow`));
 
     const zeebeClient = new ZeebeClient(config, undefined, {
       url: 'http://localhost:9200',
@@ -87,7 +87,7 @@ describe('Zeebe Worker', () => {
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', { query: { bool: { must: [] } } })
       .query({ _source_excludes: 'bpmnXml', size })
-      .reply(200, require(`${process.cwd()}/tests/data/elasticResponse.paginated`));
+      .reply(200, require(`${ process.cwd() }/tests/data/elasticResponse.paginated`));
 
     const zeebeClient = new ZeebeClient(config, {
       url: 'http://localhost:9200',
@@ -104,7 +104,7 @@ describe('Zeebe Worker', () => {
     const scope = nock('http://localhost:9200')
       .post('/operate-workflow_alias/_search', { query: { bool: { must: [] } } })
       .query({ _source_excludes: 'bpmnXml', size, from })
-      .reply(200, require(`${process.cwd()}/tests/data/elasticResponse.paginated.skip`));
+      .reply(200, require(`${ process.cwd() }/tests/data/elasticResponse.paginated.skip`));
 
     const zeebeClient = new ZeebeClient(config, {
       url: 'http://localhost:9200',
@@ -123,7 +123,7 @@ describe('Zeebe Worker', () => {
         query: { bool: { must: [{ match: { bpmnProcessId: { query: bpmnProcessId } } }] } },
       })
       .query({ _source_excludes: 'bpmnXml', size })
-      .reply(200, require(`${process.cwd()}/tests/data/elasticResponseBpmnProcessId.paginated`));
+      .reply(200, require(`${ process.cwd() }/tests/data/elasticResponseBpmnProcessId.paginated`));
 
     const zeebeClient = new ZeebeClient(config, {
       url: 'http://localhost:9200',

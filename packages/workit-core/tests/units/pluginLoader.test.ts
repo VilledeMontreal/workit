@@ -3,35 +3,35 @@
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
+import { HookState, IPlugins } from '@villedemontreal/workit-types';
 import * as path from 'path';
-import { PluginLoader, searchPathForTest } from '../../src/plugin/pluginLoader';
-import { IPlugins, HookState } from 'workit-types';
 import { IoC } from '../../src/config/container';
+import { PluginLoader, searchPathForTest } from '../../src/plugin/pluginLoader';
 
 const INSTALLED_PLUGINS_PATH = path.join(__dirname, 'node_modules');
 
 const simplePlugins: IPlugins = {
   'simple-module': {
     enabled: true,
-    path: `${INSTALLED_PLUGINS_PATH}/@villemontreal/plugin-simple-module`,
+    path: `${ INSTALLED_PLUGINS_PATH }/@villemontreal/plugin-simple-module`,
   },
 };
 
 const disablePlugins: IPlugins = {
   'simple-module': {
     enabled: false,
-    path: `${INSTALLED_PLUGINS_PATH}/@villemontreal/plugin-simple-module`,
+    path: `${ INSTALLED_PLUGINS_PATH }/@villemontreal/plugin-simple-module`,
   },
   nonexistent: {
     enabled: false,
-    path: `${INSTALLED_PLUGINS_PATH}/@villemontreal/plugin-nonexistent-module`,
+    path: `${ INSTALLED_PLUGINS_PATH }/@villemontreal/plugin-nonexistent-module`,
   },
 };
 
 const nonexistentPlugins: IPlugins = {
   nonexistent: {
     enabled: true,
-    path: `${INSTALLED_PLUGINS_PATH}/@villemontreal/plugin-nonexistent-module`,
+    path: `${ INSTALLED_PLUGINS_PATH }/@villemontreal/plugin-nonexistent-module`,
   },
 };
 
@@ -46,11 +46,11 @@ const missingPathPlugins: IPlugins = {
 
 describe('PluginLoader', () => {
   const logger = {
-    log: () => {},
-    warn: () => {},
-    error: () => {},
-    info: () => {},
-    debug: () => {},
+    log: () => { },
+    warn: () => { },
+    error: () => { },
+    info: () => { },
+    debug: () => { },
   };
 
   beforeAll(() => {

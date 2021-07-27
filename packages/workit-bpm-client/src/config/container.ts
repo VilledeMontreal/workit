@@ -4,8 +4,8 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { kernel } from 'workit-core';
-import { ICamundaConfig } from 'workit-types';
+import { kernel } from '@villedemontreal/workit-core';
+import { ICamundaConfig } from '@villedemontreal/workit-types';
 import { SERVICE_IDENTIFIER } from './constants/identifiers';
 
 const configBase: ICamundaConfig = {

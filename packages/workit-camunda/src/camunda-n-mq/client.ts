@@ -4,9 +4,9 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { IClient, IMessage } from '@villedemontreal/workit-types';
 import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
-import { IClient, IMessage } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 
 @injectable()

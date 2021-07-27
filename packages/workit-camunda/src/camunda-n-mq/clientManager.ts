@@ -4,8 +4,6 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { injectable, unmanaged } from 'inversify';
-import 'reflect-metadata';
 import {
   ICreateWorkflowInstance,
   ICreateWorkflowInstanceResponse,
@@ -19,8 +17,10 @@ import {
   IWorkflowClient,
   IWorkflowDefinition,
   IWorkflowDefinitionRequest,
-  IWorkflowOptions,
-} from 'workit-types';
+  IWorkflowOptions
+} from '@villedemontreal/workit-types';
+import { injectable, unmanaged } from 'inversify';
+import 'reflect-metadata';
 
 import debug = require('debug');
 
@@ -34,7 +34,7 @@ export abstract class ClientManager<TClient extends IWorkflowClient> implements 
   }
 
   public deployWorkflow(bpmnPath: string): Promise<IDeployWorkflowResponse> {
-    log(`Deploying workflow from path: "${bpmnPath}"`);
+    log(`Deploying workflow from path: "${ bpmnPath }"`);
     return this._client.deployWorkflow(bpmnPath);
   }
 

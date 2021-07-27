@@ -5,11 +5,11 @@
  */
 
 import { NOOP_TRACER } from '@opentelemetry/api';
+import { CamundaBpmClient, CamundaExternalClient, Utils } from '@villedemontreal/workit-bpm-client';
+import { FailureStrategySimple, IoC, SCProcessHandler, SuccessStrategySimple, Worker } from '@villedemontreal/workit-core';
+import { ICamundaClient, ICamundaConfig, IMessage, IProcessHandlerConfig, IWorkflowProps } from '@villedemontreal/workit-types';
 import { ClientRequest } from 'http';
 import * as nock from 'nock';
-import { CamundaBpmClient, CamundaExternalClient, Utils } from 'workit-bpm-client';
-import { FailureStrategySimple, IoC, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
-import { ICamundaClient, ICamundaConfig, IMessage, IProcessHandlerConfig, IWorkflowProps } from 'workit-types';
 import { Client } from '../../src/camunda-n-mq/client';
 import { SERVICE_IDENTIFIER } from '../../src/config/constants/identifiers';
 import { FakeTask } from '../utils/fake';

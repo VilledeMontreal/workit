@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.7](https://github.com/VilledeMontreal/workit/compare/v4.2.5...v4.2.7) (2021-07-27)
+
+**Note:** Version bump only for package @villedemontreal/workit-types
+
+
+
+
+
+## [4.2.6](https://github.com/VilledeMontreal/workit/compare/v4.2.5...v4.2.6) (2021-07-27)
+
+**Note:** Version bump only for package @villedemontreal/workit-types
+
+
+
+
+
 ## [4.2.5](https://github.com/VilledeMontreal/workit/compare/v4.2.3-alpha.0...v4.2.5) (2021-07-27)
 
 **Note:** Version bump only for package workit-types

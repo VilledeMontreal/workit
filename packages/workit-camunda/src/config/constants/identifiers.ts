@@ -4,8 +4,8 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { SERVICE_IDENTIFIER as CAMUNDA_BPM_IDENTIFIER } from 'workit-bpm-client';
-import { SERVICE_IDENTIFIER as ZEEBE_IDENTIFIER } from 'workit-zeebe-client';
+import { SERVICE_IDENTIFIER as CAMUNDA_BPM_IDENTIFIER } from '@villedemontreal/workit-bpm-client';
+import { SERVICE_IDENTIFIER as ZEEBE_IDENTIFIER } from '@villedemontreal/workit-zeebe-client';
 
 export const SERVICE_IDENTIFIER = {
   ...CAMUNDA_BPM_IDENTIFIER,

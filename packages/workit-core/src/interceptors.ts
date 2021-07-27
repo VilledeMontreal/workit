@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { IMessage, Interceptor } from 'workit-types';
+import { IMessage, Interceptor } from '@villedemontreal/workit-types';
 import { ProxyFactory } from './proxyFactory';
 import { isArrayOfFunctions, isEmptyArray, isFunction, isObject } from './utils/utils';
 

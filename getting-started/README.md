@@ -157,7 +157,7 @@ Deploy the process to the Camunda BPM engine or Zeebe.
 In your NodeJS script:
 
 ```ts
-import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, IoC, ICamundaConfig, Worker } from 'workit-camunda';
+import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, IoC, ICamundaConfig, Worker } from '@villedemontreal/workit-camunda';
 
 // In helloWorldTask.ts file
 class HelloWorldTask extends TaskBase<IMessage> {

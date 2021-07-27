@@ -1,5 +1,5 @@
-import { TaskBase } from 'workit-core';
-import { IMessage } from 'workit-types';
+import { TaskBase } from '@villedemontreal/workit-core';
+import { IMessage } from '@villedemontreal/workit-types';
 
 export class [CLASSNAME] extends TaskBase<IMessage> {
     constructor() {

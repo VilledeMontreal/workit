@@ -4,11 +4,11 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { injectable, optional, inject } from 'inversify';
+import { ICamundaService, IFailureStrategy, ILogger, IMessage, IWorkflowProps } from '@villedemontreal/workit-types';
+import { inject, injectable, optional } from 'inversify';
 import 'reflect-metadata';
-import { ICamundaService, IFailureStrategy, IMessage, IWorkflowProps, ILogger } from 'workit-types';
-import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { NOOP_LOGGER } from '../common/noopLogger';
+import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 
 // eslint-disable-next-line
 const stringify = require('fast-safe-stringify');

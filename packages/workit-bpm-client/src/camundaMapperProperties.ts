@@ -9,7 +9,7 @@
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
 /* eslint @typescript-eslint/no-unsafe-return: 0 */
 
-import { IVariablePayload, IWorkflowProps } from 'workit-types';
+import { IVariablePayload, IWorkflowProps } from '@villedemontreal/workit-types';
 
 export class CamundaMapperProperties {
   public static map(task: IVariablePayload): IWorkflowProps {

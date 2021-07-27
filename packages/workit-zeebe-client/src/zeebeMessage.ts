@@ -3,8 +3,8 @@
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-import { getVariablesWhenChanged } from 'workit-core';
-import { FailureException, ICamundaService, IMessage, IPayload, IWorkflowProps } from 'workit-types';
+import { getVariablesWhenChanged } from '@villedemontreal/workit-core';
+import { FailureException, ICamundaService, IMessage, IPayload, IWorkflowProps } from '@villedemontreal/workit-types';
 // FIXME:dist folder....
 import { CompleteFn } from 'zeebe-node/dist/lib/interfaces';
 import { ZeebeMapperProperties } from './zeebeMapperProperties';

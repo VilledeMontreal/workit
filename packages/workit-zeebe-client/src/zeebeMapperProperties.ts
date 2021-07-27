@@ -3,7 +3,7 @@
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-import { IEmptyPayload, IPayload, IWorkflowProps } from 'workit-types';
+import { IEmptyPayload, IPayload, IWorkflowProps } from '@villedemontreal/workit-types';
 
 export class ZeebeMapperProperties {
   public static map<TVariables = unknown, TProps = unknown>(obj: IPayload<TVariables, TProps>): IWorkflowProps<TProps> {
