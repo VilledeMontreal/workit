@@ -12,8 +12,8 @@ export class HelloWorldTask extends TaskBase<IMessage> {
   public async execute(message: IMessage): Promise<IMessage> {
     const { properties } = message;
 
-    console.log(`Executing task: ${ properties.activityId }`);
-    console.log(`${ properties.bpmnProcessId }::${ properties.processInstanceId } Servus!`);
+    console.log(`Executing task: ${properties.activityId}`);
+    console.log(`${properties.bpmnProcessId}::${properties.processInstanceId} Servus!`);
 
     // should throw for the purpose of this example
     await axios.get('https://jsonplaceholder.typicode.com/fake/1');

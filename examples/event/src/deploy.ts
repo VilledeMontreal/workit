@@ -11,7 +11,7 @@ import { IWorkflowClient } from '@villedemontreal/workit-types';
 (async (): Promise<void> => {
   const cm = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
   // const cm = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.zeebe);
-  const path = `${ process.cwd() }/bpmn/MESSAGE_EVENT.bpmn`;
+  const path = `${process.cwd()}/bpmn/MESSAGE_EVENT.bpmn`;
   // const path = `${ process.cwd() }/bpmn/zeebe/MESSAGE_EVENT.bpmn`;
   await cm.deployWorkflow(path);
   console.log('Success!');

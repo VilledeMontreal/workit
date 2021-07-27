@@ -14,7 +14,7 @@ import {
   ISuccessStrategy,
   ITask,
   ITracerPropagator,
-  IWorkflowProps
+  IWorkflowProps,
 } from '@villedemontreal/workit-types';
 import { EventEmitter } from 'events';
 import { inject, injectable, optional } from 'inversify';
@@ -30,7 +30,8 @@ const log = debug('workit:processHandler');
 @injectable()
 export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps>
   extends EventEmitter
-  implements IProcessHandler {
+  implements IProcessHandler
+{
   protected readonly _config: Partial<IProcessHandlerConfig>;
 
   protected readonly _success: ISuccessStrategy<ICamundaService>;

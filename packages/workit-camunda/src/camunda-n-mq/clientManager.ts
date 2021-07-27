@@ -17,7 +17,7 @@ import {
   IWorkflowClient,
   IWorkflowDefinition,
   IWorkflowDefinitionRequest,
-  IWorkflowOptions
+  IWorkflowOptions,
 } from '@villedemontreal/workit-types';
 import { injectable, unmanaged } from 'inversify';
 import 'reflect-metadata';
@@ -34,7 +34,7 @@ export abstract class ClientManager<TClient extends IWorkflowClient> implements 
   }
 
   public deployWorkflow(bpmnPath: string): Promise<IDeployWorkflowResponse> {
-    log(`Deploying workflow from path: "${ bpmnPath }"`);
+    log(`Deploying workflow from path: "${bpmnPath}"`);
     return this._client.deployWorkflow(bpmnPath);
   }
 

@@ -13,25 +13,25 @@ const INSTALLED_PLUGINS_PATH = path.join(__dirname, 'node_modules');
 const simplePlugins: IPlugins = {
   'simple-module': {
     enabled: true,
-    path: `${ INSTALLED_PLUGINS_PATH }/@villemontreal/plugin-simple-module`,
+    path: `${INSTALLED_PLUGINS_PATH}/@villemontreal/plugin-simple-module`,
   },
 };
 
 const disablePlugins: IPlugins = {
   'simple-module': {
     enabled: false,
-    path: `${ INSTALLED_PLUGINS_PATH }/@villemontreal/plugin-simple-module`,
+    path: `${INSTALLED_PLUGINS_PATH}/@villemontreal/plugin-simple-module`,
   },
   nonexistent: {
     enabled: false,
-    path: `${ INSTALLED_PLUGINS_PATH }/@villemontreal/plugin-nonexistent-module`,
+    path: `${INSTALLED_PLUGINS_PATH}/@villemontreal/plugin-nonexistent-module`,
   },
 };
 
 const nonexistentPlugins: IPlugins = {
   nonexistent: {
     enabled: true,
-    path: `${ INSTALLED_PLUGINS_PATH }/@villemontreal/plugin-nonexistent-module`,
+    path: `${INSTALLED_PLUGINS_PATH}/@villemontreal/plugin-nonexistent-module`,
   },
 };
 
@@ -46,11 +46,11 @@ const missingPathPlugins: IPlugins = {
 
 describe('PluginLoader', () => {
   const logger = {
-    log: () => { },
-    warn: () => { },
-    error: () => { },
-    info: () => { },
-    debug: () => { },
+    log: () => {},
+    warn: () => {},
+    error: () => {},
+    info: () => {},
+    debug: () => {},
   };
 
   beforeAll(() => {

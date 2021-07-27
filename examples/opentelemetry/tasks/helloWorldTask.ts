@@ -13,8 +13,8 @@ export class HelloWorldTask extends TaskBase<IMessage> {
     const { properties } = message;
 
     console.log();
-    console.log(`Executing task: ${ properties.activityId }`);
-    console.log(`${ properties.bpmnProcessId }::${ properties.processInstanceId } Servus!`);
+    console.log(`Executing task: ${properties.activityId}`);
+    console.log(`${properties.bpmnProcessId}::${properties.processInstanceId} Servus!`);
 
     const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
 
