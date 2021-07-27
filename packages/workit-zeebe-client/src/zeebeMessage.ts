@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2021 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -39,7 +39,7 @@ export class ZeebeMessage {
           }
           const { retries } = error;
           // TODO: check if zeebe-node made the type correction
-          this.hasBeenThreated = (complete.failure(error.message, retries) as unknown) as boolean;
+          this.hasBeenThreated = complete.failure(error.message, retries) as unknown as boolean;
           return Promise.resolve();
         },
       },

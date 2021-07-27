@@ -1,6 +1,6 @@
 {
   "name": "workit-types",
-  "version": "4.2.3-alpha.0",
+  "version": "4.2.4",
   "description": "TypeScript types for Workit",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -11,25 +11,25 @@
     "@opentelemetry/api": "0.4.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "@types/node": "^14.14.7",
-    "@typescript-eslint/eslint-plugin": "^4.7.0",
-    "@typescript-eslint/parser": "^4.7.0",
-    "codecov": "^3.6.5",
-    "eslint": "^7.13.0",
-    "eslint-config-airbnb-typescript": "^12.0.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-header": "^3.1.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "husky": "^4.2.4",
-    "prettier": "^2.1.2",
-    "typedoc": "^0.16.11",
-    "typescript": "^4.0.5"
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@types/node": "^16.4.3",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "codecov": "^3.8.3",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^7.0.1",
+    "prettier": "^2.3.2",
+    "typedoc": "^0.21.4",
+    "typescript": "^4.3.5"
   },
   "engines": {
-    "node": ">=8.11.4"
+    "node": ">=10.13.0"
   },
   "scripts": {
     "test": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
@@ -40,7 +40,7 @@
     "lint": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
     "lint-fix": "prettier \"./**/*.ts\" --write && eslint . --ext .ts --fix",
     "check-conflicts": "eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
-    "docs": "typedoc --out ../../docs --tsconfig ./tsconfig.json --excludePrivate --mode file",
+    "docs": "typedoc --out ../../docs --tsconfig ./tsconfig.json --excludePrivate --packages .",
     "codecov": "echo \"no tests yet\""
   },
   "husky": {

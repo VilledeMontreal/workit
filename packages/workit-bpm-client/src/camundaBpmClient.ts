@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2021 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -179,7 +179,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
     // TODO: fix this type issue
     return {
       bpmnProcessId: bpmnDef[0],
-      version: (bpmnDef[1] as unknown) as number,
+      version: bpmnDef[1] as unknown as number,
       workflowInstanceKey: response.id,
       workflowKey: response.definitionId,
     };

@@ -5,6 +5,7 @@
  */
 
 import { NOOP_TRACER } from '@opentelemetry/api';
+import { ClientRequest } from 'http';
 import * as nock from 'nock';
 import { CamundaBpmClient, CamundaExternalClient, Utils } from 'workit-bpm-client';
 import { FailureStrategySimple, IoC, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
@@ -68,7 +69,7 @@ describe('Camunda Worker', function () {
   it('should have Basic Auth', (done) => {
     const scoped = nock('http://localhost:8080', { encodedQueryParams: true } as any)
       .post('/engine-rest/external-task/fetchAndLock')
-      .reply(function () {
+      .reply(function (this: ClientRequest) {
         expect(this.req.headers.authorization).toStrictEqual('Basic YWRtaW46YWRtaW4xMjM=');
       });
 
