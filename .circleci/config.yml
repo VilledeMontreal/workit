@@ -151,7 +151,7 @@ workflows:
           filters: *docs_filters
       - node14:
           filters: *docs_filters
-      - node13:
+      - nodelts:
           filters: *docs_filters
       - lint:
           filters: *docs_filters
@@ -179,9 +179,9 @@ jobs:
     docker:
       - image: circleci/node:lts
     <<: *lint
-  node13:
+  nodelts:
     docker:
-      - image: circleci/node:13
+      - image: circleci/node:lts
     <<: *node_tests
 
 
