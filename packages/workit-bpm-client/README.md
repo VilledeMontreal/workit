@@ -48,7 +48,7 @@ npm i workit-bpm-client
 ```js
     import { NodeTracer } from '@opentelemetry/node';
     import { BasicAuthInterceptor, Client as CamundaExternalClient } from 'camunda-external-task-client-js';
-    import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
+    import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from '@villedemontreal/workit-core';
 
     const clientLib: ICamundaClient = new CamundaExternalClient(config);
     const client = new CamundaBpmClient(config, clientLib);

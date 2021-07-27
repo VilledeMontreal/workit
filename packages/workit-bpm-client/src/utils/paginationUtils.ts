@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { IPaginationOptions, IPaging, IWorkflowOptions } from 'workit-types';
+import { IPaginationOptions, IPaging, IWorkflowOptions } from '@villedemontreal/workit-types';
 
 export class PaginationUtils {
   public static setCamundaBpmPaginationParams<T = any>(

@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { IMessage, Interceptor } from 'workit-types';
+import { IMessage, Interceptor } from '@villedemontreal/workit-types';
 import { Interceptors } from '../../src/interceptors';
 import { ProxyFactory } from '../../src/proxyFactory';
 describe('Interceptors', () => {

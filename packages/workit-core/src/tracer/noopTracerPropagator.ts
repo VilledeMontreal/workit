@@ -5,7 +5,7 @@
  */
 
 import { SpanContext } from '@opentelemetry/api';
-import { IMessageBase, ITracerPropagator } from 'workit-types';
+import { IMessageBase, ITracerPropagator } from '@villedemontreal/workit-types';
 
 export class NoopTracerPropagator implements ITracerPropagator {
   public extractFromMessage(message: IMessageBase<{ requestInfo: unknown }>): SpanContext | undefined {

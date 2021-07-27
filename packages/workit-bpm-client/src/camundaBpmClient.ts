@@ -4,6 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { IoC, NOOP_LOGGER, PluginLoader, SERVICE_IDENTIFIER } from '@villedemontreal/workit-core';
 import {
   IBpmn,
   ICamundaClient,
@@ -29,13 +30,12 @@ import {
   IWorkflowDefinition,
   IWorkflowDefinitionRequest,
   IWorkflowOptions,
-  IWorkflowProcessIdDefinition,
-} from 'workit-types';
-import { IoC, PluginLoader, SERVICE_IDENTIFIER, NOOP_LOGGER } from 'workit-core';
-import { PaginationUtils } from './utils/paginationUtils';
-
+  IWorkflowProcessIdDefinition
+} from '@villedemontreal/workit-types';
 import { CamundaMessage } from './camundaMessage';
 import { CamundaRepository } from './repositories/camundaRepository';
+import { PaginationUtils } from './utils/paginationUtils';
+
 
 export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClient {
   private static _getWorkflowParams(options?: Partial<IWorkflowOptions & IPaginationOptions>): any {
@@ -92,7 +92,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
   }
 
   public async deployWorkflow(absPath: string): Promise<IDeployWorkflowResponse> {
-    const result = await this._repo.deployWorkflow(`Deploy from ${this._config.workerId}`, absPath);
+    const result = await this._repo.deployWorkflow(`Deploy from ${ this._config.workerId }`, absPath);
     const response = result.data;
     const deployedProcessDefinitionsId = Object.keys(response.deployedProcessDefinitions)[0];
     const definition = response.deployedProcessDefinitions[deployedProcessDefinitionsId];

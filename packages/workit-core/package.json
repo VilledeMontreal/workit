@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit-core",
-  "version": "4.2.5",
+  "version": "4.2.6",
   "description": "This package provides default and no-op implementations of the WorkIt types for client packages.",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -15,7 +15,7 @@
     "inversify": "~5.1.1",
     "reflect-metadata": "~0.1.13",
     "uuid": "^8.3.2",
-    "workit-types": "^4.2.5"
+    "@villedemontreal/workit-types": "^4.2.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",

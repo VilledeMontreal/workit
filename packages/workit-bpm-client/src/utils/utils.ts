@@ -11,9 +11,9 @@
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
 /* eslint @typescript-eslint/no-unsafe-return: 0 */
 
+import { IoC } from '@villedemontreal/workit-core';
+import { ICamundaConfig, IReadOnlyVariables, IVariables } from '@villedemontreal/workit-types';
 import { BasicAuthInterceptor } from 'camunda-external-task-client-js';
-import { IoC } from 'workit-core';
-import { ICamundaConfig, IReadOnlyVariables, IVariables } from 'workit-types';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { Variables } from '../variables';
 
@@ -110,7 +110,7 @@ export class Utils {
     return {
       maxTasks: 1,
       baseUrl: 'http://localhost:8080/engine-rest',
-      workerId: `worker-${config ? config.topicName : 'demo'}`,
+      workerId: `worker-${ config ? config.topicName : 'demo' }`,
       interceptors: Utils.defaultInterceptors(),
       use: Utils.getLogger(),
       topicName: 'topic_demo',
@@ -121,7 +121,7 @@ export class Utils {
   public static serializeVariable({
     typedValue,
   }: {
-    typedValue: { value?: any; type: string; valueInfo?: unknown; [custom: string]: any };
+    typedValue: { value?: any; type: string; valueInfo?: unknown;[custom: string]: any };
   }) {
     let { value, type } = { ...typedValue };
 

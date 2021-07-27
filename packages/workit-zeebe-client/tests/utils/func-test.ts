@@ -4,8 +4,8 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { Worker } from '@villedemontreal/workit-core';
 import * as assert from 'assert';
-import { Worker } from 'workit-core';
 
 export const run = (worker: Worker, scoped: { isDone: () => boolean }, done: () => void, delay = 500): void => {
   worker.start();

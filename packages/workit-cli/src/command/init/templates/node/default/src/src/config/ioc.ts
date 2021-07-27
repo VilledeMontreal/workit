@@ -1,5 +1,5 @@
-import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from 'workit-camunda';
-import { IoC } from 'workit-core';
+import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '@villedemontreal/workit-camunda';
+import { IoC } from '@villedemontreal/workit-core';
 import { configs } from '.';
 import { HelloWorldTask } from '../tasks/helloWorldTask';
 

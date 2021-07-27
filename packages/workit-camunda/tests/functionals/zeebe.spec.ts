@@ -4,10 +4,10 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from '@villedemontreal/workit-core';
+import { ICamundaConfig } from '@villedemontreal/workit-types';
+import { ZeebeClient } from '@villedemontreal/workit-zeebe-client';
 import * as nock from 'nock';
-import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
-import { ICamundaConfig } from 'workit-types';
-import { ZeebeClient } from 'workit-zeebe-client';
 import { Client } from '../../src/camunda-n-mq/client';
 
 process.env.ZB_NODE_LOG_LEVEL = process.env.ZB_NODE_LOG_LEVEL || 'NONE';

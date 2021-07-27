@@ -38,7 +38,7 @@ npm i workit-zeebe-client
 
 ```js
     import { NOOP_TRACER } from '@opentelemetry/api';
-    import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from 'workit-core';
+    import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from '@villedemontreal/workit-core';
 
     const client = new ZeebeClient(config);
     const successHandler = new SuccessStrategySimple();

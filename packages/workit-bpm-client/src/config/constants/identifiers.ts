@@ -3,7 +3,7 @@
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from 'workit-core';
+import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '@villedemontreal/workit-core';
 
 export const SERVICE_IDENTIFIER = {
   ...CORE_IDENTIFIER,

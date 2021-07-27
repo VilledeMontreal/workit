@@ -3,8 +3,7 @@
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-import { optional } from 'inversify';
-import { IoC, PluginLoader, SERVICE_IDENTIFIER, NOOP_LOGGER } from 'workit-core';
+import { IoC, NOOP_LOGGER, PluginLoader, SERVICE_IDENTIFIER } from '@villedemontreal/workit-core';
 import {
   ICamundaService,
   IClient,
@@ -27,9 +26,10 @@ import {
   IWorkflowOptions,
   IWorkflowProcessIdDefinition,
   IWorkflowProps,
-  IZeebeOptions,
-} from 'workit-types';
-import { Configs, IAPIConfig as IElasticExporterConfig, ZBElasticClient } from 'zeebe-elasticsearch-client';
+  IZeebeOptions
+} from '@villedemontreal/workit-types';
+import { Configs, IAPIConfig as IElasticExporterConfig, ZBElasticClient } from '@villedemontreal/zeebe-elasticsearch-client';
+import { optional } from 'inversify';
 import { ZBClient, ZBWorker } from 'zeebe-node';
 // FIXME: dist folder
 import { CompleteFn } from 'zeebe-node/dist/lib/interfaces';
@@ -37,8 +37,7 @@ import { PaginationUtils } from './utils/paginationUtils';
 import { ZeebeMessage } from './zeebeMessage';
 
 export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TVariables>
-  implements IClient<ICamundaService>, IWorkflowClient
-{
+  implements IClient<ICamundaService>, IWorkflowClient {
   private readonly _client: ZBClient;
 
   private readonly _exporterClient: ZBElasticClient;

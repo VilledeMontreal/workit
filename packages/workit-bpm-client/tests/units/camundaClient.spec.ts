@@ -4,8 +4,8 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { IoC } from '@villedemontreal/workit-core';
 import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
-import { IoC } from 'workit-core';
 import { CamundaBpmClient } from '../../src/camundaBpmClient';
 import { SERVICE_IDENTIFIER } from '../../src/config/constants/identifiers';
 import { logger } from '../../src/logger';

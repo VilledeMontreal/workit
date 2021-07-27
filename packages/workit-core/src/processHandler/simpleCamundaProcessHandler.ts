@@ -5,9 +5,6 @@
  */
 
 import { SpanKind, SpanOptions, Tracer } from '@opentelemetry/api';
-import { EventEmitter } from 'events';
-import { inject, injectable, optional } from 'inversify';
-import 'reflect-metadata';
 import {
   ICamundaService,
   IFailureStrategy,
@@ -17,11 +14,14 @@ import {
   ISuccessStrategy,
   ITask,
   ITracerPropagator,
-  IWorkflowProps,
-} from 'workit-types';
+  IWorkflowProps
+} from '@villedemontreal/workit-types';
+import { EventEmitter } from 'events';
+import { inject, injectable, optional } from 'inversify';
+import 'reflect-metadata';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
-import { Interceptors } from '../interceptors';
 import { IoC, kernel } from '../config/container';
+import { Interceptors } from '../interceptors';
 // eslint-disable-next-line import/order
 import debug = require('debug');
 
@@ -30,8 +30,7 @@ const log = debug('workit:processHandler');
 @injectable()
 export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps>
   extends EventEmitter
-  implements IProcessHandler
-{
+  implements IProcessHandler {
   protected readonly _config: Partial<IProcessHandlerConfig>;
 
   protected readonly _success: ISuccessStrategy<ICamundaService>;

@@ -4,8 +4,8 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { camundaLogger, logger } from 'workit-bpm-client';
-import { kernel } from 'workit-core';
+import { camundaLogger, logger } from '@villedemontreal/workit-bpm-client';
+import { kernel } from '@villedemontreal/workit-core';
 import { constants } from './constants';
 import { SERVICE_IDENTIFIER } from './constants/identifiers';
 

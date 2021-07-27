@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { IPluginConfig, IPlugin, ILogger, IIoC } from 'workit-types';
+import { IIoC, ILogger, IPlugin, IPluginConfig } from '@villedemontreal/workit-types';
 
 // TODO: add bpmn files and failures/success strategies as well
 
@@ -21,7 +21,7 @@ export abstract class BasePlugin implements IPlugin {
 
   protected _config!: IPluginConfig;
 
-  constructor(protected readonly packageName: string) {}
+  constructor(protected readonly packageName: string) { }
 
   public enable(ioc: IIoC, logger: ILogger, config?: IPluginConfig): void {
     this._ioc = ioc;

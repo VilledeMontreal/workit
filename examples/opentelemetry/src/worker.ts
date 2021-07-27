@@ -6,8 +6,8 @@
 import { JaegerExporter } from '@opentelemetry/exporter-jaeger';
 import { NodeTracerProvider } from '@opentelemetry/node';
 import { SimpleSpanProcessor } from '@opentelemetry/tracing';
-import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from 'workit-camunda';
-import { IoC, Worker } from 'workit-core';
+import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from '@villedemontreal/workit-camunda';
+import { IoC, Worker } from '@villedemontreal/workit-core';
 import { HelloWorldTask } from '../tasks/helloWorldTask';
 
 const ingoreUrls = [/\/external-task\/fetchAndLock/i];

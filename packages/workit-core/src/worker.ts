@@ -4,10 +4,10 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { IClient, IProcess, IProcessHandler } from '@villedemontreal/workit-types';
 import { EventEmitter } from 'events';
 import { injectable, unmanaged } from 'inversify';
 import 'reflect-metadata';
-import { IClient, IProcess, IProcessHandler } from 'workit-types';
 
 import debug = require('debug');
 
