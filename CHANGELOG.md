@@ -3,18 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [4.2.7](https://github.com/VilledeMontreal/workit/compare/v4.2.5...v4.2.7) (2021-07-27)
+## [4.2.8](https://github.com/VilledeMontreal/workit/compare/v4.2.5...v4.2.8) (2021-07-27)
 
-#### :rocket: (Enhancement)
+### Bug Fixes
+
+* prettier on workit-cli package ([#223](https://github.com/VilledeMontreal/workit/issues/223)) ([383de6d](https://github.com/VilledeMontreal/workit/commit/383de6d3890c43ca84cb54e8c20b2680447c7839))
+
+#### :rocket: (Enhancement) (from tag v4.2.7)
 * publish under @villedemontreal scope
 
-## [4.2.5](https://github.com/VilledeMontreal/workit/compare/v4.2.3-alpha.0...v4.2.5) (2021-07-27)
-
-### Features
+### Features (from tag v4.2.5)
 
 * add plugin system to workit ([#216](https://github.com/VilledeMontreal/workit/issues/216)) ([3d28cab](https://github.com/VilledeMontreal/workit/commit/3d28cab7265948f479228e3142cd341c57b6531a) (from alpha 4.2.3-alpha.0)
 * update dependencies
-
 
 
 ## [4.2.3-alpha.0](https://github.com/VilledeMontreal/workit/compare/v4.2.2...v4.2.3-alpha.0) (2020-11-27)
