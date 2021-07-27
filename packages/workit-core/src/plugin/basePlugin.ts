@@ -21,7 +21,7 @@ export abstract class BasePlugin implements IPlugin {
 
   protected _config!: IPluginConfig;
 
-  constructor(protected readonly packageName: string) { }
+  constructor(protected readonly packageName: string) {}
 
   public enable(ioc: IIoC, logger: ILogger, config?: IPluginConfig): void {
     this._ioc = ioc;

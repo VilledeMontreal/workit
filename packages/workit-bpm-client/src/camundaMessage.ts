@@ -9,7 +9,13 @@
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
 
 import { getVariablesWhenChanged, ProxyFactory } from '@villedemontreal/workit-core';
-import { FailureException, ICamundaService, IMessage, IVariablePayload, IVariables } from '@villedemontreal/workit-types';
+import {
+  FailureException,
+  ICamundaService,
+  IMessage,
+  IVariablePayload,
+  IVariables,
+} from '@villedemontreal/workit-types';
 import { CamundaMapperProperties } from './camundaMapperProperties';
 import { Variables } from './variables';
 

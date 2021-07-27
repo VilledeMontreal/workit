@@ -44,7 +44,7 @@ export class PluginLoader {
   private _hookState = HookState.UNINITIALIZED;
 
   /** Constructs a new PluginLoader instance. */
-  constructor(readonly ioc: IIoC, readonly logger: ILogger) { }
+  constructor(readonly ioc: IIoC, readonly logger: ILogger) {}
 
   /**
    * Loads a list of plugins. Each plugin module should implement the core
@@ -76,9 +76,9 @@ export class PluginLoader {
 
       if (requiredModulesToHook.length > 0) {
         this.logger.info(
-          `Some modules (${ requiredModulesToHook.join(
+          `Some modules (${requiredModulesToHook.join(
             ', '
-          ) }) were already required when their respective plugin was loaded, some plugins might not work. Make sure Workit is setup before you require in other modules.`
+          )}) were already required when their respective plugin was loaded, some plugins might not work. Make sure Workit is setup before you require in other modules.`
         );
       }
 
@@ -87,15 +87,15 @@ export class PluginLoader {
         const modulePath = config.path!;
         const version = null;
 
-        this.logger.info(`PluginLoader#load: trying loading ${ name }@${ version }`);
-        this.logger.debug(`PluginLoader#load: applying binding to ${ name }@${ version } using ${ modulePath } module`);
+        this.logger.info(`PluginLoader#load: trying loading ${name}@${version}`);
+        this.logger.debug(`PluginLoader#load: applying binding to ${name}@${version} using ${modulePath} module`);
 
         // Expecting a plugin from module;
         try {
           const { plugin } = require(modulePath);
 
           if (plugin.moduleName !== name) {
-            this.logger.error(`PluginLoader#load: Entry ${ name } use a plugin that instruments ${ plugin.moduleName }`);
+            this.logger.error(`PluginLoader#load: Entry ${name} use a plugin that instruments ${plugin.moduleName}`);
             return exports;
           }
 
@@ -104,7 +104,7 @@ export class PluginLoader {
           return plugin.enable(this.ioc, this.logger, config);
         } catch (e) {
           this.logger.error(
-            `PluginLoader#load: could not load plugin ${ modulePath } of module ${ name }. Error: ${ e.message }`
+            `PluginLoader#load: could not load plugin ${modulePath} of module ${name}. Error: ${e.message}`
           );
           return exports;
         }

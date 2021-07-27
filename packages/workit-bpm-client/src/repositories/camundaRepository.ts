@@ -21,7 +21,7 @@ import {
   IIncident,
   IProcessDefinition,
   IProcessXmlDefinition,
-  IResolveIncident
+  IResolveIncident,
 } from '@villedemontreal/workit-types';
 import axios, { AxiosInstance } from 'axios';
 import * as FormData from 'form-data';
@@ -36,9 +36,9 @@ export class CamundaRepository implements ICamundaRepository {
   private static _getworkflowInstanceUrl(idOrKey: string) {
     let url = `/process-definition`;
     if (idOrKey.split(':').length === 3) {
-      url += `/${ idOrKey }/start`;
+      url += `/${idOrKey}/start`;
     } else {
-      url += `/key/${ idOrKey }/start`;
+      url += `/key/${idOrKey}/start`;
     }
     return url;
   }
@@ -83,7 +83,7 @@ export class CamundaRepository implements ICamundaRepository {
     formData.append('deployment-name', deployName);
     formData.append('process', xmlStream);
     return this._request.post('/deployment/create', formData, {
-      headers: { ...this._headers, 'content-type': `multipart/form-data; boundary=${ formData.getBoundary() }` },
+      headers: { ...this._headers, 'content-type': `multipart/form-data; boundary=${formData.getBoundary()}` },
     });
   }
 
@@ -133,19 +133,19 @@ export class CamundaRepository implements ICamundaRepository {
 
   public async cancelWorkflowInstance(id: string): Promise<void> {
     await this._request.delete(
-      `/process-instance/${ id }?skipCustomListeners=true&skipIoMappings=true&skipSubprocesses=true`
+      `/process-instance/${id}?skipCustomListeners=true&skipIoMappings=true&skipSubprocesses=true`
     );
   }
 
   public async getIncident(incidentKey: string): Promise<IIncident> {
-    const response: IHttpResponse<IIncident[]> = await this._request.get(`/incident/?incidentId=${ incidentKey }`);
+    const response: IHttpResponse<IIncident[]> = await this._request.get(`/incident/?incidentId=${incidentKey}`);
     return response.data[0];
   }
 
   public async resolveIncident(incidentKey: string): Promise<void> {
     const incident = await this.getIncident(incidentKey);
     // check if type is for external task
-    await this._request.post(`/process-instance/${ incident.processInstanceId }/modification`, {
+    await this._request.post(`/process-instance/${incident.processInstanceId}/modification`, {
       skipCustomListeners: true,
       skipIoMappings: true,
       instructions: [
@@ -167,8 +167,8 @@ export class CamundaRepository implements ICamundaRepository {
       basePath += '/key';
     }
 
-    const pDef = this._request.get(`${ basePath }/${ idOrKey }`);
-    const pDefXml = this._request.get(`${ basePath }/${ idOrKey }/xml`);
+    const pDef = this._request.get(`${basePath}/${idOrKey}`);
+    const pDefXml = this._request.get(`${basePath}/${idOrKey}/xml`);
     const results = await Promise.all([pDef, pDefXml]);
     const payload = results[0].data;
     payload.bpmn20Xml = results[1].data.bpmn20Xml;
@@ -176,7 +176,7 @@ export class CamundaRepository implements ICamundaRepository {
   }
 
   public updateJobRetries(id: string, retries: number): Promise<IHttpResponse<void>> {
-    return this._request.put(`/external-task/${ id }/retries`, {
+    return this._request.put(`/external-task/${id}/retries`, {
       retries,
     });
   }
@@ -186,7 +186,7 @@ export class CamundaRepository implements ICamundaRepository {
     variables: T,
     local = false
   ): Promise<IHttpResponse<void>> {
-    return this._request.post(`/process-instance/${ processInstanceId }/variables`, {
+    return this._request.post(`/process-instance/${processInstanceId}/variables`, {
       modifications: Utils.serializeVariables(variables, local),
     });
   }

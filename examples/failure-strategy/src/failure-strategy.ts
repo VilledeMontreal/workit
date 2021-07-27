@@ -62,7 +62,7 @@ export class AxiosNotFoundHandler implements IHandlerStrategy {
     service: ICamundaService
   ): Promise<void> {
     try {
-      await axios.post(`http://localhost:8080/engine-rest/external-task/${ message.properties.jobKey }/bpmnError`, {
+      await axios.post(`http://localhost:8080/engine-rest/external-task/${message.properties.jobKey}/bpmnError`, {
         workerId: 'demo',
         errorCode: 'not_found',
       });

@@ -30,12 +30,11 @@ import {
   IWorkflowDefinition,
   IWorkflowDefinitionRequest,
   IWorkflowOptions,
-  IWorkflowProcessIdDefinition
+  IWorkflowProcessIdDefinition,
 } from '@villedemontreal/workit-types';
 import { CamundaMessage } from './camundaMessage';
 import { CamundaRepository } from './repositories/camundaRepository';
 import { PaginationUtils } from './utils/paginationUtils';
-
 
 export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClient {
   private static _getWorkflowParams(options?: Partial<IWorkflowOptions & IPaginationOptions>): any {
@@ -92,7 +91,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
   }
 
   public async deployWorkflow(absPath: string): Promise<IDeployWorkflowResponse> {
-    const result = await this._repo.deployWorkflow(`Deploy from ${ this._config.workerId }`, absPath);
+    const result = await this._repo.deployWorkflow(`Deploy from ${this._config.workerId}`, absPath);
     const response = result.data;
     const deployedProcessDefinitionsId = Object.keys(response.deployedProcessDefinitions)[0];
     const definition = response.deployedProcessDefinitions[deployedProcessDefinitionsId];

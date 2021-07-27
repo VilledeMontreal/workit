@@ -26,9 +26,13 @@ import {
   IWorkflowOptions,
   IWorkflowProcessIdDefinition,
   IWorkflowProps,
-  IZeebeOptions
+  IZeebeOptions,
 } from '@villedemontreal/workit-types';
-import { Configs, IAPIConfig as IElasticExporterConfig, ZBElasticClient } from '@villedemontreal/zeebe-elasticsearch-client';
+import {
+  Configs,
+  IAPIConfig as IElasticExporterConfig,
+  ZBElasticClient,
+} from '@villedemontreal/zeebe-elasticsearch-client';
 import { optional } from 'inversify';
 import { ZBClient, ZBWorker } from 'zeebe-node';
 // FIXME: dist folder
@@ -37,7 +41,8 @@ import { PaginationUtils } from './utils/paginationUtils';
 import { ZeebeMessage } from './zeebeMessage';
 
 export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TVariables>
-  implements IClient<ICamundaService>, IWorkflowClient {
+  implements IClient<ICamundaService>, IWorkflowClient
+{
   private readonly _client: ZBClient;
 
   private readonly _exporterClient: ZBElasticClient;

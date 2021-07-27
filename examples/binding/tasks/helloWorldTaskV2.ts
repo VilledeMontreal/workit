@@ -13,9 +13,9 @@ export class HelloWorldTaskV2 extends TaskBase<IMessage> {
     const { properties } = message;
 
     console.log();
-    console.log(`Executing task: ${ properties.activityId } with the class HelloWorldTaskV2`);
-    console.log(`${ properties.bpmnProcessId }::${ properties.processInstanceId } Servus!`);
-    console.log(`version: ${ properties.workflowDefinitionVersion }`);
+    console.log(`Executing task: ${properties.activityId} with the class HelloWorldTaskV2`);
+    console.log(`${properties.bpmnProcessId}::${properties.processInstanceId} Servus!`);
+    console.log(`version: ${properties.workflowDefinitionVersion}`);
 
     const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
 

@@ -37,7 +37,7 @@ describe('Client Manager (Camunda BPM)', function () {
       .post('/engine-rest/deployment/create')
       .reply(200, require('./__mocks__/deployResponse.camunda.json'));
 
-    const path = `${ process.cwd() }/tests/data/bpmn/camunda-bpm/MESSAGE_EVENT.bpmn`;
+    const path = `${process.cwd()}/tests/data/bpmn/camunda-bpm/MESSAGE_EVENT.bpmn`;
     const result = await manager.deployWorkflow(path);
 
     expect(result).toMatchObject(require('./__mocks__/deployWorkflowResult.json'));
@@ -141,9 +141,9 @@ describe('Client Manager (Camunda BPM)', function () {
   it('Get a Workflow by bpmnProcessId', async () => {
     const bpmnProcessId = 'message-event';
     const scope = nock('http://localhost:8080')
-      .get(`/engine-rest/process-definition/key/${ bpmnProcessId }`)
+      .get(`/engine-rest/process-definition/key/${bpmnProcessId}`)
       .reply(200, require('./__mocks__/getWorkflowResponse.2.camunda.json'))
-      .get(`/engine-rest/process-definition/key/${ bpmnProcessId }/xml`)
+      .get(`/engine-rest/process-definition/key/${bpmnProcessId}/xml`)
       .reply(200, require('./__mocks__/getWorkflowResponse.1.camunda.json'));
 
     const result = await manager.getWorkflow({
@@ -157,9 +157,9 @@ describe('Client Manager (Camunda BPM)', function () {
   it('Get a Workflow by workflowKey', async () => {
     const workflowKey = 'message-event:6:76bf01bc-5410-11e9-8953-0242ac110002';
     const scope = nock('http://localhost:8080')
-      .get(`/engine-rest/process-definition/${ workflowKey }`)
+      .get(`/engine-rest/process-definition/${workflowKey}`)
       .reply(200, require('./__mocks__/getWorkflowResponse.2.camunda.json'))
-      .get(`/engine-rest/process-definition/${ workflowKey }/xml`)
+      .get(`/engine-rest/process-definition/${workflowKey}/xml`)
       .reply(200, require('./__mocks__/getWorkflowResponse.1.camunda.json'));
 
     const result = await manager.getWorkflow({
@@ -173,7 +173,7 @@ describe('Client Manager (Camunda BPM)', function () {
   it('Update variable', async () => {
     const processInstanceId = '76c913e7-5410-11e9-8953-0242ac110002';
     const scope = nock('http://localhost:8080')
-      .post(`/engine-rest/process-instance/${ processInstanceId }/variables`)
+      .post(`/engine-rest/process-instance/${processInstanceId}/variables`)
       .reply(204);
     const result = await manager.updateVariables({
       processInstanceId,
@@ -188,7 +188,7 @@ describe('Client Manager (Camunda BPM)', function () {
 
   it('Update retries', async () => {
     const jobKey = '76c93b00-5410-11e9-8953-0242ac110002';
-    const scope = nock('http://localhost:8080').put(`/engine-rest/external-task/${ jobKey }/retries`).reply(204);
+    const scope = nock('http://localhost:8080').put(`/engine-rest/external-task/${jobKey}/retries`).reply(204);
 
     const result = await manager.updateJobRetries({
       jobKey,
@@ -217,7 +217,7 @@ describe('Client Manager (Camunda BPM)', function () {
   it('Cancel instance', async () => {
     const instanceId = '76c47ffe-5410-11e9-8953-0242ac110002';
     const scope = nock('http://localhost:8080')
-      .delete(`/engine-rest/process-instance/${ instanceId }`)
+      .delete(`/engine-rest/process-instance/${instanceId}`)
       .query({ skipCustomListeners: 'true', skipIoMappings: 'true', skipSubprocesses: 'true' })
       .reply(204);
 
