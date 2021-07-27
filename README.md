@@ -53,7 +53,7 @@ For example, instead of `workit-camunda` it will be `@villedemontreal/workit-cam
 ## Installing
 
 ```bash
-npm i workit-camunda
+npm i @villedemontreal/workit-camunda
 ```
 or using the generator below
 ### Yo!
@@ -63,7 +63,7 @@ or using the generator below
 This generator will help you during your development with this library. It provides handy tools.
 
 ```bash
-npm i -g workit-cli
+npm i -g @villedemontreal/workit-cli
 ```
 
 #### Install a fresh new project
