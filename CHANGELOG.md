@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 5.0.0 (2021-11-26)
+
+#### :boom: Breaking Change
+  * [#224](https://github.com/VilledeMontreal/workit/pull/224) feat(opentelemetry): update sdk to 1.0.0 ([@OlivierAlbertini](https://github.com/OlivierAlbertini))
+
 ## [4.2.9](https://github.com/VilledeMontreal/workit/compare/v4.2.5...v4.2.9) (2021-07-27)
 
 ### Bug Fixes
