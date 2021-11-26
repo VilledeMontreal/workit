@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/VilledeMontreal/workit/compare/v4.2.9...v5.0.0) (2021-11-26)
+
+
+### Features
+
+* **opentelemetry:** update sdk to 1.0.0 ([#224](https://github.com/VilledeMontreal/workit/issues/224)) ([e65ee4a](https://github.com/VilledeMontreal/workit/commit/e65ee4a6dbc67b8f22ac67e09122b28c04756034))
+
+
+
+
+
 ## [4.2.9](https://github.com/VilledeMontreal/workit/compare/v4.2.5...v4.2.9) (2021-07-27)
 
 **Note:** Version bump only for package @villedemontreal/workit-types

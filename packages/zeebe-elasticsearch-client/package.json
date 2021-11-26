@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/zeebe-elasticsearch-client",
-  "version": "4.2.9",
+  "version": "5.0.0",
   "description": "Client (Browser and NodeJs) for Zeebe Elasticsearch exporter powered by Typescript",
   "keywords": [
     "zeebe",
@@ -76,5 +76,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "4f2ab6d55a596098fe130547e4277a365a1e05ae"
+  "gitHead": "211cd4b2c2500a42eef62d650b29b3244392f83f"
 }
