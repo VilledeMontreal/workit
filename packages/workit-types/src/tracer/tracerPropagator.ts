@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { SpanContext } from '@opentelemetry/api';
+import { Context } from '@opentelemetry/api';
 import { IMessageBase } from '../core/message';
 
 /**
@@ -16,5 +16,5 @@ export interface ITracerPropagator {
    *
    * @param {IMessageBase} message the message coming from the server
    */
-  extractFromMessage(message: IMessageBase): SpanContext | undefined;
+  extractFromMessage(message: IMessageBase): Context | undefined;
 }

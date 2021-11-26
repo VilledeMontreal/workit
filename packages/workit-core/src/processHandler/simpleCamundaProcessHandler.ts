@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { SpanKind, SpanOptions, Tracer } from '@opentelemetry/api';
+import { SpanKind, SpanOptions, Tracer, context, trace } from '@opentelemetry/api';
 import {
   ICamundaService,
   IFailureStrategy,
@@ -19,6 +19,7 @@ import {
 import { EventEmitter } from 'events';
 import { inject, injectable, optional } from 'inversify';
 import 'reflect-metadata';
+import { RPCMetadata, RPCType, setRPCMetadata } from '@opentelemetry/core';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { IoC, kernel } from '../config/container';
 import { Interceptors } from '../interceptors';
@@ -81,11 +82,15 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
         'worker.id': properties.workerId,
       },
     };
-    spanOptions.parent = this._propagation.extractFromMessage(message);
-
-    const span = this._tracer.startSpan(identifier, spanOptions);
-    return this._tracer.withSpan(span, () => {
-      this._tracer.bind(this);
+    const ctx = this._propagation.extractFromMessage(message) || context.active();
+    const span = this._tracer.startSpan(identifier, spanOptions, ctx);
+    const rpcMetadata: RPCMetadata = {
+      type: RPCType.HTTP,
+      span,
+    };
+    const requestContext = setRPCMetadata(trace.setSpan(ctx, span), rpcMetadata);
+    return context.with(requestContext, () => {
+      context.bind(context.active(), this);
 
       if (properties.businessKey) {
         span.setAttribute('wf.businessKey', properties.businessKey);
