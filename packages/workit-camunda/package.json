@@ -19,7 +19,8 @@
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@opentelemetry/core": "0.4.0",
+    "@opentelemetry/core": "1.0.0",
+    "@opentelemetry/api": "1.0.3",
     "@types/chai": "^4.2.21",
     "@types/debug": "~4.1.7",
     "@types/events": "~3.0.0",

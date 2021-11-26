@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NOOP_TRACER } from '@opentelemetry/api';
+import { NoopTracer } from '@opentelemetry/api/build/src/trace/NoopTracer';
 import { EventEmitter } from 'events';
 import { Container, decorate, injectable } from 'inversify';
 import { FailureStrategySimple } from '../strategies/FailureStrategySimple';
@@ -27,7 +27,7 @@ const container = new Container();
 
 kernel.bind(SERVICE_IDENTIFIER.logger).toConstantValue(NOOP_LOGGER);
 kernel.bind(SERVICE_IDENTIFIER.tracer_propagator).toConstantValue(new NoopTracerPropagator());
-kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(NOOP_TRACER);
+kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(new NoopTracer());
 kernel.bind(SERVICE_IDENTIFIER.success_strategy).toConstantValue(new SuccessStrategySimple());
 kernel.bind(SERVICE_IDENTIFIER.failure_strategy).toConstantValue(new FailureStrategySimple());
 

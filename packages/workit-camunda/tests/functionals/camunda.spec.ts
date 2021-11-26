@@ -3,8 +3,7 @@
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-
-import { NOOP_TRACER } from '@opentelemetry/api';
+import { NoopTracer } from '@opentelemetry/api/build/src/trace/NoopTracer';
 import { CamundaBpmClient, CamundaExternalClient, Utils } from '@villedemontreal/workit-bpm-client';
 import {
   FailureStrategySimple,
@@ -28,6 +27,7 @@ import { FakeTask } from '../utils/fake';
 import { run } from '../utils/func-test';
 
 const taskName = 'sample_activity';
+const NOOP_TRACER = new NoopTracer();
 let worker: Worker;
 let successHandler: SuccessStrategySimple;
 let config: ICamundaConfig;

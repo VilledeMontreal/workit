@@ -46,7 +46,7 @@ Ce framework offre les avantages suivants:
 ## L'installation
 
 ```bash
-npm i workit-camunda
+npm i @villedemontreal/workit-camunda
 ```
 ou utiliser le générateur en dessous
 ### Yo!
@@ -56,7 +56,7 @@ ou utiliser le générateur en dessous
 Ce générateur vous aidera lors de votre développement avec ce framework. Il fournit des outils pratiques.
 
 ```bash
-npm i -g workit-cli
+npm i -g @villedemontreal/workit-cli
 ```
 
 #### Installer un nouveau projet

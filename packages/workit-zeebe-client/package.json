@@ -19,7 +19,7 @@
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@opentelemetry/core": "0.4.0",
+    "@opentelemetry/core": "1.0.0",
     "@types/bytebuffer": "5.0.42",
     "@types/debug": "~4.1.7",
     "@types/events": "~3.0.0",
@@ -56,7 +56,7 @@
     "lint": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
     "lint-fix": "prettier \"./**/*.ts\" --write && eslint . --ext .ts --fix",
     "check-conflicts": "eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
-    "docs": "typedoc --out ./docs --tsconfig ./tsconfig.json --excludePrivate --mode file",
+    "docs": "typedoc --out ./docs --tsconfig ./tsconfig.json --excludePrivate --packages .",
     "codecov": "codecov -f coverage/*.json -p ../../"
   },
   "husky": {

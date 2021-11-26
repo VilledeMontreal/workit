@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NOOP_TRACER } from '@opentelemetry/api';
+import { NoopTracer } from '@opentelemetry/api/build/src/trace/NoopTracer';
 import { FailureStrategySimple, IoC, SCProcessHandler, TaskBase, Worker } from '@villedemontreal/workit-core';
 import { ICamundaService, IMessage, ISuccessStrategy } from '@villedemontreal/workit-types';
 import * as crypto from 'crypto';
@@ -12,6 +12,7 @@ import * as path from 'path';
 import { ZeebeClient } from '../../src/zeebeClient';
 
 process.env.ZB_NODE_LOG_LEVEL = process.env.ZB_NODE_LOG_LEVEL || 'NONE';
+const NOOP_TRACER = new NoopTracer();
 
 export class SuccessStrategy implements ISuccessStrategy {
   private readonly _done: (e?: Error, message?: IMessage) => void;
