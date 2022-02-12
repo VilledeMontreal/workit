@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -30,7 +30,7 @@ export class ZeebeMessage {
           // TODO: change any to real type body
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const vars = getVariablesWhenChanged<any>(message, (msg) => ZeebeMessage.unwrap(msg));
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
           this.hasBeenThreated = await complete.success(vars?.variables);
         },
         nack(error: FailureException) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -14,6 +14,7 @@ const proxyTarget = Symbol('ProxyTarget');
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
 /* eslint @typescript-eslint/no-unsafe-return: 0 */
 /* eslint @typescript-eslint/ban-types: 0 */
+/* eslint @typescript-eslint/no-unsafe-argument: 0 */
 
 /**
  * It's for observing an object. In this package,
@@ -100,7 +101,7 @@ export class ProxyObserver {
       return result;
     },
 
-    apply: (target: any, thisArg: any, argumentsList: ArrayLike<any>) => {
+    apply: (target: Function, thisArg: any, argumentsList: ArrayLike<any>) => {
       if (!this._inApply) {
         this._inApply = true;
 
@@ -120,7 +121,10 @@ export class ProxyObserver {
     },
   };
 
-  constructor(object: any, onChangeFunc: (proxy: any, property: any, value: any, previous: any) => void) {
+  constructor(
+    object: object,
+    onChangeFunc: (proxy: any, property: string | number | symbol, value: any, previous: any) => void
+  ) {
     this._onChange = onChangeFunc;
     this._pathCache.set(object, '');
     Object.defineProperty(object, '__proxy__', {
@@ -133,7 +137,7 @@ export class ProxyObserver {
     return this._proxy;
   }
 
-  private _handleChange = (path: string, property: any, previous: any, value?: any) => {
+  private _handleChange = (path: string, property: string | number | symbol, previous: any, value?: any) => {
     if (!this._inApply) {
       this._onChange(this._proxy, concatPath(path, property), value, previous);
     } else if (!this._changed) {

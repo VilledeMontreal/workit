@@ -41,7 +41,7 @@
     "@villedemontreal/workit-camunda": "^5.0.0",
     "@villedemontreal/workit-core": "^5.0.0",
     "@villedemontreal/workit-types": "^5.0.0",
-    "axios": "^0.21.0"
+    "axios": "^0.25.0"
   },
   "keywords": [
     "workit",

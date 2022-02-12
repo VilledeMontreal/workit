@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -63,7 +63,7 @@ export class IOC {
    * @param {boolean} [singletonMode=true] default true.
    */
   public bindTo(
-    ctor: any,
+    ctor: new (...args: any[]) => unknown,
     serviceIdentifier: string | symbol,
     dependencies?: (symbol | string)[],
     named?: string | symbol | null,
@@ -84,7 +84,11 @@ export class IOC {
     }
   }
 
-  public bindToAsDefault(ctor: any, serviceIdentifier: string | symbol, dependencies?: (symbol | string)[]): void {
+  public bindToAsDefault(
+    ctor: new (...args: any[]) => unknown,
+    serviceIdentifier: string | symbol,
+    dependencies?: (symbol | string)[]
+  ): void {
     IOC._inject(ctor, dependencies);
     this._container.bind(serviceIdentifier).to(ctor).inSingletonScope().whenTargetIsDefault();
   }
@@ -110,7 +114,12 @@ export class IOC {
    * @param {boolean} [singletonMode=true] default true
    * @memberof IoC
    */
-  public bind<T>(serviceIdentifier: string, ctor: any, targetNamed: string, singletonMode = true): void {
+  public bind<T>(
+    serviceIdentifier: string,
+    ctor: new (...args: any[]) => T,
+    targetNamed: string,
+    singletonMode = true
+  ): void {
     const service = this._container.bind<T>(serviceIdentifier).to(ctor);
 
     if (singletonMode) {
@@ -157,7 +166,7 @@ export class IOC {
   }
 
   public bindTask(
-    ctor: any,
+    ctor: new (...args: any[]) => unknown,
     serviceIdentifier: string | symbol,
     workflow: { bpmnProcessId: string; version?: number },
     dependencies?: (symbol | string)[],

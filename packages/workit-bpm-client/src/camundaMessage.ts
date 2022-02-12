@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -15,6 +15,7 @@ import {
   IMessage,
   IVariablePayload,
   IVariables,
+  IWorkflowProps,
 } from '@villedemontreal/workit-types';
 import { CamundaMapperProperties } from './camundaMapperProperties';
 import { Variables } from './variables';
@@ -44,7 +45,9 @@ export class CamundaMessage {
          * Acknowledge the message to Camunda platform
          * Variables will be updated if change has been detected
          */
-        async ack(message: IMessage) {
+        async ack(
+          message: IMessage<{ [s: string]: unknown }, IWorkflowProps<{ [s: string]: string | number | boolean }>>
+        ) {
           if (this.hasBeenThreated) {
             return;
           }
@@ -78,10 +81,10 @@ export class CamundaMessage {
     ];
   }
 
-  public static unwrap(message: IMessage): IVariables {
+  public static unwrap(message: IMessage<unknown, IWorkflowProps<unknown>>): IVariables {
     const { body } = message;
     const vars = new Variables(body);
-    Object.entries(body).forEach(([key, val]) => {
+    Object.entries(body as object).forEach(([key, val]) => {
       if (Object.prototype.toString.call(val) === '[object Date]') {
         // Otherwise, we got invalid date
         // TODO: Check the cause
@@ -90,12 +93,12 @@ export class CamundaMessage {
         vars.set(key, val);
       }
     });
-    CamundaMessage._setCustomHeaders(vars, message.properties.customHeaders);
+    CamundaMessage._setCustomHeaders(vars as IVariables, message.properties.customHeaders as object);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return vars;
   }
 
-  private static _setCustomHeaders(vars: IVariables, customHeaders: any) {
+  private static _setCustomHeaders(vars: IVariables, customHeaders: object) {
     if (customHeaders && Object.keys(customHeaders).length > 0) {
       vars.set('_meta', { customHeaders });
     }

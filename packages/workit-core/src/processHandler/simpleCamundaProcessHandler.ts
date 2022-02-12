@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -93,7 +93,7 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
       context.bind(context.active(), this);
 
       if (properties.businessKey) {
-        span.setAttribute('wf.businessKey', properties.businessKey);
+        span.setAttribute('wf.businessKey', properties.businessKey as string);
       }
 
       return this._handler(message, service, () => span.end());

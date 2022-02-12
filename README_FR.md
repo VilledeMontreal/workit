@@ -1,6 +1,6 @@
 # WorkIt
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) [![Greenkeeper badge](https://badges.greenkeeper.io/VilledeMontreal/workit.svg)](https://greenkeeper.io/) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3c1fca456ba14ed7a1613b7f698d2ee3)](https://www.codacy.com/app/albertini.olivier/workit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VilledeMontreal/workit&amp;utm_campaign=Badge_Grade)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) ![npm](https://img.shields.io/npm/v/@villedemontreal/workit-types)
 
 ✨ Worker extensible pour Node.js fonctionnant avec les plates-formes Zeebe et Camunda BPM optimisées par TypeScript ✨
 
