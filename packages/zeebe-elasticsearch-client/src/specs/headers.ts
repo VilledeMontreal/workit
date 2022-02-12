@@ -4,5 +4,5 @@
  * See LICENSE file in the project root for full license information.
  */
 export interface IHeaders {
-  [custom: string]: string;
+  [custom: string]: string | number | boolean;
 }
