@@ -49,7 +49,11 @@
     "@villedemontreal/workit-camunda": "^5.0.0",
     "@villedemontreal/workit-core": "^5.0.0",
     "@villedemontreal/workit-types": "^5.0.0",
-    "axios": "^0.24.0"
+    "@opentelemetry/node": "0.4.0",
+    "@opentelemetry/plugin-http": "0.4.0",
+    "@opentelemetry/plugin-https": "0.4.0",
+    "@opentelemetry/tracing": "0.4.0",
+    "axios": "^0.25.0"
   },
   "keywords": [
     "workit",

@@ -53,11 +53,8 @@ lib
 .changelog
 
 # lock files
-yarn.lock
 package-lock.json
-packages/**/yarn.lock
 packages/**/package-lock.json
-examples/**/yarn.lock
 examples/**/package-lock.json
 
 # VsCode configs

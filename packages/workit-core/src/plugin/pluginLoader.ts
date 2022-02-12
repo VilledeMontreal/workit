@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -99,7 +99,7 @@ export class PluginLoader {
             return exports;
           }
 
-          this._plugins.push(plugin);
+          this._plugins.push(plugin as IPlugin);
           // Enable each supported plugin.
           return plugin.enable(this.ioc, this.logger, config);
         } catch (e) {

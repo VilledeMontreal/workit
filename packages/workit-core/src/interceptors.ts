@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -49,7 +49,7 @@ export class Interceptors {
       msg = await interceptor(msg);
     }
     Interceptors._validateMessage(msg);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
     if (!(msg as any).__proxy__ || ProxyFactory.cacheChanges.has(msg)) {
       ProxyFactory.cacheChanges.set(msg, true);
       return ProxyFactory.create(msg);

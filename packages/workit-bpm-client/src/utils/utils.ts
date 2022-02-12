@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -86,7 +86,7 @@ const typeMatchers = {
 };
 
 export class Utils {
-  public static assign(target: IVariables, object: any): IVariables {
+  public static assign(target: IVariables, object: { [s: string]: unknown } | ArrayLike<unknown>): IVariables {
     Object.entries(object).forEach((keyVal) => target.set(keyVal[0], keyVal[1]));
     return target;
   }
@@ -95,6 +95,7 @@ export class Utils {
    * Not a deep copy
    */
   public static copyVariables(variables: IVariables | IReadOnlyVariables): IVariables {
+    /* eslint @typescript-eslint/no-unsafe-argument: 0 */
     return Utils.assign(new Variables(), variables.getAll());
   }
 
@@ -142,8 +143,8 @@ export class Utils {
    * @returns the type of the variable
    * @param variable: external task variable
    */
-  public static getVariableType = (variable: number) => {
-    const match = Object.entries(typeMatchers).filter(([, matcherFunction]) => matcherFunction(variable))[0];
+  public static getVariableType = (variable: any): any => {
+    const match = Object.entries(typeMatchers).filter(([, matcherFunction]) => (matcherFunction as any)(variable))[0];
 
     return match[0];
   };

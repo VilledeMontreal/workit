@@ -3,7 +3,8 @@ module.exports = {
     "plugins": [
         "@typescript-eslint",
         "prettier",
-        "header"
+        "header",
+        "import"
     ],
     "extends": [
         "airbnb-typescript/base",

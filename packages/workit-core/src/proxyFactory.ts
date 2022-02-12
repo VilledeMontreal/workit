@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -24,8 +24,8 @@ export class ProxyFactory {
   public static create<T extends object = any>(object: T): T {
     return new ProxyObserver(object, function (path, value, previousValue) {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      log(`message change. Previous value ${previousValue}, new value ${value} on ${path}`);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      log(`message change. Previous value ${previousValue}, new value ${String(value)} on ${path}`);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
       ProxyFactory.cacheChanges.set(this._proxy, true);
     }) as T;
   }

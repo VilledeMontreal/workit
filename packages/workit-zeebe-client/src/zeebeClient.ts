@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2022 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -200,7 +200,7 @@ export class ZeebeClient<TVariables = unknown, TProps = unknown, RVariables = TV
 
   public cancelWorkflowInstance(instance: string): Promise<void> {
     this._validateNumber(instance);
-    return this._client.cancelWorkflowInstance(instance as any); // TODO: will be fixed https://github.com/zeebe-io/zeebe/issues/2680
+    return this._client.cancelWorkflowInstance(instance);
   }
 
   public resolveIncident(incidentKey: string): Promise<void> {
