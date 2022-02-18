@@ -1,7 +1,7 @@
 {
   "name": "workit-example-failure-strategy",
   "private": true,
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Failure strategy example",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
@@ -38,9 +38,9 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
-    "@villedemontreal/workit-camunda": "^5.0.0",
-    "@villedemontreal/workit-core": "^5.0.0",
-    "@villedemontreal/workit-types": "^5.0.0",
+    "@villedemontreal/workit-camunda": "^5.0.1",
+    "@villedemontreal/workit-core": "^5.0.1",
+    "@villedemontreal/workit-types": "^5.0.1",
     "axios": "^0.25.0"
   },
   "keywords": [

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://github.com/VilledeMontreal/workit/compare/v5.0.0...v5.0.1) (2022-02-18)
+
+**Note:** Version bump only for package @villedemontreal/zeebe-elasticsearch-client
+
+
+
+
+
 # [5.0.0](https://github.com/VilledeMontreal/workit/compare/v4.2.9...v5.0.0) (2021-11-26)
 
 **Note:** Version bump only for package @villedemontreal/zeebe-elasticsearch-client

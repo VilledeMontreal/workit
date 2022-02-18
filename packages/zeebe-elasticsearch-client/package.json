@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/zeebe-elasticsearch-client",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Client (Browser and NodeJs) for Zeebe Elasticsearch exporter powered by Typescript",
   "keywords": [
     "zeebe",
