@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 5.0.1 (2022-02-18)
+
+#### :books: (Refine Doc)
+* [#225](https://github.com/VilledeMontreal/workit/pull/225) ci: update deps and adjust types
+
 ## [5.0.0](https://github.com/VilledeMontreal/workit/compare/v4.2.9...v5.0.0) (2021-11-26)
 
 ### Features :boom: Breaking Change
