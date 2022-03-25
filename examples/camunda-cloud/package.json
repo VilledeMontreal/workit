@@ -1,7 +1,7 @@
 {
   "name": "workit-camunda-cloud",
   "private": true,
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Basic example of workit usage with Camunda Cloud",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
@@ -38,9 +38,9 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
-    "@villedemontreal/workit-camunda": "^5.0.1",
-    "@villedemontreal/workit-core": "^5.0.1",
-    "@villedemontreal/workit-types": "^5.0.1"
+    "@villedemontreal/workit-camunda": "^5.0.2",
+    "@villedemontreal/workit-core": "^5.0.2",
+    "@villedemontreal/workit-types": "^5.0.2"
   },
   "keywords": [
     "workit",

@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit-bpm-client",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Camunda BPM client for WorkIt that works with Camunda platform powered by TypeScript",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -8,8 +8,8 @@
   "main": "lib/src/index.js",
   "typings": "lib/src/index.d.ts",
   "dependencies": {
-    "@villedemontreal/workit-core": "^5.0.1",
-    "@villedemontreal/workit-types": "^5.0.1",
+    "@villedemontreal/workit-core": "^5.0.2",
+    "@villedemontreal/workit-types": "^5.0.2",
     "axios": "^0.25.0",
     "camunda-external-task-client-js": "^1.3.0",
     "debug": "^4.3.2",
