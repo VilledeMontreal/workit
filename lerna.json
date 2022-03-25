@@ -9,9 +9,7 @@
     "publish": {
       "conventionalCommits": true,
       "registry": "https://registry.npmjs.org/",
-      "ignoreChanges": [
-        "*.lock"
-      ],
+      "ignoreChanges": [],
       "allowBranch": "master",
       "message": "chore(release): publish"
     }
