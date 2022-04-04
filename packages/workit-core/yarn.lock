@@ -1212,10 +1212,10 @@
     "@typescript-eslint/types" "5.11.0"
     eslint-visitor-keys "^3.0.0"
 
-"@villedemontreal/workit-types@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@villedemontreal/workit-types/-/workit-types-5.0.1.tgz#617916f604af30b735a9207b641c0ece45a49c87"
-  integrity sha512-wT05B1Dd5bVOMqBna2buzXmcTCF+ZfqXchORvhpuRu2fFqg2nJ7hHIh4V1VTO9v/f66+y/x1blehOM2uv/h6lw==
+"@villedemontreal/workit-types@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@villedemontreal/workit-types/-/workit-types-5.0.2.tgz#b9d859fde4c5c0c00484fc3bd79c3c597147dafa"
+  integrity sha512-4vKyy2SLMoxWWNbXbGlV76KKd00w5fJmU8tzfP+IDdOuwpz+Y+7E2io5pVe5KGmzTwW+ocl9xEm9i/VjPt7N6A==
   dependencies:
     "@opentelemetry/api" "1.0.3"
 
@@ -1294,12 +1294,7 @@ ansi-escapes@^4.2.1:
   dependencies:
     type-fest "^0.11.0"
 
-ansi-regex@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
-  integrity sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg==
-
-ansi-regex@^5.0.1:
+ansi-regex@^5.0.0, ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
   integrity sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==
