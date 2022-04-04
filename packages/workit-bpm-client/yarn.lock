@@ -1238,24 +1238,24 @@
     "@typescript-eslint/types" "5.11.0"
     eslint-visitor-keys "^3.0.0"
 
-"@villedemontreal/workit-core@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@villedemontreal/workit-core/-/workit-core-5.0.1.tgz#7846f0746bfd4e01a721286d419651ef4c2d57d2"
-  integrity sha512-t8r6nQ6usDwIoL4U/WbIwpxkn7xPPMytFWRNJoe3wAYIF1S9PoTERKm/dUkU+hlptI04e2YPBn9/bkKgz4phwQ==
+"@villedemontreal/workit-core@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@villedemontreal/workit-core/-/workit-core-5.0.2.tgz#f7d0d5a186be1722ee9ab7fe93e8a09f198b6e24"
+  integrity sha512-1/FwElpjkFCWbLz94sGC+mDye9hHvo83TqMmoUHtADfp845zqzxOyG+k7jLc22cPw5ec5IdUV5fd9AEAy57+Xw==
   dependencies:
     "@opentelemetry/api" "1.0.3"
     "@opentelemetry/core" "1.0.0"
-    "@villedemontreal/workit-types" "^5.0.1"
+    "@villedemontreal/workit-types" "^5.0.2"
     debug "~4.3.2"
     fast-safe-stringify "~2.0.8"
     inversify "~5.1.1"
     reflect-metadata "~0.1.13"
     uuid "^8.3.2"
 
-"@villedemontreal/workit-types@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@villedemontreal/workit-types/-/workit-types-5.0.1.tgz#617916f604af30b735a9207b641c0ece45a49c87"
-  integrity sha512-wT05B1Dd5bVOMqBna2buzXmcTCF+ZfqXchORvhpuRu2fFqg2nJ7hHIh4V1VTO9v/f66+y/x1blehOM2uv/h6lw==
+"@villedemontreal/workit-types@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@villedemontreal/workit-types/-/workit-types-5.0.2.tgz#b9d859fde4c5c0c00484fc3bd79c3c597147dafa"
+  integrity sha512-4vKyy2SLMoxWWNbXbGlV76KKd00w5fJmU8tzfP+IDdOuwpz+Y+7E2io5pVe5KGmzTwW+ocl9xEm9i/VjPt7N6A==
   dependencies:
     "@opentelemetry/api" "1.0.3"
 
@@ -1334,12 +1334,7 @@ ansi-escapes@^4.2.1:
   dependencies:
     type-fest "^0.11.0"
 
-ansi-regex@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
-  integrity sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg==
-
-ansi-regex@^5.0.1:
+ansi-regex@^5.0.0, ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
   integrity sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==
