@@ -1,6 +1,6 @@
 {
   "lerna": "4.0.0",
-  "version": "5.0.2",
+  "version": "6.0.0",
   "packages": [
     "examples/*",
     "packages/*"
@@ -26,5 +26,5 @@
     },
     "cacheDir": ".changelog"
   },
-  "npmClient": "yarn"
+  "npmClient": "npm"
 }

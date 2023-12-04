@@ -19,10 +19,6 @@ export * from './strategies/SuccessStrategySimple';
 
 export * from './IoC';
 
-// Proxy
-export * from './proxyFactory';
-export * from './proxyObserver';
-
 export * from './worker';
 
 export * from './plugin';

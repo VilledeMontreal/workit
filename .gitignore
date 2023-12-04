@@ -52,10 +52,7 @@ lib
 #lerna
 .changelog
 
-# lock files
-package-lock.json
-packages/**/package-lock.json
-examples/**/package-lock.json
-
 # VsCode configs
 .vscode
+
+yarn.lock

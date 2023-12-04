@@ -43,5 +43,4 @@ export * from './http/httpOptions';
 export * from './http/httpResponse';
 
 // Clients
-export * from './zeebe';
 export * from './camundaBpm';

@@ -1,8 +1,0 @@
-node_modules
-lib
-.vscode
-coverage
-*lock*
-*.md
-*.ts.snap
-tests

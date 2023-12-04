@@ -10,8 +10,7 @@ import 'reflect-metadata';
 import { NOOP_LOGGER } from '../common/noopLogger';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 
-// eslint-disable-next-line
-const stringify = require('fast-safe-stringify');
+import stringify from 'fast-safe-stringify';
 
 @injectable()
 export class FailureStrategySimple implements IFailureStrategy<ICamundaService> {
@@ -25,7 +24,7 @@ export class FailureStrategySimple implements IFailureStrategy<ICamundaService> 
   public async handle<T extends Error>(
     error: T,
     message: IMessage<unknown, IWorkflowProps>,
-    service: ICamundaService
+    service: ICamundaService,
   ): Promise<void> {
     const { properties } = message;
     let retries = properties.retries as number;
@@ -47,7 +46,7 @@ export class FailureStrategySimple implements IFailureStrategy<ICamundaService> 
         errorDetails: stringify(error),
         retries,
         retryTimeout: 1000 * retries * 2,
-      })
+      }),
     );
 
     await service.nack({

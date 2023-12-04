@@ -5,7 +5,9 @@
  */
 
 import { Worker } from '@villedemontreal/workit-core';
-import { assert } from 'chai';
+import * as assert from 'assert';
+import { readFileSync } from 'fs';
+import * as path from 'path';
 
 export const run = (worker: Worker, scoped: any, done: any, delay: number = 500) => {
   worker.start();
@@ -13,7 +15,12 @@ export const run = (worker: Worker, scoped: any, done: any, delay: number = 500)
 
   setTimeout(async () => {
     await worker.stop();
-    assert.isTrue(scoped.isDone());
+    assert.ok(scoped.isDone());
     done();
   }, delay);
+};
+
+export const readJsonFileSync = (filePath: string) => {
+  const absPath = path.resolve(filePath);
+  return JSON.parse(readFileSync(absPath).toString());
 };

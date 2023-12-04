@@ -70,7 +70,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
       async (camundaObject: { task: IVariablePayload; taskService: any }) => {
         const [message, service] = CamundaMessage.wrap(camundaObject);
         await onMessageReceived(message, service);
-      }
+      },
     );
 
     this._startSubscriber();
@@ -120,7 +120,7 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
         IHttpResponse<{
           count: number;
         }>
-      >
+      >,
     ] = [this._repo.getWorkflows(apiOptions), this._repo.getWorkflowCount(apiOptions)];
     const [result, repCount] = await Promise.all(requests);
     const bpmns = result.data;

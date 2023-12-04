@@ -1,7 +1,0 @@
-node_modules
-*.d.ts
-.vscode
-coverage
-*lock*
-*.md
-tests

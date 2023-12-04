@@ -9,7 +9,7 @@ import { EventEmitter } from 'events';
 import { injectable, unmanaged } from 'inversify';
 import 'reflect-metadata';
 
-import debug = require('debug');
+import debug from 'debug';
 
 const log = debug('workit:worker');
 

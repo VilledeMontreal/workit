@@ -58,10 +58,11 @@ export class CamundaRepository implements ICamundaRepository {
 
   private readonly _request: AxiosInstance;
 
-  private readonly _headers: any;
+  private readonly _headers: { [key: string]: any };
 
   private readonly _configs: ICamundaConfig;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   constructor(@inject(SERVICE_IDENTIFIER.camunda_external_config) configs: ICamundaConfig) {
     this._configs = configs;
     const headers = {
@@ -97,7 +98,7 @@ export class CamundaRepository implements ICamundaRepository {
 
   public createWorkflowInstance<T = any>(
     idOrKey: string,
-    variables: T
+    variables: T,
   ): Promise<IHttpResponse<ICamundaBpmCreateInstanceResponse>> {
     const url = CamundaRepository._getworkflowInstanceUrl(idOrKey);
     return this._request.post(url, {
@@ -127,13 +128,13 @@ export class CamundaRepository implements ICamundaRepository {
       businessKey: typeof variables === 'object' ? (variables as any).businessKey : undefined,
       processVariables: Utils.serializeVariables(variables),
       resultEnabled: false,
-      all: true, // same behaviour than Zeebe
+      all: true,
     });
   }
 
   public async cancelWorkflowInstance(id: string): Promise<void> {
     await this._request.delete(
-      `/process-instance/${id}?skipCustomListeners=true&skipIoMappings=true&skipSubprocesses=true`
+      `/process-instance/${id}?skipCustomListeners=true&skipIoMappings=true&skipSubprocesses=true`,
     );
   }
 
@@ -184,7 +185,7 @@ export class CamundaRepository implements ICamundaRepository {
   public updateVariables<T = any>(
     processInstanceId: string,
     variables: T,
-    local = false
+    local = false,
   ): Promise<IHttpResponse<void>> {
     return this._request.post(`/process-instance/${processInstanceId}/variables`, {
       modifications: Utils.serializeVariables(variables, local),

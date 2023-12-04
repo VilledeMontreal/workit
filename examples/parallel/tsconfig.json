@@ -16,8 +16,6 @@
     "pretty": true,
     "outDir": "./lib",
     "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true
   },

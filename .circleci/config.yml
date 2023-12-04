@@ -1,23 +1,20 @@
 version: 2
 
 cache_1: &cache_1
-  key: npm-cache-01-{{ .Environment.CIRCLE_JOB }}-{{ checksum "/tmp/checksums.txt" }}-1
+  key: npm-cache-02-{{ checksum "package-lock.json" }}
   paths:
     - ./node_modules
-    - ./yarn.lock
-    - examples/basic/node_modules
-    - examples/binding/node_modules
-    - examples/event/node_modules
-    - examples/failure-strategy/node_modules
-    - examples/opentelemetry/node_modules
-    - examples/parallel/node_modules
-    - packages/workit-bpm-client/node_modules
-    - packages/workit-camunda/node_modules
-    - packages/workit-cli/node_modules
-    - packages/workit-core/node_modules
-    - packages/workit-types/node_modules
-    - packages/workit-zeebe-client/node_modules
-    - packages/zeebe-elasticsearch-client/node_modules
+    - ./package-lock.json
+    - ./examples/basic/node_modules
+    - ./examples/binding/node_modules
+    - ./examples/event/node_modules
+    - ./examples/failure-strategy/node_modules
+    - ./examples/opentelemetry/node_modules
+    - ./examples/parallel/node_modules
+    - ./packages/workit-bpm-client/node_modules
+    - ./packages/workit/node_modules
+    - ./packages/workit-core/node_modules
+    - ./packages/workit-types/node_modules
 
 lint: &lint
   steps:
@@ -37,15 +34,19 @@ lint: &lint
           echo "CIRCLE_NODE_VERSION=${CIRCLE_NODE_VERSION}"
     - restore_cache:
         keys:
-          - npm-cache-01-{{ .Environment.CIRCLE_JOB }}-{{ checksum "/tmp/checksums.txt" }}-1
+          - npm-cache-02-{{ checksum "package-lock.json" }}
     - run:
         name: Install Dependencies
-        command: yarn install
+        command: npm ci
+    - run:
+        name: Debug ls
+        command: |
+          ls -Al /home/circleci/project/packages/workit-bpm-client
     - save_cache:
         <<: *cache_1
     - run:
         name: Compile code
-        command: yarn build
+        command: npm run build
     - run:
         name: test
         command: npm run lint
@@ -53,9 +54,6 @@ lint: &lint
 node_tests: &node_tests
   steps:
     - checkout
-    - run:
-        name: Create Checksum
-        command: sh .circleci/checksum.sh /tmp/checksums.txt
     - run:
         name: Setup environment variables
         command: |
@@ -68,15 +66,15 @@ node_tests: &node_tests
           echo "CIRCLE_NODE_VERSION=${CIRCLE_NODE_VERSION}"
     - restore_cache:
         keys:
-          - npm-cache-01-{{ .Environment.CIRCLE_JOB }}-{{ checksum "/tmp/checksums.txt" }}-1
+          - npm-cache-02-{{ checksum "package-lock.json" }}
     - run:
         name: Install Dependencies
-        command: yarn install
+        command: npm ci
     - save_cache:
         <<: *cache_1
     - run:
         name: Compile code
-        command: yarn build
+        command: npm run build
     - run:
         name: test
         command: npm run test
@@ -89,9 +87,6 @@ node_integraton_tests: &node_integraton_tests
   steps:
     - checkout
     - run:
-        name: Create Checksum
-        command: sh .circleci/checksum.sh /tmp/checksums.txt
-    - run:
         name: Setup environment variables
         command: |
           echo "export CIRCLE_NODE_VERSION=\$(node --version | grep -oE 'v[0-9]+')" >> $BASH_ENV
@@ -103,25 +98,15 @@ node_integraton_tests: &node_integraton_tests
           echo "CIRCLE_NODE_VERSION=${CIRCLE_NODE_VERSION}"
     - restore_cache:
         keys:
-          - npm-cache-01-{{ .Environment.CIRCLE_JOB }}-{{ checksum "/tmp/checksums.txt" }}-1
+          - npm-cache-02-{{ checksum "package-lock.json" }}
     - run:
         name: Install Dependencies
-        command: yarn install
+        command: npm ci
     - save_cache:
         <<: *cache_1
     - run:
         name: Compile code
-        command: yarn build
-    - run:
-        name: Waiting for Zeebe to be ready
-        command: |
-          for i in `seq 1 10`;
-          do
-            nc -z localhost 26500 && echo success && exit 0
-            echo -n .
-            sleep 1
-          done
-          echo Failed waiting for Zeebe && exit 1
+        command: npm run build
     - run:
         name: test
         command: npm run test:all
@@ -147,9 +132,9 @@ workflows:
   version: 2
   test:
     jobs:
-      - node12:
+      - node18:
           filters: *docs_filters
-      - node14:
+      - node20:
           filters: *docs_filters
       - nodelts:
           filters: *docs_filters
@@ -166,18 +151,17 @@ workflows:
 
 jobs:
   # Runs the tests
-  node12:
+  node18:
     docker:
-      - image: circleci/node:12
+      - image: cimg/node:18.19
     <<: *node_tests
-  node14:
+  node20:
     docker:
-      - image: circleci/node:14
-      # - image: camunda/zeebe:0.22.1
+      - image: cimg/node:20.10
     <<: *node_tests
   lint:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     <<: *lint
   nodelts:
     docker:

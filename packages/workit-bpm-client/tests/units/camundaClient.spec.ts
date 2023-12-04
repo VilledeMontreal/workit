@@ -12,7 +12,7 @@ import { logger } from '../../src/logger';
 import { Utils } from '../../src/utils/utils';
 
 let camundaClient: CamundaBpmClient;
-let clientLib: { subscribe: jest.Mock<any, any>; start: jest.Mock<any, any>; stop: jest.Mock<any, any> };
+let clientLib: { subscribe: jest.Mock<any>; start: jest.Mock<any>; stop: jest.Mock<any> };
 describe('Camunda Client', () => {
   beforeEach(() => {
     const config = {
@@ -28,7 +28,7 @@ describe('Camunda Client', () => {
     IoC.bindToObject(logger, SERVICE_IDENTIFIER.logger);
 
     const configuration = Utils.buildConfig(config);
-    clientLib = new CamundaExternalClient(configuration);
+    clientLib = new CamundaExternalClient(configuration) as any;
 
     clientLib.subscribe = jest.fn().mockReturnValue(undefined);
     clientLib.start = jest.fn().mockReturnValue(undefined);
@@ -42,17 +42,16 @@ describe('Camunda Client', () => {
   });
 
   it('should call subscribe and start methods', async () => {
-    const onMessageReceived = jest.fn().mockResolvedValueOnce(undefined);
-    await expect(camundaClient.subscribe(onMessageReceived)).resolves.toBeUndefined();
-    expect(clientLib.subscribe).toBeCalledTimes(1);
-    expect(clientLib.start).toBeCalledTimes(1);
+    await expect(camundaClient.subscribe(async () => Promise.resolve())).resolves.toBeUndefined();
+    expect(clientLib.subscribe).toHaveBeenCalledTimes(1);
+    expect(clientLib.start).toHaveBeenCalledTimes(1);
     expect(clientLib.stop).not.toHaveBeenCalled();
   });
 
   it('should call stop method', async () => {
     await expect(camundaClient.unsubscribe()).resolves.toBeUndefined();
-    expect(clientLib.stop).toBeCalledTimes(1);
-    expect(clientLib.subscribe).toBeCalledTimes(0);
-    expect(clientLib.start).toBeCalledTimes(0);
+    expect(clientLib.stop).toHaveBeenCalledTimes(1);
+    expect(clientLib.subscribe).toHaveBeenCalledTimes(0);
+    expect(clientLib.start).toHaveBeenCalledTimes(0);
   });
 });

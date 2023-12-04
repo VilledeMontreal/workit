@@ -4,7 +4,13 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { ICamundaService, IFailureStrategy, IMessage, IWorkflowProps } from '@villedemontreal/workit-types';
+import {
+  FailureException,
+  ICamundaService,
+  IFailureStrategy,
+  IMessage,
+  IWorkflowProps,
+} from '@villedemontreal/workit-types';
 import axios, { AxiosError } from 'axios';
 
 export interface IHandlerStrategy extends IFailureStrategy<ICamundaService> {
@@ -46,7 +52,7 @@ export class FailureStrategySimple implements IFailureStrategy<ICamundaService> 
         ...error,
         retries,
         retryTimeout: 1000 * retries * 2,
-      });
+      } as FailureException);
     }
   }
 }
@@ -59,7 +65,7 @@ export class AxiosNotFoundHandler implements IHandlerStrategy {
   public async handle(
     error: AxiosError<unknown>,
     message: IMessage<unknown, IWorkflowProps>,
-    service: ICamundaService
+    service: ICamundaService,
   ): Promise<void> {
     try {
       await axios.post(`http://localhost:8080/engine-rest/external-task/${message.properties.jobKey}/bpmnError`, {

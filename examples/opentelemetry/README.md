@@ -25,7 +25,6 @@ Be sure to have a Camunda platform running. Let's say, you have Camunda BPM (def
 ```bash
 docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 ```
-If you have a port confict (stop Zeebe broker/operate)
 
 Then, with your terminal, go to `examples/opentelemetry` run:
 ```bash

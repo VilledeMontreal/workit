@@ -19,7 +19,7 @@ export interface ICamundaRepository {
   updateJobRetries(id: string, retries: number): Promise<IHttpResponse<void>>;
   createWorkflowInstance<T = any>(
     idOrKey: string,
-    variables: T
+    variables: T,
   ): Promise<IHttpResponse<ICamundaBpmCreateInstanceResponse>>;
   publishMessage<T = any, K = any>({
     messageName,

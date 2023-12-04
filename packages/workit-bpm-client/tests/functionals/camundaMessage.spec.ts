@@ -41,8 +41,8 @@ describe('camundaMessage', () => {
     };
     const [, service] = CamundaMessage.wrap(camundaPayload);
     service.nack({ name: 'error', message: 'Oopps', retries: 0, retryTimeout: 15_000 });
-    expect(camundaPayload.taskService.handleFailure).toBeCalledTimes(1);
-    expect(camundaPayload.taskService.complete).toBeCalledTimes(0);
+    expect(camundaPayload.taskService.handleFailure).toHaveBeenCalledTimes(1);
+    expect(camundaPayload.taskService.complete).toHaveBeenCalledTimes(0);
     expect(camundaPayload.taskService.handleFailure.mock.calls[0][1]).toMatchSnapshot();
   });
 });

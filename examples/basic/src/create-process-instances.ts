@@ -4,12 +4,12 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from '@villedemontreal/workit-camunda';
+import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from '@villedemontreal/workit';
 import { IoC } from '@villedemontreal/workit-core';
 import { IWorkflowClient } from '@villedemontreal/workit-types';
 
 (async (): Promise<void> => {
-  const cm = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // TAG.zeebe
+  const cm = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
   for (let index = 0; index < 1; index += 1) {
     await cm.createWorkflowInstance({
       bpmnProcessId: 'BPMN_DEMO',

@@ -37,32 +37,33 @@ You should see in the console, all activities crushed by the worker. Now, if you
 
 👏 Congrats, you have finished the Camunda BPM section!
 
-## Zeebe
+## AWS Step function
 
-If you don't have Zeebee installed, you can use docker command to run it in the root folder:
+If you don't access to AWS Step function, you can use docker command to run it in the root folder:
 
 ```bash
 docker/run
 ```
 
-Make sure to have Zeebe operate running at http://localhost:8080 (user/pass demo/demo)
+TODO:
 
-Now you just need to change the tag `TAG.camundaBpm` to `TAG.zeebe`.
+Now you just need to change the tag `TAG.camundaBpm` to `TAG.stepFunction`.
 
 After cloning the repo, open a terminal and go to `examples/basic`
 
-Edit the file at `examples/basic/src/deploy.ts`, change the tag to `TAG.zeebe` and *MUST* use a different bpmn file (one compatible with Zeebe as XML elements are differents) `${ process.cwd() }/bpmn/zeebe/BPMN_DEMO.bpmn` (the zeebe folder contains `BPMN_DEMO.bpmn`)
+Edit the file at `examples/basic/src/deploy.ts`, change the tag to `TAG.stepFunction` and *MUST* use a different bpmn file (one compatible with AWS Step function as content is different) `${ process.cwd() }/bpmn/stepfunction/BPMN_DEMO.bpmn` (the stepfunction folder contains `BPMN_DEMO.json`)
 
 ```bash
 npm run build && npm run camunda:deploy
 ```
 Now, You should have a `Demo` process definition visible here: http://localhost:8080/#/instances?filter=%7B%22active%22%3Atrue%2C%22incidents%22%3Atrue%2C%22workflow%22%3A%22BPMN_DEMO%22%2C%22version%22%3A%221%22%7D
 
+TODO:
 <p align="center">
   <a href="./operate/zeebe-operate.png"><img src="./operate/zeebe-operate.png"></a>
 </p>
 
-Edit the file at `examples/basic/src/create-process-instances.ts`, change the tag to `TAG.zeebe` 
+Edit the file at `examples/basic/src/create-process-instances.ts`, change the tag to `TAG.stepFunction` 
 
 ```bash
 npm run build && npm run camunda:create-instance
@@ -70,14 +71,16 @@ npm run build && npm run camunda:create-instance
 Now, in your `Demo` process definition, you should see the bpmn with 1 instance attached to `Activity`.
 If not look that you are on the right bpmn version.
 
-Edit the file at `examples/basic/src/worker.ts`, change the tag to `TAG.zeebe` 
+Edit the file at `examples/basic/src/worker.ts`, change the tag to `TAG.stepFunction` 
 
 ```bash
 npm run build && npm run camunda:worker
 ```
+
+TODO:
 You should see in the console, all activities crushed by the worker. Now, if you look back to the `Demo` Bpmn (refresh the page), you see that the instance have disappeared.
 
-👏 Congrats, you have finished the Zeebe BPM section!
+👏 Congrats, you have finished the AWS Step function section!
 
 ## Add traces to your worker with OpenTelemetry
 
@@ -157,7 +160,7 @@ Deploy the process to the Camunda BPM engine or Zeebe.
 In your NodeJS script:
 
 ```ts
-import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, IoC, ICamundaConfig, Worker } from '@villedemontreal/workit-camunda';
+import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, IoC, ICamundaConfig, Worker } from '@villedemontreal/workit';
 
 // In helloWorldTask.ts file
 class HelloWorldTask extends TaskBase<IMessage> {

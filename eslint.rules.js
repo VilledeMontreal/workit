@@ -11,8 +11,11 @@ module.exports = {
   "arrow-parens": "off",
   "implicit-arrow-linebreak": "off",
   "prettier/prettier": "error",
+  "@typescript-eslint/no-unused-vars": "off",
   "@typescript-eslint/no-useless-constructor": "off", // not good with inversify
   "@typescript-eslint/no-misused-promises": "off",
+  "@typescript-eslint/no-explicit-any": "off",
+  "import/named": "off", // not working properly
   "@typescript-eslint/naming-convention": [
     "error",
     {

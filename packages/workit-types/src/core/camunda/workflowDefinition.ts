@@ -24,7 +24,6 @@ export interface IWorkflowProcessIdDefinition {
    *
    * Example:
    * - CamundaBPM: "DEMO" not compatible with version property due to API restriction, please use workflowKey
-   * - Zeebe: "DEMO" and use version property to target the right workflow version.
    */
   bpmnProcessId: string;
 }
@@ -33,7 +32,6 @@ export interface IWorkflowDefinitionKey {
   /**
    * Example:
    * - CamundaBPM: "DEMO:2:weqw-qweweqw-fhdjfh-sjjss"
-   * - Zeebe: "3211"
    */
   workflowKey: string;
 }

@@ -9,7 +9,7 @@ import { IoC } from '../../src/config/container';
 import { PluginLoader, searchPathForTest } from '../../src/plugin/pluginLoader';
 
 const INSTALLED_PLUGINS_PATH = path.join(__dirname, 'node_modules');
-
+console.log(INSTALLED_PLUGINS_PATH);
 const simplePlugins: IPlugins = {
   'simple-module': {
     enabled: true,

@@ -3,8 +3,7 @@
   "private": true,
   "scripts": {
     "fix": "lerna run fix",
-    "postinstall": "yarn run bootstrap",
-    "predocs-test": "yarn docs",
+    "predocs-test": "npm docs",
     "docs-test": "lerna run docs-test",
     "docs": "lerna run docs",
     "build": "lerna run build",
@@ -12,25 +11,24 @@
     "lint": "lerna run lint",
     "test": "lerna run test",
     "test:all": "lerna run test:all",
-    "test:integration": "lerna run test:integration --scope=workit-camunda",
+    "test:integration": "lerna run test:integration --scope=workit",
     "clean": "lerna clean -y",
     "publish:ci": "lerna run lint-fix && lerna publish --canary --yes",
     "publish": "lerna run lint-fix && lerna publish",
-    "bootstrap": "lerna bootstrap",
     "bump": "lerna publish",
     "remark-lint": "remark .",
     "codecov": "lerna run codecov"
   },
   "devDependencies": {
-    "@types/node": "^16.11.24",
-    "@commitlint/cli": "^16.1.0",
-    "@commitlint/config-conventional": "^16.0.0",
+    "@types/node": "^20.10.3",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "codecov": "^3.8.3",
-    "lerna": "^4.0.0",
-    "lerna-changelog": "^1.0.1",
+    "lerna": "^8.0.0",
+    "lerna-changelog": "^2.2.0",
     "remark-cli": "^10.0.1",
     "remark-preset-lint-recommended": "^6.1.2",
-    "typescript": "^4.3.5"
+    "typescript": "^4.9.5"
   },
   "husky": {
     "hooks": {
@@ -45,6 +43,18 @@
     ]
   },
   "engines": {
-    "node": ">=10.13.0"
-  }
+    "node": ">=18.18.0"
+  },
+  "workspaces": [
+    "./examples/basic",
+    "./examples/binding",
+    "./examples/event",
+    "./examples/failure-strategy",
+    "./examples/opentelemetry",
+    "./examples/parallel",
+    "./packages/workit",
+    "./packages/workit-bpm-client",
+    "./packages/workit-core",
+    "./packages/workit-types"    
+  ]
 }
