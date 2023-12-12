@@ -7,18 +7,18 @@
 	"license": "MIT",
 	"main": "lib/src/index.js",
 	"typings": "lib/src/index.d.ts",
-  "scripts": {
-    "test": "jest --testPathIgnorePatterns integration --coverage",
-    "test:all": "jest **/tests/**/*.spec.ts --coverage",
-    "compile": "rm -rf ./lib/ && npm run build",
-    "build": "tsc -p ./tsconfig.json",
-    "watch": "tsc -p ./tsconfig.json --watch",
-    "lint": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
-    "lint-fix": "prettier \"./**/*.ts\" --write && eslint . --ext .ts --fix",
-    "check-conflicts": "eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
-    "docs": "typedoc --out ./docs --tsconfig ./tsconfig.json --excludePrivate --mode file",
-    "codecov": "codecov -f coverage/*.json -p ../../"
-  },
+	"scripts": {
+		"test": "jest --testPathIgnorePatterns integration --coverage",
+		"test:all": "jest **/tests/**/*.spec.ts --coverage",
+		"compile": "rm -rf ./lib/ && npm run build",
+		"build": "tsc -p ./tsconfig.json",
+		"watch": "tsc -p ./tsconfig.json --watch",
+		"lint": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
+		"lint-fix": "prettier \"./**/*.ts\" --write && eslint . --ext .ts --fix",
+		"check-conflicts": "eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
+		"docs": "typedoc --out ./docs --tsconfig ./tsconfig.json --excludePrivate --mode file",
+		"codecov": "codecov -f coverage/*.json -p ../../"
+	},
 	"dependencies": {
 		"@villedemontreal/workit-core": "^6.0.0-dev",
 		"@villedemontreal/workit-types": "^6.0.0-dev",
@@ -93,5 +93,5 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"gitHead": "211cd4b2c2500a42eef62d650b29b3244392f83f"
+	"gitHead": "2600360d674bc6e13191b42b25eac5e9ad98b27f"
 }
