@@ -13,7 +13,7 @@ $ # inside a directory
 $ npm install
 ```
 
-(Optional) Setup, we can switch to `TAG.camundaBpm` or `TAG.zeebe` in order to use both plateform (some comments are added in examples when BPMN is available see [basic example](basic)). 
+(Optional) Setup, we can switch to `TAG.camundaBpm` or `TAG.stepFunction` in order to use both plateform (some comments are added in examples when BPMN is available see [basic example](basic)). 
 
 ## Run the Application
 

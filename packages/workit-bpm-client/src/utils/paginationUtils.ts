@@ -9,7 +9,7 @@ import { IPaginationOptions, IPaging, IWorkflowOptions } from '@villedemontreal/
 export class PaginationUtils {
   public static setCamundaBpmPaginationParams<T = any>(
     params: T,
-    options?: Partial<IWorkflowOptions & IPaginationOptions>
+    options?: Partial<IWorkflowOptions & IPaginationOptions>,
   ) {
     if (!options) {
       return params;

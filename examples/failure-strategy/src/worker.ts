@@ -4,7 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from '@villedemontreal/workit-camunda';
+import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from '@villedemontreal/workit';
 import { IoC, Worker } from '@villedemontreal/workit-core';
 import { HelloWorldTask } from '../tasks/helloWorldTask';
 import { AxiosNotFoundHandler, FailureStrategySimple } from './failure-strategy';
@@ -16,7 +16,7 @@ enum LOCAL_IDENTIFIER {
 IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sampleActivity);
 IoC.bindToObject(new FailureStrategySimple([new AxiosNotFoundHandler()]), CORE_IDENTIFIER.failure_strategy);
 
-const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm); // TAG.zeebe
+const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
 
 const stop = () => {
   console.info('SIGTERM signal received.');

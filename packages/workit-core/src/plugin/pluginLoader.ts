@@ -44,7 +44,10 @@ export class PluginLoader {
   private _hookState = HookState.UNINITIALIZED;
 
   /** Constructs a new PluginLoader instance. */
-  constructor(readonly ioc: IIoC, readonly logger: ILogger) {}
+  constructor(
+    readonly ioc: IIoC,
+    readonly logger: ILogger,
+  ) {}
 
   /**
    * Loads a list of plugins. Each plugin module should implement the core
@@ -71,14 +74,14 @@ export class PluginLoader {
             } catch (err) {
               return false;
             }
-          }) !== undefined
+          }) !== undefined,
       );
 
       if (requiredModulesToHook.length > 0) {
         this.logger.info(
           `Some modules (${requiredModulesToHook.join(
-            ', '
-          )}) were already required when their respective plugin was loaded, some plugins might not work. Make sure Workit is setup before you require in other modules.`
+            ', ',
+          )}) were already required when their respective plugin was loaded, some plugins might not work. Make sure Workit is setup before you require in other modules.`,
         );
       }
 
@@ -104,7 +107,7 @@ export class PluginLoader {
           return plugin.enable(this.ioc, this.logger, config);
         } catch (e) {
           this.logger.error(
-            `PluginLoader#load: could not load plugin ${modulePath} of module ${name}. Error: ${e.message}`
+            `PluginLoader#load: could not load plugin ${modulePath} of module ${name}. Error: ${(e as Error).message}`,
           );
           return exports;
         }

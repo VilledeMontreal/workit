@@ -20,11 +20,10 @@ import {
   IWorkflowProps,
 } from '@villedemontreal/workit-types';
 import { BasicAuthInterceptor, Client as CamundaExternalClient } from 'camunda-external-task-client-js';
-import { ClientRequest } from 'http';
 import * as nock from 'nock';
 import { CamundaBpmClient } from '../../src/camundaBpmClient';
 import { FakeTask } from '../utils/fake';
-import { run } from '../utils/func-test';
+import { readJsonFileSync, run } from '../utils/func-test';
 
 const taskName = 'sample_activity';
 const NOOP_TRACER = new NoopTracer();
@@ -46,7 +45,7 @@ describe('Camunda Worker', function () {
       bpmnKey: 'BPMN_DEMO',
       autoPoll: false,
 
-      interceptors: [new BasicAuthInterceptor(basicOauth)],
+      interceptors: [new BasicAuthInterceptor(basicOauth) as any],
     };
 
     const handlerConfig = {
@@ -55,12 +54,12 @@ describe('Camunda Worker', function () {
     };
 
     // init
-    const clientLib: ICamundaClient = new CamundaExternalClient(config);
+    const clientLib: ICamundaClient = new CamundaExternalClient(config) as unknown as ICamundaClient;
     client = new CamundaBpmClient(config, clientLib);
     successHandler = new SuccessStrategySimple();
     failureHandler = new FailureStrategySimple();
     processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER, handlerConfig);
-    successHandler.handle = jest.fn().mockResolvedValueOnce({});
+    (successHandler as any).handle = jest.fn();
     worker = new Worker(client, processHandler);
 
     // TODO: use IoC for getting worker instance... there is a bug with jest
@@ -81,7 +80,7 @@ describe('Camunda Worker', function () {
   it('should have Basic Auth', (done) => {
     const scoped = nock('http://localhost:8080', { encodedQueryParams: true } as any)
       .post('/engine-rest/external-task/fetchAndLock')
-      .reply(function (this: ClientRequest) {
+      .reply(function (this: any, uri: string, body: any, callback: (err: any, result: any) => void) {
         expect(this.req.headers.authorization).toStrictEqual('Basic YWRtaW46YWRtaW4xMjM=');
       });
 
@@ -91,7 +90,7 @@ describe('Camunda Worker', function () {
     const scoped = nock('http://localhost:8080')
       .post('/engine-rest/external-task/fetchAndLock')
       .reply(200, () => {
-        return require('../data/camunda-response.json');
+        return readJsonFileSync('./tests/data/camunda-response.json');
       })
       .post('/engine-rest/external-task/37a72320-c4c2-11e8-a64b-0242ac110002/failure')
       .reply(204);
@@ -101,13 +100,13 @@ describe('Camunda Worker', function () {
 
   it('should get the task and send success to Camunda since task is bound', (done) => {
     const fakeTask = new FakeTask();
-    fakeTask.execute = jest.fn().mockResolvedValueOnce({});
+    (fakeTask as any).execute = jest.fn();
     IoC.unbind(taskName);
     IoC.bindToObject(fakeTask, taskName);
 
     const scoped = nock('http://localhost:8080')
       .post('/engine-rest/external-task/fetchAndLock')
-      .reply(200, require('../data/camunda-response.json'));
+      .reply(200, readJsonFileSync('./tests/data/camunda-response.json'));
 
     worker.start();
     worker.run();
@@ -116,20 +115,20 @@ describe('Camunda Worker', function () {
       worker.stop().catch();
       expect(fakeTask.execute).toHaveBeenCalled();
       expect(successHandler.handle).toHaveBeenCalled();
-      expect(successHandler.handle).toBeCalledTimes(1);
+      expect(successHandler.handle).toHaveBeenCalledTimes(1);
       expect(scoped.isDone()).toBe(true);
       done();
     }, 500);
   });
   it('should execute interceptors', (done) => {
     const fakeTask = new FakeTask();
-    const executeTaskMock: jest.Mock<any> = (fakeTask.execute = jest.fn().mockResolvedValueOnce({}));
+    (fakeTask as any).execute = jest.fn();
     IoC.unbind(taskName);
     IoC.bindToObject(fakeTask, taskName);
 
     const scoped = nock('http://localhost:8080')
       .post('/engine-rest/external-task/fetchAndLock')
-      .reply(200, require('../data/camunda-response.json'));
+      .reply(200, readJsonFileSync('./tests/data/camunda-response.json'));
 
     const configWithInterceptors: any & IProcessHandlerConfig = {
       maxTasks: 1,
@@ -187,11 +186,14 @@ describe('Camunda Worker', function () {
 
     setTimeout(() => {
       worker.stop().catch();
-      const message = executeTaskMock.mock.calls[0][0] as IMessage<any, IWorkflowProps<{ jwt: string; basic: string }>>;
+      const message = (fakeTask as any).execute.mock.calls[0][0] as IMessage<
+        any,
+        IWorkflowProps<{ jwt: string; basic: string }>
+      >;
 
       expect(fakeTask.execute).toHaveBeenCalled();
       expect(successHandler.handle).toHaveBeenCalled();
-      expect(successHandler.handle).toBeCalledTimes(1);
+      expect(successHandler.handle).toHaveBeenCalledTimes(1);
       expect(scoped.isDone()).toBe(true);
       expect(message.properties.customHeaders.jwt).toStrictEqual('jwt fake');
       expect(message.properties.customHeaders.basic).not.toStrictEqual('Basic fake');
@@ -201,7 +203,7 @@ describe('Camunda Worker', function () {
   it('should execute interceptors', async () => {
     nock('http://localhost:8080')
       .post('/engine-rest/external-task/fetchAndLock')
-      .reply(200, require('../data/camunda-response.json'));
+      .reply(200, readJsonFileSync('./tests/data/camunda-response.json'));
 
     worker = new Worker(client, processHandler);
     worker.start();
@@ -213,7 +215,7 @@ describe('Camunda Worker', function () {
         await expect(_work.stop()).resolves.toBeUndefined();
       },
       700,
-      worker
+      worker,
     );
   });
 });

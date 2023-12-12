@@ -4,6 +4,7 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { IIoC } from '@villedemontreal/workit-types';
 import { Container, decorate, inject, injectable, multiInject } from 'inversify';
 import { isObject } from 'util';
 
@@ -13,7 +14,7 @@ export { Container };
  * Useful IOC (Inversion Of Control)
  * CORE identifier (aka name param in static method) use the following enum: SERVICE_IDENTIFIER
  */
-export class IOC {
+export class IOC implements IIoC {
   public static charSplit = ':';
 
   private readonly _container: Container;
@@ -67,7 +68,7 @@ export class IOC {
     serviceIdentifier: string | symbol,
     dependencies?: (symbol | string)[],
     named?: string | symbol | null,
-    singletonMode = true
+    singletonMode = true,
   ): void {
     IOC._inject(ctor, dependencies);
 
@@ -87,7 +88,7 @@ export class IOC {
   public bindToAsDefault(
     ctor: new (...args: any[]) => unknown,
     serviceIdentifier: string | symbol,
-    dependencies?: (symbol | string)[]
+    dependencies?: (symbol | string)[],
   ): void {
     IOC._inject(ctor, dependencies);
     this._container.bind(serviceIdentifier).to(ctor).inSingletonScope().whenTargetIsDefault();
@@ -114,11 +115,11 @@ export class IOC {
    * @param {boolean} [singletonMode=true] default true
    * @memberof IoC
    */
-  public bind<T>(
+  public bind<T = any>(
     serviceIdentifier: string,
     ctor: new (...args: any[]) => T,
     targetNamed: string,
-    singletonMode = true
+    singletonMode = true,
   ): void {
     const service = this._container.bind<T>(serviceIdentifier).to(ctor);
 
@@ -145,7 +146,7 @@ export class IOC {
    */
   public getTask<T = any>(
     serviceIdentifier: symbol | string,
-    workflow?: { bpmnProcessId: string; version: number }
+    workflow?: { bpmnProcessId: string; version: number },
   ): T {
     if (!workflow) {
       return this._container.get(serviceIdentifier);
@@ -170,7 +171,7 @@ export class IOC {
     serviceIdentifier: string | symbol,
     workflow: { bpmnProcessId: string; version?: number },
     dependencies?: (symbol | string)[],
-    singletonMode = true
+    singletonMode = true,
   ): void {
     const named = this.getWorkflowNamed(workflow);
     this.bindTo(ctor, serviceIdentifier, dependencies, named, singletonMode);
@@ -230,7 +231,7 @@ export class IOC {
         } else {
           injection = inject(dependency);
         }
-        decorate(injection, ctor, index);
+        decorate(injection as ClassDecorator | ParameterDecorator | MethodDecorator, ctor, index);
       });
     } catch {
       //

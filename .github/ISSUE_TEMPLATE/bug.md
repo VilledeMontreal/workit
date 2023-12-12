@@ -22,5 +22,5 @@ Please provide either a [repl.it demo](https://repl.it) or a minimal repository 
 
 ## Your environment
 Nodejs: 
-workit-camunda:
+workit:
 Windows/Mac

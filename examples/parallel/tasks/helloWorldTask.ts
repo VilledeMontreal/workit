@@ -21,6 +21,9 @@ export class HelloWorldTask extends TaskBase<IMessage> {
     console.log('\ndata:');
     console.log(response.data);
 
-    return message;
+    return {
+      body: {},
+      properties,
+    };
   }
 }

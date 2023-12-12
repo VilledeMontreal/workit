@@ -24,7 +24,7 @@ import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { IoC, kernel } from '../config/container';
 import { Interceptors } from '../interceptors';
 // eslint-disable-next-line import/order
-import debug = require('debug');
+import debug from 'debug';
 
 const log = debug('workit:processHandler');
 
@@ -47,7 +47,7 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
     @inject(SERVICE_IDENTIFIER.success_strategy) successStrategy: ISuccessStrategy<ICamundaService>,
     @inject(SERVICE_IDENTIFIER.failure_strategy) failureStrategy: IFailureStrategy<ICamundaService>,
     @inject(SERVICE_IDENTIFIER.tracer) tracer: Tracer,
-    @inject(SERVICE_IDENTIFIER.process_handler_config) @optional() config?: IProcessHandlerConfig
+    @inject(SERVICE_IDENTIFIER.process_handler_config) @optional() config?: IProcessHandlerConfig,
   ) {
     super();
     this._tracer = tracer;
@@ -119,7 +119,7 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
       this.emit('message-handled', null, msg);
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      log(typeof e === 'object' ? e.message : e);
+      log(typeof e === 'object' ? (e as Error).message : e);
       await this._failure.handle(e, message, service);
       this.emit('message-handled', e, message);
     } finally {

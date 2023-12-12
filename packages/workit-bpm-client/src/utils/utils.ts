@@ -151,14 +151,14 @@ export class Utils {
 
   public static serializeVariables<T = any>(
     variables: T,
-    local = false
+    local = false,
   ):
     | { [custom: string]: { type: string; value?: string | number | boolean; valueInfo: {}; local: boolean } }
     | undefined {
     if (!variables) {
       return undefined;
     }
-    const dirtyVariables = {};
+    const dirtyVariables: { [key: string]: any } = {};
     Object.entries(variables).forEach(([key, value]) => {
       const type = Utils.getVariableType(value);
       const typedValue = { type, value, valueInfo: {}, local };

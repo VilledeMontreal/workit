@@ -5,7 +5,6 @@
  */
 
 import { IMessage, Interceptor } from '@villedemontreal/workit-types';
-import { ProxyFactory } from './proxyFactory';
 import { isArrayOfFunctions, isEmptyArray, isFunction, isObject } from './utils/utils';
 
 export class Interceptors {
@@ -33,7 +32,7 @@ export class Interceptors {
    */
   public static async execute<T extends IMessage>(
     interceptors: Interceptor | Interceptor[] | undefined,
-    message: T
+    message: T,
   ): Promise<T> {
     const interceptorsSanitized = Interceptors.sanitize(interceptors);
     if (!interceptorsSanitized) {
@@ -49,11 +48,7 @@ export class Interceptors {
       msg = await interceptor(msg);
     }
     Interceptors._validateMessage(msg);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-    if (!(msg as any).__proxy__ || ProxyFactory.cacheChanges.has(msg)) {
-      ProxyFactory.cacheChanges.set(msg, true);
-      return ProxyFactory.create(msg);
-    }
+
     return msg;
   }
 

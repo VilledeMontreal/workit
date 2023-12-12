@@ -9,8 +9,8 @@
 /* eslint @typescript-eslint/restrict-template-expressions: 0 */ // --> OFF
 /* eslint @typescript-eslint/no-unsafe-call: 0 */ // --> OFF
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */ // --> OFF
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const stringify = require('fast-safe-stringify');
+
+import stringify from 'fast-safe-stringify';
 
 const { pid } = process;
 const { platform } = process;
@@ -21,8 +21,8 @@ const { platform } = process;
 const success = (message: string | {}) =>
   process.stdout.write(
     `{"name":"default","pid":"${pid}","logType":"mtl-worker","level":30,"msg":"${stringify(
-      message
-    )}","time":"${new Date().toISOString()}","v":0}\n`
+      message,
+    )}","time":"${new Date().toISOString()}","v":0}\n`,
   );
 
 /**
@@ -31,8 +31,8 @@ const success = (message: string | {}) =>
 const error = (message: string | {}) =>
   process.stdout.write(
     `{"name":"default","pid":"${pid}","logType":"mtl-worker","level":50,"msg":"${stringify(
-      message
-    )}","time":"${new Date().toISOString()}","v":0}\n`
+      message,
+    )}","time":"${new Date().toISOString()}","v":0}\n`,
   );
 
 /**
@@ -42,13 +42,13 @@ const error = (message: string | {}) =>
 const log = (client: any) => {
   client.on('subscribe', (topic: string) => {
     process.stdout.write(
-      `{"name":"default","pid":"${pid}","platform":"${platform}","logType":"mtl-worker","level":30,"msg":"subscribed to topic ${topic}","time":"${new Date().toISOString()}","v":0}\n`
+      `{"name":"default","pid":"${pid}","platform":"${platform}","logType":"mtl-worker","level":30,"msg":"subscribed to topic ${topic}","time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
   client.on('unsubscribe', (topic: string) => {
     process.stdout.write(
-      `{"name":"default","pid":"${pid}","platform":"${platform}","logType":"mtl-worker","level":40,"msg":"unsubscribed from topic ${topic}","time":"${new Date().toISOString()}","v":0}\n`
+      `{"name":"default","pid":"${pid}","platform":"${platform}","logType":"mtl-worker","level":40,"msg":"unsubscribed from topic ${topic}","time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -60,7 +60,7 @@ const log = (client: any) => {
 
   client.on('poll:stop', () => {
     process.stdout.write(
-      `{"name":"default","pid":"${pid}","platform":"${platform}","logType":"mtl-worker","level":40,"msg":"stop polling","time":"${new Date().toISOString()}","v":0}\n`
+      `{"name":"default","pid":"${pid}","platform":"${platform}","logType":"mtl-worker","level":40,"msg":"stop polling","time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -72,8 +72,8 @@ const log = (client: any) => {
   client.on('poll:error', (e: Error) => {
     process.stdout.write(
       `{"name":"default","pid":"${pid}","logType":"mtl-worker","level":50,"msg":"polling failed","error":${stringify(
-        e
-      )},"time":"${new Date().toISOString()}","v":0}\n`
+        e,
+      )},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -84,8 +84,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -96,8 +96,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"retries":"${task.retries}","error":"${stringify(e)}","time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"retries":"${task.retries}","error":"${stringify(e)}","time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -108,8 +108,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -120,8 +120,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"retries":"${task.retries}","error":${stringify(e)},"time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"retries":"${task.retries}","error":${stringify(e)},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -132,8 +132,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -144,8 +144,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"retries":"${task.retries}","error":${stringify(e)},"time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"retries":"${task.retries}","error":${stringify(e)},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -156,8 +156,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -168,8 +168,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"retries":"${task.retries}","error":${stringify(e)},"time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"retries":"${task.retries}","error":${stringify(e)},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -180,8 +180,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 
@@ -192,8 +192,8 @@ const log = (client: any) => {
       }","processInstanceId":"${task.processInstanceId}","workerId":"${task.workerId}","topicName":"${
         task.topicName
       }","processDefinitionId":"${task.processDefinitionId}","variables":${stringify(
-        task.variables.getAll()
-      )},"retries":"${task.retries}","error":${stringify(e)},"time":"${new Date().toISOString()}","v":0}\n`
+        task.variables.getAll(),
+      )},"retries":"${task.retries}","error":${stringify(e)},"time":"${new Date().toISOString()}","v":0}\n`,
     );
   });
 };

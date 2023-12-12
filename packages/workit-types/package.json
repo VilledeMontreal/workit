@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit-types",
-  "version": "5.0.2",
+  "version": "6.0.0-dev",
   "description": "TypeScript types for Workit",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -11,25 +11,25 @@
     "@opentelemetry/api": "1.0.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.1.0",
-    "@commitlint/config-conventional": "^16.0.0",
-    "@types/node": "^16.11.24",
-    "@typescript-eslint/eslint-plugin": "^5.11.0",
-    "@typescript-eslint/parser": "^5.11.0",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@types/node": "^20.10.4",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
     "codecov": "^3.8.3",
-    "eslint": "^8.9.0",
-    "eslint-config-airbnb-typescript": "^16.1.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint": "^8.55.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-header": "^3.1.1",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "husky": "^7.0.4",
-    "prettier": "^2.5.1",
-    "typedoc": "^0.21.10",
-    "typescript": "^4.3.5"
+    "prettier": "^3.1.1",
+    "typedoc": "^0.25.4",
+    "typescript": "^4.9.5"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=18.0.0"
   },
   "scripts": {
     "test": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",

@@ -1,8 +1,0 @@
-#==========================================
-# Camunda configs
-#==========================================
-camunda:
-  baseUrl: http://localhost:8080/engine-rest
-  workerId: workit
-  maxTasks: 1
-  topicName: topic_demo

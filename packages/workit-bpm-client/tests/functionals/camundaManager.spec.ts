@@ -7,7 +7,8 @@
 import { ICamundaClient } from '@villedemontreal/workit-types';
 import { Client as CamundaExternalClient } from 'camunda-external-task-client-js';
 import { CamundaBpmClient } from '../../src/camundaBpmClient';
-import nock = require('nock');
+import * as nock from 'nock';
+import { readJsonFileSync } from '../utils/func-test';
 
 let manager: CamundaBpmClient;
 
@@ -32,12 +33,12 @@ describe('Client Manager (Camunda BPM)', function () {
   it('Deploy workflow', async () => {
     const scope = nock('http://localhost:8080')
       .post('/engine-rest/deployment/create')
-      .reply(200, require('./__mocks__/deployResponse.camunda.json'));
+      .reply(200, readJsonFileSync('./tests/functionals/__mocks__/deployResponse.camunda.json'));
 
     const path = `${process.cwd()}/tests/data/bpmn/camundaBpm/MESSAGE_EVENT.bpmn`;
     const result = await manager.deployWorkflow(path);
 
-    expect(result).toMatchObject(require('./__mocks__/deployWorkflowResult.json'));
+    expect(result).toMatchObject(readJsonFileSync('./tests/functionals/__mocks__/deployWorkflowResult.json'));
     expect(scope.isDone()).toBeTruthy();
   });
 
@@ -48,7 +49,6 @@ describe('Client Manager (Camunda BPM)', function () {
       correlation: undefined,
       name: '__MESSAGE_START_EVENT__',
       variables: { amount: 1000 },
-      timeToLive: undefined,
       messageId: undefined,
     });
 
@@ -59,7 +59,7 @@ describe('Client Manager (Camunda BPM)', function () {
   it('Create Instance', async () => {
     const scope = nock('http://localhost:8080')
       .post('/engine-rest/process-definition/key/message-event/start')
-      .reply(200, require('./__mocks__/createWorkflowInstanceResponse.camunda.json'));
+      .reply(200, readJsonFileSync('./tests/functionals/__mocks__/createWorkflowInstanceResponse.camunda.json'));
 
     const result = await manager.createWorkflowInstance({
       bpmnProcessId: 'message-event',
@@ -69,7 +69,7 @@ describe('Client Manager (Camunda BPM)', function () {
       },
     });
 
-    expect(result).toMatchObject(require('./__mocks__/createInstanceResult.json'));
+    expect(result).toMatchObject(readJsonFileSync('./tests/functionals/__mocks__/createInstanceResult.json'));
     expect(scope.isDone()).toBeTruthy();
   });
 
@@ -78,10 +78,10 @@ describe('Client Manager (Camunda BPM)', function () {
       .get('/engine-rest/process-definition/count')
       .reply(200, { count: 3 })
       .get('/engine-rest/process-definition')
-      .reply(200, require('./__mocks__/getWorkflowsResponse.camunda.json'));
+      .reply(200, readJsonFileSync('./tests/functionals/__mocks__/getWorkflowsResponse.camunda.json'));
 
     const result = await manager.getWorkflows();
-    expect(result).toMatchObject(require('./__mocks__/getWorkflowsResult.json'));
+    expect(result).toMatchObject(readJsonFileSync('./tests/functionals/__mocks__/getWorkflowsResult.json'));
     expect(scope.isDone()).toBeTruthy();
   });
 
@@ -93,7 +93,7 @@ describe('Client Manager (Camunda BPM)', function () {
       .reply(200, { count: 3 })
       .get('/engine-rest/process-definition')
       .query({ maxResults: size })
-      .reply(200, require('../data/camundaResponsePaginated'));
+      .reply(200, readJsonFileSync('./tests/data/camundaResponsePaginated.json'));
 
     const result = await manager.getWorkflows({ size });
 
@@ -110,7 +110,7 @@ describe('Client Manager (Camunda BPM)', function () {
       .reply(200, { count: 4 })
       .get('/engine-rest/process-definition')
       .query({ firstResult: from, maxResults: size })
-      .reply(200, require('../data/camundaResponsePaginated2'));
+      .reply(200, readJsonFileSync('./tests/data/camundaResponsePaginated2.json'));
 
     const result = await manager.getWorkflows({ size, from });
     scope.done();
@@ -127,7 +127,7 @@ describe('Client Manager (Camunda BPM)', function () {
       .reply(200, { count: 1 })
       .get('/engine-rest/process-definition')
       .query({ key: bpmnProcessId, maxResults: size })
-      .reply(200, require('../data/camundaResponsePaginated2'));
+      .reply(200, readJsonFileSync('./tests/data/camundaResponsePaginated2.json'));
 
     const result = await manager.getWorkflows({ size, bpmnProcessId });
 
@@ -139,15 +139,15 @@ describe('Client Manager (Camunda BPM)', function () {
     const bpmnProcessId = 'message-event';
     const scope = nock('http://localhost:8080')
       .get(`/engine-rest/process-definition/key/${bpmnProcessId}`)
-      .reply(200, require('./__mocks__/getWorkflowResponse.2.camunda.json'))
+      .reply(200, readJsonFileSync('./tests/functionals/__mocks__/getWorkflowResponse.2.camunda.json'))
       .get(`/engine-rest/process-definition/key/${bpmnProcessId}/xml`)
-      .reply(200, require('./__mocks__/getWorkflowResponse.1.camunda.json'));
+      .reply(200, readJsonFileSync('./tests/functionals/__mocks__/getWorkflowResponse.1.camunda.json'));
 
     const result = await manager.getWorkflow({
       bpmnProcessId,
     });
 
-    expect(result).toMatchObject(require('./__mocks__/getWorkflowResult.json'));
+    expect(result).toMatchObject(readJsonFileSync('./tests/functionals/__mocks__/getWorkflowResult.json'));
     expect(scope.isDone()).toBeTruthy();
   });
 
@@ -155,15 +155,15 @@ describe('Client Manager (Camunda BPM)', function () {
     const workflowKey = 'message-event:6:76bf01bc-5410-11e9-8953-0242ac110002';
     const scope = nock('http://localhost:8080')
       .get(`/engine-rest/process-definition/${workflowKey}`)
-      .reply(200, require('./__mocks__/getWorkflowResponse.2.camunda.json'))
+      .reply(200, readJsonFileSync('./tests/functionals/__mocks__/getWorkflowResponse.2.camunda.json'))
       .get(`/engine-rest/process-definition/${workflowKey}/xml`)
-      .reply(200, require('./__mocks__/getWorkflowResponse.1.camunda.json'));
+      .reply(200, readJsonFileSync('./tests/functionals/__mocks__/getWorkflowResponse.1.camunda.json'));
 
     const result = await manager.getWorkflow({
       workflowKey,
     });
 
-    expect(result).toMatchObject(require('./__mocks__/getWorkflowResult.json'));
+    expect(result).toMatchObject(readJsonFileSync('./tests/functionals/__mocks__/getWorkflowResult.json'));
     expect(scope.isDone()).toBeTruthy();
   });
 
@@ -203,7 +203,7 @@ describe('Client Manager (Camunda BPM)', function () {
       .reply(204)
       .get('/engine-rest/incident/')
       .query({ incidentId })
-      .reply(200, require('./__mocks__/incidentResponse.camunda.json'));
+      .reply(200, readJsonFileSync('./tests/functionals/__mocks__/incidentResponse.camunda.json'));
 
     const result = await manager.resolveIncident(incidentId);
 

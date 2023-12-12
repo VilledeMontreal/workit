@@ -8,7 +8,6 @@
 /* eslint @typescript-eslint/no-unsafe-call: 0 */
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
 
-import { getVariablesWhenChanged, ProxyFactory } from '@villedemontreal/workit-core';
 import {
   FailureException,
   ICamundaService,
@@ -20,8 +19,7 @@ import {
 import { CamundaMapperProperties } from './camundaMapperProperties';
 import { Variables } from './variables';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const stringify = require('fast-safe-stringify');
+import stringify from 'fast-safe-stringify';
 
 export class CamundaMessage {
   public static wrap(payload: { task: IVariablePayload; taskService: any }): [IMessage, ICamundaService] {
@@ -32,10 +30,10 @@ export class CamundaMessage {
       properties,
     };
     // TODO: create a CamundaMessage builder
-    const msg = ProxyFactory.create({
-      body: messageWithoutSpan.body,
-      properties: messageWithoutSpan.properties,
-    });
+    const msg = {
+      body: { ...messageWithoutSpan.body },
+      properties: { ...messageWithoutSpan.properties },
+    };
     return [
       msg,
       // TODO: create a CamundaService builder
@@ -46,13 +44,13 @@ export class CamundaMessage {
          * Variables will be updated if change has been detected
          */
         async ack(
-          message: IMessage<{ [s: string]: unknown }, IWorkflowProps<{ [s: string]: string | number | boolean }>>
+          message: IMessage<{ [s: string]: unknown }, IWorkflowProps<{ [s: string]: string | number | boolean }>>,
         ) {
           if (this.hasBeenThreated) {
             return;
           }
 
-          const vars = getVariablesWhenChanged<IVariables>(message, (m) => CamundaMessage.unwrap(m));
+          const vars = CamundaMessage.unwrap(message);
 
           await payload.taskService.complete(task, vars);
           this.hasBeenThreated = true;

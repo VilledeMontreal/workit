@@ -5,7 +5,11 @@
  */
 
 export class FailureException extends Error {
-  constructor(message?: string, public retries: number = 1, public retryTimeout: number = 1000) {
+  constructor(
+    message?: string,
+    public retries: number = 1,
+    public retryTimeout: number = 1000,
+  ) {
     super(message);
   }
 }

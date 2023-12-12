@@ -18,7 +18,7 @@ try {
   decorate(injectable(), EventEmitter);
 } catch (error) {
   console.log(
-    `Warning: We detect that you load workit-camunda module more than once. This can happens when sub dependencies have workit-camunda in different versions. You need to get the same version (try using peerDependencies in package.json) or you know what you are doing.`
+    `Warning: We detect that you load workit module more than once. This can happens when sub dependencies have workit in different versions. You need to get the same version (try using peerDependencies in package.json) or you know what you are doing.`,
   );
 }
 

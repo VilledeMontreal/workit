@@ -2,20 +2,19 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) ![npm](https://img.shields.io/npm/v/@villedemontreal/workit-types)
 
-✨ Worker extensible pour Node.js fonctionnant avec les plates-formes Zeebe et Camunda BPM optimisées par TypeScript ✨
+✨ Worker extensible pour Node.js fonctionnant avec les plates-formes AWS Step function et Camunda BPM optimisées par TypeScript ✨
 
 ## Motivation
 
 Nous avions besoin d'un framework pour nous aider à développer rapidement des Workers. Ces derniers sont utilisés pour exécuter des tâches.
 
 Ce framework offre les avantages suivants:
--   Expérimenter et choisir la plate-forme Camunda (et pas seulement Camunda) que vous voulez sans réécrire la logique métier.
--   Zeebe ne fournit pas tous les composants BPMN pour le moment. Zeebe est nouveau et des bugs inattendus peuvent apparaître lors du développement, ce qui nous permet de revenir facilement à l'ancienne plate-forme si un problème se posait.
+-   Expérimenter et choisir la plate-forme Camunda, AWS Step function ou d'autres sans réécrire la logique métier.
 -   Au lieu de dépendre directement d'un client Camunda, ce projet fournit une couche d'abstraction. De cette façon, il est plus facile de changer de client ou de créer le vôtre.
 -   Vous voulez avoir une standardisation des workers.
--   L'uniformisation. En effet, vous pouvez utiliser les deux plates-formes en fonction des besoins du projet.
+-   L'uniformisation. En effet, vous pouvez utiliser plusieurs plates-formes en fonction des besoins du projet.
 -   Ajout de fonctionnalités comme l'automatisation des traces (incluant la propagation).
--   Ce Framework impose la parité des fonctionnalités entre Zeebe et Camunda BPM via les bibliothèques clientes. Certaines fonctionnalités exposées à la plate-forme Camunda BPM ne sont pas présentes dans ce package car nous ne pourrions pas les fournir si nous passons à Zeebe. Cette limitation est destinée à guider les développeurs dans la préparation de la migration.
+-   Ce Framework impose la parité des fonctionnalités entre AWS Step function et Camunda BPM via les bibliothèques clientes. Certaines fonctionnalités exposées à la plate-forme Camunda BPM ne sont pas présentes dans ce package car nous ne pourrions pas les fournir si nous passons à AWS Step function. Cette limitation est destinée à guider les développeurs dans la préparation de la migration.
 
 ## Démarrage rapide
 
@@ -23,7 +22,7 @@ Ce framework offre les avantages suivants:
 
 ## Documentation
 
--   [La documentation est disponible dans ce dossier](packages/workit-camunda/.docs/)
+-   [La documentation est disponible dans ce dossier](packages/workit/.docs/)
 -   Une documentation complète sur l'API est disponible [en ligne](https://villedemontreal.github.io/workit/) et dans le sous répertoire `docs`
 
 ## Librairies
@@ -33,57 +32,29 @@ Ce framework offre les avantages suivants:
 | Librairie               | Description |
 | ----------------------- | -----------------|
 | [workit-types](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-types) | Cette librairie fournit les interfaces / enums TypeScript pour les classes de Workit|
-| [workit-core](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-core) | Cette librairie fournit les implémentations par défaut de la librairie "Workit types" pour Camunda Bpm et Zeebe. |
+| [workit-core](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-core) | Cette librairie fournit les implémentations par défaut de la librairie "Workit types" |
 
 ### Implémentation / Clients
 
 | Librairie               | Description |
 | ----------------------- | -----------------|
 | [workit-bpm-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) | Ce module fournit un contrôle complet pour intéragir avec la plateforme Camunda Bpm.<br> Il utilise [`camunda-external-task-client-js`](https://github.com/camunda/camunda-external-task-client-js) par défaut. |
-| [workit-zeebe-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-zeebe-client) | Ce module fournit un contrôle complet pour intéragir avec la plateforme Zeebe.<br> Il utilise [`zeebe-node`](https://github.com/creditsenseau/zeebe-client-node-js) and [`zeebe-elasticsearch-client`](https://github.com/VilledeMontreal/workit/tree/master/packages/zeebe-elasticsearch-client) par défaut. |
-| [workit-camunda](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-camunda) | Ce module permet de changer de plateforme (Camunda BPM / Zeebe) très facilement. Il suffit de remplacer un flag.<br> Il utilise [`workit-bpm-client`](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) and [`workit-zeebe-client`](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-zeebe-client) par défaut. |
 
 ## L'installation
 
 ```bash
-npm i @villedemontreal/workit-camunda
+npm i @villedemontreal/workit
 ```
 ou utiliser le générateur en dessous
-### Yo!
-
-<p align="center"><img src=".repo/render1561149492572.gif?raw=true"/></p>
-
-Ce générateur vous aidera lors de votre développement avec ce framework. Il fournit des outils pratiques.
-
-```bash
-npm i -g @villedemontreal/workit-cli
-```
-
-#### Installer un nouveau projet
-
-```bash
-workit init
-```
-#### Générer des tâches à partir de votre BPMN existant
-
-```bash
-workit create task --file /your/path.bpmn
-```
-
-#### Générer une nouvelle tâche
-
-```bash
-workit create task
-```
 
 ## Comment utiliser
 
-Basculer entre Zeebe et la plate-forme Camunda BPM est simple, il suffit de spécifier un `TAG` pour l'IoC.
+Basculer entre les plateformes est simple, il suffit de spécifier un `TAG` pour l'IoC.
 
 ### Rouler le worker
 
 ```javascript
-const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm); // or TAG.zeebe
+const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
 
 worker.start();
 worker.run();
@@ -92,33 +63,29 @@ worker.run();
 ### Déployer un workflow
 
 ```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
+const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 const fullpath = `${process.cwd()}/sample/BPMN_DEMO.bpmn`;
 await manager.deployWorkflow(fullpath);
 ```
 
 ### Obtenir les flux de travail
 
-*Zeebe: Vous aurez besoin de l'instance Elasticsearch.*
-
 ```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
+const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 await manager.getWorkflows()
 ```
 
 ### Obtenir un flux de travail
 
-*Zeebe: Vous aurez besoin de l'instance Elasticsearch.*
-
 ```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
+const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 await manager.getWorkflow({ bpmnProcessId: "DEMO" });
 ```
 
 ### Mettre à jour les variables
 
 ```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
+const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 await manager.updateVariables({ 
     processInstanceId: "5c50c48e-4691-11e9-8b8f-0242ac110002",
     variables: { amount: 1000 }
@@ -128,12 +95,11 @@ await manager.updateVariables({
 ### Publier un message
 
 ```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
+const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 await manager.publishMessage({
     correlation: {},
     name: "catching",
     variables: { amount: 100 },
-    timeToLive: undefined, // only supported for Zeebe
     messageId: "5c50c48e-4691-11e9-8b8f-0242ac110002"
 });
 ```
@@ -141,7 +107,7 @@ await manager.publishMessage({
 ### Créer une instance de flux de travail
 
 ```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); // or TAG.zeebe
+const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 await manager.createWorkflowInstance({
     bpmnProcessId: "MY_BPMN_KEY",
     variables: {
@@ -154,7 +120,6 @@ await manager.createWorkflowInstance({
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); 
-// or TAG.zeebe
 await manager.cancelWorkflowInstance("4651614f-4b3c-11e9-b5b3-ee5801424400");
 ```
 
@@ -162,7 +127,6 @@ await manager.cancelWorkflowInstance("4651614f-4b3c-11e9-b5b3-ee5801424400");
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); 
-// or TAG.zeebe
 await manager.resolveIncident("c84fce6c-518e-11e9-bd78-0242ac110003");
 ```
 
@@ -197,13 +161,10 @@ Vous pouvez même faire des liaisons complexes comme
 IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { bpmnProcessId: BPMN_PROCESS_ID, version: 2 });
 ```
 
-Si vous avez installé `workit-cli`, vous pouvez faire` workit create task` (vous devez avoir une structure de fichier standard au projet généré via la commande `workit init`)
-et tout sera fait pour vous.
-
 ### Cycle de vie et événements des Workers
 
 ```javascript
-const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.zeebe); 
+const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm); 
 // or TAG.camundaBpm
 
 worker.once('starting', () => {
@@ -299,34 +260,11 @@ export class HelloWorldTask extends TaskBase<IMessage> {
 ```
 Vous pouvez consulter le dossier `sample` où nous fournissons un exemple (parallel.ts) en utilisant [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
-[Voir le tutoriel relié aux traces](packages/workit-camunda/.docs/WORKER.md#add-traces-to-your-worker-with-opentelemetry)
+[Voir le tutoriel relié aux traces](packages/workit/.docs/WORKER.md#add-traces-to-your-worker-with-opentelemetry)
 
 ### Définissez votre configuration pour la plate-forme que vous souhaitez utiliser
 
-```javascript
-const configBase: ICamundaConfig = {
-    workerId: 'demo',
-    baseUrl: `__undefined__`,
-    topicName: 'topic_demo'
-};
-
-// For Camunda BPM platform
-const bpmnPlatformClientConfig = { ...configBase, baseUrl: 'http://localhost:8080/engine-rest',  maxTasks: 32, autoPoll: false, use: [] };
-
-IoC.bindToObject(bpmnPlatformClientConfig, CORE_IDENTIFIER.camunda_external_config);
-
-// For Zeebe platform
-const zeebeClientConfig = { ...configBase, baseUrl: 'localhost:2650', timeout: 2000 };
-
-// For Zeebe exporter (Elasticsearch instance)
-const zeebeElasticExporterConfig = {
-    url: `http://localhost:9200`,
-};
-
-IoC.bindToObject(zeebeClientConfig, CORE_IDENTIFIER.zeebe_external_config);
-IoC.bindToObject(zeebeElasticExporterConfig, CORE_IDENTIFIER.zeebe_elastic_exporter_config)
-```
-[Voir la documentation](packages/workit-camunda/.docs/CONFIG.md)
+TODO: show for step function
 
 ### Définissez vos stratégies en cas d'échec ou de succès
 
@@ -359,7 +297,7 @@ class ServerErrorHandler extends ErrorHandlerBase {
 // UnManagedErrorHandler
 // ...
 // Then you could build your strategy
-/// "FailureStrategy" implements "IFailureStrategy", this interface is provided by workit-camunda
+/// "FailureStrategy" implements "IFailureStrategy", this interface is provided by workit
 const strategy = new FailureStrategy([
   new AxiosApiErrorHandler(errorConfig, [
     new BadRequestErrorHandler(errorConfig),
@@ -384,7 +322,6 @@ npm test
 
 ## Construit avec
 
-*   [zeebe-node](https://github.com/CreditSenseAU/zeebe-client-node-js) - client nodejs pour Zeebe
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - client nodejs pour Camunda BPM
 *   [inversify](https://github.com/inversify/InversifyJS) - injection de dépendence
 *   [opentelemetry](https://opentelemetry.io/) - ajouter de l'instrumentation aux opérations
@@ -395,24 +332,8 @@ npm test
 2.  Faciliter et encourager l’adhésion aux meilleures pratiques de POO et d’IoC.
 3.  Ajoutez le moins de temps système possible.
 
-## Kubernetes
-
-### Zeebe
-
-À FAIRE: fournir un helm chart.
-Mais en attendant, pour le développement, vous pouvez faire:
-```bash
-kubernetes/run
-```
-
 ## Docker
 
-### Zeebe
-
-Dans votre terminal
-```bash
-docker/run
-```
 ### Camunda BPM
 ```bash
 docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
@@ -420,30 +341,15 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 ```
 [Plus de détails](https://github.com/camunda/docker-camunda-bpm-platform)
 
-## TODO
-<details>
-<summary>Cliquez pour agrandir</summary>
-
--   Add tests
--   Improve docs
--   Make sample and confirm compatibility with DMN
--   Adding a common exception error codes between Manager clients
--   Add metrics by using prometheus lib
-</details>
 
 ## Gestion des versions
 
 Nous utilisons [SemVer](http://semver.org/) pour la gestion des versions. Pour les versions disponibles, voir les [balises sur ce référentiel](https://github.com/VilledeMontreal/workit/tags).
 
-workit-camunda | Zeebe | Camunda BPM
+workit | AWS Step function | Camunda BPM
 -- | -- | -- 
-\>=4.0.5 | 0.22.1 | 7.6 to latest
-3.2.x <=4.0.4 | 0.20.x < 0.20.1 | 7.6 to latest
-3.1.x | 0.20.x < 0.20.1 | 7.6 to latest
-2.2.0 | 0.20.x < 0.20.1 | 7.6 to latest
-2.1.0 | 0.19.x | 7.6 to latest
-2.0.1 | 0.18.x | 7.6 to latest
-< 1.0.0 | <= 0.17.0 | 7.6 to latest
+\>=6.0.0 | TODO | 7.6 to latest
+
 
 ## Mainteneurs
 
@@ -456,7 +362,3 @@ Veuillez lire [CONTRIBUTING.md](CONTRIBUTING_FR.md) pour plus de détails sur no
 ## Licence
 
 Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails
-
-## Remerciements
-
-*   [Josh Wulf](https://github.com/jwulf) - zeebe-node m'a inspiré pendant le développement de `workit-cli`

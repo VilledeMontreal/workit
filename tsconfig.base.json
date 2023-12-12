@@ -13,17 +13,15 @@
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "es2017",
+    "target": "ES2020",
     "incremental": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "strictPropertyInitialization": true,
+    "strictPropertyInitialization": false,
     "skipLibCheck": true,
-    "charset": "utf8",
-    "suppressImplicitAnyIndexErrors": true,
     "alwaysStrict": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules"
