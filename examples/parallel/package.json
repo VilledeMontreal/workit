@@ -1,7 +1,7 @@
 {
   "name": "workit-example-parallel",
   "private": true,
-  "version": "6.0.0-dev",
+  "version": "6.0.1-dev",
   "description": "Show how to run parallel tasks with Workit",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",

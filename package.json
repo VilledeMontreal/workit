@@ -13,9 +13,6 @@
     "test:all": "lerna run test:all",
     "test:integration": "lerna run test:integration --scope=workit",
     "clean": "lerna clean -y",
-    "publish:ci": "lerna run lint-fix && lerna publish --canary --yes",
-    "publish": "lerna run lint-fix && lerna publish",
-    "bump": "lerna publish",
     "remark-lint": "remark .",
     "codecov": "lerna run codecov"
   },

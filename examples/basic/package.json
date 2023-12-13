@@ -1,7 +1,7 @@
 {
   "name": "workit-example-basic",
   "private": true,
-  "version": "6.0.0-dev",
+  "version": "6.0.1-dev",
   "description": "Basic example of workit usage",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
