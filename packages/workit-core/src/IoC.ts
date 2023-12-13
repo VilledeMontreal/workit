@@ -222,15 +222,16 @@ export class IOC implements IIoC {
 
   private static _inject(ctor: any, dependencies?: (string | symbol)[]) {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       decorate(injectable(), ctor);
       (dependencies || []).forEach((dependency, index) => {
-        // review this code when possible. use arrow function instead.
         let injection: (target: any, targetKey: string, index?: number) => void;
         if (typeof dependency === 'string' && dependency.endsWith('[]')) {
           injection = multiInject(dependency);
         } else {
           injection = inject(dependency);
         }
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         decorate(injection as ClassDecorator | ParameterDecorator | MethodDecorator, ctor, index);
       });
     } catch {
