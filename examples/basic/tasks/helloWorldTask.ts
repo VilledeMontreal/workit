@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2024 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -13,7 +13,8 @@ export class HelloWorldTask extends TaskBase<IMessage> {
     const { properties } = message;
 
     console.log(`Executing task: ${properties.activityId}`);
-    console.log(`${properties.bpmnProcessId}::${properties.processInstanceId} Servus!`);
+    console.log(properties);
+    console.log(`${properties.bpmnProcessId}::${properties.workflowInstanceKey} Servus!`);
 
     const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
 

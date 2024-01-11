@@ -51,6 +51,7 @@
     "./examples/parallel",
     "./packages/workit",
     "./packages/workit-bpm-client",
+    "./packages/workit-stepfunction-client",
     "./packages/workit-core",
     "./packages/workit-types"    
   ]

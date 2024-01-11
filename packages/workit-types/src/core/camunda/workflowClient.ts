@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2024 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -17,7 +17,7 @@ import { IWorkflowDefinition, IWorkflowDefinitionRequest } from './workflowDefin
 import { IWorkflowOptions } from './workflowOptions';
 
 export interface IWorkflowClient {
-  deployWorkflow(absPath: string): Promise<Readonly<IDeployWorkflowResponse>>;
+  deployWorkflow<T = any>(absPath: string, override?: T): Promise<Readonly<IDeployWorkflowResponse>>;
   getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>>;
   updateVariables(payload: IUpdateWorkflowVariables): Promise<void>;
   updateJobRetries(payload: IUpdateWorkflowRetry): Promise<void>;

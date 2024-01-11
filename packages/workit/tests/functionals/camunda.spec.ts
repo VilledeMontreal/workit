@@ -19,7 +19,6 @@ import {
   IProcessHandlerConfig,
   IWorkflowProps,
 } from '@villedemontreal/workit-types';
-import { ClientRequest } from 'http';
 import nock from 'nock';
 import { Client } from '../../src/camunda-n-mq/client';
 import { SERVICE_IDENTIFIER } from '../../src/config/constants/identifiers';
@@ -81,7 +80,7 @@ describe('Camunda Worker', function () {
   it('should have Basic Auth', (done) => {
     const scoped = nock('http://localhost:8080', { encodedQueryParams: true } as any)
       .post('/engine-rest/external-task/fetchAndLock')
-      .reply(function (this: ClientRequest) {
+      .reply(function (this: any, uri: string, body: any, callback: (err: any, result: any) => void) {
         expect(this.req.headers.authorization).toStrictEqual('Basic YWRtaW46YWRtaW4xMjM=');
       });
 

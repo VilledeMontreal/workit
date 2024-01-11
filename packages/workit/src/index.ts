@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2024 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -12,3 +12,4 @@ export * from './config/constants/tag';
 export * from './config/ioc';
 export * from './camunda-n-mq/client';
 export * from './camunda-n-mq/clientManager';
+export * from './stepFunction/stepFunctionManager';
