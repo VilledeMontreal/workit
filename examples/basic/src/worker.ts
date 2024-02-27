@@ -1,8 +1,12 @@
 /*
- * Copyright (c) 2023 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2024 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
+// process.env.AWS_REGION = 'us-east-1';
+// process.env.AWS_ACCESS_KEY_ID = '<AWS_ACCESS_KEY_ID>';
+// process.env.AWS_SECRET_ACCESS_KEY = '<AWS_SECRET_ACCESS_KEY>';
+// process.env.AWS_SQS_WAIT_TIME_SECONDS = '20';
 
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from '@villedemontreal/workit';
 import { IoC, Worker } from '@villedemontreal/workit-core';

@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "lib",
+  },
+  "exclude": [
+    "lib", 
+    "temp", 
+    "node_modules", 
+    "output", 
+    "log",  
+    "mocha", 
+    ".*",
+    "tests"
+  ]
+}

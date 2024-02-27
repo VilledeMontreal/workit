@@ -1,8 +1,9 @@
 /*
- * Copyright (c) 2023 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2024 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
+/* eslint @typescript-eslint/no-redundant-type-constituents: 0 */
 
 import { IPaginationOptions, IPaging, IWorkflowOptions } from '@villedemontreal/workit-types';
 

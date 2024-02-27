@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2024 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -33,9 +33,9 @@ export abstract class ClientManager<TClient extends IWorkflowClient> implements 
     this._client = client;
   }
 
-  public deployWorkflow(bpmnPath: string): Promise<IDeployWorkflowResponse> {
+  public deployWorkflow(bpmnPath: string, override?: any): Promise<IDeployWorkflowResponse> {
     log(`Deploying workflow from path: "${bpmnPath}"`);
-    return this._client.deployWorkflow(bpmnPath);
+    return this._client.deployWorkflow(bpmnPath, override);
   }
 
   public getWorkflows(options?: Partial<IWorkflowOptions & IPaginationOptions>): Promise<IPagination<IWorkflow>> {

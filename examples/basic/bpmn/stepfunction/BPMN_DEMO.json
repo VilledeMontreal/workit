@@ -1,0 +1,37 @@
+{
+    "Comment": "A description of my state machine",
+    "StartAt": "Activity",
+    "States": {
+      "Activity": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::sqs:sendMessage.waitForTaskToken",
+        "Parameters": {
+          "MessageBody": {
+            "body.$": "$",
+            "properties": {
+              "activityId": "sample_activity",
+              "retries.$": "$$.State.RetryCount",
+              "bpmnProcessId.$": "$$.StateMachine.Id",
+              "jobKey.$": "$$.Task.Token",
+              "workflowInstanceKey.$": "$$.Execution.Id"
+            }
+          },
+          "QueueUrl": "<YOUR QUEUE URL>"
+        },
+        "End": true,
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "States.ALL"
+            ],
+            "BackoffRate": 2,
+            "IntervalSeconds": 1,
+            "MaxAttempts": 5,
+            "Comment": "Basic Retrier"
+          }
+        ],
+        "HeartbeatSeconds": 30,
+        "TimeoutSeconds": 200
+      }
+    }
+  }
