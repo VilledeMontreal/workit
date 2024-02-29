@@ -22,7 +22,7 @@ import { IWorkflowClient } from '@villedemontreal/workit-types';
       bpmnProcessId:
         platform === TAG.camundaBpm
           ? 'BPMN_DEMO'
-          : `arn:aws:states:${process.env.AWS_REGION}:<YOUR-AWS-ACCOUNT-ID>:stateMachine:Basic-Exemple`,
+          : `arn:aws:states:${process.env.AWS_REGION}:<YOUR-AWS-ACCOUNT-ID>:stateMachine:Basic-Example`,
       variables: {
         amount: 1000,
         hello: 'world',

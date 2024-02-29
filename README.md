@@ -39,38 +39,12 @@ This package can be useful because:
 | Package                                  | Description |
 | ---------------------------------------- | -----------------|
 | [workit-bpm-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) | This module provides a full control over the Camunda Bpm platform.<br> It use [`camunda-external-task-client-js`](https://github.com/camunda/camunda-external-task-client-js) by default. |
+| [workit-stepfunction-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-stepfunction-client) | This module provides a full control over the Step functions platform.<br> It use `@aws-sdk/client-sqs`, `@aws-sdk/client-sfn` by default. |
 
 ## Installing
 
 ```bash
 npm i @villedemontreal/workit
-```
-or using the generator below
-### Yo!
-
-<p align="center"><img src=".repo/render1561149492572.gif?raw=true"/></p>
-
-This generator will help you during your development with this library. It provides handy tools.
-
-```bash
-npm i -g @villedemontreal/workit-cli
-```
-
-#### Install a fresh new project
-
-```bash
-workit init
-```
-#### Generate tasks from your existing BPMN
-
-```bash
-workit create task --file /your/path.bpmn
-```
-
-#### Generate new task
-
-```bash
-workit create task
 ```
 
 ## How to use
@@ -108,28 +82,6 @@ const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.cam
 await manager.getWorkflow({ bpmnProcessId: "DEMO" });
 ```
 
-### Update variables
-
-```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
-await manager.updateVariables({ 
-    processInstanceId: "5c50c48e-4691-11e9-8b8f-0242ac110002",
-    variables: { amount: 1000 }
-});
-```
-
-### Publish message
-
-```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
-await manager.publishMessage({
-    correlation: {},
-    name: "catching",
-    variables: { amount: 100 },
-    messageId: "5c50c48e-4691-11e9-8b8f-0242ac110002"
-});
-```
-
 ### Create workflow instance
 
 ```javascript
@@ -140,20 +92,6 @@ await manager.createWorkflowInstance({
         hello: "world"
     }
 });
-```
-
-### Cancel workflow instance
-
-```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
-await manager.cancelWorkflowInstance("4651614f-4b3c-11e9-b5b3-ee5801424400");
-```
-
-### Resolve incident
-
-```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
-await manager.resolveIncident("c84fce6c-518e-11e9-bd78-0242ac110003");
 ```
 
 ### Define tasks (your bpmn activities)
@@ -171,7 +109,6 @@ export class HelloWorldTask extends TaskBase<IMessage> {
       return Promise.resolve(message);
   }
 }
-
 
 enum LOCAL_IDENTIFIER {
     // sample_activity must match the activityId in your bpmn
@@ -351,7 +288,9 @@ npm test
 ## Built With
 
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - nodejs client for Camunda BPM
-*   [inversify](https://github.com/inversify/InversifyJS) - Dependency injection
+*   [@aws-sdk/client-sqs](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sqs/) - nodejs client for receiving messages from the queue
+*   [@aws-sdk/client-sfn](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sfn/) - nodejs client for managing state machines and acknowledging process
+*   [inversify](https://github.com/inversify/InversifyJS) - dependency injection
 *   [opentelemetry](https://opentelemetry.io/) - add instrumentation to the operations (provides a single set of APIs, libraries to capture distributed traces)
 
 ## Philosophy
@@ -386,7 +325,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 workit | AWS Step function | Camunda BPM
 -- | -- | -- 
-\>=6.0.0 | TODO | 7.6 to latest
+\>=6.0.0 | all | 7.6 to latest
 
 ## Maintainers
 

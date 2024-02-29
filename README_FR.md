@@ -39,7 +39,7 @@ Ce framework offre les avantages suivants:
 | Librairie               | Description |
 | ----------------------- | -----------------|
 | [workit-bpm-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) | Ce module fournit un contrôle complet pour intéragir avec la plateforme Camunda Bpm.<br> Il utilise [`camunda-external-task-client-js`](https://github.com/camunda/camunda-external-task-client-js) par défaut. |
-
+| [workit-stepfunction-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-stepfunction-client) | Ce module fournit un contrôle complet pour intéragir avec la plateforme Step functions.<br> Par défaut, il utilise `@aws-sdk/client-sqs`, `@aws-sdk/client-sfn`. |
 ## L'installation
 
 ```bash
@@ -82,28 +82,6 @@ const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.cam
 await manager.getWorkflow({ bpmnProcessId: "DEMO" });
 ```
 
-### Mettre à jour les variables
-
-```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
-await manager.updateVariables({ 
-    processInstanceId: "5c50c48e-4691-11e9-8b8f-0242ac110002",
-    variables: { amount: 1000 }
-});
-```
-
-### Publier un message
-
-```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
-await manager.publishMessage({
-    correlation: {},
-    name: "catching",
-    variables: { amount: 100 },
-    messageId: "5c50c48e-4691-11e9-8b8f-0242ac110002"
-});
-```
-
 ### Créer une instance de flux de travail
 
 ```javascript
@@ -114,20 +92,6 @@ await manager.createWorkflowInstance({
         hello: "world"
     }
 });
-```
-
-### Annuler l'instance d'un flux de travail
-
-```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); 
-await manager.cancelWorkflowInstance("4651614f-4b3c-11e9-b5b3-ee5801424400");
-```
-
-### Résoudre l'incident
-
-```javascript
-const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm); 
-await manager.resolveIncident("c84fce6c-518e-11e9-bd78-0242ac110003");
 ```
 
 ### Définir les tâches (vos activités bpmn)
@@ -323,7 +287,9 @@ npm test
 ## Construit avec
 
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - client nodejs pour Camunda BPM
-*   [inversify](https://github.com/inversify/InversifyJS) - injection de dépendence
+*   [@aws-sdk/client-sqs](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sqs/) - client nodejs pour recevoir les messages de la file d'attente
+*   [@aws-sdk/client-sfn](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sfn/) - client nodejs pour gérer l'état des processus
+*   [inversify](https://github.com/inversify/InversifyJS) - injection de dépendance
 *   [opentelemetry](https://opentelemetry.io/) - ajouter de l'instrumentation aux opérations
 
 ## Philosophie
@@ -348,7 +314,7 @@ Nous utilisons [SemVer](http://semver.org/) pour la gestion des versions. Pour l
 
 workit | AWS Step function | Camunda BPM
 -- | -- | -- 
-\>=6.0.0 | TODO | 7.6 to latest
+\>=6.0.0 | tous | 7.6 to latest
 
 
 ## Mainteneurs

@@ -16,9 +16,9 @@
     "lint": "eslint . --ext .ts && prettier -l \"src/**/*.ts\"",
     "lint-fix": "prettier \"./**/*.ts\" --write && eslint . --ext .ts --fix",
     "check-conflicts": "eslint --print-config tests/utils/func-test.ts | eslint-config-prettier-check",
-    "camunda:deploy": "node ./lib/src/deploy.js",
-    "camunda:create-instance": "node ./lib/src/create-process-instances.js",
-    "camunda:worker": "node ./lib/src/worker.js"
+    "deploy": "node ./lib/src/deploy.js",
+    "create-instance": "node ./lib/src/create-process-instances.js",
+    "worker": "node ./lib/src/worker.js"
   },
   "repository": {
     "type": "git",
