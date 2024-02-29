@@ -32,11 +32,11 @@ npm i && npm run build
 ```
 and in order to deploy your bpmn and create a process instance in Camunda, run:
 ```bash
-npm run camunda:deploy && npm run camunda:create-instance
+npm run deploy && npm run create-instance
 ```
 Finally, run the worker by running the following command:
 ```bash
-npm run camunda:worker
+npm run worker
 ```
 
 You can then navigate to `http://localhost:16686` to access the Jaeger UI.

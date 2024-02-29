@@ -20,18 +20,18 @@ Make sure to have Camunda running at http://localhost:8080/camunda (user/pass de
 Run in your terminal in the root folder:
 
 ```bash
-npm run camunda:deploy
+npm run deploy
 ```
 Now, You should have a `Demo` process definition visible here: http://localhost:8080/camunda/app/cockpit/default/#/processes
 
 ```bash
-npm run camunda:create-instance
+npm run create-instance
 ```
 Now, in your `Demo` process definition, you should see the bpmn with 1 instance attached to `Activity`.
 If not, look that you are on the right bpmn version.
 
 ```bash
-npm run camunda:worker
+npm run worker
 ```
 You should see in the console, all activities crushed by the worker. Now, if you look back to the `Demo` Bpmn (refresh the page), you see that the instance has disappeared.
 
@@ -54,7 +54,7 @@ After cloning the repo, open a terminal and go to `examples/basic`
 Edit the file at `examples/basic/src/deploy.ts`, change the tag to `TAG.stepFunction` and *MUST* use a different bpmn file (one compatible with AWS Step function as content is different) `${ process.cwd() }/bpmn/stepfunction/BPMN_DEMO.bpmn` (the stepfunction folder contains `BPMN_DEMO.json`)
 
 ```bash
-npm run build && npm run camunda:deploy
+npm run build && npm run deploy
 ```
 Now, You should have a `Demo` process definition visible here: http://localhost:8080/#/instances?filter=%7B%22active%22%3Atrue%2C%22incidents%22%3Atrue%2C%22workflow%22%3A%22BPMN_DEMO%22%2C%22version%22%3A%221%22%7D
 
@@ -66,7 +66,7 @@ TODO:
 Edit the file at `examples/basic/src/create-process-instances.ts`, change the tag to `TAG.stepFunction` 
 
 ```bash
-npm run build && npm run camunda:create-instance
+npm run build && npm run create-instance
 ```
 Now, in your `Demo` process definition, you should see the bpmn with 1 instance attached to `Activity`.
 If not look that you are on the right bpmn version.
@@ -74,7 +74,7 @@ If not look that you are on the right bpmn version.
 Edit the file at `examples/basic/src/worker.ts`, change the tag to `TAG.stepFunction` 
 
 ```bash
-npm run build && npm run camunda:worker
+npm run build && npm run worker
 ```
 
 TODO:
@@ -109,11 +109,11 @@ npm i && npm run build
 ```
 and in order to deploy your bpmn and create a process instance in Camunda, run:
 ```bash
-npm run camunda:deploy && npm run camunda:create-instance
+npm run deploy && npm run create-instance
 ```
 Finally, run the worker by running the following command:
 ```bash
-npm run camunda:worker
+npm run worker
 ```
 
 You can then navigate to `http://localhost:16686` to access the Jaeger UI.

@@ -21,7 +21,7 @@ Todo: provide steps
 
 ##### Manually
 
-In `examples/basic/bpmn/stepfunction/BPMN_DEMO.json`, you will need to specify the `QueueUrl` and in `examples/basic/src/deploy.ts` , you must specify the `roleArn` to use for deploying the new workflow.
+In `examples/basic/workflow/stepfunction/WORKFLOW_DEMO.json`, you will need to specify the `QueueUrl` and in `examples/basic/src/deploy.ts` , you must specify the `roleArn` to use for deploying the new workflow.
 
 Notice that you can skip this step if you deploy the workflow through the AWS Step function UI and it won't be necessary to run `npm run deploy`
 
@@ -35,7 +35,7 @@ You must specify the following environment variables :
 - AWS_SQS_QUEUE_URL
 - AWS_SQS_WAIT_TIME_SECONDS (Optional)
 
-(Optional) Setup, we can switch to `TAG.camundaBpm` or `TAG.stepFunction` in order to use both plateform (some comments are added in the example).
+(Optional) Setup, we can switch to `TAG.camundaBpm` or `TAG.stepFunction` in order to use both platforms (some comments are added in the example).
 
 ```sh
 $ # from this directory

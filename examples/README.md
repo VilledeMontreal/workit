@@ -21,11 +21,11 @@ $ npm install
 $ # inside a directory
 
 $ # deploy a bpmn provided in the example
-$ npm camunda:deploy
+$ npm deploy
 $ # create instance(s)
-$ npm camunda:create-instance
+$ npm create-instance
 $ # run worker
-$ npm camunda:worker
+$ npm worker
 ```
 
 ## Useful links
