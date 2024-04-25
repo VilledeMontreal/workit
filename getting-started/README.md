@@ -39,29 +39,18 @@ You should see in the console, all activities crushed by the worker. Now, if you
 
 ## AWS Step function
 
-If you don't access to AWS Step function, you can use docker command to run it in the root folder:
+How to setup step functions and the state machine : [link](./STEP_FUNCTIONS_SETUP.md) TODO
 
-```bash
-docker/run
-```
+Now, You should have a `Basic-Example` process definition visible here: TODO
 
-TODO:
 
-Now you just need to change the tag `TAG.camundaBpm` to `TAG.stepFunction`.
+<p align="center">
+  <a href="../.repo/sfn_demo.png"><img src="../.repo/sfn_demo.png"></a>
+</p>
 
 After cloning the repo, open a terminal and go to `examples/basic`
 
-Edit the file at `examples/basic/src/deploy.ts`, change the tag to `TAG.stepFunction` and *MUST* use a different bpmn file (one compatible with AWS Step function as content is different) `${ process.cwd() }/bpmn/stepfunction/BPMN_DEMO.bpmn` (the stepfunction folder contains `BPMN_DEMO.json`)
-
-```bash
-npm run build && npm run deploy
-```
-Now, You should have a `Demo` process definition visible here: http://localhost:8080/#/instances?filter=%7B%22active%22%3Atrue%2C%22incidents%22%3Atrue%2C%22workflow%22%3A%22BPMN_DEMO%22%2C%22version%22%3A%221%22%7D
-
-TODO:
-<p align="center">
-  <a href="./operate/zeebe-operate.png"><img src="./operate/zeebe-operate.png"></a>
-</p>
+Now you just need to change the tag `TAG.camundaBpm` to `TAG.stepFunction` and fill environment variables in code.
 
 Edit the file at `examples/basic/src/create-process-instances.ts`, change the tag to `TAG.stepFunction` 
 
