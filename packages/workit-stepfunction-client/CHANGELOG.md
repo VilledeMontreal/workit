@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.4-dev](https://github.com/VilledeMontreal/workit/compare/v6.0.3-dev...v6.0.4-dev) (2024-04-25)
+
+- Adjust mapping for message.properties
+- Adjust Ack methods for sending payload correctly
+
+
+
+
+
 ## [6.0.3-dev](https://github.com/VilledeMontreal/workit/compare/v6.0.2-dev...v6.0.3-dev) (2024-02-28)
 
 

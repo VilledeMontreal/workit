@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit-types",
-  "version": "6.0.3-dev",
+  "version": "6.0.4-dev",
   "description": "TypeScript types for Workit",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
