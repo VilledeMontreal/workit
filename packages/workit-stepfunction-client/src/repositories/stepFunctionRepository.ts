@@ -3,7 +3,7 @@
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-import { IMessage, IStepFunctionClientConfig } from '@villedemontreal/workit-types';
+import { IMessage, IStepFunctionClientConfig, IncidentException } from '@villedemontreal/workit-types';
 import { StepFunctionClient } from '../sfnClient';
 import * as fs from 'fs/promises';
 
@@ -54,16 +54,22 @@ export class StepFunctionRepository {
   }
 
   public sendTaskSuccess(message: IMessage): Promise<SendTaskSuccessCommandOutput> {
-    const params = { output: message.body ? JSON.stringify(message.body) : '{}', taskToken: message.properties.jobKey };
+    const payload = JSON.stringify(message.body);
+
+    if (payload.length > 262144) {
+      throw new IncidentException("payload (message.body) can't exceed 256KB");
+    }
+
+    const params = { output: message.body ? payload : '{}', taskToken: message.properties.jobKey };
     const command = new SendTaskSuccessCommand(params);
     return this._client.send(command);
   }
 
-  public sendTaskFailure(error: Error, message: IMessage): Promise<SendTaskFailureCommandOutput> {
+  public sendTaskFailure(error: NodeJS.ErrnoException, message: IMessage): Promise<SendTaskFailureCommandOutput> {
     const params = {
-      output: stringify(message.body),
+      cause: stringify(error).substring(0, 32768),
       taskToken: message.properties.jobKey,
-      error: stringify(error),
+      error: (error.code || error.name || 'UnhandledException').substring(0, 256),
     };
     const command = new SendTaskFailureCommand(params);
     return this._client.send(command);

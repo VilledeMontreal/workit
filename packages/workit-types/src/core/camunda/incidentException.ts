@@ -5,6 +5,10 @@
  */
 
 export class IncidentException extends Error {
+  public get code() {
+    return 'Workit.Incident';
+  }
+
   public get retries() {
     return 0;
   }

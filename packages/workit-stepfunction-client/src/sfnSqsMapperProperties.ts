@@ -27,7 +27,7 @@ export class SfnSqsMapperProperties {
       activityId: properties.activityId,
       businessKey: properties.businessKey,
       processInstanceId: task.ReceiptHandle,
-      workflowDefinitionVersion: Number(task.processDefinitionId.split(':')[1]),
+      workflowDefinitionVersion: properties.version === undefined ? 0 : Number(properties.version) || 0,
       workflowInstanceKey: properties.workflowInstanceKey,
       workflowKey: properties.workflowKey,
       bpmnProcessId: properties.workflowKey,
