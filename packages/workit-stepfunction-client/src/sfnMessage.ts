@@ -11,13 +11,19 @@ import { FailureException, ICamundaService, IMessage, IWorkflowProps } from '@vi
 import { Message } from '@aws-sdk/client-sqs';
 import { StepFunctionRepository } from './repositories/stepFunctionRepository';
 import { SfnSqsMapperProperties } from './sfnSqsMapperProperties';
+import { dateTimeReviver } from './utils/datetime';
+import { DISABLE_DATETIME_REVIVER } from './config/constants/params';
 
 export class SfnMessage {
   public static wrap(payload: Message, repo: StepFunctionRepository): [IMessage, ICamundaService] {
     const { Body } = payload;
-    const msg = (JSON.parse(Body || '{}') as IMessage) || Object.create(null);
+    const msg: IMessage =
+      (!DISABLE_DATETIME_REVIVER
+        ? JSON.parse(Body || '{}', dateTimeReviver)
+        : (JSON.parse(Body || '{}') as IMessage)) || Object.create(null);
+
     const properties = SfnSqsMapperProperties.map({ ...payload, Body: msg });
-    const messageWithoutSpan = { body: msg.body, properties } as IMessage;
+    const messageWithoutSpan = { body: msg.body, properties };
     return [
       messageWithoutSpan,
       {

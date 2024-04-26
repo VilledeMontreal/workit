@@ -18,13 +18,13 @@
   },
   "devDependencies": {
     "@types/node": "^20.10.3",
-    "@commitlint/cli": "^18.4.3",
-    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "codecov": "^3.8.3",
-    "lerna": "^8.0.0",
+    "lerna": "^8.1.2",
     "lerna-changelog": "^2.2.0",
-    "remark-cli": "^10.0.1",
-    "remark-preset-lint-recommended": "^6.1.2",
+    "remark-cli": "^12.0.0",
+    "remark-preset-lint-recommended": "^7.0.0",
     "typescript": "^4.9.5"
   },
   "husky": {

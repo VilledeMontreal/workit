@@ -23,7 +23,7 @@ const config = {
   queueUrl: env.AWS_SQS_QUEUE_URL || '',
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/StepFunctions.html
   apiVersion: env.AWS_API_VERSION || env.AWS_STEP_FUNCTION_API_VERSION || '2016-11-23',
-  waitTimeSeconds: env.AWS_SQS_WAIT_TIME_SECONDS || undefined,
+  waitTimeSeconds: Number(env.AWS_SQS_WAIT_TIME_SECONDS) || undefined,
 };
 
 kernel.bind(SERVICE_IDENTIFIER.stepfunction_config).toConstantValue(config);

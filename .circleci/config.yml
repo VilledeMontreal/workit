@@ -7,13 +7,13 @@ cache_1: &cache_1
     - ./package-lock.json
     - ./examples/basic/node_modules
     - ./examples/binding/node_modules
-    - ./examples/event/node_modules
     - ./examples/failure-strategy/node_modules
     - ./examples/opentelemetry/node_modules
     - ./examples/parallel/node_modules
-    - ./packages/workit-bpm-client/node_modules
     - ./packages/workit/node_modules
+    - ./packages/workit-bpm-client/node_modules
     - ./packages/workit-core/node_modules
+    - ./packages/workit-stepfunction-client/node_modules
     - ./packages/workit-types/node_modules
 
 lint: &lint

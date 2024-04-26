@@ -9,7 +9,7 @@
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
 /* eslint @typescript-eslint/no-unsafe-return: 0 */
 
-import { IVariablePayload, IWorkflowProps } from '@villedemontreal/workit-types';
+import { ICustomHeaders, IVariablePayload, IWorkflowProps } from '@villedemontreal/workit-types';
 
 export class SfnSqsMapperProperties {
   public static map(task: any): IWorkflowProps {
@@ -17,8 +17,8 @@ export class SfnSqsMapperProperties {
     let lockExpirationTime: Date | undefined;
 
     if (properties.taskTimeoutSeconds && properties.enteredTime) {
-      const startedAt = new Date(properties.enteredTime as string);
-      lockExpirationTime = new Date(startedAt.getTime() + properties.taskTimeoutSeconds * 1000 - 2000);
+      const startedAt = new Date(properties.enteredTime as string | Date);
+      lockExpirationTime = new Date(startedAt.getTime() + Number(properties.taskTimeoutSeconds) * 1000);
     } else {
       // default
       lockExpirationTime = new Date(new Date().getTime() + 60_000);
@@ -51,7 +51,11 @@ export class SfnSqsMapperProperties {
 
   private static _getCustomHeaders(task: any) {
     const meta = SfnSqsMapperProperties._getMeta(task);
-    const customHeaders = { messageId: task.MessageId, MD5OfBody: task.MD5OfBody };
+    const customHeaders: ICustomHeaders = {
+      messageId: task.MessageId as string,
+      MD5OfBody: task.MD5OfBody as string,
+      enteredTime: task.Body.properties.enteredTime as Date | string,
+    };
     if (meta && typeof meta.customHeaders === 'object') {
       Object.assign(customHeaders, meta.customHeaders);
     }

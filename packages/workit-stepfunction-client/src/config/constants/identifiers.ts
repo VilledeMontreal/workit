@@ -8,9 +8,13 @@ import { SERVICE_IDENTIFIER as CORE_IDENTIFIER } from '@villedemontreal/workit-c
 export const SERVICE_IDENTIFIER = {
   ...CORE_IDENTIFIER,
   /**
-   * Bind the repository
+   * Bind the Camunda repository
    */
   camunda_repository: Symbol('camunda_repository'),
+  /**
+   * Bind the Step function repository
+   */
+  stepfunction_repository: Symbol('stepfunction_repository'),
   /**
    * Bind the Generic client you want to use
    */

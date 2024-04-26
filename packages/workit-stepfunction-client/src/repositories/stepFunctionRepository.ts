@@ -21,6 +21,7 @@ import {
   SendTaskHeartbeatCommandOutput,
   SendTaskHeartbeatCommand,
 } from '@aws-sdk/client-sfn';
+import { MAX_ERROR_CAUSE_LENGTH, MAX_ERROR_CODE_LENGTH, MAX_PAYLOAD_LENGTH } from '../config/constants/params';
 
 /* eslint @typescript-eslint/no-unsafe-assignment: 0 */
 /* eslint @typescript-eslint/no-unsafe-call: 0 */
@@ -56,7 +57,7 @@ export class StepFunctionRepository {
   public sendTaskSuccess(message: IMessage): Promise<SendTaskSuccessCommandOutput> {
     const payload = JSON.stringify(message.body);
 
-    if (payload.length > 262144) {
+    if (payload.length > MAX_PAYLOAD_LENGTH) {
       throw new IncidentException("payload (message.body) can't exceed 256KB");
     }
 
@@ -67,9 +68,9 @@ export class StepFunctionRepository {
 
   public sendTaskFailure(error: NodeJS.ErrnoException, message: IMessage): Promise<SendTaskFailureCommandOutput> {
     const params = {
-      cause: stringify(error).substring(0, 32768),
+      cause: stringify(error).substring(0, MAX_ERROR_CAUSE_LENGTH),
       taskToken: message.properties.jobKey,
-      error: (error.code || error.name || 'UnhandledException').substring(0, 256),
+      error: (error.code || error.name || 'UnhandledException').substring(0, MAX_ERROR_CODE_LENGTH),
     };
     const command = new SendTaskFailureCommand(params);
     return this._client.send(command);
