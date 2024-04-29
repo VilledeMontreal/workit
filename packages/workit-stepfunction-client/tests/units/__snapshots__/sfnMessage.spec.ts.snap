@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Step function Message Step function Message wrap should behave like Camunda Bpm Engine - meta object 1`] = `
+{
+  "MD5OfBody": "hash",
+  "a": 1,
+  "enteredTime": undefined,
+  "messageId": "id",
+}
+`;

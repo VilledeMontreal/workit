@@ -1,0 +1,11 @@
+{
+    "Comment": "A description of my state machine",
+    "StartAt": "Parallel",
+    "States": {
+        "Parallel": {
+            "Type": "Parallel",
+            "Branches": [],
+            "End": true
+        }
+    }
+}

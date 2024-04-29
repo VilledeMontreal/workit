@@ -35,7 +35,7 @@ import { inject, injectable, optional } from 'inversify';
 import { Message } from '@aws-sdk/client-sqs';
 import { StepFunctionRepository } from './repositories/stepFunctionRepository';
 
-export type IConfig = ICamundaConfig & IStepFunctionClientConfig;
+export type IConfig = Partial<ICamundaConfig> & IStepFunctionClientConfig;
 
 @injectable()
 export class SFnSQSClient implements IClient<ICamundaService>, IWorkflowClient {
@@ -47,7 +47,7 @@ export class SFnSQSClient implements IClient<ICamundaService>, IWorkflowClient {
 
   constructor(
     @inject(SF_SERVICE_IDENTIFIER.stepfunction_config) config: IConfig,
-    @inject(SF_SERVICE_IDENTIFIER.camunda_repository) @optional() repo?: StepFunctionRepository,
+    @inject(SF_SERVICE_IDENTIFIER.stepfunction_repository) @optional() repo?: StepFunctionRepository,
   ) {
     this._config = config;
     this._repo = repo || new StepFunctionRepository(this._config);
@@ -165,7 +165,7 @@ export class SFnSQSClient implements IClient<ICamundaService>, IWorkflowClient {
   }
 
   public cancelWorkflowInstance(instanceId: string): Promise<void> {
-    // https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sfn/command/StopExecutionCommand/
+    // use https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sfn/command/StopExecutionCommand/
     return Promise.reject(new Error('Not implemented exception'));
   }
 

@@ -5,5 +5,5 @@
  */
 
 export interface ICustomHeaders {
-  [custom: string]: string;
+  [custom: string]: string | Date | number | boolean;
 }
