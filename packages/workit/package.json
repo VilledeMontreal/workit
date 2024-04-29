@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit",
-  "version": "6.0.4-dev",
+  "version": "6.0.5-dev",
   "description": "Worker for Node.js system with pluggable clients that works with both AWS Step function and Camunda platform powered by TypeScript",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -8,10 +8,10 @@
   "main": "lib/src/index.js",
   "typings": "lib/src/index.d.ts",
   "dependencies": {
-    "@villedemontreal/workit-bpm-client": "^6.0.4-dev",
-    "@villedemontreal/workit-core": "^6.0.4-dev",
-    "@villedemontreal/workit-stepfunction-client": "^6.0.4-dev",
-    "@villedemontreal/workit-types": "^6.0.4-dev",
+    "@villedemontreal/workit-bpm-client": "^6.0.5-dev",
+    "@villedemontreal/workit-core": "^6.0.5-dev",
+    "@villedemontreal/workit-stepfunction-client": "^6.0.5-dev",
+    "@villedemontreal/workit-types": "^6.0.5-dev",
     "debug": "~4.3.4",
     "inversify": "6.0.2",
     "reflect-metadata": "~0.1.13"

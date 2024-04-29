@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit-stepfunction-client",
-  "version": "6.0.4-dev",
+  "version": "6.0.5-dev",
   "description": "Camunda BPM client for WorkIt that works with Camunda platform powered by TypeScript",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -10,8 +10,8 @@
   "dependencies": {
     "@aws-sdk/client-sfn": "3.563.0",
     "@aws-sdk/client-sqs": "3.563.0",
-    "@villedemontreal/workit-core": "^6.0.4-dev",
-    "@villedemontreal/workit-types": "^6.0.4-dev",
+    "@villedemontreal/workit-core": "^6.0.5-dev",
+    "@villedemontreal/workit-types": "^6.0.5-dev",
     "debug": "^4.3.4",
     "fast-safe-stringify": "~2.1.1",
     "inversify": "6.0.2",
