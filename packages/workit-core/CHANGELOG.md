@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.6-dev](https://github.com/VilledeMontreal/workit/compare/v6.0.5-dev...v6.0.6-dev) (2024-05-06)
+
+**Note:** Version bump only for package @villedemontreal/workit-core
+
+
+
+
+
 ## [6.0.5-dev](https://github.com/VilledeMontreal/workit/compare/v6.0.4-dev...v6.0.5-dev) (2024-04-29)
 
 **Note:** Version bump only for package @villedemontreal/workit-core
