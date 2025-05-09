@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2025 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -68,10 +68,15 @@ export class SFnSQSClient implements IClient<ICamundaService>, IWorkflowClient {
 
     this._topicSubscription = sqsConsumer.Consumer.create({
       queueUrl: this._config.queueUrl,
+      alwaysAcknowledge: this._config.alwaysAcknowledge === undefined ? true : this._config.alwaysAcknowledge,
       waitTimeSeconds: this._config.waitTimeSeconds,
       handleMessage: async (message: Message) => {
         const [msg, service] = SfnMessage.wrap(message, this._repo);
-        await onMessageReceived(msg, service);
+        try {
+          await onMessageReceived(msg, service);
+        } catch (error) {
+          this._getLogger().error("please check your code, this error shouldn't be catched here", error);
+        }
       },
       sqs: new SQSClient(config),
     });
