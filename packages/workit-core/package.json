@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit-core",
-  "version": "6.0.6-dev",
+  "version": "6.0.7-dev",
   "description": "This package provides default and no-op implementations of the WorkIt types for client packages.",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",
@@ -10,7 +10,7 @@
   "dependencies": {
     "@opentelemetry/api": "1.0.3",
     "@opentelemetry/core": "1.0.0",
-    "@villedemontreal/workit-types": "^6.0.6-dev",
+    "@villedemontreal/workit-types": "^6.0.7-dev",
     "debug": "~4.3.4",
     "fast-safe-stringify": "~2.1.1",
     "inversify": "6.0.2",

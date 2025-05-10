@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.7-dev](https://github.com/VilledeMontreal/workit/compare/v6.0.6-dev...v6.0.7-dev) (2025-05-10)
+
+
+### Bug Fixes
+
+* mapping and acknowledgment behaviour for sqs ([1595510](https://github.com/VilledeMontreal/workit/commit/15955109b3a13f03584c4767f755dd34bac55578))
+
+
+
+
+
 ## [6.0.6-dev](https://github.com/VilledeMontreal/workit/compare/v6.0.5-dev...v6.0.6-dev) (2024-05-06)
 
 **Note:** Version bump only for package workit-example-failure-strategy
