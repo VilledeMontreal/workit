@@ -10,50 +10,46 @@ npm i @villedemontreal/workit-stepfunction-client
 
 ## How to use 
 
-TODO: update for step-function lib
-
 ```js
-    import { BasicAuthInterceptor, Client as CamundaExternalClient } from 'camunda-external-task-client-js';
-    
-    const basicOauth = { username: 'admin', password: 'admin123' };
+  const env = process.env;
+  const config = {
+    region: env.AWS_REGION || '',
+    credentials: {
+      accessKeyId: env.AWS_ACCESS_KEY_ID || '',
+      secretAccessKey: env.AWS_SECRET_ACCESS_KEY || ''
+    },
+    queueUrl: env.AWS_SQS_QUEUE_URL || '',
+    apiVersion: env.AWS_API_VERSION '2016-11-23',
+    waitTimeSeconds: env.AWS_SQS_WAIT_TIME_SECONDS || undefined,
+    workerId: camundaConfig.worker.id
+  };
 
-    const config = {
-      maxTasks: 32,
-      workerId: 'demo',
-      baseUrl: `http://localhost:8080/engine-rest`,
-      topicName: 'topic_demo',
-      bpmnKey: 'BPMN_DEMO',
-      autoPoll: false,
-      interceptors: [new BasicAuthInterceptor(basicOauth)]
-    };
-
-    const clientLib: ICamundaClient = new CamundaExternalClient(config);
-    const client = new CamundaBpmClient(config, clientLib);
+  const clientLib = new StepFunctionClient(config);
+  const client = new SFnSQSClient(config, clientLib);
     
-    await client.deployWorkflow('deploy-your.bpmn');
-    await client.createWorkflowInstance({
-        bpmnProcessId: "BPMN_DEMO",
-        variables: {
-            amount: 1000,
-            hello: "world"
-        }
-    });
-    await client.subscribe(async (message, service) => {
-      // do something
-    });
-    
-    // client contains other useful methods
+  await client.deployWorkflow('deploy-your.bpmn');
+  await client.createWorkflowInstance({
+      bpmnProcessId: "BPMN_DEMO",
+      variables: {
+          amount: 1000,
+          hello: "world"
+      }
+  });
+  await client.subscribe(async (message, service) => {
+    // do something
+  });
+  
+  // client contains other useful methods
 ```
 
 ## Start a worker
 
 ```js
     import { NodeTracer } from '@opentelemetry/node';
-    import { BasicAuthInterceptor, Client as CamundaExternalClient } from 'camunda-external-task-client-js';
     import { FailureStrategySimple, SCProcessHandler, SuccessStrategySimple, Worker } from '@villedemontreal/workit-core';
 
-    const clientLib: ICamundaClient = new CamundaExternalClient(config);
-    const client = new CamundaBpmClient(config, clientLib);
+    const clientLib = new StepFunctionClient(config);
+    const client = new SFnSQSClient(config, clientLib);
     const successHandler = new SuccessStrategySimple();
     const failureHandler = new FailureStrategySimple();
     const tracer = new NodeTracer();

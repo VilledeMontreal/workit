@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Ville de Montreal. All rights reserved.
+ * Copyright (c) 2025 Ville de Montreal. All rights reserved.
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
@@ -26,7 +26,7 @@ export class SfnSqsMapperProperties {
     return {
       activityId: properties.activityId,
       businessKey: properties.businessKey,
-      processInstanceId: task.processInstanceId,
+      processInstanceId: properties.processInstanceId,
       workflowDefinitionVersion: properties.version === undefined ? 1 : Number(properties.version) || 1,
       workflowInstanceKey: properties.workflowInstanceKey,
       workflowKey: properties.workflowKey,
