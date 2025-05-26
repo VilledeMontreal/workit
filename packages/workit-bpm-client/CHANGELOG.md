@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.9-dev](https://github.com/VilledeMontreal/workit/compare/v6.0.8-dev...v6.0.9-dev) (2025-05-26)
+
+
+### Bug Fixes
+
+* lerna issue with package-lock.json ([3f60ab3](https://github.com/VilledeMontreal/workit/commit/3f60ab3214fd7dad51a95eebda88142ca0abc60b))
+
+
+
+
+
 ## [6.0.8-dev](https://github.com/VilledeMontreal/workit/compare/v6.0.7-dev...v6.0.8-dev) (2025-05-26)
 
 **Note:** Version bump only for package @villedemontreal/workit-bpm-client
