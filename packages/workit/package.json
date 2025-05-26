@@ -49,6 +49,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
+    "genPackagelock": "npm i --package-lock-only --workspaces false",
     "test": "jest --testPathIgnorePatterns integration --coverage",
     "test:all": "jest **/tests/**/*.spec.ts --coverage",
     "compile": "rm -rf ./lib/ && npm run build",
