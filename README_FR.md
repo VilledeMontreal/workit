@@ -1,31 +1,38 @@
-# WorkIt
+# WorkIt 🚀
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) ![npm](https://img.shields.io/npm/v/@villedemontreal/workit-types)
 
-✨ Worker extensible pour Node.js fonctionnant avec les plates-formes AWS Step function et Camunda BPM optimisées par TypeScript ✨
+✨ **Worker extensible pour Node.js fonctionnant avec les plates-formes AWS Step function et Camunda BPM optimisées par TypeScript** ✨
 
-## Motivation
+
+
+## 🚦 Motivation
 
 Nous avions besoin d'un framework pour nous aider à développer rapidement des Workers. Ces derniers sont utilisés pour exécuter des tâches.
 
-Ce framework offre les avantages suivants:
--   Expérimenter et choisir la plate-forme Camunda, AWS Step function ou d'autres sans réécrire la logique métier.
+Ce framework offre les avantages suivants :
+-   Expérimenter et choisir la plate-forme Camunda, AWS Step Functions ou d'autres sans réécrire la logique métier.
 -   Au lieu de dépendre directement d'un client Camunda, ce projet fournit une couche d'abstraction. De cette façon, il est plus facile de changer de client ou de créer le vôtre.
 -   Vous voulez avoir une standardisation des workers.
 -   L'uniformisation. En effet, vous pouvez utiliser plusieurs plates-formes en fonction des besoins du projet.
 -   Ajout de fonctionnalités comme l'automatisation des traces (incluant la propagation).
--   Ce Framework impose la parité des fonctionnalités entre AWS Step function et Camunda BPM via les bibliothèques clientes. Certaines fonctionnalités exposées à la plate-forme Camunda BPM ne sont pas présentes dans ce package car nous ne pourrions pas les fournir si nous passons à AWS Step function. Cette limitation est destinée à guider les développeurs dans la préparation de la migration.
+-   Ce Framework impose la parité des fonctionnalités entre AWS Step Functions et Camunda BPM via les bibliothèques clientes. Certaines fonctionnalités exposées à la plate-forme Camunda BPM ne sont pas présentes dans ce package car nous ne pourrions pas les fournir si nous passons à AWS Step Functions. Cette limitation est destinée à guider les développeurs dans la préparation de la migration.
 
-## Démarrage rapide
+
+## 🏁 Démarrage rapide
 
 [Commencez en 2 minutes](getting-started/README.md).
 
-## Documentation
+
+
+## 📚 Documentation
 
 -   [La documentation est disponible dans ce dossier](packages/workit/.docs/)
 -   Une documentation complète sur l'API est disponible [en ligne](https://villedemontreal.github.io/workit/) et dans le sous répertoire `docs`
 
-## Librairies
+
+
+## 📦 Librairies
 
 ### API
 
@@ -40,18 +47,25 @@ Ce framework offre les avantages suivants:
 | ----------------------- | -----------------|
 | [workit-bpm-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) | Ce module fournit un contrôle complet pour intéragir avec la plateforme Camunda Bpm.<br> Il utilise [`camunda-external-task-client-js`](https://github.com/camunda/camunda-external-task-client-js) par défaut. |
 | [workit-stepfunction-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-stepfunction-client) | Ce module fournit un contrôle complet pour intéragir avec la plateforme Step functions.<br> Par défaut, il utilise `@aws-sdk/client-sqs`, `@aws-sdk/client-sfn`. |
-## L'installation
+
+---
+
+## ⚙️ Installation
 
 ```bash
 npm i @villedemontreal/workit
 ```
 ou utiliser le générateur en dessous
 
-## Comment utiliser
+
+## ⚡ Comment utiliser
 
 Basculer entre les plateformes est simple, il suffit de spécifier un `TAG` pour l'IoC.
 
-### Rouler le worker
+- TAG.camundaBpm (Camunda)
+- TAG.stepFunction (AWS Step Functions)
+
+### ▶️ Rouler le worker
 
 ```javascript
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
@@ -60,7 +74,7 @@ worker.start();
 worker.run();
 ```
 
-### Déployer un workflow
+### 📤 Déployer un workflow
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
@@ -68,21 +82,21 @@ const fullpath = `${process.cwd()}/sample/BPMN_DEMO.bpmn`;
 await manager.deployWorkflow(fullpath);
 ```
 
-### Obtenir les flux de travail
+### 📋 Obtenir les flux de travail
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 await manager.getWorkflows()
 ```
 
-### Obtenir un flux de travail
+### 📄 Obtenir un flux de travail
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 await manager.getWorkflow({ bpmnProcessId: "DEMO" });
 ```
 
-### Créer une instance de flux de travail
+### 🆕 Créer une instance de flux de travail
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
@@ -94,7 +108,7 @@ await manager.createWorkflowInstance({
 });
 ```
 
-### Définir les tâches (vos activités bpmn)
+### 🛠️ Définir les tâches (vos activités bpmn)
 
 Vous pouvez définir plusieurs tâches pour un seul Worker. Il traitera tous les messages et acheminera les requêtes vers les bonnes tâches.
 
@@ -125,7 +139,9 @@ Vous pouvez même faire des liaisons complexes comme
 IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { bpmnProcessId: BPMN_PROCESS_ID, version: 2 });
 ```
 
-### Cycle de vie et événements des Workers
+---
+
+### 🔄 Cycle de vie et événements des Workers
 
 ```javascript
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm); 
@@ -162,7 +178,9 @@ worker.run(); // Promise
 worker.stop(); // Promise
 ```
 
-### Les intercepteurs
+---
+
+### 🛡️ Les intercepteurs
 
 ```javascript
 const workerConfig = {
@@ -177,7 +195,9 @@ const workerConfig = {
 IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
-### Open-telemetry
+---
+
+### 📈 Open-telemetry
 Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit étandre [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-api/src/trace/tracer.ts#L29). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
 
 ```javascript
@@ -226,13 +246,17 @@ Vous pouvez consulter le dossier `sample` où nous fournissons un exemple (paral
 
 [Voir le tutoriel relié aux traces](packages/workit/.docs/WORKER.md#add-traces-to-your-worker-with-opentelemetry)
 
-### Définissez votre configuration pour la plate-forme que vous souhaitez utiliser
+---
+
+### ⚙️ Définissez votre configuration pour la plate-forme que vous souhaitez utiliser
 
 TODO: show for step function
 
-### Définissez vos stratégies en cas d'échec ou de succès
+---
 
-Par défaut, nous définissons une stratégie simple de réussite ou d’échec.
+### 🧩 Définissez vos stratégies en cas d'échec ou de succès
+
+Par défaut, nous définissons une stratégie simple de réussite ou d'échec.
 Nous vous recommandons vivement de fournir la vôtre car votre application déclenche des exceptions spécifiques.
 Les stratégies sont automatiquement traitées.
 Si une exception se dégage de la tâche, une stratégie d'échec est invoquée, sinon c'est un succès et la stratégie de succès est invoquée.
@@ -276,7 +300,9 @@ const strategy = new FailureStrategy([
 IoC.bindToObject(strategy, CORE_IDENTIFIER.failure_strategy);
 ```
 
-## Rouler les tests
+---
+
+## 🧪 Rouler les tests
 
 Nous utilisons Jest.
 
@@ -284,7 +310,9 @@ Nous utilisons Jest.
 npm test
 ```
 
-## Construit avec
+---
+
+## 🏗️ Construit avec
 
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - client nodejs pour Camunda BPM
 *   [@aws-sdk/client-sqs](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sqs/) - client nodejs pour recevoir les messages de la file d'attente
@@ -292,13 +320,17 @@ npm test
 *   [inversify](https://github.com/inversify/InversifyJS) - injection de dépendance
 *   [opentelemetry](https://opentelemetry.io/) - ajouter de l'instrumentation aux opérations
 
-## Philosophie
+---
+
+## 💡 Philosophie
 
 1.  Autorisez les développeurs Javascript à écrire du code conforme aux principes SOLID.
-2.  Faciliter et encourager l’adhésion aux meilleures pratiques de POO et d’IoC.
+2.  Faciliter et encourager l'adhésion aux meilleures pratiques de POO et d'IoC.
 3.  Ajoutez le moins de temps système possible.
 
-## Docker
+---
+
+## 🐳 Docker
 
 ### Camunda BPM
 ```bash
@@ -307,8 +339,9 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 ```
 [Plus de détails](https://github.com/camunda/docker-camunda-bpm-platform)
 
+---
 
-## Gestion des versions
+## 🏷️ Gestion des versions
 
 Nous utilisons [SemVer](http://semver.org/) pour la gestion des versions. Pour les versions disponibles, voir les [balises sur ce référentiel](https://github.com/VilledeMontreal/workit/tags).
 
@@ -316,15 +349,20 @@ workit | AWS Step function | Camunda BPM
 -- | -- | -- 
 \>=6.0.0 | tous | 7.6 to latest
 
+---
 
-## Mainteneurs
+## 👥 Mainteneurs
 
 Voir aussi la liste des [contributeurs](CONTRIBUTORS.md) ayant participé à ce projet.
 
-## Contribuer
+---
+
+## 🤝 Contribuer
 
 Veuillez lire [CONTRIBUTING.md](CONTRIBUTING_FR.md) pour plus de détails sur notre code de conduite et sur le processus de soumission des demandes.
 
-## Licence
+---
+
+## 📄 Licence
 
 Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails
