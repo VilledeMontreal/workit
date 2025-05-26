@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "postinstall": "lerna run genPackagelock",
     "fix": "lerna run fix",
     "predocs-test": "npm docs",
     "docs-test": "lerna run docs-test",

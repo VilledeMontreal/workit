@@ -8,6 +8,7 @@
 	"main": "lib/src/index.js",
 	"typings": "lib/src/index.d.ts",
 	"scripts": {
+		"genPackagelock": "npm i --package-lock-only --workspaces false",
 		"test": "jest --testPathIgnorePatterns integration --coverage",
 		"test:all": "jest **/tests/**/*.spec.ts --coverage",
 		"compile": "rm -rf ./lib/ && npm run build",
