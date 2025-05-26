@@ -1,27 +1,30 @@
-# WorkIt
+# WorkIt 🚀
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/) ![npm](https://img.shields.io/npm/v/@villedemontreal/workit-types)
 
-[Français](README_FR.md)
+[🇫🇷 Français](README_FR.md)
 
-✨Extensible worker for Node.js that works with both AWS Step function and Camunda BPM platforms powered by TypeScript ✨
+✨ **Extensible worker for Node.js that works with both AWS Step function and Camunda BPM platforms powered by TypeScript** ✨
 
-## Motivation
+
+## 🚦 Motivation
 
 We needed a framework to help us quickly build workers used to execute tasks.
 
 This package can be useful because:
--   Experiment and choose the platform you want without rewritting the business logic. Today, only Camunda and AWS Step function clients are maintained
--   Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it’s easier to change the client or to make your own.
+-   Experiment and choose the platform you want without rewriting the business logic. Today, only Camunda and AWS Step functions clients are maintained
+-   Instead of depending directly from a Camunda client, this project provides an abstraction layer. This way it's easier to change the client or to make your own.
 -   You want to have a worker standardization.
 -   Uniformisation. Indeed, you can use both platforms depending project needs.
 -   Added features like automated tracing.
 
-## Quickstart
+
+## 🏁 Quickstart
 
 [Get started in 2 minutes](getting-started/README.md).
 
-## Documentation
+
+## 📚 Documentation
 
 -   [Documentation is available in this folder](packages/workit/.docs/)
 -   Comprehensive API documentation is available [online](https://villedemontreal.github.io/workit/) and in the `docs` subdirectory
@@ -41,17 +44,22 @@ This package can be useful because:
 | [workit-bpm-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-bpm-client) | This module provides a full control over the Camunda Bpm platform.<br> It use [`camunda-external-task-client-js`](https://github.com/camunda/camunda-external-task-client-js) by default. |
 | [workit-stepfunction-client](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-stepfunction-client) | This module provides a full control over the Step functions platform.<br> It use `@aws-sdk/client-sqs`, `@aws-sdk/client-sfn` by default. |
 
-## Installing
+---
+
+## 📦 Installing
 
 ```bash
 npm i @villedemontreal/workit
 ```
 
-## How to use
+
+## ⚡ How to use
 
 Switching between platforms is easy as specifying a `TAG` to the IoC.
+- TAG.camundaBpm (Camunda platform)
+- TAG.stepFunction (AWS Step Functions platform)
 
-### Run worker
+### ▶️ Run worker
 
 ```javascript
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
@@ -60,7 +68,7 @@ worker.start();
 worker.run();
 ```
 
-### Deploy a workflow
+### 📤 Deploy a workflow
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
@@ -68,21 +76,21 @@ const fullpath = `${process.cwd()}/sample/BPMN_DEMO.bpmn`;
 await manager.deployWorkflow(fullpath);
 ```
 
-### Get workflows
+### 📋 Get workflows
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 await manager.getWorkflows()
 ```
 
-### Get a workflow
+### 📄 Get a workflow
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
 await manager.getWorkflow({ bpmnProcessId: "DEMO" });
 ```
 
-### Create workflow instance
+### 🆕 Create workflow instance
 
 ```javascript
 const manager = IoC.get<IWorkflowClient>(CORE_IDENTIFIER.client_manager, TAG.camundaBpm);
@@ -94,7 +102,7 @@ await manager.createWorkflowInstance({
 });
 ```
 
-### Define tasks (your bpmn activities)
+### 🛠️ Define tasks (your bpmn activities)
 
 You can define many tasks to one worker. It will handle all messages and will route to the right tasks.
 
@@ -127,7 +135,9 @@ IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { bpmnProcessId: BPMN
 If you have installed `workit-cli`, you can do `workit create task` 
 and everything will be done for you.
 
-### Worker life cycle and events
+---
+
+### 🔄 Worker life cycle and events
 
 ```javascript
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
@@ -163,7 +173,9 @@ worker.run(); // Promise
 worker.stop(); // Promise
 ```
 
-### Interceptors
+---
+
+### 🛡️ Interceptors
 
 ```javascript
 const workerConfig = {
@@ -178,8 +190,10 @@ const workerConfig = {
 IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ```
 
-### OpenTelemetry
-By default, we bound a `NoopTracer` but you can provide your own and it must extend [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-api/src/trace/tracer.ts#L29).We strongly recommand to use this kind of pattern in your task: [Domain Probe pattern](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). But here an example:
+---
+
+### 📈 OpenTelemetry
+By default, we bound a `NoopTracer` but you can provide your own and it must extend [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-api/src/trace/tracer.ts#L29). We strongly recommend to use this kind of pattern in your task: [Domain Probe pattern](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). But here an example:
 
 ```javascript
 // Simply bind your custom tracer object like this
@@ -227,16 +241,20 @@ You can look to `sample` folder where we provide an example (parallel.ts) using 
 
 [See get started section with OpenTelemetry](packages/workit/.docs/WORKER.md#add-traces-to-your-worker-with-opentelemetry)
 
-### Define your config for the platform you want to use
+---
+
+### ⚙️ Define your config for the platform you want to use
 
 TODO show for step function
 
-### Define your strategies in case of failure or success
+---
+
+### 🧩 Define your strategies in case of failure or success
 
 By default, we define simple strategy for success or failure. 
 We strongly recommend you to provide yours as your app trigger specific exceptions.
 Strategies are automatically handled.
-If an exeption is bubble up from the task, failure strategy  is raised, otherwise it's success.
+If an exception is bubble up from the task, failure strategy  is raised, otherwise it's success.
 
 ```javascript
 // the idea is to create your own but imagine that your worker works mainly with HTTP REST API
@@ -277,7 +295,9 @@ const strategy = new FailureStrategy([
 IoC.bindToObject(strategy, CORE_IDENTIFIER.failure_strategy);
 ```
 
-## Running the tests
+---
+
+## 🧪 Running the tests
 
 We use Jest.
 
@@ -285,7 +305,9 @@ We use Jest.
 npm test
 ```
 
-## Built With
+---
+
+## 🏗️ Built With
 
 *   [camunda-external-task-client-js](https://github.com/camunda/camunda-external-task-client-js) - nodejs client for Camunda BPM
 *   [@aws-sdk/client-sqs](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sqs/) - nodejs client for receiving messages from the queue
@@ -293,13 +315,17 @@ npm test
 *   [inversify](https://github.com/inversify/InversifyJS) - dependency injection
 *   [opentelemetry](https://opentelemetry.io/) - add instrumentation to the operations (provides a single set of APIs, libraries to capture distributed traces)
 
-## Philosophy
+---
+
+## 💡 Philosophy
 
 1.  Allow Javascript developers to write code that adheres to the SOLID principles.
 2.  Facilitate and encourage the adherence to the best OOP and IoC practices.
 3.  Add as little runtime overhead as possible.
 
-## Docker
+---
+
+## 🐳 Docker
 
 ### Bpmn platform
 ```bash
@@ -308,7 +334,9 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 ```
 [More details](https://github.com/camunda/docker-camunda-bpm-platform)
 
-## TODO
+---
+
+## 📝 TODO
 <details>
 <summary>Click to expand</summary>
 
@@ -319,7 +347,9 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 -   Add metrics by using prometheus lib
 </details>
 
-## Versionning
+---
+
+## 🏷️ Versionning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/VilledeMontreal/workit/tags).
 
@@ -327,14 +357,20 @@ workit | AWS Step function | Camunda BPM
 -- | -- | -- 
 \>=6.0.0 | all | 7.6 to latest
 
-## Maintainers
+---
+
+## 👥 Maintainers
 
 See the list of [contributors](CONTRIBUTORS.md) who participated in this project.
 
-## Contributing
+---
+
+## 🤝 Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## License
+---
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
