@@ -132,9 +132,6 @@ You can even make complex binding like
 IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { bpmnProcessId: BPMN_PROCESS_ID, version: 2 });
 ```
 
-If you have installed `workit-cli`, you can do `workit create task` 
-and everything will be done for you.
-
 ---
 
 ### 🔄 Worker life cycle and events

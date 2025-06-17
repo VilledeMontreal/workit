@@ -5,7 +5,7 @@
 This package provides default and no-op implementations of the WorkIt types for client packages.
 
 ```bash
-npm i workit-core
+npm i @villedemontreal/workit-core
 ```
 
 ## Useful links

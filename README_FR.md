@@ -5,7 +5,6 @@
 ✨ **Worker extensible pour Node.js fonctionnant avec les plates-formes AWS Step function et Camunda BPM optimisées par TypeScript** ✨
 
 
-
 ## 🚦 Motivation
 
 Nous avions besoin d'un framework pour nous aider à développer rapidement des Workers. Ces derniers sont utilisés pour exécuter des tâches.
@@ -23,25 +22,23 @@ Ce framework offre les avantages suivants :
 
 [Commencez en 2 minutes](getting-started/README.md).
 
-
-
 ## 📚 Documentation
 
 -   [La documentation est disponible dans ce dossier](packages/workit/.docs/)
 -   Une documentation complète sur l'API est disponible [en ligne](https://villedemontreal.github.io/workit/) et dans le sous répertoire `docs`
-
+-   [📖 Exemples](examples)
 
 
 ## 📦 Librairies
 
-### API
+### 🔧 API
 
 | Librairie               | Description |
 | ----------------------- | -----------------|
 | [workit-types](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-types) | Cette librairie fournit les interfaces / enums TypeScript pour les classes de Workit|
 | [workit-core](https://github.com/VilledeMontreal/workit/tree/master/packages/workit-core) | Cette librairie fournit les implémentations par défaut de la librairie "Workit types" |
 
-### Implémentation / Clients
+### 🔌 Implémentation / Clients
 
 | Librairie               | Description |
 | ----------------------- | -----------------|
@@ -57,13 +54,12 @@ npm i @villedemontreal/workit
 ```
 ou utiliser le générateur en dessous
 
-
 ## ⚡ Comment utiliser
 
 Basculer entre les plateformes est simple, il suffit de spécifier un `TAG` pour l'IoC.
 
-- TAG.camundaBpm (Camunda)
-- TAG.stepFunction (AWS Step Functions)
+- `TAG.camundaBpm` (Camunda)
+- `TAG.stepFunction` (AWS Step Functions)
 
 ### ▶️ Rouler le worker
 
@@ -134,11 +130,10 @@ enum LOCAL_IDENTIFIER {
 IoC.bindTo(HelloWorldTask, LOCAL_IDENTIFIER.sample_activity);
 ```
 
-Vous pouvez même faire des liaisons complexes comme
+Vous pouvez même faire des liaisons complexes comme :
 ```javascript
 IoC.bindTask(HelloWorldTaskV2, LOCAL_IDENTIFIER.activity1, { bpmnProcessId: BPMN_PROCESS_ID, version: 2 });
 ```
-
 ---
 
 ### 🔄 Cycle de vie et événements des Workers
@@ -198,7 +193,8 @@ IoC.bindToObject(workerConfig, CORE_IDENTIFIER.worker_config);
 ---
 
 ### 📈 Open-telemetry
-Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit étandre [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-api/src/trace/tracer.ts#L29). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
+
+Par défaut, nous lions un `NoopTracer` mais vous pouvez en fournir un et il doit étendre [Tracer](https://github.com/open-telemetry/opentelemetry-js/blob/master/packages/opentelemetry-api/src/trace/tracer.ts#L29). Nous vous recommandons fortement d'utiliser ce type de pattern dans vos tâches : [le pattern "Domain Probe"](https://martinfowler.com/articles/domain-oriented-observability.html#DomainProbesEnableCleanerMore-focusedTests). Mais voici un exemple :
 
 ```javascript
 // Simply bind your custom tracer object like this
@@ -242,9 +238,10 @@ export class HelloWorldTask extends TaskBase<IMessage> {
   }
 }
 ```
+
 Vous pouvez consulter le dossier `sample` où nous fournissons un exemple (parallel.ts) en utilisant [Jaeger](https://www.jaegertracing.io/docs/latest/).
 
-[Voir le tutoriel relié aux traces](packages/workit/.docs/WORKER.md#add-traces-to-your-worker-with-opentelemetry)
+[📖 Voir le tutoriel relié aux traces](packages/workit/.docs/WORKER.md#add-traces-to-your-worker-with-opentelemetry)
 
 ---
 
@@ -324,20 +321,20 @@ npm test
 
 ## 💡 Philosophie
 
-1.  Autorisez les développeurs Javascript à écrire du code conforme aux principes SOLID.
+1.  Permettre aux développeurs Javascript d'écrire du code conforme aux principes SOLID.
 2.  Faciliter et encourager l'adhésion aux meilleures pratiques de POO et d'IoC.
-3.  Ajoutez le moins de temps système possible.
+3.  Ajouter le moins de surcharge d'exécution possible.
 
 ---
 
 ## 🐳 Docker
 
-### Camunda BPM
+### 🏢 Camunda BPM
 ```bash
 docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 // Go: http://localhost:8080/camunda - user/password : `demo/demo`
 ```
-[Plus de détails](https://github.com/camunda/docker-camunda-bpm-platform)
+[📖 Plus de détails](https://github.com/camunda/docker-camunda-bpm-platform)
 
 ---
 
@@ -345,9 +342,9 @@ docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 
 Nous utilisons [SemVer](http://semver.org/) pour la gestion des versions. Pour les versions disponibles, voir les [balises sur ce référentiel](https://github.com/VilledeMontreal/workit/tags).
 
-workit | AWS Step function | Camunda BPM
--- | -- | -- 
-\>=6.0.0 | tous | 7.6 to latest
+| workit | AWS Step function | Camunda BPM |
+| ------ | ----------------- | ----------- |
+| >=6.0.0 | tous | 7.6 to latest |
 
 ---
 
