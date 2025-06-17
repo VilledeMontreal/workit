@@ -5,7 +5,7 @@
 ## Installing
 
 ```bash
-npm i workit-bpm-client
+npm i @villedemontreal/workit-bpm-client
 ```
 
 ## How to use 
