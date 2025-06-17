@@ -33,7 +33,17 @@ describe('Step function Message', () => {
     MD5OfBody: 'hash',
     Body: JSON.stringify({
       body: { a: 1, b: true, c: cDate, d: { d1: new Date() }, e: [] },
-      properties: { customHeaders: {} } as any,
+      properties: {
+        customHeaders: {},
+        activityId: 'activity-123',
+        processInstanceId: 'process-123',
+        workflowInstanceKey: 'workflow-instance-123',
+        workflowKey: 'workflow-123',
+        bpmnProcessId: 'bpmn-process-123',
+        topicName: 'topic-123',
+        workerId: 'worker-123',
+        jobKey: 'job-123',
+      } as any,
     }),
   };
 
