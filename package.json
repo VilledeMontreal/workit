@@ -50,6 +50,7 @@
     "./examples/failure-strategy",
     "./examples/opentelemetry",
     "./examples/parallel",
+    "./examples/plugin-metrics",
     "./packages/workit",
     "./packages/workit-bpm-client",
     "./packages/workit-stepfunction-client",

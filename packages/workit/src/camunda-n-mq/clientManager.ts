@@ -22,7 +22,7 @@ import {
 import { injectable, unmanaged } from 'inversify';
 import 'reflect-metadata';
 
-import debug from 'debug';
+import debug = require('debug');
 
 const log = debug('workit:clientManager');
 @injectable()

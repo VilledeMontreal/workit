@@ -57,7 +57,7 @@ export class StepFunctionRepository {
   public sendTaskSuccess(message: IMessage): Promise<SendTaskSuccessCommandOutput> {
     const payload = JSON.stringify(message.body);
 
-    if (payload.length > MAX_PAYLOAD_LENGTH) {
+    if (payload && payload.length > MAX_PAYLOAD_LENGTH) {
       throw new IncidentException("payload (message.body) can't exceed 256KB");
     }
 
