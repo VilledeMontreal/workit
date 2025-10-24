@@ -54,6 +54,7 @@
     "./packages/workit-bpm-client",
     "./packages/workit-stepfunction-client",
     "./packages/workit-core",
-    "./packages/workit-types"    
-  ]
+    "./packages/workit-types"
+  ],
+  "version": "6.0.1"
 }
