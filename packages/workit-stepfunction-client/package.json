@@ -25,7 +25,7 @@
     "@types/chai": "^4.2.21",
     "@types/debug": "~4.1.12",
     "@types/events": "~3.0.3",
-    "@types/form-data": "~2.5.0",
+    "@types/form-data": "~2.5.2",
     "@types/jest": "^29.5.11",
     "@types/nock": "^11.1.0",
     "@types/node": "^20.10.8",
