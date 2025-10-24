@@ -6,7 +6,7 @@
 
 import { IIoC } from '@villedemontreal/workit-types';
 import { Container, decorate, inject, injectable, multiInject } from 'inversify';
-import { isObject } from 'util';
+import { isObject } from './utils/utils';
 
 export { Container };
 
