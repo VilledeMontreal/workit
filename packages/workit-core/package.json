@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/workit-core",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "This package provides default and no-op implementations of the WorkIt types for client packages.",
   "author": "Montreal City Authors",
   "homepage": "https://github.com/VilledeMontreal/workit#readme",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.1](https://github.com/VilledeMontreal/workit/compare/v6.0.0...v6.0.1) (2025-10-24)
+
+
+### Bug Fixes
+
+* Update form-data dependency to fix vulnerabilitie ([b1f8c3e](https://github.com/VilledeMontreal/workit/commit/b1f8c3e6359a68da22ffd0cc6e486499280734c9))
+
+
+
+
+
 # [6.0.0](https://github.com/VilledeMontreal/workit/compare/v6.0.9-dev...v6.0.0) (2025-06-17)
 
 **Note:** Version bump only for package @villedemontreal/workit-bpm-client
