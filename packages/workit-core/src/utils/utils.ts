@@ -5,7 +5,7 @@
  */
 
 export const isFunction = (f: any) => typeof f === 'function';
-export const isObject = (o: any) => o !== null && typeof o === 'object';
+export const isObject = (o: any) => typeof o === 'object';
 /**
  * Applied test function on each element on the array and ANDs the results
  */
