@@ -41,7 +41,7 @@
     "@villedemontreal/workit": "^6.0.1",
     "@villedemontreal/workit-core": "^6.0.1",
     "@villedemontreal/workit-types": "^6.0.0",
-    "axios": "^1.6.2"
+    "axios": "^1.13.0"
   },
   "keywords": [
     "workit",

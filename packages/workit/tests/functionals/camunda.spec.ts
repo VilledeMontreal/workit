@@ -3,7 +3,6 @@
  * Licensed under the MIT license.
  * See LICENSE file in the project root for full license information.
  */
-import { NoopTracer } from '@opentelemetry/api/build/src/trace/NoopTracer';
 import { CamundaBpmClient, CamundaExternalClient, Utils } from '@villedemontreal/workit-bpm-client';
 import {
   FailureStrategySimple,
@@ -24,9 +23,11 @@ import { Client } from '../../src/camunda-n-mq/client';
 import { SERVICE_IDENTIFIER } from '../../src/config/constants/identifiers';
 import { FakeTask } from '../utils/fake';
 import { run } from '../utils/func-test';
+import { trace } from '@opentelemetry/api';
 
+// If no TracerProvider is configured, this will return a NoopTracer
+const NOOP_TRACER = trace.getTracer('workit:nooptracer');
 const taskName = 'sample_activity';
-const NOOP_TRACER = new NoopTracer();
 let worker: Worker;
 let successHandler: SuccessStrategySimple;
 let config: ICamundaConfig;

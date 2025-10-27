@@ -8,7 +8,7 @@
   "main": "lib/src/index.js",
   "typings": "lib/src/index.d.ts",
   "dependencies": {
-    "@opentelemetry/api": "1.0.3"
+    "@opentelemetry/api": "1.9.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
