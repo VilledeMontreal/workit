@@ -4,7 +4,6 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NoopTracer } from '@opentelemetry/api/build/src/trace/NoopTracer';
 import {
   FailureStrategySimple,
   IoC,
@@ -24,9 +23,11 @@ import * as nock from 'nock';
 import { CamundaBpmClient } from '../../src/camundaBpmClient';
 import { FakeTask } from '../utils/fake';
 import { readJsonFileSync, run } from '../utils/func-test';
+import { trace } from '@opentelemetry/api';
 
+// If no TracerProvider is configured, this will return a NoopTracer
+const NOOP_TRACER = trace.getTracer('workit:nooptracer');
 const taskName = 'sample_activity';
-const NOOP_TRACER = new NoopTracer();
 let worker: Worker;
 let successHandler: SuccessStrategySimple;
 let config: ICamundaConfig;

@@ -4,14 +4,15 @@
  * See LICENSE file in the project root for full license information.
  */
 
-import { NoopTracer } from '@opentelemetry/api/build/src/trace/NoopTracer';
 import { SCProcessHandler } from '../../src/processHandler/simpleCamundaProcessHandler';
 import { FailureStrategySimple } from '../../src/strategies/FailureStrategySimple';
 import { SuccessStrategySimple } from '../../src/strategies/SuccessStrategySimple';
 import { Worker } from '../../src/worker';
 import { FakeClient } from '../utils/fake';
+import { trace } from '@opentelemetry/api';
 
-const NOOP_TRACER = new NoopTracer();
+// If no TracerProvider is configured, this will return a NoopTracer
+const NOOP_TRACER = trace.getTracer('workit:nooptracer');
 
 describe('Worker', () => {
   it('should be an instance of Worker', () => {

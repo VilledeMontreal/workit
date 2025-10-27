@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 cache_1: &cache_1
   key: npm-cache-01-{{ checksum "package-lock.json" }}
@@ -137,11 +137,11 @@ workflows:
   version: 2
   test:
     jobs:
-      - node18:
-          filters: *docs_filters
       - node20:
           filters: *docs_filters
       - nodelts:
+          filters: *docs_filters
+      - nodecurrent:
           filters: *docs_filters
       - lint:
           filters: *docs_filters
@@ -156,21 +156,21 @@ workflows:
 
 jobs:
   # Runs the tests
-  node18:
-    docker:
-      - image: cimg/node:18.19
-    <<: *node_tests
   node20:
     docker:
-      - image: cimg/node:20.10
+      - image: cimg/node:20.19
     <<: *node_tests
-  lint:
-    docker:
-      - image: cimg/node:lts
-    <<: *lint
   nodelts:
     docker:
       - image: cimg/node:lts
+    <<: *node_tests
+  lint:
+    docker:
+      - image: cimg/node:current
+    <<: *lint
+  nodecurrent:
+    docker:
+      - image: cimg/node:current
     <<: *node_tests
 
 
