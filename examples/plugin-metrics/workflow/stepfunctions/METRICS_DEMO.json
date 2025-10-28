@@ -1,0 +1,69 @@
+{
+  "Comment": "Metrics Demo Workflow for WorkIt - Step Functions",
+  "StartAt": "CalculateTask",
+  "States": {
+    "CalculateTask": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sqs:sendMessage.waitForTaskToken",
+      "Parameters": {
+        "QueueUrl": "${QueueUrl}",
+        "MessageBody": {
+          "TaskToken.$": "$$.Task.Token",
+          "Input.$": "$",
+          "TaskName": "CalculateTask"
+        }
+      },
+      "Next": "ProcessDataTask",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "HandleError"
+        }
+      ]
+    },
+    "ProcessDataTask": {
+      "Type": "Task", 
+      "Resource": "arn:aws:states:::sqs:sendMessage.waitForTaskToken",
+      "Parameters": {
+        "QueueUrl": "${QueueUrl}",
+        "MessageBody": {
+          "TaskToken.$": "$$.Task.Token",
+          "Input.$": "$",
+          "TaskName": "ProcessDataTask"
+        }
+      },
+      "Next": "Success",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "HandleError"
+        }
+      ]
+    },
+    "Success": {
+      "Type": "Succeed",
+      "Comment": "Workflow completed successfully"
+    },
+    "HandleError": {
+      "Type": "Fail",
+      "Comment": "Workflow failed",
+      "Cause": "Task execution failed"
+    }
+  }
+}

@@ -4,9 +4,69 @@
  * See LICENSE file in the project root for full license information.
  */
 
+import { IWorkflowProps } from '@villedemontreal/workit-types';
 import { SfnSqsMapperProperties, SfnSqsMapperValidationError } from '../../src/sfnSqsMapperProperties';
 
 describe('SfnSqsMapperProperties', () => {
+  const createValidTask = (overrides?: any): any => {
+    const defaultTask = {
+      MessageId: 'msg-123',
+      MD5OfBody: 'md5-hash-456',
+      Body: {
+        properties: {
+          jobKey: 'task-token-123',
+          activityId: 'step-function-activity',
+          businessKey: 'business-456',
+          processInstanceId: 'execution-789',
+          version: 1,
+          workflowInstanceKey: 'execution-key-abc',
+          workflowKey: 'state-machine-def',
+          bpmnProcessId: 'OrderProcess',
+          retries: 0,
+          topicName: 'process-topic',
+          workerId: 'sf-worker-001',
+          enteredTime: '2023-12-01T10:00:00.000Z',
+          taskTimeoutSeconds: 300,
+          redriveCount: 0,
+        },
+      },
+    };
+
+    if (!overrides) {
+      return defaultTask;
+    }
+
+    const result = { ...defaultTask, ...overrides };
+
+    if (overrides.Body) {
+      result.Body = { ...defaultTask.Body, ...overrides.Body };
+
+      if (overrides.Body.properties) {
+        result.Body.properties = { ...defaultTask.Body.properties, ...overrides.Body.properties };
+      }
+    }
+
+    return result;
+  };
+
+  describe('SfnSqsMapperValidationError', () => {
+    it('should create validation error with message and field', () => {
+      const error = new SfnSqsMapperValidationError('Invalid field', 'testField');
+
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe('Invalid field');
+      expect(error.field).toBe('testField');
+      expect(error.name).toBe('SfnSqsMapperValidationError');
+    });
+
+    it('should extend Error properly', () => {
+      const error = new SfnSqsMapperValidationError('Test error', 'testField');
+
+      expect(error instanceof Error).toBe(true);
+      expect(error instanceof SfnSqsMapperValidationError).toBe(true);
+    });
+  });
+
   describe('map', () => {
     const mockDate = new Date('2023-01-01T12:00:00Z');
     const originalDate = global.Date;
@@ -737,6 +797,121 @@ describe('SfnSqsMapperProperties', () => {
         expect(() => SfnSqsMapperProperties.map(largeTask)).not.toThrow();
         const result = SfnSqsMapperProperties.map(largeTask);
         expect(Object.keys(result.customHeaders).length).toBeGreaterThan(1000);
+      });
+    });
+
+    describe('unmap', () => {
+      it('should throw not implemented error', () => {
+        const props: IWorkflowProps = {
+          activityId: 'test',
+          workflowDefinitionVersion: 1,
+          workflowInstanceKey: 'test',
+          workflowKey: 'test',
+          bpmnProcessId: 'test',
+          customHeaders: {},
+          jobKey: 'test',
+          lockExpirationTime: new Date(),
+          processInstanceId: 'test-instance',
+          retries: 3,
+          topicName: 'test-topic',
+          workerId: 'test-worker',
+        };
+
+        expect(() => SfnSqsMapperProperties.unmap(props)).toThrow('Not Implemented yet');
+      });
+    });
+
+    describe('real-world AWS Step Functions scenarios', () => {
+      it('should handle typical AWS SQS message from Step Functions', () => {
+        const awsMessage = {
+          MessageId: 'f1c23456-7890-1234-5678-123456789012',
+          ReceiptHandle: 'receipt-handle-123',
+          MD5OfBody: 'a1b2c3d4e5f6789012345678901234567890',
+          Body: {
+            properties: {
+              jobKey: 'arn:aws:states:us-east-1:123456789012:task:step-function:abc123-def456-789',
+              activityId: 'ProcessPayment',
+              businessKey: 'PAYMENT_12345',
+              processInstanceId: 'arn:aws:states:us-east-1:123456789012:execution:PaymentProcess:payment-execution-123',
+              version: 2,
+              workflowInstanceKey: 'payment-execution-123',
+              workflowKey: 'PaymentProcess',
+              bpmnProcessId: 'PaymentProcessStateMachine',
+              retries: 0,
+              redriveCount: 0,
+              topicName: 'payment-processing-topic',
+              workerId: 'payment-worker-001',
+              enteredTime: '2023-12-01T14:30:15.123Z',
+              taskTimeoutSeconds: 900,
+              _meta: {
+                customHeaders: {
+                  'X-Correlation-ID': 'correlation-payment-12345',
+                  'X-AWS-Region': 'us-east-1',
+                  'X-Execution-Name': 'payment-execution-123',
+                },
+              },
+            },
+          },
+        };
+
+        const result = SfnSqsMapperProperties.map(awsMessage);
+
+        expect(result).toEqual({
+          activityId: 'ProcessPayment',
+          businessKey: 'PAYMENT_12345',
+          processInstanceId: 'arn:aws:states:us-east-1:123456789012:execution:PaymentProcess:payment-execution-123',
+          workflowDefinitionVersion: 2,
+          workflowInstanceKey: 'payment-execution-123',
+          workflowKey: 'PaymentProcess',
+          bpmnProcessId: 'PaymentProcessStateMachine',
+          customHeaders: {
+            messageId: 'f1c23456-7890-1234-5678-123456789012',
+            MD5OfBody: 'a1b2c3d4e5f6789012345678901234567890',
+            enteredTime: '2023-12-01T14:30:15.123Z',
+            'X-Correlation-ID': 'correlation-payment-12345',
+            'X-AWS-Region': 'us-east-1',
+            'X-Execution-Name': 'payment-execution-123',
+          },
+          jobKey: 'arn:aws:states:us-east-1:123456789012:task:step-function:abc123-def456-789',
+          retries: 0,
+          redriveCount: 0,
+          topicName: 'payment-processing-topic',
+          workerId: 'payment-worker-001',
+          lockExpirationTime: new Date('2023-12-01T14:45:15.123Z'),
+        });
+      });
+
+      it('should handle message with retry scenario', () => {
+        const retriedMessage = createValidTask({
+          Body: {
+            properties: {
+              retries: 2,
+              redriveCount: 1,
+              enteredTime: '2023-12-01T10:00:00.000Z',
+              taskTimeoutSeconds: 60,
+            },
+          },
+        });
+
+        const result = SfnSqsMapperProperties.map(retriedMessage);
+
+        expect(result.retries).toBe(2);
+        expect(result.redriveCount).toBe(1);
+        expect(result.lockExpirationTime).toEqual(new Date('2023-12-01T10:01:00.000Z'));
+      });
+
+      it('should maintain consistency across multiple message mappings', () => {
+        const message1 = createValidTask({ MessageId: 'msg-1' });
+        const message2 = createValidTask({ MessageId: 'msg-2' });
+
+        const result1 = SfnSqsMapperProperties.map(message1);
+        const result2 = SfnSqsMapperProperties.map(message2);
+
+        expect(result1.customHeaders.messageId).toBe('msg-1');
+        expect(result2.customHeaders.messageId).toBe('msg-2');
+
+        expect(result1.activityId).toBe(result2.activityId);
+        expect(result1.workflowKey).toBe(result2.workflowKey);
       });
     });
   });

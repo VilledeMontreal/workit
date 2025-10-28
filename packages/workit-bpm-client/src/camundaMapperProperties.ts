@@ -15,17 +15,17 @@ export class CamundaMapperProperties {
   public static map(task: IVariablePayload): IWorkflowProps {
     return {
       activityId: task.activityId,
-      businessKey: task.businessKey,
-      processInstanceId: task.processInstanceId,
+      businessKey: task.businessKey === null ? undefined : task.businessKey,
+      processInstanceId: !task.processInstanceId ? (undefined as any) : task.processInstanceId,
       workflowDefinitionVersion: Number(task.processDefinitionId.split(':')[1]),
       workflowInstanceKey: task.processDefinitionId,
       workflowKey: task.processDefinitionKey,
       bpmnProcessId: task.processDefinitionKey,
       customHeaders: CamundaMapperProperties._getCustomHeaders(task),
       jobKey: task.id,
-      retries: task.retries,
-      topicName: task.topicName,
-      workerId: task.workerId,
+      retries: task.retries === null ? (undefined as any) : task.retries,
+      topicName: !task.topicName ? (undefined as any) : task.topicName,
+      workerId: !task.workerId ? (undefined as any) : task.workerId,
       lockExpirationTime: new Date(task.lockExpirationTime),
     };
   }
@@ -40,7 +40,7 @@ export class CamundaMapperProperties {
 
   private static _getCustomHeaders(task: IVariablePayload) {
     const meta = CamundaMapperProperties._getMeta(task);
-    if (meta && meta.customHeaders) {
+    if (meta && meta.customHeaders && typeof meta.customHeaders === 'object' && meta.customHeaders !== null) {
       return meta.customHeaders;
     }
     return {};

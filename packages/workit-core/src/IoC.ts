@@ -31,6 +31,10 @@ export class IOC implements IIoC {
       throw new Error('we need to have a name');
     }
 
+    if (!this._container.isBound(name)) {
+      return false;
+    }
+
     try {
       this._container.unbindSync(name);
       return true;
@@ -240,7 +244,7 @@ export class IOC implements IIoC {
   }
 
   private static _validateWorkflow(workflow: { bpmnProcessId: string; version?: number }): void {
-    if (!isObject(workflow) || typeof workflow.bpmnProcessId !== 'string') {
+    if (!workflow || !isObject(workflow) || typeof workflow.bpmnProcessId !== 'string') {
       throw new Error('workflow object is required');
     }
   }
