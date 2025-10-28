@@ -77,6 +77,7 @@ export class SFnSQSClient implements IClient<ICamundaService>, IWorkflowClient {
         } catch (error) {
           this._getLogger().error("please check your code, this error shouldn't be catched here", error);
         }
+        return message;
       },
       sqs: new SQSClient(config),
     });

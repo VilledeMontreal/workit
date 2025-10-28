@@ -5,6 +5,14 @@
  */
 export interface IIoC {
   bindToObject<T = any>(obj: T, serviceIdentifier: symbol | string, named?: string): void;
+  unbind(name: string | symbol): boolean;
+  bindTo<T = any>(
+    ctor: new (...args: any[]) => T,
+    serviceIdentifier: string | symbol,
+    dependencies?: (symbol | string)[],
+    named?: string | symbol | null,
+    singletonMode?: boolean,
+  ): void;
   bind<T = any>(
     serviceIdentifier: string,
     ctor: new (...args: any[]) => T,

@@ -9,7 +9,7 @@ import { kernel } from '@villedemontreal/workit-core';
 import { constants } from './constants';
 import { SERVICE_IDENTIFIER } from './constants/identifiers';
 
-kernel.bind(SERVICE_IDENTIFIER.logger).toConstantValue(camundaLogger).whenTargetIsDefault();
+kernel.bind(SERVICE_IDENTIFIER.logger).toConstantValue(camundaLogger).whenDefault();
 Object.values(constants.envs).forEach((env) => {
-  kernel.bind(SERVICE_IDENTIFIER.logger).toConstantValue(logger).whenTargetNamed(env);
+  kernel.bind(SERVICE_IDENTIFIER.logger).toConstantValue(logger).whenNamed(env);
 });

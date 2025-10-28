@@ -12,9 +12,9 @@
     "@villedemontreal/workit-core": "^6.0.1",
     "@villedemontreal/workit-stepfunction-client": "^6.0.1",
     "@villedemontreal/workit-types": "^6.0.0",
-    "debug": "~4.3.4",
-    "inversify": "6.0.2",
-    "reflect-metadata": "~0.1.13"
+    "debug": "~4.4.3",
+    "inversify": "7.10.4",
+    "reflect-metadata": "~0.2.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

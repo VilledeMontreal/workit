@@ -32,7 +32,7 @@ export class IOC implements IIoC {
     }
 
     try {
-      this._container.unbind(name);
+      this._container.unbindSync(name);
       return true;
     } catch (error) {
       return false;
@@ -46,7 +46,7 @@ export class IOC implements IIoC {
 
     try {
       if (name) {
-        return this._container.isBoundNamed(serviceIdentifier, name);
+        return this._container.isBound(serviceIdentifier, { name });
       }
       return this._container.isBound(serviceIdentifier);
     } catch (e) {
@@ -79,9 +79,9 @@ export class IOC implements IIoC {
     }
 
     if (named) {
-      service.whenTargetNamed(named);
+      service.whenNamed(named);
     } else {
-      service.whenTargetIsDefault();
+      service.whenDefault();
     }
   }
 
@@ -91,7 +91,7 @@ export class IOC implements IIoC {
     dependencies?: (symbol | string)[],
   ): void {
     IOC._inject(ctor, dependencies);
-    this._container.bind(serviceIdentifier).to(ctor).inSingletonScope().whenTargetIsDefault();
+    this._container.bind(serviceIdentifier).to(ctor).inSingletonScope().whenDefault();
   }
 
   // todo: merge with bindTo
@@ -100,7 +100,7 @@ export class IOC implements IIoC {
     const newObj = IOC._overrideConfig(obj, serviceIdentifier);
     const service = this._container.bind(serviceIdentifier).toConstantValue(newObj);
     if (named) {
-      service.whenTargetNamed(named);
+      service.whenNamed(named);
     }
   }
 
@@ -127,13 +127,13 @@ export class IOC implements IIoC {
       service.inSingletonScope();
     }
 
-    service.whenTargetNamed(targetNamed);
+    service.whenNamed(targetNamed);
   }
 
   public get<T>(serviceIdentifier: symbol | string, named?: string | symbol): T {
     if (named) {
-      return this._container.isBoundNamed(serviceIdentifier, named)
-        ? this._container.getNamed(serviceIdentifier, named)
+      return this._container.isBound(serviceIdentifier, { name: named })
+        ? this._container.get(serviceIdentifier, { name: named })
         : this._container.get(serviceIdentifier);
     }
     return this._container.get(serviceIdentifier);
@@ -146,7 +146,7 @@ export class IOC implements IIoC {
    */
   public getTask<T = any>(
     serviceIdentifier: symbol | string,
-    workflow?: { bpmnProcessId: string; version: number },
+    workflow?: { bpmnProcessId: string; version?: number },
   ): T {
     if (!workflow) {
       return this._container.get(serviceIdentifier);
@@ -156,12 +156,12 @@ export class IOC implements IIoC {
     const workflowVersion = workflow.version;
     const pattern = this.getWorkflowNamed(workflow);
 
-    if (workflowVersion && this._container.isBoundNamed(serviceIdentifier, pattern)) {
-      return this._container.getNamed(serviceIdentifier, pattern);
+    if (workflowVersion && this._container.isBound(serviceIdentifier, { name: pattern })) {
+      return this._container.get(serviceIdentifier, { name: pattern });
     }
 
-    if (this._container.isBoundNamed(serviceIdentifier, workflowId)) {
-      return this._container.getNamed(serviceIdentifier, workflowId);
+    if (this._container.isBound(serviceIdentifier, { name: workflowId })) {
+      return this._container.get(serviceIdentifier, { name: workflowId });
     }
     return this._container.get(serviceIdentifier);
   }
@@ -232,7 +232,7 @@ export class IOC implements IIoC {
           injection = inject(dependency);
         }
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        decorate(injection as ClassDecorator | ParameterDecorator | MethodDecorator, ctor, index);
+        decorate(injection as ParameterDecorator | ParameterDecorator[], ctor, index);
       });
     } catch {
       //

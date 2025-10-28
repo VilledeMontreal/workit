@@ -26,15 +26,13 @@ try {
 }
 
 const kernel = new Container();
-const container = new Container();
-
 kernel.bind(SERVICE_IDENTIFIER.logger).toConstantValue(NOOP_LOGGER);
 kernel.bind(SERVICE_IDENTIFIER.tracer_propagator).toConstantValue(new NoopTracerPropagator());
 kernel.bind(SERVICE_IDENTIFIER.tracer).toConstantValue(tracer);
 kernel.bind(SERVICE_IDENTIFIER.success_strategy).toConstantValue(new SuccessStrategySimple());
 kernel.bind(SERVICE_IDENTIFIER.failure_strategy).toConstantValue(new FailureStrategySimple());
 
-container.parent = kernel;
+const container = new Container({ parent: kernel });
 const IoC = new IOC(container);
 
 export { kernel, container, IoC };

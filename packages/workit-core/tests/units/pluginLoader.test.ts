@@ -99,7 +99,8 @@ describe('PluginLoader', () => {
       expect(pluginLoader['_plugins'].length).toBe(0);
       pluginLoader.load(simplePlugins);
       expect(pluginLoader['_plugins'].length).toBe(1);
-      expect(IoC.isServiceBound('test')).toBeTruthy();
+      expect(IoC.isServiceBound('test', 'simple-process')).toBeTruthy();
+      expect(IoC.getTask('test', { bpmnProcessId: 'simple-process' })).toBeTruthy();
       pluginLoader.unload();
     });
 
