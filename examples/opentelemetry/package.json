@@ -1,7 +1,7 @@
 {
   "name": "workit-example-opentelemetry",
   "private": true,
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Show how to trace operations with Workit an OpenTelemetry",
   "main": "lib/src/worker.js",
   "typings": "lib/src/worker.d.ts",
@@ -46,9 +46,9 @@
     "@opentelemetry/sdk-trace-base": "2.2.0",
     "@opentelemetry/sdk-trace-node": "2.2.0",
     "@opentelemetry/semantic-conventions": "1.37.0",
-    "@villedemontreal/workit": "^7.0.0",
-    "@villedemontreal/workit-core": "^7.0.0",
-    "@villedemontreal/workit-types": "^7.0.0",
+    "@villedemontreal/workit": "^7.0.1",
+    "@villedemontreal/workit-core": "^7.0.1",
+    "@villedemontreal/workit-types": "^7.0.1",
     "axios": "^1.13.0"
   },
   "keywords": [
