@@ -19,12 +19,62 @@ import {
   IWorkflowDefinitionRequest,
   IWorkflowOptions,
 } from '@villedemontreal/workit-types';
+// Mock debug module with full compatibility
+jest.mock('debug', () => {
+  const mockDebugInstance = jest.fn();
+  const mockDebug: any = jest.fn(() => mockDebugInstance);
+
+  // Ensure it works as both CJS and ESM
+  mockDebug.default = mockDebug;
+  mockDebug.enabled = jest.fn(() => false);
+  mockDebug.humanize = jest.fn();
+  mockDebug.coerce = jest.fn();
+  mockDebug.disable = jest.fn();
+  mockDebug.enable = jest.fn();
+  mockDebug.selectColor = jest.fn();
+  mockDebug.formatArgs = jest.fn();
+  mockDebug.save = jest.fn();
+  mockDebug.load = jest.fn();
+  mockDebug.useColors = jest.fn(() => false);
+  mockDebug.colors = [];
+  mockDebug.inspectOpts = {};
+
+  return mockDebug;
+});
+
+// Mock sqs-consumer module completely
+jest.mock('sqs-consumer', () => {
+  const mockConsumer = {
+    start: jest.fn(),
+    stop: jest.fn(),
+    on: jest.fn(),
+    off: jest.fn(),
+    emit: jest.fn(),
+    isRunning: false,
+  };
+
+  return {
+    Consumer: {
+      create: jest.fn(() => mockConsumer),
+    },
+    default: {
+      create: jest.fn(() => mockConsumer),
+    },
+  };
+});
+
+// Mock AWS SDK modules
+jest.mock('@aws-sdk/client-sqs', () => ({
+  SQSClient: jest.fn().mockImplementation(() => ({})),
+}));
+
+jest.mock('@aws-sdk/client-sfn', () => ({
+  SFNClient: jest.fn().mockImplementation(() => ({})),
+}));
+
 import { ClientManager } from '../../src/camunda-n-mq/clientManager';
 import { CamundaManager } from '../../src/camundaBpm/camundaManager';
 import { StepFunctionManager } from '../../src/stepFunction/stepFunctionManager';
-
-// Mock debug to avoid console output in tests
-jest.mock('debug', () => jest.fn(() => jest.fn()));
 
 // Mock workflow client
 const createMockWorkflowClient = (): jest.Mocked<IWorkflowClient> => ({
@@ -71,12 +121,14 @@ describe('Manager Classes', () => {
       it('should delegate to underlying client', async () => {
         const mockResponse: IDeployWorkflowResponse = {
           key: 'deployment-123',
-          workflows: [{
-            bpmnProcessId: 'test-process',
-            workflowKey: 'test-key',
-            resourceName: 'test.bpmn',
-            version: 1,
-          }],
+          workflows: [
+            {
+              bpmnProcessId: 'test-process',
+              workflowKey: 'test-key',
+              resourceName: 'test.bpmn',
+              version: 1,
+            },
+          ],
         };
         mockClient.deployWorkflow.mockResolvedValue(mockResponse);
 
@@ -90,12 +142,14 @@ describe('Manager Classes', () => {
         const override = { deploymentName: 'custom-deployment' };
         const mockResponse: IDeployWorkflowResponse = {
           key: 'deployment-456',
-          workflows: [{
-            bpmnProcessId: 'custom-process',
-            workflowKey: 'custom-key',
-            resourceName: 'custom.bpmn',
-            version: 1,
-          }],
+          workflows: [
+            {
+              bpmnProcessId: 'custom-process',
+              workflowKey: 'custom-key',
+              resourceName: 'custom.bpmn',
+              version: 1,
+            },
+          ],
         };
         mockClient.deployWorkflow.mockResolvedValue(mockResponse);
 
@@ -419,7 +473,9 @@ describe('Manager Classes', () => {
         const error = new Error('Instance not found or already completed');
         mockClient.cancelWorkflowInstance.mockRejectedValue(error);
 
-        await expect(manager.cancelWorkflowInstance(instanceId)).rejects.toThrow('Instance not found or already completed');
+        await expect(manager.cancelWorkflowInstance(instanceId)).rejects.toThrow(
+          'Instance not found or already completed',
+        );
       });
     });
   });
@@ -441,12 +497,14 @@ describe('Manager Classes', () => {
     it('should inherit all ClientManager functionality', async () => {
       const mockResponse: IDeployWorkflowResponse = {
         key: 'camunda-deployment-123',
-        workflows: [{
-          bpmnProcessId: 'camunda-process',
-          workflowKey: 'camunda-key',
-          resourceName: 'camunda.bpmn',
-          version: 1,
-        }],
+        workflows: [
+          {
+            bpmnProcessId: 'camunda-process',
+            workflowKey: 'camunda-key',
+            resourceName: 'camunda.bpmn',
+            version: 1,
+          },
+        ],
       };
       mockClient.deployWorkflow.mockResolvedValue(mockResponse);
 
@@ -494,12 +552,14 @@ describe('Manager Classes', () => {
     it('should inherit all ClientManager functionality', async () => {
       const mockResponse: IDeployWorkflowResponse = {
         key: 'sf-deployment-456',
-        workflows: [{
-          bpmnProcessId: 'step-function-process',
-          workflowKey: 'step-function-key',
-          resourceName: 'stepfunction.json',
-          version: 1,
-        }],
+        workflows: [
+          {
+            bpmnProcessId: 'step-function-process',
+            workflowKey: 'step-function-key',
+            resourceName: 'stepfunction.json',
+            version: 1,
+          },
+        ],
       };
       mockClient.deployWorkflow.mockResolvedValue(mockResponse);
 
@@ -560,21 +620,25 @@ describe('Manager Classes', () => {
       // Setup different responses for each manager
       const camundaResponse: IDeployWorkflowResponse = {
         key: 'camunda-123',
-        workflows: [{
-          bpmnProcessId: 'camunda-workflow',
-          workflowKey: 'camunda-key',
-          resourceName: 'camunda.bpmn',
-          version: 1,
-        }],
+        workflows: [
+          {
+            bpmnProcessId: 'camunda-workflow',
+            workflowKey: 'camunda-key',
+            resourceName: 'camunda.bpmn',
+            version: 1,
+          },
+        ],
       };
       const stepFunctionResponse: IDeployWorkflowResponse = {
         key: 'sf-456',
-        workflows: [{
-          bpmnProcessId: 'step-function-workflow',
-          workflowKey: 'sf-key',
-          resourceName: 'stepfunction.json',
-          version: 1,
-        }],
+        workflows: [
+          {
+            bpmnProcessId: 'step-function-workflow',
+            workflowKey: 'sf-key',
+            resourceName: 'stepfunction.json',
+            version: 1,
+          },
+        ],
       };
 
       camundaClient.deployWorkflow.mockResolvedValue(camundaResponse);
@@ -596,12 +660,14 @@ describe('Manager Classes', () => {
       // Deploy
       const deployResponse: IDeployWorkflowResponse = {
         key: 'workflow-123',
-        workflows: [{
-          bpmnProcessId: 'multi-engine-workflow',
-          workflowKey: 'multi-key',
-          resourceName: 'multi.bpmn',
-          version: 1,
-        }],
+        workflows: [
+          {
+            bpmnProcessId: 'multi-engine-workflow',
+            workflowKey: 'multi-key',
+            resourceName: 'multi.bpmn',
+            version: 1,
+          },
+        ],
       };
       camundaClient.deployWorkflow.mockResolvedValue(deployResponse);
 
@@ -646,10 +712,12 @@ describe('Manager Classes', () => {
       stepFunctionClient.createWorkflowInstance.mockRejectedValue(instanceError);
 
       await expect(camundaManager.deployWorkflow('/invalid/path')).rejects.toThrow('Deployment failed');
-      await expect(stepFunctionManager.createWorkflowInstance({
-        bpmnProcessId: 'invalid',
-        variables: {},
-      })).rejects.toThrow('Instance creation failed');
+      await expect(
+        stepFunctionManager.createWorkflowInstance({
+          bpmnProcessId: 'invalid',
+          variables: {},
+        }),
+      ).rejects.toThrow('Instance creation failed');
     });
   });
 });

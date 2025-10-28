@@ -19,14 +19,14 @@ describe('MetricsPlugin', () => {
       bind: jest.fn(),
       get: jest.fn(),
       getTask: jest.fn(),
-      bindTask: jest.fn()
+      bindTask: jest.fn(),
     } as any;
 
     mockLogger = {
       info: jest.fn(),
       warn: jest.fn(),
       error: jest.fn(),
-      debug: jest.fn()
+      debug: jest.fn(),
     } as any;
 
     config = {
@@ -35,12 +35,12 @@ describe('MetricsPlugin', () => {
       httpEndpoint: {
         enabled: false,
         port: 3001,
-        path: '/metrics'
+        path: '/metrics',
       },
       persistence: {
         enabled: false,
-        file: './test-metrics.json'
-      }
+        file: './test-metrics.json',
+      },
     } as IMetricsPluginConfig;
 
     plugin = new MetricsPlugin();
@@ -56,10 +56,7 @@ describe('MetricsPlugin', () => {
     it('should bind metrics service to IoC container', () => {
       plugin.enable(mockIoC, mockLogger, config);
 
-      expect(mockIoC.bindToObject).toHaveBeenCalledWith(
-        expect.any(Object),
-        'metricsService'
-      );
+      expect(mockIoC.bindToObject).toHaveBeenCalledWith(expect.any(Object), 'metricsService');
       expect(mockLogger.info).toHaveBeenCalledWith('Metrics plugin enabled');
     });
 
@@ -75,7 +72,7 @@ describe('MetricsPlugin', () => {
     it('should attempt to unbind metrics service from IoC container', () => {
       // Add unbind method to mock since it's called with try/catch
       (mockIoC as any).unbind = jest.fn();
-      
+
       plugin.enable(mockIoC, mockLogger, config);
       plugin.disable();
 
@@ -113,7 +110,7 @@ describe('MetricsPlugin', () => {
         expect(stats).toEqual({
           count: 2,
           total: 300,
-          average: 150
+          average: 150,
         });
       });
 
@@ -135,7 +132,7 @@ describe('MetricsPlugin', () => {
         expect(metrics).toEqual({
           metric1: 5,
           metric2: 10,
-          'plugin.metrics.started': 1
+          'plugin.metrics.started': 1,
         });
       });
     });

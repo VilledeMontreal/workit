@@ -7,11 +7,14 @@
 import 'reflect-metadata';
 import { TAG } from '@villedemontreal/workit';
 import { Worker, SERVICE_IDENTIFIER, IoC, PluginLoader } from '@villedemontreal/workit-core';
-import { IPlugins } from '@villedemontreal/workit-types';
+import { IPlugins, ILogger } from '@villedemontreal/workit-types';
 
 // Import des tâches
 import { CalculateTask } from '../tasks/calculateTask';
 import { ProcessDataTask } from '../tasks/processDataTask';
+
+// Import de l'interface pour le service de métriques
+import { IMetricsService } from './plugins/metrics-plugin';
 
 // Configuration des plugins
 const plugins: IPlugins = {
@@ -40,7 +43,7 @@ async function main() {
   console.log(`🚀 Starting WorkIt worker with Metrics plugin for ${platform.toUpperCase()}`);
 
   // Obtenir le logger
-  const logger = IoC.get(SERVICE_IDENTIFIER.logger);
+  const logger = IoC.get<ILogger>(SERVICE_IDENTIFIER.logger);
 
   // Charger les plugins
   const pluginLoader = new PluginLoader(IoC, logger);
@@ -62,7 +65,7 @@ async function main() {
       pluginLoader.unload();
 
       // Afficher un résumé final des métriques
-      const metricsService = IoC.get('metricsService');
+      const metricsService = IoC.get<IMetricsService>('metricsService');
       const finalMetrics = metricsService.getAllMetrics();
 
       console.log('\n📊 Final Metrics Summary:');
@@ -83,7 +86,7 @@ async function main() {
   worker.start();
 
   // Incrémenter la métrique de démarrage
-  const metricsService = IoC.get('metricsService');
+  const metricsService = IoC.get<IMetricsService>('metricsService');
   metricsService.increment('worker.started');
 
   console.log('✅ Worker started successfully');

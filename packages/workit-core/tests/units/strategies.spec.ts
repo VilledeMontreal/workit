@@ -99,7 +99,7 @@ describe('Strategy Classes', () => {
 
       it('should log debug warning about production usage', () => {
         expect(mockLogger.debug).toHaveBeenCalledWith(
-          'warning: You should not use this failure strategy class in production'
+          'warning: You should not use this failure strategy class in production',
         );
       });
     });
@@ -128,15 +128,9 @@ describe('Strategy Classes', () => {
 
         await failureStrategy.handle(error, message, service);
 
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"errorMessage":"Task failed"')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retries":1')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retryTimeout":2000')
-        );
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"errorMessage":"Task failed"'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retries":1'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retryTimeout":2000'));
 
         expect(mockNack).toHaveBeenCalledWith({
           ...error,
@@ -153,15 +147,9 @@ describe('Strategy Classes', () => {
 
         await failureStrategy.handle(error, message, service);
 
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"errorMessage":"Task failed again"')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retries":4')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retryTimeout":8000')
-        );
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"errorMessage":"Task failed again"'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retries":4'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retryTimeout":8000'));
 
         expect(mockNack).toHaveBeenCalledWith({
           ...error,
@@ -179,14 +167,10 @@ describe('Strategy Classes', () => {
         await failureStrategy.handle(error, message, service);
 
         expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"errorMessage":"Task failed too many times"')
+          expect.stringContaining('"errorMessage":"Task failed too many times"'),
         );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retries":0')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retryTimeout":0')
-        );
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retries":0'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retryTimeout":0'));
 
         expect(mockNack).toHaveBeenCalledWith({
           ...error,
@@ -203,15 +187,9 @@ describe('Strategy Classes', () => {
 
         await failureStrategy.handle(error, message, service);
 
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"errorMessage":"Task at limit"')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retries":0')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retryTimeout":0')
-        );
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"errorMessage":"Task at limit"'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retries":0'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retryTimeout":0'));
 
         expect(mockNack).toHaveBeenCalledWith({
           ...error,
@@ -256,9 +234,7 @@ describe('Strategy Classes', () => {
 
         await failureStrategy.handle(complexError, message, service);
 
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"errorMessage":"Complex error"')
-        );
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"errorMessage":"Complex error"'));
       });
 
       it('should propagate service.nack errors', async () => {
@@ -281,15 +257,9 @@ describe('Strategy Classes', () => {
 
         await failureStrategy.handle(errorWithoutMessage, message, service);
 
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"errorMessage":""')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retries":1')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retryTimeout":2000')
-        );
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"errorMessage":""'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retries":1'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retryTimeout":2000'));
       });
 
       it('should handle custom error types', async () => {
@@ -315,15 +285,9 @@ describe('Strategy Classes', () => {
           retryTimeout: 2000,
         });
 
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"errorMessage":"Custom failure"')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retries":1')
-        );
-        expect(mockLogger.debug).toHaveBeenCalledWith(
-          expect.stringContaining('"retryTimeout":2000')
-        );
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"errorMessage":"Custom failure"'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retries":1'));
+        expect(mockLogger.debug).toHaveBeenCalledWith(expect.stringContaining('"retryTimeout":2000'));
       });
     });
 
@@ -392,7 +356,7 @@ describe('Strategy Classes', () => {
     it('should work together in a workflow scenario', async () => {
       const successStrategy = new SuccessStrategySimple();
       const failureStrategy = new FailureStrategySimple(mockLogger);
-      
+
       const message = createMockMessage();
       const mockService = {
         ack: jest.fn().mockResolvedValue(undefined),

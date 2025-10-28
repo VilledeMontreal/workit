@@ -5,7 +5,9 @@
  */
 import { HookState, IIoC, ILogger, IPlugin, IPlugins } from '@villedemontreal/workit-types';
 import * as path from 'path';
+import { Container } from 'inversify';
 import { IoC } from '../../src/config/container';
+import { IOC } from '../../src/IoC';
 import { PluginLoader, searchPathForTest } from '../../src/plugin/pluginLoader';
 
 const INSTALLED_PLUGINS_PATH = path.join(__dirname, 'node_modules');
@@ -59,6 +61,17 @@ describe('PluginLoader', () => {
   });
 
   afterEach(() => {
+    // Clear IoC container bindings for the test service
+    try {
+      // Unbind all by trying to unbind until no more bindings exist
+      const container = IoC.getContainer();
+      while (container.isBound('test')) {
+        container.unbindSync('test');
+      }
+    } catch (error) {
+      // Ignore errors during cleanup - no more bindings to unbind
+    }
+
     // clear require cache
     Object.keys(require.cache).forEach((key) => delete require.cache[key]);
   });
@@ -95,12 +108,16 @@ describe('PluginLoader', () => {
     });
 
     it('should load a plugin and bind the target', () => {
-      const pluginLoader = new PluginLoader(IoC, logger);
+      // Create a fresh IoC instance for this test to avoid conflicts
+      const freshContainer = new Container();
+      const freshIoC = new IOC(freshContainer);
+
+      const pluginLoader = new PluginLoader(freshIoC, logger);
       expect(pluginLoader['_plugins'].length).toBe(0);
       pluginLoader.load(simplePlugins);
       expect(pluginLoader['_plugins'].length).toBe(1);
-      expect(IoC.isServiceBound('test', 'simple-process')).toBeTruthy();
-      expect(IoC.getTask('test', { bpmnProcessId: 'simple-process' })).toBeTruthy();
+      expect(freshIoC.isServiceBound('test', 'simple-process')).toBeTruthy();
+      expect(freshIoC.getTask('test', { bpmnProcessId: 'simple-process' })).toBeTruthy();
       pluginLoader.unload();
     });
 
@@ -156,7 +173,7 @@ describe('PluginLoader', () => {
 
     beforeEach(() => {
       jest.clearAllMocks();
-      
+
       mockLogger = {
         debug: jest.fn(),
         info: jest.fn(),
@@ -167,10 +184,15 @@ describe('PluginLoader', () => {
       mockIoC = {
         bindToObject: jest.fn(),
         bind: jest.fn(),
+        bindTo: jest.fn(),
+        unbind: jest.fn().mockReturnValue(true),
         get: jest.fn(),
         getTask: jest.fn(),
         bindTask: jest.fn(),
-      };
+        isServiceBound: jest.fn().mockReturnValue(false),
+        getWorkflowNamed: jest.fn(),
+        getContainer: jest.fn(),
+      } as any;
 
       enhancedPluginLoader = new PluginLoader(mockIoC, mockLogger);
     });
@@ -306,7 +328,7 @@ describe('PluginLoader', () => {
           enable: jest.fn(),
           disable: jest.fn(),
         };
-        
+
         (enhancedPluginLoader as any)._plugins = [mockPlugin];
         (enhancedPluginLoader as any)._hookState = HookState.LOADED;
 
@@ -323,7 +345,7 @@ describe('PluginLoader', () => {
           enable: jest.fn(),
           disable: jest.fn(),
         };
-        
+
         (enhancedPluginLoader as any)._plugins = [mockPlugin];
         (enhancedPluginLoader as any)._hookState = HookState.UNINITIALIZED;
 
@@ -342,7 +364,7 @@ describe('PluginLoader', () => {
             throw new Error('Disable failed');
           }),
         };
-        
+
         (enhancedPluginLoader as any)._plugins = [mockPlugin];
         (enhancedPluginLoader as any)._hookState = HookState.LOADED;
 
@@ -365,7 +387,9 @@ describe('PluginLoader', () => {
         expect((enhancedPluginLoader as any)._hookState).toBe(HookState.LOADED);
         expect(mockLogger.info).toHaveBeenCalledWith('PluginLoader#load: trying loading nonexistent-module@null');
         expect(mockLogger.error).toHaveBeenCalledWith(
-          expect.stringContaining('PluginLoader#load: could not load plugin /path/to/nonexistent of module nonexistent-module')
+          expect.stringContaining(
+            'PluginLoader#load: could not load plugin /path/to/nonexistent of module nonexistent-module',
+          ),
         );
       });
 

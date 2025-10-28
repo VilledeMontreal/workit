@@ -53,7 +53,7 @@
   },
   "scripts": {
     "genPackagelock": "npm i --package-lock-only --workspaces false",
-    "test": "jest --testPathIgnorePatterns integration --coverage --passWithNoTests",
+    "test": "node --max-old-space-size=4096 --expose-gc ../../node_modules/.bin/jest --testPathIgnorePatterns integration --coverage --passWithNoTests",
     "test:all": "jest **/tests/**/*.spec.ts --coverage --passWithNoTests",
     "compile": "rm -rf ./lib/ && npm run build",
     "build": "tsc -p ./tsconfig.json",

@@ -77,7 +77,7 @@ describe('IOC', () => {
 
     it('should bind class with named binding', () => {
       ioc.bindTo(TestService, TEST_IDENTIFIER, undefined, 'test-name');
-      
+
       const instance = ioc.get<ITestService>(TEST_IDENTIFIER, 'test-name');
       expect(instance).toBeInstanceOf(TestService);
     });
@@ -87,7 +87,7 @@ describe('IOC', () => {
 
       const instance1 = ioc.get<ITestService>(TEST_IDENTIFIER);
       const instance2 = ioc.get<ITestService>(TEST_IDENTIFIER);
-      
+
       expect(instance1).toBe(instance2);
     });
 
@@ -96,7 +96,7 @@ describe('IOC', () => {
 
       const instance1 = ioc.get<ITestService>(TEST_IDENTIFIER);
       const instance2 = ioc.get<ITestService>(TEST_IDENTIFIER);
-      
+
       expect(instance1).not.toBe(instance2);
       expect(instance1).toBeInstanceOf(TestService);
       expect(instance2).toBeInstanceOf(TestService);
@@ -176,7 +176,7 @@ describe('IOC', () => {
 
       const instance1 = ioc.get<ITestService>(TEST_STRING_IDENTIFIER, 'test-name');
       const instance2 = ioc.get<ITestService>(TEST_STRING_IDENTIFIER, 'test-name');
-      
+
       expect(instance1).toBe(instance2);
     });
 
@@ -185,7 +185,7 @@ describe('IOC', () => {
 
       const instance1 = ioc.get<ITestService>(TEST_STRING_IDENTIFIER, 'test-name');
       const instance2 = ioc.get<ITestService>(TEST_STRING_IDENTIFIER, 'test-name');
-      
+
       expect(instance1).not.toBe(instance2);
     });
   });
@@ -290,7 +290,7 @@ describe('IOC', () => {
 
       const instance1 = ioc.getTask<ITestService>(TEST_IDENTIFIER, workflow);
       const instance2 = ioc.getTask<ITestService>(TEST_IDENTIFIER, workflow);
-      
+
       expect(instance1).not.toBe(instance2);
     });
   });
@@ -359,9 +359,9 @@ describe('IOC', () => {
 
     it('should unbind existing service and return true', () => {
       expect(ioc.isServiceBound(TEST_IDENTIFIER)).toBe(true);
-      
+
       const result = ioc.unbind(TEST_IDENTIFIER);
-      
+
       expect(result).toBe(true);
       expect(ioc.isServiceBound(TEST_IDENTIFIER)).toBe(false);
     });
@@ -380,9 +380,9 @@ describe('IOC', () => {
 
     it('should work with string identifiers', () => {
       ioc.bindTo(TestService, TEST_STRING_IDENTIFIER);
-      
+
       const result = ioc.unbind(TEST_STRING_IDENTIFIER);
-      
+
       expect(result).toBe(true);
       expect(ioc.isServiceBound(TEST_STRING_IDENTIFIER)).toBe(false);
     });
@@ -443,7 +443,7 @@ describe('IOC', () => {
       // Unbind and rebind with different service
       ioc.unbind(TEST_IDENTIFIER);
       ioc.bindTo(TestServiceAnother, TEST_IDENTIFIER);
-      
+
       instance = ioc.get<ITestService>(TEST_IDENTIFIER);
       expect(instance).toBeInstanceOf(TestServiceAnother);
     });

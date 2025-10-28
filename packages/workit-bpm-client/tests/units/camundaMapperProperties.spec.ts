@@ -11,7 +11,7 @@ describe('CamundaMapperProperties', () => {
   const createMockTask = (overrides?: Partial<IVariablePayload>): IVariablePayload => {
     const mockVariables = new Map();
     mockVariables.set('testVar', { value: 'test', type: 'string' });
-    
+
     return {
       id: 'task-123',
       activityId: 'activity-456',
@@ -99,7 +99,7 @@ describe('CamundaMapperProperties', () => {
     it('should extract custom headers from _meta variable', () => {
       const mockVariables = new Map();
       const customHeaders = {
-        'Authorization': 'Bearer token123',
+        Authorization: 'Bearer token123',
         'X-Custom-Header': 'custom-value',
       };
       mockVariables.set('_meta', { customHeaders });
@@ -199,7 +199,7 @@ describe('CamundaMapperProperties', () => {
         'lockExpirationTime',
       ];
 
-      expectedProperties.forEach(prop => {
+      expectedProperties.forEach((prop) => {
         expect(result).toHaveProperty(prop);
       });
     });
@@ -213,7 +213,7 @@ describe('CamundaMapperProperties', () => {
         'ProcessWithCamelCase',
       ];
 
-      complexKeys.forEach(key => {
+      complexKeys.forEach((key) => {
         const task = createMockTask({
           processDefinitionKey: key,
         });
@@ -255,7 +255,7 @@ describe('CamundaMapperProperties', () => {
 
       // Should not throw, but version extraction might be NaN
       const result = CamundaMapperProperties.map(task);
-      
+
       // If split fails, [1] would be undefined, Number(undefined) is NaN
       expect(isNaN(result.workflowDefinitionVersion)).toBe(true);
     });
@@ -317,15 +317,15 @@ describe('CamundaMapperProperties', () => {
       const mockVariables = new Map();
       mockVariables.set('orderId', { value: 'ORD-12345', type: 'string' });
       mockVariables.set('amount', { value: 150.75, type: 'double' });
-      mockVariables.set('customer', { 
-        value: JSON.stringify({ id: 'CUST-001', name: 'John Doe' }), 
-        type: 'json' 
+      mockVariables.set('customer', {
+        value: JSON.stringify({ id: 'CUST-001', name: 'John Doe' }),
+        type: 'json',
       });
       mockVariables.set('_meta', {
         customHeaders: {
           'X-Correlation-ID': 'correlation-abc123',
           'X-Request-ID': 'request-def456',
-        }
+        },
       });
 
       const realWorldTask: IVariablePayload = {
@@ -381,7 +381,7 @@ describe('CamundaMapperProperties', () => {
       // Should have same structure but different IDs
       expect(result1.jobKey).toBe('task-1');
       expect(result2.jobKey).toBe('task-2');
-      
+
       // Other properties should be mapped consistently
       expect(result1.activityId).toBe(result2.activityId);
       expect(result1.workflowKey).toBe(result2.workflowKey);

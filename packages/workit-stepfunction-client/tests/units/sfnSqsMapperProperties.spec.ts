@@ -37,15 +37,15 @@ describe('SfnSqsMapperProperties', () => {
     }
 
     const result = { ...defaultTask, ...overrides };
-    
+
     if (overrides.Body) {
       result.Body = { ...defaultTask.Body, ...overrides.Body };
-      
+
       if (overrides.Body.properties) {
         result.Body.properties = { ...defaultTask.Body.properties, ...overrides.Body.properties };
       }
     }
-    
+
     return result;
   };
 
@@ -909,7 +909,7 @@ describe('SfnSqsMapperProperties', () => {
 
         expect(result1.customHeaders.messageId).toBe('msg-1');
         expect(result2.customHeaders.messageId).toBe('msg-2');
-        
+
         expect(result1.activityId).toBe(result2.activityId);
         expect(result1.workflowKey).toBe(result2.workflowKey);
       });

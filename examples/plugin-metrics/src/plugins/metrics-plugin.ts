@@ -202,14 +202,17 @@ export class MetricsPlugin extends BasePlugin {
       res.json(metrics);
     });
 
-    app.get(`${this._metricsConfig.httpEndpoint?.path || '/metrics'}/:name`, (req: express.Request, res: express.Response) => {
-      const metric = this._metricsService.getMetric(req.params.name);
-      if (metric !== undefined) {
-        res.json({ [req.params.name]: metric });
-      } else {
-        res.status(404).json({ error: 'Metric not found' });
+    app.get(
+      `${this._metricsConfig.httpEndpoint?.path || '/metrics'}/:name`,
+      (req: express.Request, res: express.Response) => {
+        const metric = this._metricsService.getMetric(req.params.name);
+        if (metric !== undefined) {
+          res.json({ [req.params.name]: metric });
+        } else {
+          res.status(404).json({ error: 'Metric not found' });
+        }
       }
-    });
+    );
 
     app.get(
       `${this._metricsConfig.httpEndpoint?.path || '/metrics'}/:name/stats`,

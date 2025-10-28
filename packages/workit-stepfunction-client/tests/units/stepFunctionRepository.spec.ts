@@ -19,9 +19,8 @@ import { QUEUE_URL, sqsConfig } from '../utils/sqs';
 import { MAX_ERROR_CAUSE_LENGTH, MAX_ERROR_CODE_LENGTH, MAX_PAYLOAD_LENGTH } from '../../src/config/constants/params';
 
 // Mock dependencies
-jest.mock('../../src/sfnClient');
 jest.mock('fs/promises');
-jest.mock('fast-safe-stringify', () => jest.fn().mockImplementation((obj) => JSON.stringify(obj)));
+jest.mock('fast-safe-stringify', () => jest.fn((obj) => JSON.stringify(obj)));
 
 const mockedFs = fs as jest.Mocked<typeof fs>;
 
@@ -84,7 +83,7 @@ describe('StepFunctionRepository', () => {
 
       expect(mockedFs.readFile).toHaveBeenCalledWith(mockWorkflowPath);
       expect(mockSend).toHaveBeenCalledTimes(1);
-      
+
       const command = mockSend.mock.calls[0][0];
       expect(command.constructor.name).toBe('CreateStateMachineCommand');
       expect(command.input).toEqual({
@@ -115,7 +114,7 @@ describe('StepFunctionRepository', () => {
         expect.objectContaining({
           ...override,
           definition: expect.any(String),
-        })
+        }),
       );
       expect(result).toBe(mockOutput);
     });
@@ -209,7 +208,10 @@ describe('StepFunctionRepository', () => {
     it('should handle complex nested objects', async () => {
       const complexPayload = {
         user: { id: 123, name: 'John', preferences: { theme: 'dark', notifications: true } },
-        items: [{ id: 1, name: 'Item 1' }, { id: 2, name: 'Item 2' }],
+        items: [
+          { id: 1, name: 'Item 1' },
+          { id: 2, name: 'Item 2' },
+        ],
         metadata: { timestamp: '2023-01-01T00:00:00Z', version: '1.0' },
       };
       const message = createMessage(complexPayload);

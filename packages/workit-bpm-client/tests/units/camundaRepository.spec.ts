@@ -12,17 +12,23 @@ import {
   IProcessDefinition,
 } from '@villedemontreal/workit-types';
 import axios from 'axios';
-import * as FormData from 'form-data';
 import * as fs from 'fs';
 import { CamundaRepository } from '../../src/repositories/camundaRepository';
 
 // Mock dependencies
 jest.mock('axios');
-jest.mock('form-data');
 jest.mock('fs');
 
+// Mock form-data manually
+const mockFormData = {
+  append: jest.fn(),
+  getBoundary: jest.fn().mockReturnValue('test-boundary'),
+};
+jest.mock('form-data', () => {
+  return jest.fn().mockImplementation(() => mockFormData);
+});
+
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-const MockedFormData = FormData as jest.MockedClass<typeof FormData>;
 const mockedFs = fs as jest.Mocked<typeof fs>;
 
 describe('CamundaRepository', () => {
@@ -33,6 +39,10 @@ describe('CamundaRepository', () => {
   beforeEach(() => {
     // Clear all mocks
     jest.clearAllMocks();
+
+    // Reset form-data mock
+    mockFormData.append.mockClear();
+    mockFormData.getBoundary.mockReturnValue('test-boundary');
 
     // Mock axios create
     mockAxiosInstance = {
@@ -119,13 +129,8 @@ describe('CamundaRepository', () => {
   describe('deployWorkflow', () => {
     it('should deploy workflow with correct form data', async () => {
       const mockStream = {} as any;
-      const mockFormData = {
-        append: jest.fn(),
-        getBoundary: jest.fn().mockReturnValue('test-boundary'),
-      };
 
       mockedFs.createReadStream.mockReturnValue(mockStream);
-      MockedFormData.mockImplementation(() => mockFormData as any);
 
       const mockResponse = { data: { id: 'deployment-1' } };
       mockAxiosInstance.post.mockResolvedValue(mockResponse);
@@ -150,10 +155,10 @@ describe('CamundaRepository', () => {
   describe('getWorkflows', () => {
     it('should get workflows without options', async () => {
       const mockWorkflows: IBpmn[] = [
-        { 
-          id: '1', 
-          name: 'Process 1', 
-          key: 'process1', 
+        {
+          id: '1',
+          name: 'Process 1',
+          key: 'process1',
           version: 1,
           category: 'test-category',
           resource: 'process1.bpmn',
@@ -162,10 +167,10 @@ describe('CamundaRepository', () => {
           historyTimeToLive: 30,
           startableInTasklist: true,
         },
-        { 
-          id: '2', 
-          name: 'Process 2', 
-          key: 'process2', 
+        {
+          id: '2',
+          name: 'Process 2',
+          key: 'process2',
           version: 1,
           category: 'test-category',
           resource: 'process2.bpmn',
@@ -430,7 +435,7 @@ describe('CamundaRepository', () => {
       await repository.cancelWorkflowInstance(instanceId);
 
       expect(mockAxiosInstance.delete).toHaveBeenCalledWith(
-        '/process-instance/instance-123?skipCustomListeners=true&skipIoMappings=true&skipSubprocesses=true'
+        '/process-instance/instance-123?skipCustomListeners=true&skipIoMappings=true&skipSubprocesses=true',
       );
     });
   });
@@ -661,10 +666,6 @@ describe('CamundaRepository', () => {
       const error = new Error('Deployment failed');
       mockAxiosInstance.post.mockRejectedValue(error);
 
-      MockedFormData.mockImplementation(() => ({
-        append: jest.fn(),
-        getBoundary: jest.fn().mockReturnValue('boundary'),
-      }) as any);
       mockedFs.createReadStream.mockReturnValue({} as any);
 
       await expect(repository.deployWorkflow('test', '/path')).rejects.toThrow('Deployment failed');

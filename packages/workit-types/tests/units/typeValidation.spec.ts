@@ -127,7 +127,7 @@ describe('Type Validation Tests', () => {
   describe('Configuration Types', () => {
     it('should validate ICustomHeaders', () => {
       const headers: ICustomHeaders = {
-        'Authorization': 'Bearer token123',
+        Authorization: 'Bearer token123',
         'X-Custom-Header': 'custom-value',
         'Content-Type': 'application/json',
       };
@@ -168,12 +168,7 @@ describe('Type Validation Tests', () => {
 
   describe('Logger Types', () => {
     it('should validate Loglevel type values', () => {
-      const levels: Loglevel[] = [
-        'ERROR',
-        'INFO',
-        'DEBUG',
-        'NONE',
-      ];
+      const levels: Loglevel[] = ['ERROR', 'INFO', 'DEBUG', 'NONE'];
 
       expect(levels).toContain('ERROR');
       expect(levels).toContain('INFO');
@@ -183,10 +178,18 @@ describe('Type Validation Tests', () => {
 
     it('should validate ILogger interface', () => {
       const mockLogger: ILogger = {
-        debug: (message: string) => { /* implementation */ },
-        info: (message: string) => { /* implementation */ },
-        warn: (message: string) => { /* implementation */ },
-        error: (message: string) => { /* implementation */ },
+        debug: (message: string) => {
+          /* implementation */
+        },
+        info: (message: string) => {
+          /* implementation */
+        },
+        warn: (message: string) => {
+          /* implementation */
+        },
+        error: (message: string) => {
+          /* implementation */
+        },
       };
 
       expect(typeof mockLogger.debug).toBe('function');
@@ -198,11 +201,7 @@ describe('Type Validation Tests', () => {
 
   describe('Plugin Types', () => {
     it('should validate HookState enum', () => {
-      const states = [
-        HookState.UNINITIALIZED,
-        HookState.LOADED,
-        HookState.UNLOADED,
-      ];
+      const states = [HookState.UNINITIALIZED, HookState.LOADED, HookState.UNLOADED];
 
       expect(states).toContain(HookState.UNINITIALIZED);
       expect(states).toContain(HookState.LOADED);
@@ -258,7 +257,7 @@ describe('Type Validation Tests', () => {
   describe('Type Safety and Constraints', () => {
     it('should enforce type safety in generic interfaces', () => {
       // This test validates TypeScript compiler behavior
-      interface StrictMessage extends IMessage<{ data: string }, { id: number }> { }
+      interface StrictMessage extends IMessage<{ data: string }, { id: number }> {}
 
       const strictMessage: StrictMessage = {
         body: { data: 'test' },
@@ -271,7 +270,7 @@ describe('Type Validation Tests', () => {
     });
 
     it('should handle optional properties correctly', () => {
-      interface OptionalPropsMessage extends IMessage<{ data: string }, { required: string; optional?: number }> { }
+      interface OptionalPropsMessage extends IMessage<{ data: string }, { required: string; optional?: number }> {}
 
       const messageWithOptional: OptionalPropsMessage = {
         body: { data: 'test' },
@@ -291,7 +290,7 @@ describe('Type Validation Tests', () => {
       expect(typeof HookState.UNINITIALIZED).toBe('number');
       expect(typeof HookState.LOADED).toBe('number');
       expect(typeof HookState.UNLOADED).toBe('number');
-      
+
       expect(HookState.UNINITIALIZED).toBe(0);
       expect(HookState.LOADED).toBe(1);
       expect(HookState.UNLOADED).toBe(2);
@@ -312,7 +311,7 @@ describe('Type Validation Tests', () => {
             metadata: { created: new Date() },
           },
           {
-            id: '2', 
+            id: '2',
             name: 'Item 2',
             metadata: { created: new Date(), updated: new Date() },
           },
