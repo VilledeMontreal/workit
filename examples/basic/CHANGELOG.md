@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/VilledeMontreal/workit/compare/v6.0.1...v7.0.0) (2025-10-28)
+
+
+### Features
+
+* breaking change - update otel lib ([776d4e0](https://github.com/VilledeMontreal/workit/commit/776d4e04e7ecfb4cebf965989429abae9d00e379))
+
+
+
+
+
 ## [6.0.1](https://github.com/VilledeMontreal/workit/compare/v6.0.0...v6.0.1) (2025-10-24)
 
 **Note:** Version bump only for package workit-example-basic
