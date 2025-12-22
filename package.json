@@ -20,7 +20,7 @@
     "@types/node": "^20.19.27",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "lerna": "^8.2.4",
+    "lerna": "^9.0.3",
     "lerna-changelog": "^2.2.0",
     "remark-cli": "^12.0.1",
     "remark-preset-lint-recommended": "^7.0.1",
