@@ -83,10 +83,6 @@ node_tests: &node_tests
     - run:
         name: test
         command: npm run test
-    - run:
-        name: report coverage
-        command: if [ "${CIRCLE_NODE_VERSION}" = "v12" ]; then npm run codecov; fi
-        # command: npm run codecov
 
 node_integraton_tests: &node_integraton_tests
   steps:
@@ -115,10 +111,6 @@ node_integraton_tests: &node_integraton_tests
     - run:
         name: test
         command: npm run test:all
-    - run:
-        name: report coverage
-        # command: if [ "${CIRCLE_NODE_VERSION}" = "v12" ]; then npm run codecov; fi
-        command: npm run codecov
 
 docs_filters: &docs_filters # Ignores any commit on any branch by default
   branches:
