@@ -1,7 +1,7 @@
 {
   "name": "workit-example-plugin-metrics",
   "private": true,
-  "version": "7.0.1",
+  "version": "7.0.2",
   "description": "WorkIt plugin metrics example",
   "main": "lib/src/worker.js",
   "types": "lib/src/worker.d.ts",
@@ -20,11 +20,11 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@villedemontreal/workit": "^7.0.1",
-    "@villedemontreal/workit-bpm-client": "^7.0.1",
-    "@villedemontreal/workit-core": "^7.0.1",
-    "@villedemontreal/workit-stepfunction-client": "^7.0.1",
-    "@villedemontreal/workit-types": "^7.0.1",
+    "@villedemontreal/workit": "^7.0.2",
+    "@villedemontreal/workit-bpm-client": "^7.0.2",
+    "@villedemontreal/workit-core": "^7.0.2",
+    "@villedemontreal/workit-stepfunction-client": "^7.0.2",
+    "@villedemontreal/workit-types": "^7.0.2",
     "debug": "^4.3.4",
     "express": "^4.18.2",
     "inversify": "^6.0.1",
