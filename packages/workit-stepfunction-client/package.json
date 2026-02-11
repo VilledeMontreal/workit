@@ -8,8 +8,8 @@
   "main": "lib/src/index.js",
   "typings": "lib/src/index.d.ts",
   "dependencies": {
-    "@aws-sdk/client-sfn": "3.956.0",
-    "@aws-sdk/client-sqs": "3.956.0",
+    "@aws-sdk/client-sfn": "3.987.0",
+    "@aws-sdk/client-sqs": "3.987.0",
     "@villedemontreal/workit-core": "^7.0.2",
     "@villedemontreal/workit-types": "^7.0.2",
     "debug": "^4.3.4",
