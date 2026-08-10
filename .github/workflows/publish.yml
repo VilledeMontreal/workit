@@ -1,0 +1,63 @@
+name: Publish npm packages
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: npm-publish-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Validate and publish
+    runs-on: ubuntu-latest
+    environment: npm
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out the release
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          persist-credentials: false
+
+      - name: Set up Node.js and npm registry
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Install an OIDC-compatible npm CLI
+        run: npm install --global npm@11.5.1
+
+      - name: Verify release versions
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: npm run release:verify -- "$RELEASE_TAG"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Build packages
+        run: npm run build
+
+      - name: Lint packages
+        run: npm run lint
+
+      - name: Test packages
+        run: npm test
+
+      # Authentication uses npm Trusted Publishing (OIDC). No NPM_TOKEN is required.
+      - name: Publish public workspaces
+        env:
+          NPM_DIST_TAG: ${{ github.event.release.prerelease && 'next' || 'latest' }}
+        run: npm publish --workspaces --access public --tag "$NPM_DIST_TAG"

@@ -21,4 +21,7 @@ import { IWorkflowClient } from '@villedemontreal/workit-types';
   }
 
   console.log('Success!');
-})();
+})().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});

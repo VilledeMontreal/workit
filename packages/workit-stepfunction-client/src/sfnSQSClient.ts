@@ -5,7 +5,6 @@
  */
 
 import { IoC, NOOP_LOGGER, PluginLoader, SERVICE_IDENTIFIER } from '@villedemontreal/workit-core';
-import { SERVICE_IDENTIFIER as SF_SERVICE_IDENTIFIER } from './config/constants/identifiers';
 import {
   ICamundaConfig,
   ICamundaService,
@@ -27,12 +26,12 @@ import {
   IWorkflowOptions,
   IStepFunctionClientConfig,
 } from '@villedemontreal/workit-types';
-import { SfnMessage } from './sfnMessage';
-import { SQSClient } from '@aws-sdk/client-sqs';
+import { SQSClient, Message } from '@aws-sdk/client-sqs';
 import * as sqsConsumer from 'sqs-consumer';
 import { randomUUID } from 'crypto';
 import { inject, injectable, optional } from 'inversify';
-import { Message } from '@aws-sdk/client-sqs';
+import { SfnMessage } from './sfnMessage';
+import { SERVICE_IDENTIFIER as SF_SERVICE_IDENTIFIER } from './config/constants/identifiers';
 import { StepFunctionRepository } from './repositories/stepFunctionRepository';
 
 export type IConfig = Partial<ICamundaConfig> & IStepFunctionClientConfig;
@@ -87,14 +86,18 @@ export class SFnSQSClient implements IClient<ICamundaService>, IWorkflowClient {
     return Promise.resolve();
   }
 
-  public unsubscribe(): Promise<void> {
+  public async unsubscribe(): Promise<void> {
     try {
       if (this._topicSubscription) {
         this._topicSubscription.stop();
+        while (this._topicSubscription.status?.isPolling === true) {
+          await new Promise<void>((resolve) => {
+            setTimeout(resolve, 10);
+          });
+        }
       }
-      return Promise.resolve();
     } catch (error) {
-      return Promise.reject(error);
+      throw error instanceof Error ? error : new Error(String(error));
     }
   }
 

@@ -7,7 +7,7 @@ export const dateTimeReviver = (key: unknown, value: unknown) => {
   let a;
   if (typeof value === 'string' && value[0] === '2' && value[value.length - 1] === 'Z') {
     a = Date.parse(value);
-    if (!isNaN(a)) {
+    if (!Number.isNaN(a)) {
       return new Date(a);
     }
   }

@@ -1,6 +1,5 @@
 node_modules/
 !packages/workit-core/tests/units/node_modules
-lerna-debug.log
 packages/*/lib
 .idea
 # Add any directories, files, or patterns you don't want to be tracked by version control
@@ -48,9 +47,6 @@ coverage
 
 #ignore transpile code
 lib
-
-#lerna
-.changelog
 
 # VsCode configs
 .vscode

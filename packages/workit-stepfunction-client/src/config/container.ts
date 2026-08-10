@@ -8,7 +8,7 @@ import { kernel } from '@villedemontreal/workit-core';
 import { IAwsConfig } from '@villedemontreal/workit-types';
 import { SERVICE_IDENTIFIER } from './constants/identifiers';
 
-const env = process.env;
+const { env } = process;
 
 const configBase: IAwsConfig = {
   region: env.AWS_REGION || '',

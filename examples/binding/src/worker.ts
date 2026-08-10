@@ -33,4 +33,7 @@ IoC.bindTask(HelloWorldTaskV3, LOCAL_IDENTIFIER.activity3, { bpmnProcessId: BPMN
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
 
 worker.start();
-worker.run();
+worker.run().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});

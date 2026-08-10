@@ -10,6 +10,7 @@
     "test:all": "echo \"no test specified\"",
     "codecov": "echo \"no tests yet\"",
     "docs": "echo \"no doc specified\"",
+    "clean": "rm -rf ./lib/",
     "compile": "rm -rf ./lib/ && npm run build",
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc -p ./tsconfig.json --watch",
@@ -25,23 +26,22 @@
     "url": "git+https://github.com/VilledeMontreal/workit.git"
   },
   "devDependencies": {
-    "@types/node": "^20.19.27",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
+    "@types/node": "^20.19.43",
+    "@typescript-eslint/eslint-plugin": "^8.66.0",
+    "@typescript-eslint/parser": "^8.66.0",
     "eslint": "^8.57.1",
-    "eslint-config-airbnb-typescript": "^17.1.0",
-    "eslint-config-prettier": "^9.1.2",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.7.4",
-    "typescript": "^4.9.5"
+    "eslint-plugin-prettier": "^5.5.6",
+    "prettier": "^3.9.6",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@villedemontreal/workit": "^7.0.2",
     "@villedemontreal/workit-core": "^7.0.2",
     "@villedemontreal/workit-types": "^7.0.2",
-    "axios": "^1.13.2"
+    "axios": "^1.19.0"
   },
   "keywords": [
     "workit",

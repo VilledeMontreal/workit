@@ -119,6 +119,8 @@ export class MetricsPlugin extends BasePlugin {
 
   private _persistenceInterval?: NodeJS.Timeout;
 
+  private _persistenceInFlight?: Promise<void>;
+
   private _metricsConfig!: IMetricsPluginConfig;
 
   constructor() {
@@ -236,8 +238,12 @@ export class MetricsPlugin extends BasePlugin {
   private _setupPersistence(): void {
     if (!this._metricsConfig.persistence?.enabled) return;
 
-    this._persistenceInterval = setInterval(async () => {
-      await this._saveMetrics();
+    this._persistenceInterval = setInterval(() => {
+      if (!this._persistenceInFlight) {
+        this._persistenceInFlight = this._saveMetrics().finally(() => {
+          this._persistenceInFlight = undefined;
+        });
+      }
     }, this._metricsConfig.persistence.interval || 60000);
 
     // Charger les métriques existantes au démarrage

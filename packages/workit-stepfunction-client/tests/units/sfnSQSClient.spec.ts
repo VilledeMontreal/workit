@@ -11,6 +11,7 @@ jest.mock('sqs-consumer', () => {
         return {
           start: jest.fn(),
           stop: jest.fn(),
+          status: { isPolling: false, isRunning: false },
         };
       }),
     },
@@ -48,5 +49,23 @@ describe('Step function SQS Client', () => {
     await expect(sfnSQSClient.unsubscribe()).resolves.toBeUndefined();
     expect(subscription.stop).toHaveBeenCalledTimes(1);
     expect(subscription.start).not.toHaveBeenCalled();
+  });
+
+  it('should wait for in-flight polling before stopping', async () => {
+    const subscription = sfnSQSClient['_topicSubscription'];
+    subscription.status.isPolling = true;
+    let stopped = false;
+
+    const stopping = sfnSQSClient.unsubscribe().then(() => {
+      stopped = true;
+    });
+    await new Promise<void>((resolve) => {
+      setTimeout(resolve, 20);
+    });
+    expect(stopped).toBe(false);
+
+    subscription.status.isPolling = false;
+    await stopping;
+    expect(stopped).toBe(true);
   });
 });

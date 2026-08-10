@@ -133,5 +133,50 @@ describe('Step function Message', () => {
       expect(repo.sendTaskFailure).toHaveBeenCalledTimes(1);
       expect(repo.sendTaskSuccess).not.toHaveBeenCalled();
     });
+
+    it('should only treat concurrent acknowledgements once', async () => {
+      let resolveSuccess!: () => void;
+      const repo = new StepFunctionRepository(config);
+      (repo.sendTaskSuccess as jest.Mock).mockImplementationOnce(
+        () =>
+          new Promise<void>((resolve) => {
+            resolveSuccess = resolve;
+          }),
+      );
+      const [message, service] = SfnMessage.wrap(awsMessage, repo);
+
+      const acknowledgement = service.ack(message);
+      const concurrentFailure = service.nack(new FailureException('Opps'));
+
+      expect(repo.sendTaskSuccess).toHaveBeenCalledTimes(1);
+      expect(repo.sendTaskFailure).not.toHaveBeenCalled();
+      resolveSuccess();
+      await Promise.all([acknowledgement, concurrentFailure]);
+      expect(service.hasBeenThreated).toBe(true);
+    });
+
+    it('should let a concurrent failure treatment proceed when acknowledgement fails', async () => {
+      let rejectSuccess!: (error: Error) => void;
+      const successError = new Error('success failed');
+      const repo = new StepFunctionRepository(config);
+      (repo.sendTaskSuccess as jest.Mock).mockImplementationOnce(
+        () =>
+          new Promise<void>((_resolve, reject) => {
+            rejectSuccess = reject;
+          }),
+      );
+      const [message, service] = SfnMessage.wrap(awsMessage, repo);
+
+      const acknowledgement = service.ack(message);
+      const concurrentFailure = service.nack(new FailureException('Opps'));
+      const failedAcknowledgement = expect(acknowledgement).rejects.toBe(successError);
+      const successfulFailureTreatment = expect(concurrentFailure).resolves.toBeUndefined();
+      rejectSuccess(successError);
+
+      await failedAcknowledgement;
+      await successfulFailureTreatment;
+      expect(repo.sendTaskFailure).toHaveBeenCalledTimes(1);
+      expect(service.hasBeenThreated).toBe(true);
+    });
   });
 });

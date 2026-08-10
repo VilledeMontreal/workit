@@ -6,13 +6,13 @@
 
 import { EventEmitter } from 'events';
 import { Container, decorate, injectable } from 'inversify';
+import { trace } from '@opentelemetry/api';
 import { FailureStrategySimple } from '../strategies/FailureStrategySimple';
 import { SuccessStrategySimple } from '../strategies/SuccessStrategySimple';
 import { NoopTracerPropagator } from '../tracer/noopTracerPropagator';
 import { SERVICE_IDENTIFIER } from './constants/identifiers';
 import { IOC } from '../IoC';
 import { NOOP_LOGGER } from '../common/noopLogger';
-import { trace } from '@opentelemetry/api';
 
 // If no TracerProvider is configured, this will return a NoopTracer
 const tracer = trace.getTracer('workit:nooptracer');
@@ -20,6 +20,7 @@ const tracer = trace.getTracer('workit:nooptracer');
 try {
   decorate(injectable(), EventEmitter);
 } catch (error) {
+  // eslint-disable-next-line no-console -- consumers need an immediate warning about duplicate Workit copies.
   console.log(
     `Warning: We detect that you load workit module more than once. This can happens when sub dependencies have workit in different versions. You need to get the same version (try using peerDependencies in package.json) or you know what you are doing.`,
   );

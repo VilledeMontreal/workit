@@ -6,8 +6,8 @@
 
 import { CamundaBpmClient, CamundaExternalClient } from '@villedemontreal/workit-bpm-client';
 import { IoC, Worker } from '@villedemontreal/workit-core';
-import { Client } from '../camunda-n-mq/client';
 import { SFnSQSClient } from '@villedemontreal/workit-stepfunction-client';
+import { Client } from '../camunda-n-mq/client';
 import { StepFunctionManager } from '../stepFunction/stepFunctionManager';
 import { StepFunctionWorker } from '../stepFunction/stepFunctionWorker';
 import { CamundaBpmWorker } from '../camundaBpm/camundaBpmWorker';

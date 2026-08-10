@@ -228,7 +228,7 @@ export class IOC implements IIoC {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       decorate(injectable(), ctor);
-      (dependencies || []).forEach((dependency, index) => {
+      (dependencies || []).forEach((dependency, parameterIndex) => {
         let injection: (target: any, targetKey: string, index?: number) => void;
         if (typeof dependency === 'string' && dependency.endsWith('[]')) {
           injection = multiInject(dependency);
@@ -236,7 +236,7 @@ export class IOC implements IIoC {
           injection = inject(dependency);
         }
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        decorate(injection as ParameterDecorator | ParameterDecorator[], ctor, index);
+        decorate(injection as ParameterDecorator | ParameterDecorator[], ctor, parameterIndex);
       });
     } catch {
       //

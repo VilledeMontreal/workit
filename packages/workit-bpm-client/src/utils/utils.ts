@@ -5,7 +5,8 @@
  */
 
 /* eslint @typescript-eslint/no-unsafe-assignment: 0 */
-/* eslint @typescript-eslint/ban-types: 0 */
+/* eslint @typescript-eslint/no-empty-object-type: 0 */
+/* eslint @typescript-eslint/no-unsafe-function-type: 0 */
 /* eslint @typescript-eslint/restrict-template-expressions: 0 */
 /* eslint @typescript-eslint/no-unsafe-call: 0 */
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
