@@ -19,7 +19,7 @@ export class PaginationUtils {
     return { ...params, firstResult: options.from, maxResults: options.size || PaginationUtils._DEFAULT_SIZE_ITEMS };
   }
 
-  public static getPagingFromOptions(totalCount: number, options?: (any & IPaginationOptions) | undefined): IPaging {
+  public static getPagingFromOptions(totalCount: number, options?: any & IPaginationOptions): IPaging {
     // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html
     if (!options) {
       return {

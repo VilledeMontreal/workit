@@ -32,4 +32,7 @@ import { IWorkflowClient } from '@villedemontreal/workit-types';
   console.warn(
     `Please, provide the following value "${result.workflows[0].bpmnProcessId}" to bpmnProcessId variable in create-process-instances.ts file for creating an instance`,
   );
-})();
+})().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});

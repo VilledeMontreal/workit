@@ -36,7 +36,7 @@ export class SfnSqsMapperProperties {
       throw new SfnSqsMapperValidationError('Task.Body.properties must be a valid object', 'task.Body.properties');
     }
 
-    const properties = task.Body.properties;
+    const { properties } = task.Body;
 
     // Validation critique: jobKey est requis pour l'acknowledgment AWS
     if (!properties.jobKey || typeof properties.jobKey !== 'string' || properties.jobKey.trim() === '') {

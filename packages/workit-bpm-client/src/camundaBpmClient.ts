@@ -36,6 +36,17 @@ import { CamundaMessage } from './camundaMessage';
 import { CamundaRepository } from './repositories/camundaRepository';
 import { PaginationUtils } from './utils/paginationUtils';
 
+type DrainableCamundaClient = ICamundaClient & {
+  activeTasksCount: number;
+  on(event: string, listener: () => void): unknown;
+  options?: {
+    interval?: number;
+    maxParallelExecutions?: number;
+    maxTasks?: number;
+  };
+  topicSubscriptions?: Record<string, ITopicSubscription>;
+};
+
 export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClient {
   private static _getWorkflowParams(options?: Partial<IWorkflowOptions & IPaginationOptions>): any {
     const _params = {} as Record<string, unknown>;
@@ -53,10 +64,23 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
 
   private readonly _repo: ICamundaRepository;
 
+  private _pollRequestInFlight = false;
+
+  private _nextPollDueAt = 0;
+
+  private _pollingStarted: boolean;
+
+  private readonly _drainableClient: DrainableCamundaClient | undefined;
+
+  private _unsubscribeInFlight: Promise<void> | undefined;
+
   constructor(config: ICamundaConfig, client: ICamundaClient) {
     this._client = client;
     this._config = config;
     this._repo = new CamundaRepository(config);
+    this._pollingStarted = config.autoPoll !== false;
+    this._drainableClient = this._asDrainableClient(client);
+    this._observePolling();
     const pluginLoader = new PluginLoader(IoC, this._getLogger());
     if (config.plugins) {
       pluginLoader.load(config.plugins);
@@ -79,14 +103,28 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
   }
 
   public unsubscribe(): Promise<void> {
+    if (!this._unsubscribeInFlight) {
+      this._unsubscribeInFlight = this._stopAndDrain().finally(() => {
+        this._unsubscribeInFlight = undefined;
+      });
+    }
+    return this._unsubscribeInFlight;
+  }
+
+  private async _stopAndDrain(): Promise<void> {
     try {
+      const pollingWasStarted = this._pollingStarted;
+      this._client.stop();
+      this._pollingStarted = false;
+      if (pollingWasStarted) {
+        await this._waitForDrain();
+      }
       if (this._topicSubscription) {
         this._topicSubscription.unsubscribe();
+        this._topicSubscription = undefined;
       }
-      this._client.stop();
-      return Promise.resolve();
     } catch (error) {
-      return Promise.reject(error);
+      throw error instanceof Error ? error : new Error(String(error));
     }
   }
 
@@ -193,9 +231,66 @@ export class CamundaBpmClient implements IClient<ICamundaService>, IWorkflowClie
   }
 
   private _startSubscriber() {
-    if (!this._config.autoPoll) {
+    if (!this._pollingStarted) {
+      this._pollingStarted = true;
       this._client.start();
     }
+  }
+
+  private _asDrainableClient(client: ICamundaClient): DrainableCamundaClient | undefined {
+    const candidate = client as Partial<DrainableCamundaClient>;
+    if (typeof candidate.on !== 'function' || typeof candidate.activeTasksCount !== 'number') {
+      return undefined;
+    }
+    return candidate as DrainableCamundaClient;
+  }
+
+  private _observePolling(): void {
+    if (!this._drainableClient) {
+      return;
+    }
+
+    this._drainableClient.on('poll:start', () => {
+      const maxTasks = this._drainableClient?.options?.maxTasks ?? this._config.maxTasks ?? 10;
+      const maxParallelExecutions = this._drainableClient?.options?.maxParallelExecutions;
+      const requiredTasksCount =
+        maxParallelExecutions == null
+          ? maxTasks
+          : Math.min(maxTasks, maxParallelExecutions - (this._drainableClient?.activeTasksCount ?? 0));
+      const hasSubscriptions = Object.keys(this._drainableClient?.topicSubscriptions ?? {}).length > 0;
+      this._pollRequestInFlight = requiredTasksCount > 0 && hasSubscriptions;
+      if (!this._pollRequestInFlight) {
+        this._nextPollDueAt = Date.now() + this._pollInterval;
+      }
+    });
+
+    const markPollRequestComplete = () => {
+      this._pollRequestInFlight = false;
+      this._nextPollDueAt = Date.now() + this._pollInterval;
+    };
+    this._drainableClient.on('poll:success', markPollRequestComplete);
+    this._drainableClient.on('poll:error', markPollRequestComplete);
+  }
+
+  private async _waitForDrain(): Promise<void> {
+    if (!this._drainableClient) {
+      return;
+    }
+
+    const stopTimerDueAt = Date.now() + this._pollInterval;
+    while (
+      this._pollRequestInFlight ||
+      this._drainableClient.activeTasksCount > 0 ||
+      Date.now() <= Math.max(stopTimerDueAt, this._nextPollDueAt)
+    ) {
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, 10);
+      });
+    }
+  }
+
+  private get _pollInterval(): number {
+    return this._drainableClient?.options?.interval ?? this._config.interval ?? 300;
   }
 
   private _hasBpmnProcessId(request: IWorkflowDefinitionRequest): request is IWorkflowProcessIdDefinition {

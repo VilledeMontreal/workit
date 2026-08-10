@@ -38,7 +38,7 @@ export interface ICamundaConfig {
   /**
    * Function(s) that have access to the client instance as soon as it is created and before any polling happens. Check out logger for a better understanding of the usage of middlewares.
    */
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   use?: Function | Function[];
   bpmnKey?: string;
   autoPoll?: boolean;
@@ -50,7 +50,7 @@ export interface ICamundaConfig {
    * The Long Polling timeout in milliseconds.
    */
   asyncResponseTimeout?: number;
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   interceptors?: Function | Function[];
   /** load librairies containing workflow tasks */
   plugins?: IPlugins;

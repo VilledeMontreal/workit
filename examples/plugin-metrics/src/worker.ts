@@ -57,7 +57,7 @@ async function main() {
   const worker = IoC.get<Worker>(SERVICE_IDENTIFIER.worker, tag);
 
   // Gestion gracieuse de l'arrêt
-  process.on('SIGINT', async () => {
+  const shutdown = async (): Promise<void> => {
     console.log('\n⏹️  Shutting down gracefully...');
 
     try {
@@ -80,6 +80,12 @@ async function main() {
       console.error('❌ Error during shutdown:', error);
       process.exit(1);
     }
+  };
+  process.on('SIGINT', () => {
+    shutdown().catch(error => {
+      console.error('❌ Error while invoking shutdown:', error);
+      process.exit(1);
+    });
   });
 
   // Démarrer le worker

@@ -5,7 +5,7 @@
  */
 import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
 import { resourceFromAttributes } from '@opentelemetry/resources';
-import { JaegerExporter } from '@opentelemetry/exporter-jaeger';
+import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
 import { ConsoleSpanExporter, SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import { registerInstrumentations } from '@opentelemetry/instrumentation';
@@ -13,11 +13,11 @@ import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
 import * as opentelemetry from '@opentelemetry/api';
 
 opentelemetry.diag.setLogger(new opentelemetry.DiagConsoleLogger(), opentelemetry.DiagLogLevel.ALL);
-const jaegerExporter = new JaegerExporter({
-  host: 'localhost',
+const otlpExporter = new OTLPTraceExporter({
+  url: 'http://localhost:4318/v1/traces',
 });
 const provider = new NodeTracerProvider({
-  spanProcessors: [new SimpleSpanProcessor(jaegerExporter), new SimpleSpanProcessor(new ConsoleSpanExporter())],
+  spanProcessors: [new SimpleSpanProcessor(otlpExporter), new SimpleSpanProcessor(new ConsoleSpanExporter())],
   resource: resourceFromAttributes({
     [ATTR_SERVICE_NAME]: 'myWorker',
   }),
@@ -41,9 +41,12 @@ registerInstrumentations({
   ],
 });
 
+// Workit must be loaded only after the tracing provider and instrumentations are registered.
+/* eslint-disable import/first */
 import { SERVICE_IDENTIFIER as CORE_IDENTIFIER, TAG } from '@villedemontreal/workit';
 import { IoC, Worker } from '@villedemontreal/workit-core';
 import { HelloWorldTask } from '../tasks/helloWorldTask';
+/* eslint-enable import/first */
 
 enum LOCAL_IDENTIFIER {
   activity1 = 'activity_1',
@@ -59,4 +62,7 @@ IoC.bindToObject(tracer, CORE_IDENTIFIER.tracer);
 const worker = IoC.get<Worker>(CORE_IDENTIFIER.worker, TAG.camundaBpm);
 
 worker.start();
-worker.run();
+worker.run().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});

@@ -60,7 +60,7 @@ describe('Worker', () => {
   describe('Positive tests', () => {
     // it('should call strategy handlers');
 
-    it('should call client methods', () => {
+    it('should call client methods', async () => {
       const successHandler = new SuccessStrategySimple();
       const failureHandler = new FailureStrategySimple();
       const fakeClient = new FakeClient();
@@ -69,8 +69,8 @@ describe('Worker', () => {
 
       const processHandler = new SCProcessHandler(successHandler, failureHandler, NOOP_TRACER);
       const worker = new Worker(fakeClient, processHandler);
-      worker.run();
-      worker.stop().catch();
+      await worker.run();
+      await worker.stop();
       expect(fakeClient.subscribe).toHaveBeenCalledTimes(1);
       expect(fakeClient.unsubscribe).toHaveBeenCalledTimes(1);
     });

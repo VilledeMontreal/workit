@@ -34,7 +34,10 @@ const stop = () => {
 };
 
 worker.start();
-worker.run();
+worker.run().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});
 
 process.on('SIGINT', stop);
 process.on('SIGTERM', stop);

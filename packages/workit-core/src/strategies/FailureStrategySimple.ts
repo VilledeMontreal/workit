@@ -7,10 +7,9 @@
 import { ICamundaService, IFailureStrategy, ILogger, IMessage, IWorkflowProps } from '@villedemontreal/workit-types';
 import { inject, injectable, optional } from 'inversify';
 import 'reflect-metadata';
+import stringify from 'fast-safe-stringify';
 import { NOOP_LOGGER } from '../common/noopLogger';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
-
-import stringify from 'fast-safe-stringify';
 
 @injectable()
 export class FailureStrategySimple implements IFailureStrategy<ICamundaService> {

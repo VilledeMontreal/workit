@@ -22,6 +22,8 @@ import {
 import { injectable, unmanaged } from 'inversify';
 import 'reflect-metadata';
 
+// `debug` exposes a CommonJS `export =` API.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 import debug = require('debug');
 
 const log = debug('workit:clientManager');

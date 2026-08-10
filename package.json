@@ -2,36 +2,39 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "postinstall": "lerna run genPackagelock",
-    "fix": "lerna run fix",
+    "fix": "npm run fix --workspaces --if-present",
     "predocs-test": "npm docs",
-    "docs-test": "lerna run docs-test",
-    "docs": "lerna run docs",
-    "build": "lerna run build",
-    "lint-fix": "lerna run lint-fix",
-    "lint": "lerna run lint",
-    "test": "lerna run test",
-    "test:all": "lerna run test:all",
-    "test:integration": "lerna run test:integration --scope=workit",
-    "clean": "lerna clean -y",
+    "docs-test": "npm run docs-test --workspaces --if-present",
+    "docs": "npm run docs --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "lint-fix": "npm run lint-fix --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "test:all": "npm run test:all --workspaces --if-present",
+    "test:integration": "npm run test:integration --workspace=@villedemontreal/workit --if-present",
+    "release:version": "node ./scripts/set-release-version.mjs",
+    "release:verify": "node ./scripts/verify-release-version.mjs",
+    "release:dry-run": "npm run build && npm publish --workspaces --dry-run",
+    "clean": "npm run clean --workspaces --if-present",
     "remark-lint": "remark ."
   },
   "devDependencies": {
-    "@types/node": "^20.19.27",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "lerna": "^8.2.4",
-    "lerna-changelog": "^2.2.0",
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@types/node": "^20.19.43",
+    "eslint-config-airbnb-base": "^15.0.0",
     "remark-cli": "^12.0.1",
     "remark-preset-lint-recommended": "^7.0.1",
-    "typescript": "^4.9.5"
+    "typescript": "^5.9.3"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lerna run lint-fix && remark .",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "lerna exec npm run test"
-    }
+  "overrides": {
+    "@opentelemetry/api": "1.9.0",
+    "@opentelemetry/context-async-hooks": "2.2.0",
+    "@opentelemetry/core": "2.2.0",
+    "@opentelemetry/resources": "2.2.0",
+    "@opentelemetry/sdk-metrics": "2.2.0",
+    "@opentelemetry/sdk-trace-base": "2.2.0",
+    "@opentelemetry/sdk-trace-node": "2.2.0"
   },
   "remarkConfig": {
     "plugins": [
@@ -39,21 +42,20 @@
     ]
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=20.6.0"
   },
   "workspaces": [
+    "./packages/workit-types",
+    "./packages/workit-core",
+    "./packages/workit-bpm-client",
+    "./packages/workit-stepfunction-client",
+    "./packages/workit",
     "./examples/basic",
     "./examples/binding",
-    "./examples/event",
     "./examples/failure-strategy",
     "./examples/opentelemetry",
     "./examples/parallel",
-    "./examples/plugin-metrics",
-    "./packages/workit",
-    "./packages/workit-bpm-client",
-    "./packages/workit-stepfunction-client",
-    "./packages/workit-core",
-    "./packages/workit-types"
+    "./examples/plugin-metrics"
   ],
   "version": "6.0.1"
 }

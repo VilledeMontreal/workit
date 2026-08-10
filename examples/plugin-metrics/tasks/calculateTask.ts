@@ -26,7 +26,9 @@ export class CalculateTask extends TaskBase<IMessage> {
 
       // Ajouter une durée variable pour la démo
       const processingTime = Math.random() * 1000 + 500; // 500ms à 1.5s
-      await new Promise(resolve => setTimeout(resolve, processingTime));
+      await new Promise(resolve => {
+        setTimeout(resolve, processingTime);
+      });
 
       // Effectuer le calcul
       const result = {

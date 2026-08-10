@@ -7,7 +7,7 @@ module.exports = {
         "import"
     ],
     "extends": [
-        "airbnb-typescript/base",
+        "airbnb-base",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -16,6 +16,13 @@ module.exports = {
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "project": "./tsconfig.json"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".ts"]
+            }
+        }
     },
     "rules": require('../../eslint.rules.js')
 }

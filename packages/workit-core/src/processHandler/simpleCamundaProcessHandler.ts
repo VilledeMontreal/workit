@@ -23,7 +23,7 @@ import { RPCMetadata, RPCType, setRPCMetadata } from '@opentelemetry/core';
 import { SERVICE_IDENTIFIER } from '../config/constants/identifiers';
 import { IoC, kernel } from '../config/container';
 import { Interceptors } from '../interceptors';
-// eslint-disable-next-line import/order
+// eslint-disable-next-line import/order, @typescript-eslint/no-require-imports
 import debug = require('debug');
 
 const log = debug('workit:processHandler');
@@ -51,7 +51,7 @@ export class SCProcessHandler<T = any, K extends IWorkflowProps = IWorkflowProps
   ) {
     super();
     this._tracer = tracer;
-    this._config = config || ({} as IProcessHandlerConfig);
+    this._config = config || {};
     this._propagation = this._config.propagation || IoC.get(SERVICE_IDENTIFIER.tracer_propagator);
     this._success = successStrategy;
     this._failure = failureStrategy;

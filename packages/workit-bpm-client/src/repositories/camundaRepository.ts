@@ -5,7 +5,7 @@
  */
 
 /* eslint @typescript-eslint/no-unsafe-assignment: 0 */
-/* eslint @typescript-eslint/ban-types: 0 */
+/* eslint @typescript-eslint/no-empty-object-type: 0 */
 /* eslint @typescript-eslint/restrict-template-expressions: 0 */
 /* eslint @typescript-eslint/no-unsafe-call: 0 */
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
@@ -21,7 +21,6 @@ import {
   IIncident,
   IProcessDefinition,
   IProcessXmlDefinition,
-  IResolveIncident,
 } from '@villedemontreal/workit-types';
 import axios, { AxiosInstance } from 'axios';
 import * as FormData from 'form-data';
@@ -155,7 +154,7 @@ export class CamundaRepository implements ICamundaRepository {
           activityId: incident.activityId,
         },
       ],
-    } as IResolveIncident);
+    });
   }
 
   public async getWorkflow(idOrKey: string): Promise<IProcessDefinition & IProcessXmlDefinition> {

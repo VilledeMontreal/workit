@@ -6,18 +6,12 @@ Have fun!
 
 ## Installation
 
-First, start Jaeger with docker
+First, start Jaeger with its OTLP HTTP collector enabled:
 
 ```bash
 docker run -d --name jaeger \
-  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
-  -p 5775:5775/udp \
-  -p 6831:6831/udp \
-  -p 6832:6832/udp \
-  -p 5778:5778 \
   -p 16686:16686 \
-  -p 14268:14268 \
-  -p 9411:9411 \
+  -p 4318:4318 \
   jaegertracing/all-in-one:latest
 ```
 
@@ -56,22 +50,6 @@ By clicking on a trace, you should see something like:
 </p>
 
 👏 Congrats, you have finished the tracing section!
-
-### FAQ
-
-#### error sending spans over UDP: Error: send EMSGSIZE [...]
-
-related issue: https://github.com/jaegertracing/jaeger-client-node/issues/124
-In your terminal, you can do something like:
-
-```bash
-% sysctl net.inet.udp.maxdgram
-net.inet.udp.maxdgram: 9216
-% sudo sysctl net.inet.udp.maxdgram=65536
-net.inet.udp.maxdgram: 9216 -> 65536
-% sysctl net.inet.udp.maxdgram
-net.inet.udp.maxdgram: 65536
-```
 
 ## Useful links
 - For more information on OpenTelemetry, visit: <https://opentelemetry.io/>

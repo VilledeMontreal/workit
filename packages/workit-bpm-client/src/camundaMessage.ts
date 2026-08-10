@@ -16,10 +16,9 @@ import {
   IVariables,
   IWorkflowProps,
 } from '@villedemontreal/workit-types';
+import stringify from 'fast-safe-stringify';
 import { CamundaMapperProperties } from './camundaMapperProperties';
 import { Variables } from './variables';
-
-import stringify from 'fast-safe-stringify';
 
 export class CamundaMessage {
   public static wrap(payload: { task: IVariablePayload; taskService: any }): [IMessage, ICamundaService] {
@@ -34,36 +33,69 @@ export class CamundaMessage {
       body: { ...messageWithoutSpan.body },
       properties: { ...messageWithoutSpan.properties },
     };
-    return [
-      msg,
-      // TODO: create a CamundaService builder
-      {
-        hasBeenThreated: false,
-        /**
-         * Acknowledge the message to Camunda platform
-         * Variables will be updated if change has been detected
-         */
-        async ack(
-          message: IMessage<{ [s: string]: unknown }, IWorkflowProps<{ [s: string]: string | number | boolean }>>,
-        ) {
-          if (this.hasBeenThreated) {
+    const treatmentState = { hasBeenThreated: false };
+    let treatmentInFlight: Promise<void> | undefined;
+    const runTreatment = async (treatment: () => Promise<void>): Promise<void> => {
+      if (treatmentState.hasBeenThreated) {
+        return;
+      }
+      if (treatmentInFlight) {
+        const currentTreatment = treatmentInFlight;
+        try {
+          await currentTreatment;
+          return;
+        } catch (error) {
+          if (treatmentInFlight === currentTreatment) {
+            treatmentInFlight = undefined;
+          }
+          if (!treatmentState.hasBeenThreated) {
+            await runTreatment(treatment);
             return;
           }
+          throw error;
+        }
+      }
 
+      const currentTreatment = (async () => {
+        await treatment();
+        treatmentState.hasBeenThreated = true;
+      })();
+      treatmentInFlight = currentTreatment;
+
+      try {
+        await currentTreatment;
+      } finally {
+        if (!treatmentState.hasBeenThreated && treatmentInFlight === currentTreatment) {
+          treatmentInFlight = undefined;
+        }
+      }
+    };
+    const service: ICamundaService = {
+      get hasBeenThreated() {
+        return treatmentState.hasBeenThreated;
+      },
+      set hasBeenThreated(value: boolean) {
+        treatmentState.hasBeenThreated = value;
+      },
+      /**
+       * Acknowledge the message to Camunda platform
+       * Variables will be updated if change has been detected
+       */
+      async ack(
+        message: IMessage<{ [s: string]: unknown }, IWorkflowProps<{ [s: string]: string | number | boolean }>>,
+      ) {
+        await runTreatment(async () => {
           const vars = CamundaMessage.unwrap(message);
-
           await payload.taskService.complete(task, vars);
-          this.hasBeenThreated = true;
-        },
-        /**
-         * Un acknowledge the message to Camunda platform
-         * This will handle failure.
-         * Notice that on failure, the current camunda client doesn't update the variables
-         */
-        async nack(error: FailureException) {
-          if (this.hasBeenThreated) {
-            return;
-          }
+        });
+      },
+      /**
+       * Un acknowledge the message to Camunda platform
+       * This will handle failure.
+       * Notice that on failure, the current camunda client doesn't update the variables
+       */
+      async nack(error: FailureException) {
+        await runTreatment(async () => {
           const { retries, retryTimeout } = error;
           const retryTimeoutInMs = retryTimeout || 1000 * retries * 2;
           await payload.taskService.handleFailure(task, {
@@ -73,10 +105,10 @@ export class CamundaMessage {
             // TODO: Add to configuration
             retryTimeout: retryTimeoutInMs,
           });
-          this.hasBeenThreated = true;
-        },
+        });
       },
-    ];
+    };
+    return [msg, service];
   }
 
   public static unwrap(message: IMessage<unknown, IWorkflowProps<unknown>>): IVariables {

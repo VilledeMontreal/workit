@@ -9,15 +9,15 @@ import * as assert from 'assert';
 import { readFileSync } from 'fs';
 import * as path from 'path';
 
-export const run = (worker: Worker, scoped: any, done: any, delay: number = 500) => {
+export const run = async (worker: Worker, scoped: any, delay: number = 500): Promise<void> => {
   worker.start();
-  worker.run();
+  await worker.run();
 
-  setTimeout(async () => {
-    await worker.stop();
-    assert.ok(scoped.isDone());
-    done();
-  }, delay);
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, delay);
+  });
+  await worker.stop();
+  assert.ok(scoped.isDone());
 };
 
 export const readJsonFileSync = (filePath: string) => {

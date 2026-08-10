@@ -31,7 +31,7 @@ describe('camundaMessage', () => {
     expect(camundaObject).toMatchSnapshot();
   });
 
-  it('wrap', () => {
+  it('wrap', async () => {
     const camundaPayload = {
       task: { processInstanceId: '38963', processDefinitionId: 'xxxxx', variables: new Variables() } as any,
       taskService: {
@@ -40,9 +40,65 @@ describe('camundaMessage', () => {
       },
     };
     const [, service] = CamundaMessage.wrap(camundaPayload);
-    service.nack({ name: 'error', message: 'Oopps', retries: 0, retryTimeout: 15_000 });
+    await service.nack({ name: 'error', message: 'Oopps', retries: 0, retryTimeout: 15_000 });
     expect(camundaPayload.taskService.handleFailure).toHaveBeenCalledTimes(1);
     expect(camundaPayload.taskService.complete).toHaveBeenCalledTimes(0);
     expect(camundaPayload.taskService.handleFailure.mock.calls[0][1]).toMatchSnapshot();
+  });
+
+  it('should only treat concurrent acknowledgements once', async () => {
+    let resolveComplete!: () => void;
+    const complete = jest.fn().mockImplementation(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveComplete = resolve;
+        }),
+    );
+    const camundaPayload = {
+      task: { processInstanceId: '38963', processDefinitionId: 'xxxxx', variables: new Variables() } as any,
+      taskService: {
+        handleFailure: jest.fn(),
+        complete,
+      },
+    };
+    const [message, service] = CamundaMessage.wrap(camundaPayload);
+
+    const acknowledgement = service.ack(message);
+    const concurrentFailure = service.nack({ name: 'error', message: 'Oopps', retries: 0, retryTimeout: 15_000 });
+
+    expect(complete).toHaveBeenCalledTimes(1);
+    expect(camundaPayload.taskService.handleFailure).not.toHaveBeenCalled();
+    resolveComplete();
+    await Promise.all([acknowledgement, concurrentFailure]);
+    expect(service.hasBeenThreated).toBe(true);
+  });
+
+  it('should let a concurrent failure treatment proceed when acknowledgement fails', async () => {
+    let rejectComplete!: (error: Error) => void;
+    const completeError = new Error('complete failed');
+    const camundaPayload = {
+      task: { processInstanceId: '38963', processDefinitionId: 'xxxxx', variables: new Variables() } as any,
+      taskService: {
+        handleFailure: jest.fn(),
+        complete: jest.fn().mockImplementation(
+          () =>
+            new Promise<void>((_resolve, reject) => {
+              rejectComplete = reject;
+            }),
+        ),
+      },
+    };
+    const [message, service] = CamundaMessage.wrap(camundaPayload);
+
+    const acknowledgement = service.ack(message);
+    const concurrentFailure = service.nack({ name: 'error', message: 'Oopps', retries: 0, retryTimeout: 15_000 });
+    const failedAcknowledgement = expect(acknowledgement).rejects.toBe(completeError);
+    const successfulFailureTreatment = expect(concurrentFailure).resolves.toBeUndefined();
+    rejectComplete(completeError);
+
+    await failedAcknowledgement;
+    await successfulFailureTreatment;
+    expect(camundaPayload.taskService.handleFailure).toHaveBeenCalledTimes(1);
+    expect(service.hasBeenThreated).toBe(true);
   });
 });

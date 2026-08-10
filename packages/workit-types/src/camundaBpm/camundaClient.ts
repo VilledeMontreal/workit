@@ -13,6 +13,9 @@ export interface ICamundaClient {
   sanitizeOptions(customOptions: any): void;
   start(): void;
   stop(): void;
-  subscribe(topic: string, handler: (obj: { task: IVariablePayload; taskService: any }) => void): ITopicSubscription;
-  subscribe(topic: string, customOptions: any, handler: (obj: any) => void): ITopicSubscription;
+  subscribe(
+    topic: string,
+    handler: (obj: { task: IVariablePayload; taskService: any }) => void | Promise<void>,
+  ): ITopicSubscription;
+  subscribe(topic: string, customOptions: any, handler: (obj: any) => void | Promise<void>): ITopicSubscription;
 }

@@ -12,10 +12,27 @@ module.exports = {
   "implicit-arrow-linebreak": "off",
   "prettier/prettier": "error",
   "@typescript-eslint/no-unused-vars": "off",
+  "no-use-before-define": "off",
+  "@typescript-eslint/no-use-before-define": ["error", {
+    "functions": false,
+    "classes": true,
+    "variables": true,
+    "typedefs": false,
+    "ignoreTypeReferences": true,
+    "allowNamedExports": true
+  }],
+  "no-useless-constructor": "off",
   "@typescript-eslint/no-useless-constructor": "off", // not good with inversify
-  "@typescript-eslint/no-misused-promises": "off",
+  "no-empty-function": "off",
+  "@typescript-eslint/no-empty-function": ["error", { "allow": ["constructors", "methods"] }],
   "@typescript-eslint/no-explicit-any": "off",
   "import/named": "off", // not working properly
+  "import/extensions": ["error", "ignorePackages", {
+    "js": "never",
+    "jsx": "never",
+    "ts": "never",
+    "tsx": "never"
+  }],
   "@typescript-eslint/naming-convention": [
     "error",
     {

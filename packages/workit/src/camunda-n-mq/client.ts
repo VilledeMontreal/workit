@@ -36,9 +36,9 @@ export class Client<TClient extends IClient> {
   ): Promise<void> {
     try {
       return await action(this._client);
-    } catch (ex) {
+    } catch (error) {
       if (!onException) {
-        return Promise.resolve();
+        throw error;
       }
       return onException(this._client);
     }

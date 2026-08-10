@@ -43,7 +43,7 @@ async function createInstances() {
   ];
 
   try {
-    for (let i = 0; i < instanceCount; i++) {
+    for (let i = 0; i < instanceCount; i += 1) {
       const workflow = workflows[i % workflows.length];
 
       const instance = await manager.createWorkflowInstance({

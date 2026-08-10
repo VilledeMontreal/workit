@@ -13,4 +13,7 @@ import { IWorkflowClient } from '@villedemontreal/workit-types';
   const path = `${process.cwd()}/workflow/camunda/BPMN_DEMO.bpmn`;
   await cm.deployWorkflow(path);
   console.log('Success!');
-})();
+})().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});

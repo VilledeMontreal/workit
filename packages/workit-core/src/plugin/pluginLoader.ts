@@ -12,6 +12,7 @@
 /* eslint @typescript-eslint/explicit-member-accessibility: 0 */
 /* eslint @typescript-eslint/restrict-template-expressions: 0 */
 /* eslint import/no-dynamic-require: 0 */
+/* eslint import/no-import-module-exports: 0 -- test helper intentionally extends CommonJS module.paths */
 /* eslint global-require: 0 */
 /* eslint no-restricted-syntax: 0 */
 
@@ -95,21 +96,22 @@ export class PluginLoader {
 
         // Expecting a plugin from module;
         try {
+          // Plugins are loaded dynamically from user-provided CommonJS module paths.
+          // eslint-disable-next-line @typescript-eslint/no-require-imports
           const { plugin } = require(modulePath);
 
           if (plugin.moduleName !== name) {
             this.logger.error(`PluginLoader#load: Entry ${name} use a plugin that instruments ${plugin.moduleName}`);
-            return exports;
+            return;
           }
 
           this._plugins.push(plugin as IPlugin);
           // Enable each supported plugin.
-          return plugin.enable(this.ioc, this.logger, config);
+          plugin.enable(this.ioc, this.logger, config);
         } catch (e) {
           this.logger.error(
             `PluginLoader#load: could not load plugin ${modulePath} of module ${name}. Error: ${(e as Error).message}`,
           );
-          return exports;
         }
       });
       this._hookState = HookState.LOADED;

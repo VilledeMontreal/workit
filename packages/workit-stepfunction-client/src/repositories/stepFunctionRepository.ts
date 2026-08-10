@@ -4,7 +4,6 @@
  * See LICENSE file in the project root for full license information.
  */
 import { IMessage, IStepFunctionClientConfig, IncidentException } from '@villedemontreal/workit-types';
-import { StepFunctionClient } from '../sfnClient';
 import * as fs from 'fs/promises';
 
 import {
@@ -21,12 +20,14 @@ import {
   SendTaskHeartbeatCommandOutput,
   SendTaskHeartbeatCommand,
 } from '@aws-sdk/client-sfn';
+import { StepFunctionClient } from '../sfnClient';
 import { MAX_ERROR_CAUSE_LENGTH, MAX_ERROR_CODE_LENGTH, MAX_PAYLOAD_LENGTH } from '../config/constants/params';
 
 /* eslint @typescript-eslint/no-unsafe-assignment: 0 */
 /* eslint @typescript-eslint/no-unsafe-call: 0 */
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// `fast-safe-stringify` exposes a CommonJS `export =` API.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const stringify = require('fast-safe-stringify');
 
 export class StepFunctionRepository {
@@ -44,6 +45,8 @@ export class StepFunctionRepository {
     override?: CreateStateMachineCommandInput,
   ): Promise<CreateStateMachineCommandOutput> {
     const workflow = (await fs.readFile(absPath)).toString();
+    // Object.assign preserves the required AWS command input type when `override` is optional.
+    // eslint-disable-next-line prefer-object-spread
     const input = Object.assign({ definition: workflow }, override);
     const command = new CreateStateMachineCommand(input);
     return this._client.send(command);

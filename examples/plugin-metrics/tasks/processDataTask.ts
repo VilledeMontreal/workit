@@ -32,14 +32,16 @@ export class ProcessDataTask extends TaskBase<IMessage> {
 
       // Simuler le traitement des données
       const processingTime = Math.random() * 800 + 200; // 200ms à 1s
-      await new Promise(resolve => setTimeout(resolve, processingTime));
+      await new Promise(resolve => {
+        setTimeout(resolve, processingTime);
+      });
 
       // Traitement fictif des données
       const processedData = data.map((item: any, index: number) => ({
         ...item,
         processed: true,
         processedAt: new Date().toISOString(),
-        index: index,
+        index,
       }));
 
       // Simuler des erreurs occasionnelles pour démontrer les métriques d'échec
@@ -50,7 +52,7 @@ export class ProcessDataTask extends TaskBase<IMessage> {
 
       const result = {
         processedCount: processedData.length,
-        processedData: processedData,
+        processedData,
         processingTime: Math.round(processingTime),
         processedAt: new Date().toISOString(),
       };
