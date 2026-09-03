@@ -27,7 +27,7 @@
     "@villedemontreal/workit-stepfunction-client": "^7.0.2",
     "@villedemontreal/workit-types": "^7.0.2",
     "debug": "^4.4.3",
-    "express": "^4.22.2",
+    "express": "^5.2.1",
     "inversify": "^7.10.4",
     "reflect-metadata": "^0.2.2"
   },
