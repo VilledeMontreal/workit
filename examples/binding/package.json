@@ -27,21 +27,21 @@
   },
   "devDependencies": {
     "@types/node": "^20.19.43",
-    "@typescript-eslint/eslint-plugin": "^8.66.0",
-    "@typescript-eslint/parser": "^8.66.0",
+    "@typescript-eslint/eslint-plugin": "^8.73.0",
+    "@typescript-eslint/parser": "^8.73.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-prettier": "^5.5.6",
-    "prettier": "^3.9.6",
+    "eslint-plugin-prettier": "^5.5.7",
+    "prettier": "^3.10.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "@villedemontreal/workit": "^7.0.2",
     "@villedemontreal/workit-core": "^7.0.2",
     "@villedemontreal/workit-types": "^7.0.2",
-    "axios": "^1.19.0"
+    "axios": "^1.21.1"
   },
   "keywords": [
     "workit",

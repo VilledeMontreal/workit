@@ -26,7 +26,7 @@ Trusted Publishing uses short-lived OIDC credentials. The workflow therefore doe
    dependencies, and `package-lock.json`.
    Use `npm run release:version -- <version> --dry-run` to preview the change.
 2. Run `npm run release:verify -- v<version>`.
-3. Run `npm ci`, `npm run build`, `npm run lint`, and `npm test`.
+3. Run `npm ci`, `npm run audit`, `npm run build`, `npm run lint`, and `npm test`.
 4. Merge the release commit, create a `v<version>` tag, then publish the corresponding GitHub release.
 
 The workflow validates the tag, package versions, and internal dependency ranges before publishing.
