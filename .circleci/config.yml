@@ -39,6 +39,9 @@ lint: &lint
         name: Install Dependencies
         command: npm ci
     - run:
+        name: Audit Dependencies
+        command: npm run audit
+    - run:
         name: Debug ls
         command: |
           ls -Al /home/circleci/project/packages/workit-bpm-client
@@ -70,6 +73,9 @@ node_tests: &node_tests
     - run:
         name: Install Dependencies
         command: npm ci
+    - run:
+        name: Audit Dependencies
+        command: npm run audit
     - save_cache:
         <<: *cache_1
     - run:
@@ -98,6 +104,9 @@ node_integraton_tests: &node_integraton_tests
     - run:
         name: Install Dependencies
         command: npm ci
+    - run:
+        name: Audit Dependencies
+        command: npm run audit
     - save_cache:
         <<: *cache_1
     - run:
